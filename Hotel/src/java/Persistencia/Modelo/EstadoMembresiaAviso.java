@@ -14,21 +14,22 @@ public class EstadoMembresiaAviso extends EstadoMembresia {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
+        @Override
 	public void activar(){
 
 	}
 
+        @Override
 	public void registrarAviso(){
 
 	}
 
+        @Override
 	public void registrarVencimiento(){
 
 	}
 
+        @Override
 	public String getNombre(){
 		return nombre;
 	}
@@ -37,23 +38,28 @@ public class EstadoMembresiaAviso extends EstadoMembresia {
 	 * 
 	 * @param newVal
 	 */
+        @Override
 	public void setNombre(String newVal){
 		nombre = newVal;
 	}
 
+        @Override
 	public boolean isActiva(){
 		return false;
 	}
 
+        @Override
 	public boolean isPrueba(){
 		return false;
 	}
 
+        @Override
 	public boolean isVencida(){
 		return false;
 	}
 
+        @Override
 	public boolean isAviso(){
-		return false;
+		return true;
 	}
 }//end EstadoMembresiaAviso

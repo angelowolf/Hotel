@@ -217,4 +217,16 @@ public class Hotel {
     public void setWeb(String newVal) {
         web = newVal;
     }
+
+    public boolean isMembresiaActiva() {
+        return this.membresia.isActiva();
+    }
+
+    public boolean isMembresiaVencida() {
+        return this.membresia.isVencida();
+    }
+
+    public boolean isMembresiaAviso() {
+        return this.membresia.isAviso();
+    }
 }//end Hotel

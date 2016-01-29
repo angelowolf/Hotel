@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,24 +7,35 @@ package Persistencia.Modelo;
  */
 public class TipoUsuario {
 
-	private String nombre;
+    private String nombre;
 
-	public TipoUsuario(){
+    public String getNombre() {
+        return nombre;
+    }
 
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	public void finalize() throws Throwable {
+    /**
+     * Verifica si el usuario es ROOT del sitio.
+     *
+     * @return true si lo es.
+     */
+    public boolean isRoot() {
+        return nombre.equals("root");
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
-
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    /**
+     * Verifica si el usuario es ADMINISTRADOR de su hotel.
+     *
+     * @return true si lo es.
+     */
+    public boolean isOwner() {
+        return nombre.equals("owner");
+    }
 }//end TipoUsuario

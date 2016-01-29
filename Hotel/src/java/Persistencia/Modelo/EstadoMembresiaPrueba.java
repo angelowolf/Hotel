@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,52 +7,58 @@ package Persistencia.Modelo;
  */
 public class EstadoMembresiaPrueba extends EstadoMembresia {
 
-	private String nombre = "prueba";
+    private String nombre = "prueba";
 
-	public EstadoMembresiaPrueba(){
+    public EstadoMembresiaPrueba() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void activar(){
+    @Override
+    public void activar() {
 
-	}
+    }
 
-	public void registrarAviso(){
+    @Override
+    public void registrarAviso() {
 
-	}
+    }
 
-	public void registrarVencimiento(){
+    @Override
+    public void registrarVencimiento() {
 
-	}
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    @Override
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	public boolean isActiva(){
-		return false;
-	}
+    @Override
+    public boolean isActiva() {
+        return false;
+    }
 
-	public boolean isPrueba(){
-		return false;
-	}
+    @Override
+    public boolean isPrueba() {
+        return true;
+    }
 
-	public boolean isVencida(){
-		return false;
-	}
+    @Override
+    public boolean isVencida() {
+        return false;
+    }
 
-	public boolean isAviso(){
-		return false;
-	}
+    @Override
+    public boolean isAviso() {
+        return false;
+    }
 }//end EstadoMembresiaPrueba

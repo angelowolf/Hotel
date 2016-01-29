@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,63 +7,96 @@ package Persistencia.Modelo;
  */
 public class Usuario {
 
-	private String clave;
-	private String email;
-	private String nick;
-	private TipoUsuario tipoUsuario;
+    private int idUsuario;
+    private String clave;
+    private String email;
+    private String nick;
+    private TipoUsuario tipoUsuario;
+    private Hotel hotel;
 
-	public Usuario(){
+    public Usuario() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    /**
+     * Verifica si el usuario es ROOT del sitio.
+     *
+     * @return true si lo es.
+     */
+    public boolean isRoot() {
+        return tipoUsuario.isRoot();
+    }
 
-	}
-	public TipoUsuario getTipoUsuario(){
-		return tipoUsuario;
-	}
+    /**
+     * Verifica si el usuario es ADMINISTRADOR de su hotel.
+     *
+     * @return true si lo es.
+     */
+    public boolean isOwner() {
+        return tipoUsuario.isOwner();
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoUsuario(TipoUsuario newVal){
-		tipoUsuario = newVal;
-	}
+    public Hotel getHotel() {
+        return hotel;
+    }
 
-	public String getNick(){
-		return nick;
-	}
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNick(String newVal){
-		nick = newVal;
-	}
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
-	public String getEmail(){
-		return email;
-	}
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setEmail(String newVal){
-		email = newVal;
-	}
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
 
-	public String getClave(){
-		return clave;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoUsuario(TipoUsuario newVal) {
+        tipoUsuario = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setClave(String newVal){
-		clave = newVal;
-	}
+    public String getNick() {
+        return nick;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setNick(String newVal) {
+        nick = newVal;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setEmail(String newVal) {
+        email = newVal;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setClave(String newVal) {
+        clave = newVal;
+    }
 }//end Usuario

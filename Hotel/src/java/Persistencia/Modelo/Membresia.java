@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,63 +9,76 @@ import java.util.Date;
  */
 public class Membresia {
 
-	private EstadoMembresia estadoMembresia;
-	private Date fechaActivacion;
-	private Date fechaVencimiento;
-	private Date fechaAviso;
+    private EstadoMembresia estadoMembresia;
+    private Date fechaActivacion;
+    private Date fechaVencimiento;
+    private Date fechaAviso;
 
-	public Membresia(){
+    public Membresia() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public void finalize() throws Throwable {
 
-	}
-	public EstadoMembresia getEstadoMembresia(){
-		return estadoMembresia;
-	}
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setEstadoMembresia(EstadoMembresia newVal){
-		estadoMembresia = newVal;
-	}
+    public EstadoMembresia getEstadoMembresia() {
+        return estadoMembresia;
+    }
 
-	public Date getFechaAviso(){
-		return fechaAviso;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setEstadoMembresia(EstadoMembresia newVal) {
+        estadoMembresia = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaAviso(Date newVal){
-		fechaAviso = newVal;
-	}
+    public Date getFechaAviso() {
+        return fechaAviso;
+    }
 
-	public Date getFechaVencimiento(){
-		return fechaVencimiento;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaAviso(Date newVal) {
+        fechaAviso = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaVencimiento(Date newVal){
-		fechaVencimiento = newVal;
-	}
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
 
-	public Date getFechaActivacion(){
-		return fechaActivacion;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaVencimiento(Date newVal) {
+        fechaVencimiento = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaActivacion(Date newVal){
-		fechaActivacion = newVal;
-	}
+    public Date getFechaActivacion() {
+        return fechaActivacion;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaActivacion(Date newVal) {
+        fechaActivacion = newVal;
+    }
+
+    public boolean isActiva() {
+        return this.estadoMembresia.isActiva();
+    }
+
+    public boolean isVencida() {
+        return this.estadoMembresia.isVencida();
+    }
+
+    public boolean isAviso() {
+        return this.estadoMembresia.isAviso();
+    }
 }//end Membresia

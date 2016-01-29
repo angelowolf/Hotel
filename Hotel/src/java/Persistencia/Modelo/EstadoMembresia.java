@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,52 +7,49 @@ package Persistencia.Modelo;
  */
 public abstract class EstadoMembresia {
 
-	private String nombre;
+    private String nombre;
 
-	public EstadoMembresia(){
+    public EstadoMembresia() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public void activar() {
 
-	}
-	public void activar(){
+    }
 
-	}
+    public void registrarAviso() {
 
-	public void registrarAviso(){
+    }
 
-	}
+    public void registrarVencimiento() {
 
-	public void registrarVencimiento(){
+    }
 
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public boolean isActiva() {
+        return false;
+    }
 
-	public boolean isActiva(){
-		return false;
-	}
+    public boolean isPrueba() {
+        return false;
+    }
 
-	public boolean isPrueba(){
-		return false;
-	}
+    public boolean isVencida() {
+        return false;
+    }
 
-	public boolean isVencida(){
-		return false;
-	}
-
-	public boolean isAviso(){
-		return false;
-	}
+    public boolean isAviso() {
+        return false;
+    }
 }//end EstadoMembresia
