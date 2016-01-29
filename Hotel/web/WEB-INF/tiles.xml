@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <!--MASTER PAGE EJEMPLO-->
+    <!--        <definition name="baseLayout" template="/BaseLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="" /> 
+    </definition>
+    <definition name="layoutSitio" template="/LayoutSitio.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="" /> 
+    </definition>-->
+    <!--FIN MASTER PAGE-->
+    <!--EJEMPLO-->
+    <!--    <definition name="/Servicio/AltaModificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Servicios" />
+        <put-attribute name="body" value="/Servicio/AltaModificacion.jsp" />
+    </definition>
+    <definition name="/Servicio/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Servicios" />
+        <put-attribute name="body" value="/Servicio/Todos.jsp" />
+    </definition>-->
+    <!--FIN EJEMPLO-->
+</tiles-definitions>
