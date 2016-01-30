@@ -19,10 +19,6 @@ public class Membresia {
 
     }
 
-    public void finalize() throws Throwable {
-
-    }
-
     public EstadoMembresia getEstadoMembresia() {
         return estadoMembresia;
     }

@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,50 +9,56 @@ import java.util.Date;
  */
 public class Temporada {
 
-	private Date fechaFin;
-	private Date fechaInicio;
-	private String nombre;
+    private int id;
+    private Date fechaFin;
+    private Date fechaInicio;
+    private String nombre;
 
-	public Temporada(){
+    public Temporada() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Date getFechaInicio(){
-		return fechaInicio;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaInicio(Date newVal){
-		fechaInicio = newVal;
-	}
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
 
-	public Date getFechaFin(){
-		return fechaFin;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaInicio(Date newVal) {
+        fechaInicio = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaFin(Date newVal){
-		fechaFin = newVal;
-	}
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaFin(Date newVal) {
+        fechaFin = newVal;
+    }
 }//end Temporada

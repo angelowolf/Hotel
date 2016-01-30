@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,128 +9,134 @@ import java.util.Date;
  */
 public class Persona {
 
-	private String apellido;
-	private Domicilio domicilio;
-	private String email;
-	private String nombre;
-	private Sexo sexo;
-	private String telefono;
-	private TipoDocumento tipoDocumento;
-	private Date fechaNacimiento;
-	private Pais pais;
+    private int id;
+    private String apellido;
+    private Domicilio domicilio;
+    private String email;
+    private String nombre;
+    private Sexo sexo;
+    private String telefono;
+    private TipoDocumento tipoDocumento;
+    private Date fechaNacimiento;
+    private Pais pais;
 
-	public Persona(){
+    public Persona() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public Domicilio getDomicilio(){
-		return domicilio;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDomicilio(Domicilio newVal){
-		domicilio = newVal;
-	}
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
 
-	public Sexo getSexo(){
-		return sexo;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDomicilio(Domicilio newVal) {
+        domicilio = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setSexo(Sexo newVal){
-		sexo = newVal;
-	}
+    public Sexo getSexo() {
+        return sexo;
+    }
 
-	public TipoDocumento getTipoDocumento(){
-		return tipoDocumento;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setSexo(Sexo newVal) {
+        sexo = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoDocumento(TipoDocumento newVal){
-		tipoDocumento = newVal;
-	}
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
 
-	public Pais getPais(){
-		return pais;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoDocumento(TipoDocumento newVal) {
+        tipoDocumento = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPais(Pais newVal){
-		pais = newVal;
-	}
+    public Pais getPais() {
+        return pais;
+    }
 
-	public Date getFechaNacimiento(){
-		return fechaNacimiento;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPais(Pais newVal) {
+        pais = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaNacimiento(Date newVal){
-		fechaNacimiento = newVal;
-	}
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
-	public String getTelefono(){
-		return telefono;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaNacimiento(Date newVal) {
+        fechaNacimiento = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTelefono(String newVal){
-		telefono = newVal;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTelefono(String newVal) {
+        telefono = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getEmail(){
-		return email;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setEmail(String newVal){
-		email = newVal;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getApellido(){
-		return apellido;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setEmail(String newVal) {
+        email = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setApellido(String newVal){
-		apellido = newVal;
-	}
+    public String getApellido() {
+        return apellido;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setApellido(String newVal) {
+        apellido = newVal;
+    }
 }//end Persona

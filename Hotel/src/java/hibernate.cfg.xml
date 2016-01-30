@@ -24,6 +24,22 @@
         <!--INICIO MAPEO BD-->
         <mapping package="Persistencia.MapeoHibernate.EstadoMembresia.hbm.xml" resource="Persistencia/MapeoHibernate/EstadoMembresia.hbm.xml"/>
         <mapping package="Persistencia.MapeoHibernate.Membresia.hbm.xml" resource="Persistencia/MapeoHibernate/Membresia.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Pais.hbm.xml" resource="Persistencia/MapeoHibernate/Pais.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Modulo.hbm.xml" resource="Persistencia/MapeoHibernate/Modulo.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Plan.hbm.xml" resource="Persistencia/MapeoHibernate/Plan.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.EstadoPago.hbm.xml" resource="Persistencia/MapeoHibernate/EstadoPago.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.TipoPago.hbm.xml" resource="Persistencia/MapeoHibernate/TipoPago.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Pago.hbm.xml" resource="Persistencia/MapeoHibernate/Pago.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Provincia.hbm.xml" resource="Persistencia/MapeoHibernate/Provincia.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Localidad.hbm.xml" resource="Persistencia/MapeoHibernate/Localidad.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Domicilio.hbm.xml" resource="Persistencia/MapeoHibernate/Domicilio.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Vehiculo.hbm.xml" resource="Persistencia/MapeoHibernate/Vehiculo.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.TipoUsuario.hbm.xml" resource="Persistencia/MapeoHibernate/TipoUsuario.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.TipoDocumento.hbm.xml" resource="Persistencia/MapeoHibernate/TipoDocumento.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Sexo.hbm.xml" resource="Persistencia/MapeoHibernate/Sexo.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Usuario.hbm.xml" resource="Persistencia/MapeoHibernate/Usuario.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Persona.hbm.xml" resource="Persistencia/MapeoHibernate/Persona.hbm.xml"/>
+        <mapping package="Persistencia.MapeoHibernate.Hotel.hbm.xml" resource="Persistencia/MapeoHibernate/Hotel.hbm.xml"/>
         <!--FIN MAPEO BD-->
     </session-factory>
 </hibernate-configuration>

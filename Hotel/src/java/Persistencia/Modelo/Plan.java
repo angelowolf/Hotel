@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.List;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,63 +9,69 @@ import java.util.List;
  */
 public class Plan {
 
-	private List<Modulo> modulos;
-	private String nombre;
-	private int precio;
-	private String caracteristica;
+    private int id;
+    private List<Modulo> modulos;
+    private String nombre;
+    private int precio;
+    private String caracteristica;
 
-	public Plan(){
+    public Plan() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public List<Modulo> getModulos(){
-		return modulos;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setModulos(List<Modulo> newVal){
-		modulos = newVal;
-	}
+    public List<Modulo> getModulos() {
+        return modulos;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setModulos(List<Modulo> newVal) {
+        modulos = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getPrecio(){
-		return precio;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPrecio(int newVal){
-		precio = newVal;
-	}
+    public int getPrecio() {
+        return precio;
+    }
 
-	public String getCaracteristica(){
-		return caracteristica;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPrecio(int newVal) {
+        precio = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCaracteristica(String newVal){
-		caracteristica = newVal;
-	}
+    public String getCaracteristica() {
+        return caracteristica;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setCaracteristica(String newVal) {
+        caracteristica = newVal;
+    }
 }//end Plan

@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,52 +7,58 @@ package Persistencia.Modelo;
  */
 public class EstadoPagoPendiente extends EstadoPago {
 
-	private String nombre = "pendiente";
+    private int id;
+    private String nombre = "pendiente";
 
-	public EstadoPagoPendiente(){
+    public EstadoPagoPendiente() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public void confirmar(){
+    public void confirmar() {
 
-	}
+    }
 
-	public void verificarMonto(){
+    public void verificarMonto() {
 
-	}
+    }
 
-	public void anular(){
+    public void anular() {
 
-	}
+    }
 
-	public boolean isPendiente(){
-		return false;
-	}
+    public boolean isPendiente() {
+        return false;
+    }
 
-	public boolean isConfirmado(){
-		return false;
-	}
+    public boolean isConfirmado() {
+        return false;
+    }
 
-	public boolean isAnulado(){
-		return false;
-	}
+    public boolean isAnulado() {
+        return false;
+    }
 
-	public boolean isIncompleto(){
-		return false;
-	}
+    public boolean isIncompleto() {
+        return false;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    public int getId() {
+        return id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 }//end EstadoPagoPendiente

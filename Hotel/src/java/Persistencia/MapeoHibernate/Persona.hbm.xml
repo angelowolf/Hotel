@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>   
+    <class name="Persistencia.Modelo.Persona" table="Persona">
+        <id name="id">
+            <generator class="native" />
+        </id>
+        <discriminator column="DISC" type="string" />
+        <property name="apellido" column="apellido" type="string"/>
+        <property name="email" column="email" type="string"/>
+        <property name="nombre" column="nombre" type="string"/>
+        <property name="telefono" column="telefono" type="string"/>
+        <property name="fechaNacimiento" column="fechaNacimiento" type="date"/>        
+        <many-to-one name="sexo" column="id_sexo" />
+        <many-to-one name="pais" column="id_pais" />
+        <many-to-one name="tipoDocumento" column="id_tipoDocumento" />
+        
+        <many-to-one name="domicilio" class="Persistencia.Modelo.Domicilio" cascade="all" column="id_domicilio" />
+         
+        <subclass name="Persistencia.Modelo.Dueño" discriminator-value="owner">
+            <many-to-one name="usuario" class="Persistencia.Modelo.Usuario" cascade="all" column="id_usuario" />
+        </subclass>
+        
+        <subclass name="Persistencia.Modelo.Empleado" discriminator-value="empleado">
+            <property name="cuil" />
+        </subclass>
+        
+        <subclass name="Persistencia.Modelo.Particular" discriminator-value="particular">
+            <many-to-one name="vehiculo" class="Persistencia.Modelo.Vehiculo" cascade="all" column="id_vehiculo" />
+        </subclass>
+    </class>
+</hibernate-mapping>

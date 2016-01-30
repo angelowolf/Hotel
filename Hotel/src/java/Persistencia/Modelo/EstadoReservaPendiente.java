@@ -14,9 +14,6 @@ public class EstadoReservaPendiente extends EstadoReserva {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 	public String getNombre(){
 		return nombre;
 	}

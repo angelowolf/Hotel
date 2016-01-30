@@ -10,12 +10,6 @@
         <property name="fechaVencimiento" column="fechaVencimiento" type="date"/>
         <property name="fechaAviso" column="fechaAviso" type="date"/>
         
-        <many-to-one
-            name="estadoMembresia" column="id_estadoMembresia"
-            outer-join="false"
-            lazy="false"
-            not-found="ignore"
-            class="Persistencia.Modelo.EstadoMembresia" >
-        </many-to-one>        
+        <many-to-one name="estadoMembresia" outer-join="false" lazy="false" not-found="ignore" class="Persistencia.Modelo.EstadoMembresia" column="id_estadoMembresia" />
     </class>
 </hibernate-mapping>

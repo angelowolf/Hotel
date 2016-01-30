@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,50 +9,56 @@ import java.util.Date;
  */
 public class DetalleMantenimiento {
 
-	private String descripcion;
-	private Date fecha;
-	private boolean resuelto;
+    private int id;
+    private String descripcion;
+    private Date fecha;
+    private boolean resuelto;
 
-	public DetalleMantenimiento(){
+    public DetalleMantenimiento() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getDescripcion(){
-		return descripcion;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDescripcion(String newVal){
-		descripcion = newVal;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public Date getFecha(){
-		return fecha;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDescripcion(String newVal) {
+        descripcion = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFecha(Date newVal){
-		fecha = newVal;
-	}
+    public Date getFecha() {
+        return fecha;
+    }
 
-	public boolean isResuelto(){
-		return resuelto;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFecha(Date newVal) {
+        fecha = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setResuelto(boolean newVal){
-		resuelto = newVal;
-	}
+    public boolean isResuelto() {
+        return resuelto;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setResuelto(boolean newVal) {
+        resuelto = newVal;
+    }
 }//end DetalleMantenimiento

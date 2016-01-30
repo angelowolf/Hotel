@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,37 +7,43 @@ package Persistencia.Modelo;
  */
 public class Modulo {
 
-	private String nombre;
-	private String caracteristica;
+    private int id;
+    private String nombre;
+    private String caracteristica;
 
-	public Modulo(){
+    public Modulo() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getCaracteristica(){
-		return caracteristica;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCaracteristica(String newVal){
-		caracteristica = newVal;
-	}
+    public String getCaracteristica() {
+        return caracteristica;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setCaracteristica(String newVal) {
+        caracteristica = newVal;
+    }
 }//end Modulo

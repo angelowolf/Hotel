@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,89 +7,95 @@ package Persistencia.Modelo;
  */
 public class Domicilio {
 
-	private String torre;
-	private String calle;
-	private int numero;
-	private String departamento;
-	private int piso;
-	private Localidad localidad;
+    private int id;
+    private String torre;
+    private String calle;
+    private int numero;
+    private String departamento;
+    private int piso;
+    private Localidad localidad;
 
-	public Domicilio(){
+    public Domicilio() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public Localidad getLocalidad(){
-		return localidad;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setLocalidad(Localidad newVal){
-		localidad = newVal;
-	}
+    public Localidad getLocalidad() {
+        return localidad;
+    }
 
-	public int getPiso(){
-		return piso;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setLocalidad(Localidad newVal) {
+        localidad = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPiso(int newVal){
-		piso = newVal;
-	}
+    public int getPiso() {
+        return piso;
+    }
 
-	public String getDepartamento(){
-		return departamento;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPiso(int newVal) {
+        piso = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDepartamento(String newVal){
-		departamento = newVal;
-	}
+    public String getDepartamento() {
+        return departamento;
+    }
 
-	public int getNumero(){
-		return numero;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDepartamento(String newVal) {
+        departamento = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNumero(int newVal){
-		numero = newVal;
-	}
+    public int getNumero() {
+        return numero;
+    }
 
-	public String getCalle(){
-		return calle;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNumero(int newVal) {
+        numero = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCalle(String newVal){
-		calle = newVal;
-	}
+    public String getCalle() {
+        return calle;
+    }
 
-	public String getTorre(){
-		return torre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCalle(String newVal) {
+        calle = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTorre(String newVal){
-		torre = newVal;
-	}
+    public String getTorre() {
+        return torre;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setTorre(String newVal) {
+        torre = newVal;
+    }
 }//end Domicilio

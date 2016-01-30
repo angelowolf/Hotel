@@ -78,7 +78,7 @@ public class ControladorUsuario {
      */
     public void eliminar(int idUsuario) {
         Usuario u = new Usuario();
-        u.setIdUsuario(idUsuario);
+        u.setId(idUsuario);
         usuarioDAO.eliminar(u);
     }
 

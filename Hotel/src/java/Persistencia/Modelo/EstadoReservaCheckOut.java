@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,60 +7,57 @@ package Persistencia.Modelo;
  */
 public class EstadoReservaCheckOut extends EstadoReserva {
 
-	private String nombre = "checkout";
+    private String nombre = "checkout";
 
-	public EstadoReservaCheckOut(){
+    public EstadoReservaCheckOut() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	public void confirmar(){
+    public void confirmar() {
 
-	}
+    }
 
-	public void registrarIngreso(){
+    public void registrarIngreso() {
 
-	}
+    }
 
-	public void registrarEgreso(){
+    public void registrarEgreso() {
 
-	}
+    }
 
-	public void cancelar(){
+    public void cancelar() {
 
-	}
+    }
 
-	public boolean isPendiente(){
-		return false;
-	}
+    public boolean isPendiente() {
+        return false;
+    }
 
-	public boolean isConfirmada(){
-		return false;
-	}
+    public boolean isConfirmada() {
+        return false;
+    }
 
-	public boolean isCancelada(){
-		return false;
-	}
+    public boolean isCancelada() {
+        return false;
+    }
 
-	public boolean isCheckOut(){
-		return false;
-	}
+    public boolean isCheckOut() {
+        return false;
+    }
 
-	public boolean isCheckIn(){
-		return false;
-	}
+    public boolean isCheckIn() {
+        return false;
+    }
 }//end EstadoReservaCheckOut

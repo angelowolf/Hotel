@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,52 +7,58 @@ package Persistencia.Modelo;
  */
 public abstract class EstadoPago {
 
-	private String nombre;
+    private int id;
+    private String nombre;
 
-	public EstadoPago(){
+    public EstadoPago() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public void confirmar() {
 
-	}
-	public void confirmar(){
+    }
 
-	}
+    public void verificarMonto() {
 
-	public void verificarMonto(){
+    }
 
-	}
+    public void anular() {
 
-	public void anular(){
+    }
 
-	}
+    public boolean isPendiente() {
+        return false;
+    }
 
-	public boolean isPendiente(){
-		return false;
-	}
+    public boolean isConfirmado() {
+        return false;
+    }
 
-	public boolean isConfirmado(){
-		return false;
-	}
+    public boolean isAnulado() {
+        return false;
+    }
 
-	public boolean isAnulado(){
-		return false;
-	}
+    public boolean isIncompleto() {
+        return false;
+    }
 
-	public boolean isIncompleto(){
-		return false;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 }//end EstadoPago

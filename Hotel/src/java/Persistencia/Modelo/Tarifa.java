@@ -3,7 +3,6 @@ package Persistencia.Modelo;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -11,76 +10,82 @@ import java.util.List;
  */
 public class Tarifa {
 
-	private Date fechaDesde;
-	private Date fechaHasta;
-	private float precio;
-	private Temporada temporada;
-	private List<TipoHabitacion> tipoHabitaciones;
+    private int id;
+    private Date fechaDesde;
+    private Date fechaHasta;
+    private float precio;
+    private Temporada temporada;
+    private List<TipoHabitacion> tipoHabitaciones;
 
-	public Tarifa(){
+    public Tarifa() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public List<TipoHabitacion> getTipoHabitaciones(){
-		return tipoHabitaciones;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoHabitaciones(List<TipoHabitacion> newVal){
-		tipoHabitaciones = newVal;
-	}
+    public List<TipoHabitacion> getTipoHabitaciones() {
+        return tipoHabitaciones;
+    }
 
-	public Temporada getTemporada(){
-		return temporada;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoHabitaciones(List<TipoHabitacion> newVal) {
+        tipoHabitaciones = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTemporada(Temporada newVal){
-		temporada = newVal;
-	}
+    public Temporada getTemporada() {
+        return temporada;
+    }
 
-	public Date getFechaDesde(){
-		return fechaDesde;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTemporada(Temporada newVal) {
+        temporada = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaDesde(Date newVal){
-		fechaDesde = newVal;
-	}
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
 
-	public Date getFechaHasta(){
-		return fechaHasta;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaDesde(Date newVal) {
+        fechaDesde = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaHasta(Date newVal){
-		fechaHasta = newVal;
-	}
+    public Date getFechaHasta() {
+        return fechaHasta;
+    }
 
-	public float getPrecio(){
-		return precio;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaHasta(Date newVal) {
+        fechaHasta = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPrecio(float newVal){
-		precio = newVal;
-	}
+    public float getPrecio() {
+        return precio;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setPrecio(float newVal) {
+        precio = newVal;
+    }
 }//end Tarifa

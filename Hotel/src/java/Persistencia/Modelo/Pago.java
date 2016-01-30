@@ -10,72 +10,86 @@ import java.util.Date;
  */
 public class Pago {
 
-	private EstadoPago estadoPago;
-	private Date fechaPago;
-	private TipoPago tipoPago;
-	private int total;
-	private EstrategiaCalculo estrategiaCalculo;
+    private int id;
+    private EstadoPago estadoPago;
+    private Date fechaPago;
+    private TipoPago tipoPago;
+    private int total;
+    private EstrategiaCalculo estrategiaCalculo;
 
-	public Pago(){
+    public Pago() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public TipoPago getTipoPago(){
-		return tipoPago;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoPago(TipoPago newVal){
-		tipoPago = newVal;
-	}
+    public EstrategiaCalculo getEstrategiaCalculo() {
+        return estrategiaCalculo;
+    }
 
-	public EstadoPago getEstadoPago(){
-		return estadoPago;
-	}
+    public void setEstrategiaCalculo(EstrategiaCalculo estrategiaCalculo) {
+        this.estrategiaCalculo = estrategiaCalculo;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setEstadoPago(EstadoPago newVal){
-		estadoPago = newVal;
-	}
+    public TipoPago getTipoPago() {
+        return tipoPago;
+    }
 
-	public Date getFechaPago(){
-		return fechaPago;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoPago(TipoPago newVal) {
+        tipoPago = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaPago(Date newVal){
-		fechaPago = newVal;
-	}
+    public EstadoPago getEstadoPago() {
+        return estadoPago;
+    }
 
-	public int getTotal(){
-		return total;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setEstadoPago(EstadoPago newVal) {
+        estadoPago = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTotal(int newVal){
-		total = newVal;
-	}
+    public Date getFechaPago() {
+        return fechaPago;
+    }
 
-	/**
-	 * 
-	 * @param plan
-	 */
-	public int calcularCosto(Plan plan){
-		return 0;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaPago(Date newVal) {
+        fechaPago = newVal;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setTotal(int newVal) {
+        total = newVal;
+    }
+
+    /**
+     *
+     * @param plan
+     */
+    public int calcularCosto(Plan plan) {
+        return 0;
+    }
 }//end Pago

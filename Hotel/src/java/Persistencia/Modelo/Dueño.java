@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,24 +7,33 @@ package Persistencia.Modelo;
  */
 public class Dueño extends Persona {
 
-	private Usuario usuario;
+    private int id;
+    private Usuario usuario;
 
-	public Dueño(){
+    public Dueño(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	}
+    public Dueño() {
+    }
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	public Usuario getUsuario(){
-		return usuario;
-	}
+    public int getId() {
+        return id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setUsuario(Usuario newVal){
-		usuario = newVal;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setUsuario(Usuario newVal) {
+        usuario = newVal;
+    }
 }//end Dueño

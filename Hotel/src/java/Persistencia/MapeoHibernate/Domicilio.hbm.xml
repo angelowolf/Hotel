@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>   
+    <class name="Persistencia.Modelo.Domicilio" table="domicilio">
+        <id name="id">
+            <column name="id" />
+            <generator class="native"/>
+        </id>
+        <property name="torre" column="torre" type="string"/>
+        <property name="calle" column="calle" type="string"/>
+        <property name="numero" column="numero"/>
+        <property name="departamento" column="departamento" type="string"/>
+        <property name="piso" column="piso"/>
+        <many-to-one name="localidad" column="id_localidad" />        
+    </class>
+</hibernate-mapping>

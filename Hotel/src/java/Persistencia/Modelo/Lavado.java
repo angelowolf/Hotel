@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,63 +9,69 @@ import java.util.Date;
  */
 public class Lavado {
 
-	private Date fechaEntrega;
-	private Lavanderia lavanderia;
-	private DetalleLavado detalleLavado;
-	private TipoMovimientoBlanqueria tipoMovimientoBlanqueria;
+    private int id;
+    private Date fechaEntrega;
+    private Lavanderia lavanderia;
+    private DetalleLavado detalleLavado;
+    private TipoMovimientoBlanqueria tipoMovimientoBlanqueria;
 
-	public Lavado(){
+    public Lavado() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public Lavanderia getLavanderia(){
-		return lavanderia;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setLavanderia(Lavanderia newVal){
-		lavanderia = newVal;
-	}
+    public Lavanderia getLavanderia() {
+        return lavanderia;
+    }
 
-	public DetalleLavado getDetalleLavado(){
-		return detalleLavado;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setLavanderia(Lavanderia newVal) {
+        lavanderia = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDetalleLavado(DetalleLavado newVal){
-		detalleLavado = newVal;
-	}
+    public DetalleLavado getDetalleLavado() {
+        return detalleLavado;
+    }
 
-	public TipoMovimientoBlanqueria getTipoMovimientoBlanqueria(){
-		return tipoMovimientoBlanqueria;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDetalleLavado(DetalleLavado newVal) {
+        detalleLavado = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoMovimientoBlanqueria(TipoMovimientoBlanqueria newVal){
-		tipoMovimientoBlanqueria = newVal;
-	}
+    public TipoMovimientoBlanqueria getTipoMovimientoBlanqueria() {
+        return tipoMovimientoBlanqueria;
+    }
 
-	public Date getFechaEntrega(){
-		return fechaEntrega;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoMovimientoBlanqueria(TipoMovimientoBlanqueria newVal) {
+        tipoMovimientoBlanqueria = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaEntrega(Date newVal){
-		fechaEntrega = newVal;
-	}
+    public Date getFechaEntrega() {
+        return fechaEntrega;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaEntrega(Date newVal) {
+        fechaEntrega = newVal;
+    }
 }//end Lavado

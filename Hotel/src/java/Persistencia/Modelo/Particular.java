@@ -7,7 +7,7 @@ package Persistencia.Modelo;
  * @created 28-ene-2016 08:44:28 p.m.
  */
 public class Particular extends Persona implements ICliente {
-
+  
 	private Vehiculo vehiculo;
 	public Vehiculo m_Vehiculo;
 
@@ -15,9 +15,6 @@ public class Particular extends Persona implements ICliente {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 	public Vehiculo getVehiculo(){
 		return vehiculo;
 	}

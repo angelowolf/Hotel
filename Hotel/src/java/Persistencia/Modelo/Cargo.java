@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,63 +9,69 @@ import java.util.Date;
  */
 public class Cargo {
 
-	private Date fecha;
-	private float monto;
-	private String descripcion;
-	private TipoCargo tipoCargo;
+    private int id;
+    private Date fecha;
+    private float monto;
+    private String descripcion;
+    private TipoCargo tipoCargo;
 
-	public Cargo(){
+    public Cargo() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public TipoCargo getTipoCargo(){
-		return tipoCargo;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoCargo(TipoCargo newVal){
-		tipoCargo = newVal;
-	}
+    public TipoCargo getTipoCargo() {
+        return tipoCargo;
+    }
 
-	public Date getFecha(){
-		return fecha;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoCargo(TipoCargo newVal) {
+        tipoCargo = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFecha(Date newVal){
-		fecha = newVal;
-	}
+    public Date getFecha() {
+        return fecha;
+    }
 
-	public float getMonto(){
-		return monto;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFecha(Date newVal) {
+        fecha = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setMonto(float newVal){
-		monto = newVal;
-	}
+    public float getMonto() {
+        return monto;
+    }
 
-	public String getDescripcion(){
-		return descripcion;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setMonto(float newVal) {
+        monto = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDescripcion(String newVal){
-		descripcion = newVal;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setDescripcion(String newVal) {
+        descripcion = newVal;
+    }
 }//end Cargo

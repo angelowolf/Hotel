@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,50 +7,56 @@ package Persistencia.Modelo;
  */
 public class Localidad {
 
-	private int codigoPostal;
-	private String nombre;
-	private Provincia provincia;
+    private int id;
+    private int codigoPostal;
+    private String nombre;
+    private Provincia provincia;
 
-	public Localidad(){
+    public Localidad() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public Provincia getProvincia(){
-		return provincia;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setProvincia(Provincia newVal){
-		provincia = newVal;
-	}
+    public Provincia getProvincia() {
+        return provincia;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setProvincia(Provincia newVal) {
+        provincia = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getCodigoPostal(){
-		return codigoPostal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCodigoPostal(int newVal){
-		codigoPostal = newVal;
-	}
+    public int getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setCodigoPostal(int newVal) {
+        codigoPostal = newVal;
+    }
 }//end Localidad

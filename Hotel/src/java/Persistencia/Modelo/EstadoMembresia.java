@@ -8,7 +8,6 @@ package Persistencia.Modelo;
 public abstract class EstadoMembresia {
 
     private int id;
-
     private String nombre;
 
     public EstadoMembresia() {

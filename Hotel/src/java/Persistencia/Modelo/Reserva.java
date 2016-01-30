@@ -3,7 +3,6 @@ package Persistencia.Modelo;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -11,183 +10,189 @@ import java.util.List;
  */
 public class Reserva {
 
-	private ICliente cliente;
-	private List<Cobro> cobros;
-	private List<DetalleReserva> detalleReservas;
-	private EstadoReserva estadoReserva;
-	private Date fechaIngreso;
-	private Date fechaReserva;
-	private Date fechaSalida;
-	private String descripcion;
-	private List<Persona> pasajeros;
-	private List<Cargo> cargos;
-	private boolean checkIn;
-	private boolean checkOut;
+    private int id;
+    private ICliente cliente;
+    private List<Cobro> cobros;
+    private List<DetalleReserva> detalleReservas;
+    private EstadoReserva estadoReserva;
+    private Date fechaIngreso;
+    private Date fechaReserva;
+    private Date fechaSalida;
+    private String descripcion;
+    private List<Persona> pasajeros;
+    private List<Cargo> cargos;
+    private boolean checkIn;
+    private boolean checkOut;
 
-	public Reserva(){
+    public Reserva() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public ICliente getCliente(){
-		return cliente;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCliente(ICliente newVal){
-		cliente = newVal;
-	}
+    public ICliente getCliente() {
+        return cliente;
+    }
 
-	public List<Cobro> getCobros(){
-		return cobros;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCliente(ICliente newVal) {
+        cliente = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCobros(List<Cobro> newVal){
-		cobros = newVal;
-	}
+    public List<Cobro> getCobros() {
+        return cobros;
+    }
 
-	public List<DetalleReserva> getDetalleReservas(){
-		return detalleReservas;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCobros(List<Cobro> newVal) {
+        cobros = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDetalleReservas(List<DetalleReserva> newVal){
-		detalleReservas = newVal;
-	}
+    public List<DetalleReserva> getDetalleReservas() {
+        return detalleReservas;
+    }
 
-	public EstadoReserva getEstadoReserva(){
-		return estadoReserva;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDetalleReservas(List<DetalleReserva> newVal) {
+        detalleReservas = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setEstadoReserva(EstadoReserva newVal){
-		estadoReserva = newVal;
-	}
+    public EstadoReserva getEstadoReserva() {
+        return estadoReserva;
+    }
 
-	public List<Persona> getPasajeros(){
-		return pasajeros;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setEstadoReserva(EstadoReserva newVal) {
+        estadoReserva = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPasajeros(List<Persona> newVal){
-		pasajeros = newVal;
-	}
+    public List<Persona> getPasajeros() {
+        return pasajeros;
+    }
 
-	public List<Cargo> getCargos(){
-		return cargos;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPasajeros(List<Persona> newVal) {
+        pasajeros = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCargos(List<Cargo> newVal){
-		cargos = newVal;
-	}
+    public List<Cargo> getCargos() {
+        return cargos;
+    }
 
-	public void confirmar(){
+    /**
+     *
+     * @param newVal
+     */
+    public void setCargos(List<Cargo> newVal) {
+        cargos = newVal;
+    }
 
-	}
+    public void confirmar() {
 
-	public void registrarIngreso(){
+    }
 
-	}
+    public void registrarIngreso() {
 
-	public void registrarEgreso(){
+    }
 
-	}
+    public void registrarEgreso() {
 
-	public void cancelar(){
+    }
 
-	}
+    public void cancelar() {
 
-	public boolean isCheckOut(){
-		return checkOut;
-	}
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCheckOut(boolean newVal){
-		checkOut = newVal;
-	}
+    public boolean isCheckOut() {
+        return checkOut;
+    }
 
-	public boolean isCheckIn(){
-		return checkIn;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCheckOut(boolean newVal) {
+        checkOut = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCheckIn(boolean newVal){
-		checkIn = newVal;
-	}
+    public boolean isCheckIn() {
+        return checkIn;
+    }
 
-	public String getDescripcion(){
-		return descripcion;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCheckIn(boolean newVal) {
+        checkIn = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setDescripcion(String newVal){
-		descripcion = newVal;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public Date getFechaSalida(){
-		return fechaSalida;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setDescripcion(String newVal) {
+        descripcion = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaSalida(Date newVal){
-		fechaSalida = newVal;
-	}
+    public Date getFechaSalida() {
+        return fechaSalida;
+    }
 
-	public Date getFechaReserva(){
-		return fechaReserva;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaSalida(Date newVal) {
+        fechaSalida = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaReserva(Date newVal){
-		fechaReserva = newVal;
-	}
+    public Date getFechaReserva() {
+        return fechaReserva;
+    }
 
-	public Date getFechaIngreso(){
-		return fechaIngreso;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaReserva(Date newVal) {
+        fechaReserva = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaIngreso(Date newVal){
-		fechaIngreso = newVal;
-	}
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaIngreso(Date newVal) {
+        fechaIngreso = newVal;
+    }
 }//end Reserva

@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,37 +7,43 @@ package Persistencia.Modelo;
  */
 public class Item {
 
-	private int stock;
-	private String nombre;
+    private int id;
+    private int stock;
+    private String nombre;
 
-	public Item(){
+    public Item() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getStock(){
-		return stock;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setStock(int newVal){
-		stock = newVal;
-	}
+    public int getStock() {
+        return stock;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setStock(int newVal) {
+        stock = newVal;
+    }
 }//end Item

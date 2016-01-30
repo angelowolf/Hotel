@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>    
+    <class name="Persistencia.Modelo.EstadoPago" table="EstadoPago" polymorphism="implicit">
+        <cache usage="read-only"/>
+        <id name="id" column="id">
+            <generator class="assigned" />
+        </id>
+        <discriminator insert="false" column="id" />
+        <property name="nombre" column="nombre" />
+        
+        <subclass name="Persistencia.Modelo.EstadoPagoPendiente" discriminator-value="0"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoConfirmado" discriminator-value="1"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoIncompleto" discriminator-value="2"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoAnulado" discriminator-value="3"/>
+    </class>
+</hibernate-mapping>

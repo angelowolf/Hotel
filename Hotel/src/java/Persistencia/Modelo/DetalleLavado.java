@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,50 +7,56 @@ package Persistencia.Modelo;
  */
 public class DetalleLavado {
 
-	private int cantidad;
-	private float precio;
-	private Item item;
+    private int id;
+    private int cantidad;
+    private float precio;
+    private Item item;
 
-	public DetalleLavado(){
+    public DetalleLavado() {
 
-	}
+    }
+    
+    public int getId() {
+        return id;
+    }
 
-	public void finalize() throws Throwable {
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	}
-	public Item getItem(){
-		return item;
-	}
+    public Item getItem() {
+        return item;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setItem(Item newVal){
-		item = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setItem(Item newVal) {
+        item = newVal;
+    }
 
-	public int getCantidad(){
-		return cantidad;
-	}
+    public int getCantidad() {
+        return cantidad;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCantidad(int newVal){
-		cantidad = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setCantidad(int newVal) {
+        cantidad = newVal;
+    }
 
-	public float getPrecio(){
-		return precio;
-	}
+    public float getPrecio() {
+        return precio;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPrecio(float newVal){
-		precio = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPrecio(float newVal) {
+        precio = newVal;
+    }
 }//end DetalleLavado

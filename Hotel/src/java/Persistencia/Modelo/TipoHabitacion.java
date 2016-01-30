@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.List;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,37 +9,43 @@ import java.util.List;
  */
 public class TipoHabitacion {
 
-	private List<Habitacion> habitaciones;
-	private String nombre;
+    private int id;
+    private List<Habitacion> habitaciones;
+    private String nombre;
 
-	public TipoHabitacion(){
+    public TipoHabitacion() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public List<Habitacion> getHabitaciones(){
-		return habitaciones;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setHabitaciones(List<Habitacion> newVal){
-		habitaciones = newVal;
-	}
+    public List<Habitacion> getHabitaciones() {
+        return habitaciones;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setHabitaciones(List<Habitacion> newVal) {
+        habitaciones = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 }//end TipoHabitacion

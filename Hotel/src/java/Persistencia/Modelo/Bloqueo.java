@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,37 +9,42 @@ import java.util.Date;
  */
 public class Bloqueo {
 
-	private Date fechaInicio;
-	private Date fechaFIn;
+    private int id;
+    private Date fechaInicio;
+    private Date fechaFIn;
 
-	public Bloqueo(){
+    public Bloqueo() {
 
-	}
+    }
+    
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void finalize() throws Throwable {
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
 
-	}
-	public Date getFechaInicio(){
-		return fechaInicio;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaInicio(Date newVal) {
+        fechaInicio = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaInicio(Date newVal){
-		fechaInicio = newVal;
-	}
+    public Date getFechaFIn() {
+        return fechaFIn;
+    }
 
-	public Date getFechaFIn(){
-		return fechaFIn;
-	}
-
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaFIn(Date newVal){
-		fechaFIn = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaFIn(Date newVal) {
+        fechaFIn = newVal;
+    }
 }//end Bloqueo

@@ -1,5 +1,7 @@
 package Persistencia.Modelo;
 
+import Persistencia.ORM.DAOImplementacion.TipoUsuarioDAO;
+
 /**
  * @author Angelo
  * @version 1.0
@@ -7,12 +9,11 @@ package Persistencia.Modelo;
  */
 public class Usuario {
 
-    private int idUsuario;
+    private int id;
     private String clave;
     private String email;
     private String nick;
     private TipoUsuario tipoUsuario;
-    private Hotel hotel;
 
     public Usuario() {
 
@@ -36,20 +37,14 @@ public class Usuario {
         return tipoUsuario.isOwner();
     }
 
-    public Hotel getHotel() {
-        return hotel;
+   
+
+    public int getId() {
+        return id;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public TipoUsuario getTipoUsuario() {
@@ -98,5 +93,11 @@ public class Usuario {
      */
     public void setClave(String newVal) {
         clave = newVal;
+    }
+
+    public void hacerOwner() {
+        TipoUsuarioDAO tipoUsuarioDAO = new TipoUsuarioDAO();
+        TipoUsuario tp = tipoUsuarioDAO.getTipoOwner();
+        this.tipoUsuario = tp;
     }
 }//end Usuario

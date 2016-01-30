@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.List;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,76 +9,82 @@ import java.util.List;
  */
 public class Habitacion {
 
-	private String nombre;
-	private TipoHabitacion tipoHabitacion;
-	private List<DetalleMantenimiento> mantenimiento;
-	private int capacidad;
-	private List<Bloqueo> bloqueos;
+    private int id;
+    private String nombre;
+    private TipoHabitacion tipoHabitacion;
+    private List<DetalleMantenimiento> mantenimiento;
+    private int capacidad;
+    private List<Bloqueo> bloqueos;
 
-	public Habitacion(){
+    public Habitacion() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public List<Bloqueo> getBloqueos(){
-		return bloqueos;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setBloqueos(List<Bloqueo> newVal){
-		bloqueos = newVal;
-	}
+    public List<Bloqueo> getBloqueos() {
+        return bloqueos;
+    }
 
-	public List<DetalleMantenimiento> getMantenimiento(){
-		return mantenimiento;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setBloqueos(List<Bloqueo> newVal) {
+        bloqueos = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setMantenimiento(List<DetalleMantenimiento> newVal){
-		mantenimiento = newVal;
-	}
+    public List<DetalleMantenimiento> getMantenimiento() {
+        return mantenimiento;
+    }
 
-	public TipoHabitacion getTipoHabitacion(){
-		return tipoHabitacion;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setMantenimiento(List<DetalleMantenimiento> newVal) {
+        mantenimiento = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setTipoHabitacion(TipoHabitacion newVal){
-		tipoHabitacion = newVal;
-	}
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
+    }
 
-	public String getNombre(){
-		return nombre;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setTipoHabitacion(TipoHabitacion newVal) {
+        tipoHabitacion = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getCapacidad(){
-		return capacidad;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setCapacidad(int newVal){
-		capacidad = newVal;
-	}
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setCapacidad(int newVal) {
+        capacidad = newVal;
+    }
 }//end Habitacion

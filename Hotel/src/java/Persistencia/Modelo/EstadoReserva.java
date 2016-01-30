@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,60 +7,66 @@ package Persistencia.Modelo;
  */
 public abstract class EstadoReserva {
 
-	private String nombre;
+    private int id;
+    private String nombre;
 
-	public EstadoReserva(){
+    public EstadoReserva() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void confirmar(){
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	}
+    public void confirmar() {
 
-	public void registrarIngreso(){
+    }
 
-	}
+    public void registrarIngreso() {
 
-	public void registrarEgreso(){
+    }
 
-	}
+    public void registrarEgreso() {
 
-	public void cancelar(){
+    }
 
-	}
+    public void cancelar() {
 
-	public boolean isPendiente(){
-		return false;
-	}
+    }
 
-	public boolean isConfirmada(){
-		return false;
-	}
+    public boolean isPendiente() {
+        return false;
+    }
 
-	public boolean isCancelada(){
-		return false;
-	}
+    public boolean isConfirmada() {
+        return false;
+    }
 
-	public boolean isCheckOut(){
-		return false;
-	}
+    public boolean isCancelada() {
+        return false;
+    }
 
-	public boolean isCheckIn(){
-		return false;
-	}
+    public boolean isCheckOut() {
+        return false;
+    }
+
+    public boolean isCheckIn() {
+        return false;
+    }
 }//end EstadoReserva

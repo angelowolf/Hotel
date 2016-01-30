@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,50 +7,56 @@ package Persistencia.Modelo;
  */
 public class Vehiculo {
 
-	private String color;
-	private String modelo;
-	private String patente;
+    private int id;
+    private String color;
+    private String modelo;
+    private String patente;
 
-	public Vehiculo(){
+    public Vehiculo() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getPatente(){
-		return patente;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPatente(String newVal){
-		patente = newVal;
-	}
+    public String getPatente() {
+        return patente;
+    }
 
-	public String getModelo(){
-		return modelo;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setPatente(String newVal) {
+        patente = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setModelo(String newVal){
-		modelo = newVal;
-	}
+    public String getModelo() {
+        return modelo;
+    }
 
-	public String getColor(){
-		return color;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setModelo(String newVal) {
+        modelo = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setColor(String newVal){
-		color = newVal;
-	}
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setColor(String newVal) {
+        color = newVal;
+    }
 }//end Vehiculo

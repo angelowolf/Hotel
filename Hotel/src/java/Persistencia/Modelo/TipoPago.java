@@ -1,6 +1,5 @@
 package Persistencia.Modelo;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,37 +7,43 @@ package Persistencia.Modelo;
  */
 public class TipoPago {
 
-	private String nombre;
-	private float porcentajeRecargo;
+    private int id;
+    private String nombre;
+    private float porcentajeRecargo;
 
-	public TipoPago(){
+    public TipoPago() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public String getNombre(){
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setNombre(String newVal){
-		nombre = newVal;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public float getPorcentajeRecargo(){
-		return porcentajeRecargo;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setNombre(String newVal) {
+        nombre = newVal;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setPorcentajeRecargo(float newVal){
-		porcentajeRecargo = newVal;
-	}
+    public float getPorcentajeRecargo() {
+        return porcentajeRecargo;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setPorcentajeRecargo(float newVal) {
+        porcentajeRecargo = newVal;
+    }
 }//end TipoPago

@@ -2,7 +2,6 @@ package Persistencia.Modelo;
 
 import java.util.Date;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -10,76 +9,90 @@ import java.util.Date;
  */
 public class DetalleReserva {
 
-	private Date fechaIngreso;
-	private Date fechaSalida;
-	private Habitacion habitacion;
-	private int adultos;
-	private int menores;
+    private int id;
+    private Date fechaIngreso;
+    private Date fechaSalida;
+    private Habitacion habitacion;
+    private int adultos;
+    private int menores;
 
-	public DetalleReserva(){
+    public DetalleReserva() {
 
-	}
+    }
 
-	public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
-	}
-	public Habitacion getHabitacion(){
-		return habitacion;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setHabitacion(Habitacion newVal){
-		habitacion = newVal;
-	}
+    public Date getFechaSalida() {
+        return fechaSalida;
+    }
+    
+    public void setFechaSalida(Date fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
 
-	public Date getFechaIngreso(){
-		return fechaIngreso;
-	}
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFechaIngreso(Date newVal){
-		fechaIngreso = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setHabitacion(Habitacion newVal) {
+        habitacion = newVal;
+    }
 
-	public Date getFfechaSalida(){
-		return fechaSalida;
-	}
+    public Date getFechaIngreso() {
+        return fechaIngreso;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setFfechaSalida(Date newVal){
-		fechaSalida = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFechaIngreso(Date newVal) {
+        fechaIngreso = newVal;
+    }
 
-	public int getAdultos(){
-		return adultos;
-	}
+    public Date getFfechaSalida() {
+        return fechaSalida;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setAdultos(int newVal){
-		adultos = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setFfechaSalida(Date newVal) {
+        fechaSalida = newVal;
+    }
 
-	public int getMenores(){
-		return menores;
-	}
+    public int getAdultos() {
+        return adultos;
+    }
 
-	/**
-	 * 
-	 * @param newVal
-	 */
-	public void setMenores(int newVal){
-		menores = newVal;
-	}
+    /**
+     *
+     * @param newVal
+     */
+    public void setAdultos(int newVal) {
+        adultos = newVal;
+    }
+
+    public int getMenores() {
+        return menores;
+    }
+
+    /**
+     *
+     * @param newVal
+     */
+    public void setMenores(int newVal) {
+        menores = newVal;
+    }
 }//end DetalleReserva

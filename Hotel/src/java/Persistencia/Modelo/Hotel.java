@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Hotel {
 
+    private int id;
     private Dueño dueño;
     private Membresia membresia;
     private List<Pago> pagos;
@@ -16,6 +17,14 @@ public class Hotel {
     private String nombre;
     private List<Reserva> reservas;
     private List<TipoHabitacion> tipoHabitaciones;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public List<TipoHabitacion> getTipoHabitaciones() {
         return tipoHabitaciones;

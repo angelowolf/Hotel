@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Limpieza {
 
+    private int id;
     private Date fechaDesde;
     private Date fechaHasta;
     private List<Habitacion> habitaciones;
@@ -20,8 +21,20 @@ public class Limpieza {
 
     }
 
-    public void finalize() throws Throwable {
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Habitacion> getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(List<Habitacion> habitacion) {
+        this.habitacion = habitacion;
     }
 
     public Empleado getEmpleado() {
