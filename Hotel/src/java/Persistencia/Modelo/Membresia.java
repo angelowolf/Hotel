@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class Membresia {
 
+    private int id;
     private EstadoMembresia estadoMembresia;
     private Date fechaActivacion;
     private Date fechaVencimiento;
@@ -24,6 +25,14 @@ public class Membresia {
 
     public EstadoMembresia getEstadoMembresia() {
         return estadoMembresia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

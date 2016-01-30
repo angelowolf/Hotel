@@ -7,6 +7,8 @@ package Persistencia.Modelo;
  */
 public abstract class EstadoMembresia {
 
+    private int id;
+
     private String nombre;
 
     public EstadoMembresia() {
@@ -23,6 +25,14 @@ public abstract class EstadoMembresia {
 
     public void registrarVencimiento() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
