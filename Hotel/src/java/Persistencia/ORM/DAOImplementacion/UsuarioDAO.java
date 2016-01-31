@@ -14,7 +14,7 @@ import org.hibernate.Session;
  */
 public class UsuarioDAO extends GenericDAO<Usuario, Integer> implements IUsuario {
 
-    public Usuario buscar(String username) {
+    public Usuario buscarNick(String username) {
         Session session = getHibernateTemplate();
         List<Usuario> objetos = new ArrayList<Usuario>();
         try {

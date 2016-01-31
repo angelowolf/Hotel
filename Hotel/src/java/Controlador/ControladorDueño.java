@@ -1,11 +1,9 @@
 package Controlador;
 
 import Persistencia.Modelo.Dueño;
-import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.Usuario;
 import Persistencia.ORM.DAOImplementacion.DueñoDAO;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Angelo

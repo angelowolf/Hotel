@@ -18,5 +18,11 @@
             <one-to-many class="Persistencia.Modelo.Pago" />
         </list>
         
+        <list name="usuarios" cascade="all-delete-orphan"> 
+            <key column="id_hotel" /> 
+            <index column="orden" /> 
+            <one-to-many class="Persistencia.Modelo.Usuario" />
+        </list>
+        
     </class>
 </hibernate-mapping>

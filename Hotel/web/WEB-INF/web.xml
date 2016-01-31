@@ -9,7 +9,7 @@
     <!--FIN SESION-->
     <!--Pagina principal del sitio-->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <!--FIN PAGINA-->
     <!--Pagina que redirigira al producir un error 404, o una accion no encontrada (URL que no exista)-->

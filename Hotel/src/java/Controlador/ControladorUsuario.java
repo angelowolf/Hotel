@@ -1,7 +1,9 @@
 package Controlador;
 
+import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoUsuario;
 import Persistencia.Modelo.Usuario;
+import Persistencia.ORM.DAOImplementacion.HotelDAO;
 import Persistencia.ORM.DAOImplementacion.TipoUsuarioDAO;
 import Persistencia.ORM.DAOImplementacion.UsuarioDAO;
 import Soporte.Encriptar;
@@ -83,14 +85,29 @@ public class ControladorUsuario {
     }
 
     //***********************************************************************************************************
+    
+    /**
+     * Busca un usuario por email o por nick.
+     * 
+     * @param emailONick
+     * @return usuario
+     */
+    public Usuario getUsuario(String emailONick) {
+        Usuario u = getUsuarioByNick(emailONick);
+        if (u == null) {
+            u = getUsuarioByEmail(emailONick);
+        }
+        return u;
+    }
+    
     /**
      * Busca un usuario por su nick.
      *
      * @param username El nick.
      * @return EL usuario.
      */
-    public Usuario getUsuarioByNick(String username) {
-        return usuarioDAO.buscar(username);
+    private Usuario getUsuarioByNick(String username) {
+        return usuarioDAO.buscarNick(username);
     }
 
     /**
@@ -99,21 +116,24 @@ public class ControladorUsuario {
      * @param email El email.
      * @return El usuario.
      */
-    public Usuario getUsuarioByEmail(String email) {
+    private Usuario getUsuarioByEmail(String email) {
         return usuarioDAO.buscarEmail(email);
     }
 
     /**
      * Verifica si los datos ingresados pertenecen a un usuario registrado.
      *
-     * @param username El nick.
+     * @param emailONick El email o el nick.
      * @param password La clave.
      * @return True si existe.
      */
-    public boolean iniciarSesion(String username, String password) {
-        Usuario usuario = usuarioDAO.buscar(username);
+    public boolean iniciarSesion(String emailONick, String password) {
+        Usuario usuario = usuarioDAO.buscarEmail(emailONick);
+        if (usuario == null) {
+            usuario = usuarioDAO.buscarNick(emailONick);
+        }
         String claveMD5 = Encriptar.encriptaEnMD5(password);
-        return usuario != null && usuario.getNick().equals(username) && usuario.getClave().equals(claveMD5);
+        return usuario != null && (usuario.getEmail().equals(emailONick) || usuario.getNick().equals(emailONick)) && usuario.getClave().equals(claveMD5);
     }
 
     /**
@@ -134,7 +154,9 @@ public class ControladorUsuario {
      * @return true si puede logear.
      */
     public boolean verificarCuentaActiva(Usuario u) {
-        return !u.getHotel().isMembresiaVencida();
+        HotelDAO hotelDAO = new HotelDAO();
+        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        return !hotel.isMembresiaVencida();
     }
 
     /**
@@ -145,7 +167,9 @@ public class ControladorUsuario {
      * @return true si se encuentra en esta semana.
      */
     public boolean verificarCuentaAviso(Usuario u) {
-        return u.getHotel().isMembresiaAviso();
+        HotelDAO hotelDAO = new HotelDAO();
+        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        return hotel.isMembresiaAviso();
     }
 
     /**
@@ -156,7 +180,9 @@ public class ControladorUsuario {
      * @return El mensaje a msotrar.
      */
     public String getMensajeAviso(Usuario u) {
-        String fecha = new SimpleDateFormat("dd-MM-yyyy").format(u.getHotel().getMembresia().getFechaVencimiento());
+        HotelDAO hotelDAO = new HotelDAO();
+        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        String fecha = new SimpleDateFormat("dd-MM-yyyy").format(hotel.getMembresia().getFechaVencimiento());
         return Soporte.Mensaje.getAviso(fecha);
     }
 }//end ControladorUsuario

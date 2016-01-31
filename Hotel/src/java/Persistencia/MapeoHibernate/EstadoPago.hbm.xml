@@ -10,9 +10,9 @@
         <discriminator insert="false" column="id" />
         <property name="nombre" column="nombre" />
         
-        <subclass name="Persistencia.Modelo.EstadoPagoPendiente" discriminator-value="0"/>
-        <subclass name="Persistencia.Modelo.EstadoPagoConfirmado" discriminator-value="1"/>
-        <subclass name="Persistencia.Modelo.EstadoPagoIncompleto" discriminator-value="2"/>
-        <subclass name="Persistencia.Modelo.EstadoPagoAnulado" discriminator-value="3"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoPendiente" discriminator-value="1"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoConfirmado" discriminator-value="2"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoIncompleto" discriminator-value="3"/>
+        <subclass name="Persistencia.Modelo.EstadoPagoAnulado" discriminator-value="4"/>
     </class>
 </hibernate-mapping>

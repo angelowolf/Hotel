@@ -8,8 +8,8 @@
         </id>
         
         <property name="clave" column="clave" type="string"/>
-        <property name="email" column="email" type="string"/>
-        <property name="nick" column="nick" type="string"/>
+        <property name="email" column="email" type="string" unique-key="usuario_uk_email"/>
+        <property name="nick" column="nick" type="string" unique-key="usuario_uk_nick"/>
         
         <many-to-one name="tipoUsuario" column="id_tipoUsuario" />
         

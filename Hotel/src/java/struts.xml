@@ -4,13 +4,17 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <constant name="struts.devMode" value="false"/>        
+    <constant name="struts.devMode" value="true"/>        
     <!--archivo que modifica el texto de los errores que valida struts2-->
     <constant name="struts.custom.i18n.resources" value="struts-mensajes" />
     <!--maximo tamaño permitido al subir archivos-->
     <constant name="struts.multipart.maxSize" value="10485760" />
+    <!--quitar action de url-->
+    <constant name="struts.action.extension" value="," />
+    <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/imagenes/.*" />
     
     <!--ACCIONES INICIO-->
     <include file="struts-error.xml"></include>
+    <include file="struts-login.xml"></include>
     <!--ACCIONES FIN-->
 </struts>

@@ -100,4 +100,9 @@ public class Usuario {
         TipoUsuario tp = tipoUsuarioDAO.getTipoOwner();
         this.tipoUsuario = tp;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", clave=" + clave + ", email=" + email + ", nick=" + nick + ", tipoUsuario=" + tipoUsuario + '}';
+    }
 }//end Usuario
