@@ -60,4 +60,8 @@ public class ControladorTipoUsuario implements IControlador<TipoUsuario> {
 	public List<TipoUsuario> getTodos(){
 		return null;
 	}
+
+    TipoUsuario getTipoUsuarioOwner() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }//end ControladorTipoUsuario

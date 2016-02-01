@@ -1,6 +1,7 @@
 package Controlador;
 
 import Persistencia.Modelo.TipoPago;
+import Persistencia.ORM.DAOImplementacion.TipoPagoDAO;
 import java.util.List;
 
 /**
@@ -8,56 +9,39 @@ import java.util.List;
  * @version 1.0
  * @created 28-ene-2016 08:44:22 p.m.
  */
-public class ControladorTipoPago implements IControlador<TipoPago> {
+public class ControladorTipoPago {
 
-	public ControladorTipoPago(){
+    private TipoPagoDAO tipoPagoDAO;
 
-	}
+    public ControladorTipoPago() {
+        tipoPagoDAO = new TipoPagoDAO();
+    }
 
-	public void finalize() throws Throwable {
+    public List<TipoPago> getTodos() {
+        return tipoPagoDAO.getTodos();
+    }
 
-	}
-	/**
-	 * 
-	 * @param k
-	 */
-	public void guardar(TipoPago k){
+    public boolean tipoPagoEnUso(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	}
+    public void actualizar(int id, String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void actualizar(TipoPago k){
+    public void guardar(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	}
+    public boolean existe(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void eliminar(TipoPago k){
+    public void eliminar(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public int eliminar(int id){
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public TipoPago getUno(int id){
-		return null;
-	}
-
-	public List<TipoPago> getTodos(){
-		return null;
-	}
+    public TipoPago getUno(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }//end ControladorTipoPago

@@ -1,6 +1,8 @@
 package Persistencia.Modelo;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * @author Angelo
@@ -16,7 +18,13 @@ public class Membresia {
     private Date fechaAviso;
 
     public Membresia() {
-
+        estadoMembresia = new EstadoMembresiaPrueba();
+        Calendar c = new GregorianCalendar();
+        fechaActivacion = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 7);
+        fechaAviso = c.getTime();
+        c.add(Calendar.DAY_OF_MONTH, 7);
+        fechaVencimiento = c.getTime();
     }
 
     public EstadoMembresia getEstadoMembresia() {

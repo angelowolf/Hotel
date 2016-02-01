@@ -25,6 +25,8 @@ public class Mensaje {
 
     //************************************************************************//
     //Mensajes de validacion//
+    public static final String tipoPago = "Tipo Pago";
+    public static final String pago = "Pago";
     public static final String ingreseNombre = "Ingrese un nombre.";
     public static final String ingreseSimbolo = "Ingrese un simbolo.";
     public static final String ingreseDireccion = "Ingrese una dirección.";

@@ -4,23 +4,23 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
     <!--MASTER PAGE EJEMPLO-->
-    <!--        <definition name="baseLayout" template="/BaseLayout.jsp">
+    <definition name="rootlayout" template="/root/rootlayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>
-    <definition name="layoutSitio" template="/LayoutSitio.jsp">
+<!--    <definition name="layoutSitio" template="/LayoutSitio.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>-->
     <!--FIN MASTER PAGE-->
     <!--EJEMPLO-->
-    <!--    <definition name="/Servicio/AltaModificacion.tiles" extends="baseLayout">
-        <put-attribute name="title" value="Formulario Servicios" />
-        <put-attribute name="body" value="/Servicio/AltaModificacion.jsp" />
+    <definition name="/root/tipopago/AltaModificacion.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Formulario Tipo Pago" />
+        <put-attribute name="body" value="/root/tipopago/AltaModificacion.jsp" />
     </definition>
-    <definition name="/Servicio/Todos.tiles" extends="baseLayout">
-        <put-attribute name="title" value="Servicios" />
-        <put-attribute name="body" value="/Servicio/Todos.jsp" />
-    </definition>-->
+    <definition name="/root/tipopago/Todos.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Tipo Pagos" />
+        <put-attribute name="body" value="/root/tipopago/Todos.jsp" />
+    </definition>
     <!--FIN EJEMPLO-->
 </tiles-definitions>

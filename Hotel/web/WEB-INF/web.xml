@@ -51,12 +51,12 @@
     </filter-mapping>
     <!--FIN FILTRO SRUTS2-->
     <!--Definicion del framework Tiles-->
-    <!--     <listener>
+         <listener>
         <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>      
     </listener>  
      <context-param>
         <param-name>tilesDefinitions</param-name>
         <param-value>/WEB-INF/tiles.xml</param-value>
-    </context-param>-->
+    </context-param>
     <!--FIN TILES-->
 </web-app>

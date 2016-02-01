@@ -1,5 +1,6 @@
 package Persistencia.Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class Hotel {
     private List<Lavado> lavados;
     private Domicilio domicilio;
     private String telefonos;
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = new ArrayList<Usuario>();
     private String email;
     private String web;
     private Pais pais;

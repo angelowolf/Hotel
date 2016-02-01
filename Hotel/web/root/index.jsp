@@ -361,6 +361,16 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Tipo Pago<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="<s:url action="listar" namespace="/root/tipopago"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/tipopago"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -376,10 +386,10 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-                
+
                 <s:actionerror theme="bootstrap" />
                 <s:actionmessage theme="bootstrap" />
-                
+
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">

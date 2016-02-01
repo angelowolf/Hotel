@@ -12,9 +12,10 @@
     <!--quitar action de url-->
     <constant name="struts.action.extension" value="," />
     <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/imagenes/.*" />
-    
+    <constant name="struts.ui.theme" value="simple" />
     <!--ACCIONES INICIO-->
     <include file="struts-error.xml"></include>
     <include file="struts-login.xml"></include>
+    <include file="struts-tipopago.xml"></include>
     <!--ACCIONES FIN-->
 </struts>
