@@ -26,19 +26,21 @@ public class TipoPagoAction extends ActionSupport {
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private String nombre;
     private int id;
+    private float recargo;
 
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
             addFieldError("nombre", Mensaje.ingreseNombre);
             flag = false;
-        } else {
-            if (controladorTipoPago.existe(nombre)) {
-                addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoPago));
-                flag = false;
-            }
+        } else if (controladorTipoPago.existe(id, nombre)) {
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoPago));
+            flag = false;
         }
-
+        if (recargo < 0) {
+            addFieldError("recargo", Mensaje.ingreseRecargo);
+            flag = false;
+        }
         return flag;
     }
 
@@ -47,10 +49,10 @@ public class TipoPagoAction extends ActionSupport {
             return INPUT;
         }
         if (id != 0) {
-            controladorTipoPago.actualizar(id, nombre);
+            controladorTipoPago.actualizar(id, nombre, recargo);
             sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoPago));
         } else {
-            controladorTipoPago.guardar(nombre);;
+            controladorTipoPago.guardar(nombre, recargo);;
             sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoPago));
         }
         return SUCCESS;
@@ -102,6 +104,14 @@ public class TipoPagoAction extends ActionSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getRecargo() {
+        return recargo;
+    }
+
+    public void setRecargo(float recargo) {
+        this.recargo = recargo;
     }
 
 }

@@ -19,6 +19,9 @@
                 <div class="col-md-8 col-md-offset-2">
                     <s:textfield name="nombre" label="Nombre" placeholder="Ingrese el nombre" />
                 </div>
+                 <div class="col-md-8 col-md-offset-2">
+                    <s:textfield name="recargo" label="Recargo" placeholder="Ingrese el recargo" />
+                </div>
                 <s:submit value="Confirmar" cssClass="btn btn-success col-md-offset-10 col-md-2"/>
             </s:form>
         </div>

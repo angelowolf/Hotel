@@ -3,6 +3,7 @@ package Controlador;
 import Persistencia.Modelo.TipoPago;
 import Persistencia.ORM.DAOImplementacion.TipoPagoDAO;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 /**
  * @author Angelo
@@ -11,37 +12,97 @@ import java.util.List;
  */
 public class ControladorTipoPago {
 
-    private TipoPagoDAO tipoPagoDAO;
+    private final TipoPagoDAO tipoPagoDAO;
 
     public ControladorTipoPago() {
         tipoPagoDAO = new TipoPagoDAO();
     }
 
+    /**
+     * Busca todos los tipos de pagos existenes.
+     *
+     * @return
+     */
     public List<TipoPago> getTodos() {
         return tipoPagoDAO.getTodos();
     }
 
+    /**
+     * verifica si el tipo de pago esta asociado a algun pago.
+     *
+     * @param id el tipo de pago a verificar
+     * @return true si lo esta.
+     */
     public boolean tipoPagoEnUso(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return !tipoPagoDAO.pagoEnUso(id).isEmpty();
     }
 
-    public void actualizar(int id, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * actualiza los datos.
+     *
+     * @param id
+     * @param nombre
+     * @param recargo
+     */
+    public void actualizar(int id, String nombre, float recargo) {
+        nombre = (WordUtils.capitalize(nombre));
+        TipoPago t = tipoPagoDAO.buscar(id);
+        t.setNombre(nombre);
+        t.setPorcentajeRecargo(recargo);
+        tipoPagoDAO.actualizar(t);
     }
 
-    public void guardar(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * guarda un nuevo tipo de pago.
+     *
+     * @param nombre
+     * @param recargo
+     */
+    public void guardar(String nombre, float recargo) {
+        nombre = (WordUtils.capitalize(nombre));
+        TipoPago t = new TipoPago();
+        t.setNombre(nombre);
+        t.setPorcentajeRecargo(recargo);
+        tipoPagoDAO.guardar(t);
     }
 
-    public boolean existe(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * verifica si el nombre esta disponible, en caso de que el nombre sea el
+     * del propio tipo de pago devolvera true.
+     *
+     * @param id
+     * @param nombre
+     * @return true si esta disponible.
+     */
+    public boolean existe(int id, String nombre) {
+        nombre = (WordUtils.capitalize(nombre));
+        List<TipoPago> lista = tipoPagoDAO.buscar(nombre);
+        for (TipoPago m : lista) {
+            if (m.getNombre().equals(nombre)) {
+                return m.getId() != id;
+            }
+        }
+        return false;
     }
 
+    /**
+     * elimina el tipo de pago.
+     *
+     * @param id
+     */
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TipoPago t = new TipoPago();
+        t.setId(id);
+        tipoPagoDAO.eliminar(t);
     }
 
+    /**
+     * recupera un tipo de pago de la bd.
+     *
+     * @param id
+     * @return
+     */
     public TipoPago getUno(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tipoPagoDAO.buscar(id);
     }
 }//end ControladorTipoPago

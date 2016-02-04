@@ -17,5 +17,8 @@
     <include file="struts-error.xml"></include>
     <include file="struts-login.xml"></include>
     <include file="struts-tipopago.xml"></include>
+    
+    <include file="struts-ERRORIDE.xml"></include>
+   
     <!--ACCIONES FIN-->
 </struts>

@@ -56,6 +56,7 @@ public class Mensaje {
     public static final String emailEnviado = "Recibimos tu consulta correctamente.Nos comunicaremos a la brevedad.";
     public static final String ingreseTelefono = "Ingrese un teléfono.";
     public static final String ingreseConsulta = "Ingrese su consulta.";
+    public static final String ingreseRecargo = "Ingrese un recargo positivo.";
 
     public Mensaje() {
 

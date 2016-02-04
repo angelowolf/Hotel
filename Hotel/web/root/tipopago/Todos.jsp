@@ -2,12 +2,7 @@
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://displaytag.sf.net" prefix="display" %>
-<div class="form-group">
-    <div class="text-center">
-        <s:actionerror theme="bootstrap"/>
-        <s:actionmessage theme="bootstrap"/>
-        <s:fielderror theme="bootstrap"/>
-    </div>
+<div class="form-group">   
     <fieldset>
         <legend>
             Tipos Pago
@@ -25,11 +20,11 @@
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column title="Funciones">
                 <s:form action="editar" id="editURL" style="display:inline-block;">
-                    <s:hidden name="idAmbiente" value="%{#attr.row.id}"/>
+                    <s:hidden name="id" value="%{#attr.row.id}"/>
                     <s:submit value="Editar" action="%{editURL}" cssClass="btn btn-info"/>
                 </s:form>
                 <s:form action="eliminar" id="deleteURL" style="display:inline-block;">
-                    <s:hidden name="idAmbiente" value="%{#attr.row.id}"/>
+                    <s:hidden name="id" value="%{#attr.row.id}"/>
                     <s:submit value="Eliminar" action="%{deleteURL}" cssClass="btn btn-danger"/>
                 </s:form>
             </display:column>

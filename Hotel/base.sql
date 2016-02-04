@@ -1,3 +1,4 @@
+
 USE sistema_hotel;
 
 INSERT INTO plan (nombre,precio,caracteristica) VALUES ('simple',500,'asd');
