@@ -3,24 +3,56 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-    <!--MASTER PAGE EJEMPLO-->
+    <!--MASTER PAGE EJEMPLO-->   
+    
     <definition name="rootlayout" template="/root/rootlayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>
-<!--    <definition name="layoutSitio" template="/LayoutSitio.jsp">
+    <!--    <definition name="layoutSitio" template="/LayoutSitio.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>-->
     <!--FIN MASTER PAGE-->
-    <!--EJEMPLO-->
-    <definition name="/root/tipopago/AltaModificacion.tiles" extends="rootlayout">
+    <!--INDEX ROOT-->
+    <definition name="/root/index.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/root/index.jsp" />
+    </definition>
+    <!--TIPO PAGO-->
+    <definition name="/root/tipopago/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Tipo Pago" />
-        <put-attribute name="body" value="/root/tipopago/AltaModificacion.jsp" />
+        <put-attribute name="body" value="/root/tipopago/altamodificacion.jsp" />
     </definition>
-    <definition name="/root/tipopago/Todos.tiles" extends="rootlayout">
+    <definition name="/root/tipopago/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Tipo Pagos" />
-        <put-attribute name="body" value="/root/tipopago/Todos.jsp" />
+        <put-attribute name="body" value="/root/tipopago/todos.jsp" />
+    </definition>   
+    <!--TIPO DOCUMENTO-->
+    <definition name="/root/tipodocumento/altamodificacion.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Formulario Tipo Documento" />
+        <put-attribute name="body" value="/root/tipodocumento/altamodificacion.jsp" />
     </definition>
-    <!--FIN EJEMPLO-->
+    <definition name="/root/tipodocumento/todos.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Tipo Documentos" />
+        <put-attribute name="body" value="/root/tipodocumento/todos.jsp" />
+    </definition>
+    <!--SEXO-->
+    <definition name="/root/sexo/altamodificacion.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Formulario Sexo" />
+        <put-attribute name="body" value="/root/sexo/altamodificacion.jsp" />
+    </definition>
+    <definition name="/root/sexo/todos.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Sexos" />
+        <put-attribute name="body" value="/root/sexo/todos.jsp" />
+    </definition>
+    <!--MODULO-->
+    <definition name="/root/modulo/altamodificacion.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Formulario Modulo" />
+        <put-attribute name="body" value="/root/modulo/altamodificacion.jsp" />
+    </definition>
+    <definition name="/root/modulo/todos.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Modulos" />
+        <put-attribute name="body" value="/root/modulo/todos.jsp" />
+    </definition>
 </tiles-definitions>

@@ -5,8 +5,8 @@
  */
 package Acciones;
 
-import Controlador.ControladorTipoPago;
-import Persistencia.Modelo.TipoPago;
+import Controlador.ControladorModulo;
+import Persistencia.Modelo.Modulo;
 import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,28 +17,23 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  *
- * @author angelo
+ * @author ang_2
  */
-public class TipoPagoAction extends ActionSupport {
+public class ModuloAction extends ActionSupport {
 
-    private List<TipoPago> lista = new ArrayList<TipoPago>();
-    private final ControladorTipoPago controladorTipoPago = new ControladorTipoPago();
+    private List<Modulo> lista = new ArrayList<Modulo>();
+    private final ControladorModulo controladorModulo = new ControladorModulo();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
-    private String nombre;
+    private String nombre, caracteristica;
     private int id;
-    private float recargo;
 
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
             addFieldError("nombre", Mensaje.ingreseNombre);
             flag = false;
-        } else if (controladorTipoPago.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoPago));
-            flag = false;
-        }
-        if (recargo < 0) {
-            addFieldError("recargo", Mensaje.ingreseRecargo);
+        } else if (controladorModulo.existe(id, nombre)) {
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.modulo));
             flag = false;
         }
         return flag;
@@ -49,17 +44,17 @@ public class TipoPagoAction extends ActionSupport {
             return INPUT;
         }
         if (id != 0) {
-            controladorTipoPago.actualizar(id, nombre, recargo);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoPago));
+            controladorModulo.actualizar(id, nombre, caracteristica);
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.modulo));
         } else {
-            controladorTipoPago.guardar(nombre, recargo);;
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoPago));
+            controladorModulo.guardar(nombre, caracteristica);
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.modulo));
         }
         return SUCCESS;
     }
 
     public String list() {
-        lista = controladorTipoPago.getTodos();
+        lista = controladorModulo.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         String alerta = (String) sesion.get("alerta");
@@ -70,24 +65,24 @@ public class TipoPagoAction extends ActionSupport {
     }
 
     public String eliminar() {
-        if (controladorTipoPago.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoPago, Mensaje.pago));
+        if (controladorModulo.enUso(id)) {
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.modulo, Mensaje.plan));
         } else {
-            controladorTipoPago.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPago));
+            controladorModulo.eliminar(id);
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.modulo));
         }
         return SUCCESS;
     }
 
     public String editar() {
-        TipoPago tp = controladorTipoPago.getUno(id);
-        nombre = tp.getNombre();
-        recargo = tp.getPorcentajeRecargo();
-        id = tp.getId();
+        Modulo modulo = controladorModulo.getUno(id);
+        nombre = modulo.getNombre();
+        caracteristica = modulo.getCaracteristica();
+        id = modulo.getId();
         return SUCCESS;
     }
 
-    public List<TipoPago> getLista() {
+    public List<Modulo> getLista() {
         return lista;
     }
 
@@ -107,12 +102,11 @@ public class TipoPagoAction extends ActionSupport {
         this.id = id;
     }
 
-    public float getRecargo() {
-        return recargo;
+    public String getCaracteristica() {
+        return caracteristica;
     }
 
-    public void setRecargo(float recargo) {
-        this.recargo = recargo;
+    public void setCaracteristica(String caracteristica) {
+        this.caracteristica = caracteristica;
     }
-
 }

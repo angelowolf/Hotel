@@ -33,7 +33,7 @@ public class ControladorTipoPago {
      * @param id el tipo de pago a verificar
      * @return true si lo esta.
      */
-    public boolean tipoPagoEnUso(int id) {
+    public boolean enUso(int id) {
         return !tipoPagoDAO.pagoEnUso(id).isEmpty();
     }
 

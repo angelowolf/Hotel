@@ -10,19 +10,19 @@
         </result-types>
         <action name="guardarOModificar" method="guardarOModificar" class="Acciones.TipoPagoAction">
             <result name="success" type="redirect">listar</result>
-            <result name="input" type="tiles">/root/tipopago/AltaModificacion.tiles</result>
+            <result name="input" type="tiles">/root/tipopago/altamodificacion.tiles</result>
         </action>
         <action name="eliminar" method="eliminar" class="Acciones.TipoPagoAction">
             <result name="success" type="redirect">listar</result>
         </action>
         <action name="listar" method="list" class="Acciones.TipoPagoAction">
-            <result name="success" type="tiles">/root/tipopago/Todos.tiles</result>
+            <result name="success" type="tiles">/root/tipopago/todos.tiles</result>
         </action>
         <action name="editar" method="editar" class="Acciones.TipoPagoAction">
-            <result name="success" type="tiles">/root/tipopago/AltaModificacion.tiles</result>
+            <result name="success" type="tiles">/root/tipopago/altamodificacion.tiles</result>
         </action> 
         <action name="nuevo" method="nuevo" class="Acciones.LinkAction">
-            <result name="nuevo" type="tiles">/root/tipopago/AltaModificacion.tiles</result>
+            <result name="nuevo" type="tiles">/root/tipopago/altamodificacion.tiles</result>
         </action>              
     </package>
 </struts>

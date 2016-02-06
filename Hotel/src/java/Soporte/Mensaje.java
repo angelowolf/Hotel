@@ -22,10 +22,15 @@ public class Mensaje {
     //************************************************************************//
     //Nombre de clases...//
     public static final String usuario = "usuario";
-
+    public static final String sexo = "sexo";
+    public static final String tipoPago = "Tipo Pago";
+    public static final String personas = "Personas";
+    public static final String persona = "Persona";
+    public static final String tipoDocumento = "Tipo Documento";
+    public static final String modulo = "Modulo";
+    public static final String plan = "Plan";
     //************************************************************************//
     //Mensajes de validacion//
-    public static final String tipoPago = "Tipo Pago";
     public static final String pago = "Pago";
     public static final String ingreseNombre = "Ingrese un nombre.";
     public static final String ingreseSimbolo = "Ingrese un simbolo.";

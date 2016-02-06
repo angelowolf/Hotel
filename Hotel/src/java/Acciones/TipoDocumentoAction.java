@@ -5,8 +5,8 @@
  */
 package Acciones;
 
-import Controlador.ControladorTipoPago;
-import Persistencia.Modelo.TipoPago;
+import Controlador.ControladorTipoDocumento;
+import Persistencia.Modelo.TipoDocumento;
 import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,28 +17,23 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  *
- * @author angelo
+ * @author ang_2
  */
-public class TipoPagoAction extends ActionSupport {
+public class TipoDocumentoAction extends ActionSupport {
 
-    private List<TipoPago> lista = new ArrayList<TipoPago>();
-    private final ControladorTipoPago controladorTipoPago = new ControladorTipoPago();
+    private List<TipoDocumento> lista = new ArrayList<TipoDocumento>();
+    private final ControladorTipoDocumento controladorTipoDocumento = new ControladorTipoDocumento();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private String nombre;
     private int id;
-    private float recargo;
 
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
             addFieldError("nombre", Mensaje.ingreseNombre);
             flag = false;
-        } else if (controladorTipoPago.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoPago));
-            flag = false;
-        }
-        if (recargo < 0) {
-            addFieldError("recargo", Mensaje.ingreseRecargo);
+        } else if (controladorTipoDocumento.existe(id, nombre)) {
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoDocumento));
             flag = false;
         }
         return flag;
@@ -49,17 +44,17 @@ public class TipoPagoAction extends ActionSupport {
             return INPUT;
         }
         if (id != 0) {
-            controladorTipoPago.actualizar(id, nombre, recargo);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoPago));
+            controladorTipoDocumento.actualizar(id, nombre);
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoDocumento));
         } else {
-            controladorTipoPago.guardar(nombre, recargo);;
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoPago));
+            controladorTipoDocumento.guardar(nombre);
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoDocumento));
         }
         return SUCCESS;
     }
 
     public String list() {
-        lista = controladorTipoPago.getTodos();
+        lista = controladorTipoDocumento.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         String alerta = (String) sesion.get("alerta");
@@ -70,24 +65,23 @@ public class TipoPagoAction extends ActionSupport {
     }
 
     public String eliminar() {
-        if (controladorTipoPago.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoPago, Mensaje.pago));
+        if (controladorTipoDocumento.enUso(id)) {
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoDocumento, Mensaje.persona));
         } else {
-            controladorTipoPago.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPago));
+            controladorTipoDocumento.eliminar(id);
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoDocumento));
         }
         return SUCCESS;
     }
 
     public String editar() {
-        TipoPago tp = controladorTipoPago.getUno(id);
-        nombre = tp.getNombre();
-        recargo = tp.getPorcentajeRecargo();
-        id = tp.getId();
+        TipoDocumento tipoDocumento = controladorTipoDocumento.getUno(id);
+        nombre = tipoDocumento.getNombre();
+        id = tipoDocumento.getId();
         return SUCCESS;
     }
 
-    public List<TipoPago> getLista() {
+    public List<TipoDocumento> getLista() {
         return lista;
     }
 
@@ -106,13 +100,4 @@ public class TipoPagoAction extends ActionSupport {
     public void setId(int id) {
         this.id = id;
     }
-
-    public float getRecargo() {
-        return recargo;
-    }
-
-    public void setRecargo(float recargo) {
-        this.recargo = recargo;
-    }
-
 }

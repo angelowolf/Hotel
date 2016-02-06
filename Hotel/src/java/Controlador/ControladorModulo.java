@@ -1,62 +1,66 @@
 package Controlador;
 
 import Persistencia.Modelo.Modulo;
+import Persistencia.ORM.DAOImplementacion.ModuloDAO;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
+
 /**
  * @author Angelo
  * @version 1.0
  * @created 28-ene-2016 08:44:22 p.m.
  */
-public class ControladorModulo implements IControlador<Modulo> {
+public class ControladorModulo {
 
-	public ControladorModulo(){
+    private final ModuloDAO moduloDAO;
 
-	}
+    public ControladorModulo() {
+        moduloDAO = new ModuloDAO();
+    }
 
-	public void finalize() throws Throwable {
+    public boolean existe(int id, String nombre) {
+        nombre = (WordUtils.capitalize(nombre));
+        List<Modulo> lista = moduloDAO.buscar(nombre);
+        for (Modulo m : lista) {
+            if (m.getNombre().equals(nombre)) {
+                return m.getId() != id;
+            }
+        }
+        return false;
+    }
 
-	}
-	/**
-	 * 
-	 * @param k
-	 */
-	public void guardar(Modulo k){
+    public void actualizar(int id, String nombre, String caracteristica) {
+        nombre = (WordUtils.capitalize(nombre));
+        Modulo t = moduloDAO.buscar(id);
+        t.setNombre(nombre);
+        t.setCaracteristica(caracteristica);
+        moduloDAO.actualizar(t);
+    }
 
-	}
+    public void guardar(String nombre, String caracteristica) {
+        nombre = (WordUtils.capitalize(nombre));
+        Modulo t = new Modulo();
+        t.setNombre(nombre);
+        t.setCaracteristica(caracteristica);
+        moduloDAO.guardar(t);
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void actualizar(Modulo k){
+    public List<Modulo> getTodos() {
+        return moduloDAO.getTodos();
+    }
 
-	}
+    public boolean enUso(int id) {
+        return !moduloDAO.enUso(id).isEmpty();
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void eliminar(Modulo k){
+    public void eliminar(int id) {
+        Modulo t = new Modulo();
+        t.setId(id);
+        moduloDAO.eliminar(t);
+    }
 
-	}
+    public Modulo getUno(int id) {
+        return moduloDAO.buscar(id);
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public int eliminar(int id){
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public Modulo getUno(int id){
-		return null;
-	}
-
-	public List<Modulo> getTodos(){
-		return null;
-	}
 }//end ControladorModulo
