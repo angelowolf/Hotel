@@ -15,8 +15,10 @@ public class Mensaje {
     private static final String eliminada = "La %s ha sido eliminado.";
     private static final String elExiste = "El %s ya existe!";
     private static final String laExiste = "La %s ya existe!";
-    private static final String usado = "El %s esta siendo utilizado por alguna %s, debe eliminarla o desvincularlas para poder eliminar este %s!";
-    private static final String usada = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar esta %s!";
+    private static final String usadoPorUna = "El %s esta siendo utilizado por alguna %s, debe eliminarla o desvincularlos para poder eliminar este %s!";
+    private static final String usadoPorUn = "El %s esta siendo utilizado por algun %s, debe eliminarlo o desvincularlos para poder eliminar este %s!";
+    private static final String usadaPorUna = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar esta %s!";
+    private static final String usadaPorUn = "La %s esta siendo utilizada por algun %s, debe eliminarlo o desvincularlos para poder eliminar esta %s!";
     private static final String codigoYaEnviado = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %d minutos podra generar otro codigo.";
     private static final String cuentaAviso = "Le recordamos que su suscripción actual está próxima a vencer. Vencera el %s";
     //************************************************************************//
@@ -29,6 +31,7 @@ public class Mensaje {
     public static final String tipoDocumento = "Tipo Documento";
     public static final String modulo = "Modulo";
     public static final String plan = "Plan";
+    public static final String hotel = "Hotel";
     //************************************************************************//
     //Mensajes de validacion//
     public static final String pago = "Pago";
@@ -62,6 +65,8 @@ public class Mensaje {
     public static final String ingreseTelefono = "Ingrese un teléfono.";
     public static final String ingreseConsulta = "Ingrese su consulta.";
     public static final String ingreseRecargo = "Ingrese un recargo positivo.";
+    public static final String ingreseCaracteristica = "Ingrese una característica.";
+    public static final String precioNoValido = "Ingrese un precio valido.";
 
     public Mensaje() {
 
@@ -123,11 +128,56 @@ public class Mensaje {
         return String.format(laExiste, arg);
     }
 
-    public static String getUsado(String arg, String arg2) {
-        return String.format(usado, arg, arg2, arg);
+    /**
+     * Crea un mensaje que notifica que el objeto no se puede eliminar porque
+     * está siendo usado. "El %s esta siendo utilizado por alguna %s, debe
+     * eliminarla o desvincularlos para poder eliminar este %s!"
+     *
+     * @param arg El objeto usado.
+     * @param arg2 Quien usa al objeto.
+     * @return El mensaje.
+     */
+    public static String getUsadoPorUna(String arg, String arg2) {
+        return String.format(usadoPorUna, arg, arg2, arg);
     }
 
-    public static String getUsada(String arg, String arg2) {
-        return String.format(usada, arg, arg2, arg);
+    /**
+     * Crea un mensaje que notifica que el objeto no se puede eliminar porque
+     * está siendo usado. "La %s esta siendo utilizada por alguna %s, debe
+     * eliminarla o desvincularlas para poder eliminar esta %s!"
+     *
+     * @param arg El objeto usado.
+     * @param arg2 Quien usa al objeto.
+     * @return El mensaje.
+     */
+    public static String getUsadaPorUna(String arg, String arg2) {
+        return String.format(usadaPorUna, arg, arg2, arg);
     }
+
+    /**
+     * Crea un mensaje que notifica que el objeto no se puede eliminar porque
+     * está siendo usado. "El %s esta siendo utilizado por algun %s, debe
+     * eliminarlo o desvincularlos para poder eliminar este %s!"
+     *
+     * @param arg El objeto usado.
+     * @param arg2 Quien usa al objeto.
+     * @return El mensaje.
+     */
+    public static String getUsadoPorUn(String arg, String arg2) {
+        return String.format(usadoPorUn, arg, arg2, arg);
+    }
+
+    /**
+     * Crea un mensaje que notifica que el objeto no se puede eliminar porque
+     * está siendo usado. "La %s esta siendo utilizada por algun %s, debe
+     * eliminarlo o desvincularlos para poder eliminar esta %s!"
+     *
+     * @param arg El objeto usado.
+     * @param arg2 Quien usa al objeto.
+     * @return El mensaje.
+     */
+    public static String getUsadaPorUn(String arg, String arg2) {
+        return String.format(usadaPorUn, arg, arg2, arg);
+    }
+
 }//end Mensaje

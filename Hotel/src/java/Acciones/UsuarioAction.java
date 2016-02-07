@@ -56,4 +56,9 @@ public class UsuarioAction extends ActionSupport {
             return INPUT;
         }
     }
+    
+    public String logout() {
+        sesion.remove("user");
+        return SUCCESS;
+    }
 }

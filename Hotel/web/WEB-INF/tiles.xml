@@ -4,7 +4,6 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
     <!--MASTER PAGE EJEMPLO-->   
-    
     <definition name="rootlayout" template="/root/rootlayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
@@ -54,5 +53,14 @@
     <definition name="/root/modulo/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Modulos" />
         <put-attribute name="body" value="/root/modulo/todos.jsp" />
+    </definition>
+    <!--PLAN-->
+    <definition name="/root/plan/altamodificacion.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Formulario Plan" />
+        <put-attribute name="body" value="/root/plan/altamodificacion.jsp" />
+    </definition>
+    <definition name="/root/plan/todos.tiles" extends="rootlayout">
+        <put-attribute name="title" value="Planes" />
+        <put-attribute name="body" value="/root/plan/todos.jsp" />
     </definition>
 </tiles-definitions>

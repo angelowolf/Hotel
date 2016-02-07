@@ -17,7 +17,9 @@
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="/../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        
+        <link href="/../css/bootstrap-multiselect.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
         <link href="/../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
@@ -34,7 +36,7 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+        <link href="/../css/root.css" rel="stylesheet">
     </head>
 
     <body>
@@ -50,7 +52,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">SB Admin v2.0</a>
+                    <a class="navbar-brand" href="#">Gestión</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -62,12 +64,12 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="<s:url action="logout" namespace="/"/>"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -80,23 +82,38 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
-                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sexo<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-transgender fa-fw"></i> Sexo<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="<s:url action="listar" namespace="/Toot/Sexo"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
-                                    <li><a href="<s:url action="nuevo" namespace="/Toot/Sexo"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
-                                </ul>                              
-                            </li><li>
-                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Tipo Documento<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="<s:url action="listar" namespace="/Root/Tipodocumento"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
-                                    <li><a href="<s:url action="nuevo" namespace="/Toot/Tipodocumento"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
+                                    <li><a href="<s:url action="listar" namespace="/root/sexo"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/sexo"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
                                 </ul>                              
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Tipo Pago<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-cube fa-fw"></i> Modulo<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="<s:url action="listar" namespace="/Root/TipoPago"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
-                                    <li><a href="<s:url action="nuevo" namespace="/Root/TipoPago"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
+                                    <li><a href="<s:url action="listar" namespace="/root/modulo"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/modulo"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
+                                </ul>        
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cubes fa-fw"></i> Plan<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="<s:url action="listar" namespace="/root/plan"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/plan"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
+                                </ul>        
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-credit-card fa-fw"></i> Tipo Documento<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="<s:url action="listar" namespace="/root/tipodocumento"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/tipodocumento"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
+                                </ul>                              
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bank fa-fw"></i> Tipo Pago<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="<s:url action="listar" namespace="/root/tipopago"/>"><i class="glyphicon glyphicon-list fa-fw "></i> Todos</a></li>
+                                    <li><a href="<s:url action="nuevo" namespace="/root/tipopago"/>"><i class="glyphicon glyphicon-plus fa-fw "></i> Nuevo</a></li>
                                 </ul>                              
                             </li>
                         </ul>
@@ -132,10 +149,13 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="/../bower_components/jquery/dist/jquery.min.js"></script>
+        
+        
+        <!-- Multiselect -->        
+        <script src="/../js/bootstrap-multiselect.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="/../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/../js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
         <script src="/../bower_components/metisMenu/dist/metisMenu.min.js"></script>

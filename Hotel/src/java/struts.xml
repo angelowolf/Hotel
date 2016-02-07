@@ -15,8 +15,15 @@
     <constant name="struts.ui.theme" value="simple" />
     <!--ACCIONES INICIO-->
     <include file="struts-error.xml"></include>
-    <include file="struts-login.xml"></include>
-    <include file="struts-tipopago.xml"></include>
+    <include file="struts-sesion.xml"></include>
+    <include file="struts-tipopago.xml"></include>    
+    <include file="struts-tipodocumento.xml"></include>
+    <include file="struts-sexo.xml"></include>
+    <include file="struts-modulo.xml"></include>
+    <include file="struts-plan.xml"></include>
+    
+    
+    
     
     <include file="struts-ERRORIDE.xml"></include>
    

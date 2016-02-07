@@ -33,4 +33,10 @@ public class TipoDocumento {
     public void setNombre(String newVal) {
         nombre = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "TipoDocumento{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
+
 }//end TipoDocumento

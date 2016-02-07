@@ -46,4 +46,10 @@ public class Modulo {
     public void setCaracteristica(String newVal) {
         caracteristica = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "Modulo{" + "id=" + id + ", nombre=" + nombre + ", caracteristica=" + caracteristica + '}';
+    }
+    
 }//end Modulo

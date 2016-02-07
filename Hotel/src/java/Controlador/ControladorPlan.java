@@ -1,63 +1,68 @@
 package Controlador;
 
+import Persistencia.Modelo.Modulo;
 import Persistencia.Modelo.Plan;
+import Persistencia.ORM.DAOImplementacion.PlanDAO;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 /**
  * @author Angelo
  * @version 1.0
  * @created 28-ene-2016 08:44:22 p.m.
  */
-public class ControladorPlan implements IControlador<Plan> {
+public class ControladorPlan {
 
-	public ControladorPlan(){
+    private final PlanDAO planDAO;
 
-	}
+    public ControladorPlan() {
+        planDAO = new PlanDAO();
+    }
 
-	public void finalize() throws Throwable {
+    public boolean existe(int id, String nombre) {
+        nombre = (WordUtils.capitalize(nombre));
+        List<Plan> lista = planDAO.buscar(nombre);
+        for (Plan m : lista) {
+            if (m.getNombre().equals(nombre)) {
+                return m.getId() != id;
+            }
+        }
+        return false;
+    }
 
-	}
-	/**
-	 * 
-	 * @param k
-	 */
-	public void guardar(Plan k){
+    public void actualizar(int id, String nombre, int precio, String caracteristica) {
+        nombre = (WordUtils.capitalize(nombre));
+        Plan t = planDAO.buscar(id);
+        t.setNombre(nombre);
+        t.setCaracteristica(caracteristica);
+        t.setPrecio(precio);
+        planDAO.actualizar(t);
+    }
 
-	}
+    public void guardar(String nombre, int precio, String caracteristica) {
+        nombre = (WordUtils.capitalize(nombre));
+        Plan t = new Plan();
+        t.setNombre(nombre);
+        t.setCaracteristica(caracteristica);
+        t.setPrecio(precio);
+        planDAO.guardar(t);
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void actualizar(Plan k){
+    public List<Plan> getTodos() {
+        return planDAO.getTodos();
+    }
 
-	}
+    public boolean enUso(int id) {
+        return !planDAO.enUso(id).isEmpty();
+    }
 
-	/**
-	 * 
-	 * @param k
-	 */
-	public void eliminar(Plan k){
+    public void eliminar(int id) {
+        Plan t = new Plan();
+        t.setId(id);
+        planDAO.eliminar(t);
+    }
 
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public int eliminar(int id){
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public Plan getUno(int id){
-		return null;
-	}
-
-	public List<Plan> getTodos(){
-		return null;
-	}
+    public Plan getUno(int id) {
+        return planDAO.buscar(id);
+    }
 }//end ControladorPlan

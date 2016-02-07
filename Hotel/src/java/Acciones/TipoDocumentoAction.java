@@ -66,7 +66,7 @@ public class TipoDocumentoAction extends ActionSupport {
 
     public String eliminar() {
         if (controladorTipoDocumento.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoDocumento, Mensaje.persona));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.tipoDocumento, Mensaje.persona));
         } else {
             controladorTipoDocumento.eliminar(id);
             sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoDocumento));

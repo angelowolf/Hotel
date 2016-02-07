@@ -74,4 +74,10 @@ public class Plan {
     public void setCaracteristica(String newVal) {
         caracteristica = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "Plan{" + "id=" + id + ", modulos=" + modulos + ", nombre=" + nombre + ", precio=" + precio + ", caracteristica=" + caracteristica + '}';
+    }
+
 }//end Plan

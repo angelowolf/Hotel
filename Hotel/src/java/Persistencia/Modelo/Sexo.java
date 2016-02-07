@@ -33,4 +33,10 @@ public class Sexo {
     public void setNombre(String newVal) {
         nombre = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "Sexo{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
+
 }//end Sexo

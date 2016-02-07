@@ -53,7 +53,7 @@ public class SexoAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String list() {
+    public String list() {      
         lista = controladorSexo.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
@@ -66,7 +66,7 @@ public class SexoAction extends ActionSupport {
 
     public String eliminar() {
         if (controladorSexo.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.sexo, Mensaje.persona));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.sexo, Mensaje.persona));
         } else {
             controladorSexo.eliminar(id);
             sesion.put("mensaje", Mensaje.getEliminado(Mensaje.sexo));

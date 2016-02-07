@@ -71,7 +71,7 @@ public class TipoPagoAction extends ActionSupport {
 
     public String eliminar() {
         if (controladorTipoPago.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoPago, Mensaje.pago));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.tipoPago, Mensaje.pago));
         } else {
             controladorTipoPago.eliminar(id);
             sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPago));
