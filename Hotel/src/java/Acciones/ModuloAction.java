@@ -65,9 +65,13 @@ public class ModuloAction extends ActionSupport {
     }
 
     public String eliminar() {
+        System.out.println(id);
+        
         if (controladorModulo.enUso(id)) {
+            System.out.println("1");
             sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.modulo, Mensaje.plan));
         } else {
+            System.out.println("2");
             controladorModulo.eliminar(id);
             sesion.put("mensaje", Mensaje.getEliminado(Mensaje.modulo));
         }

@@ -33,3 +33,5 @@ UPDATE hotel SET id_owner = 1 WHERE id = 1;
 
 -- UPDATE membresia SET id_estadoMembresia = 4 WHERE id = 1;
 update hotel set id_owner = 1 where id = 1;
+
+select * from Modulo m inner join plan_modulo p ON m.id = p.id_modulo WHERE m.id = 2

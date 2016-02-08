@@ -21,10 +21,7 @@
                     <s:hidden name="id" value="%{#attr.row.id}"/>
                     <s:submit value="Editar" action="%{editURL}" cssClass="btn btn-sm btn-info"/>
                 </s:form>
-                <s:form action="eliminar" id="deleteURL" style="display:inline-block;">
-                    <s:hidden name="id" value="%{#attr.row.id}"/>
-                    <s:submit value="Eliminar" action="%{deleteURL}" cssClass="btn btn-sm btn-danger"/>
-                </s:form>
+                <s:submit value="Eliminar" data-id="%{#attr.row.id}" data-deleteURL="%{deleteURL}" data-toggle="modal" data-target="#modal-delete" cssClass="btn btn-sm btn-danger"/>
             </display:column>
         </display:table>
 

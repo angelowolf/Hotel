@@ -10,7 +10,7 @@
         <property name="precio" column="precio" />
         <property name="caracteristica" column="caracteristica" type="string" />
 
-        <list name="modulos" table="plan_modulo" cascade="all-delete-orphan" >
+        <list name="modulos" table="plan_modulo">
             <key column="id_plan" />
             <list-index column="orden" />
             <many-to-many class="Persistencia.Modelo.Modulo" column="id_modulo" />

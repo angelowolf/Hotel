@@ -9,13 +9,13 @@
     <!--FIN SESION-->
     <!--Pagina principal del sitio-->
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/index.jsp</welcome-file>
     </welcome-file-list>
     <!--FIN PAGINA-->
     <!--Pagina que redirigira al producir un error 404, o una accion no encontrada (URL que no exista)-->
     <error-page>
         <error-code>404</error-code>
-        <location>/404.jsp</location>
+        <location>/WEB-INF/404.jsp</location>
     </error-page>
     <!--FIN ERROR 404-->
     <!--Le asigna a todas las paginas HTML UTF-8. Para las tildes. Solucina error de struts al mandar por request acentos.-->

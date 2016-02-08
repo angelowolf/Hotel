@@ -29,7 +29,7 @@ public class ModuloDAO extends GenericDAO<Modulo, Integer> implements IModulo {
         Session session = getHibernateTemplate();
         List<Modulo> objetos = new ArrayList<Modulo>();
         try {
-            String sql = "select * from Modulo m inner join plan_modulo p ON m.id = p.id_plan WHERE m.id LIKE :id ";
+            String sql = "select * from Modulo m inner join plan_modulo p ON m.id = p.id_modulo WHERE m.id = :id ";
             objetos = session.createSQLQuery(sql).addEntity(Modulo.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();

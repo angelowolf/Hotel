@@ -1,66 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <!--MASTER PAGE EJEMPLO-->   
-    <definition name="rootlayout" template="/root/rootlayout.jsp">
-        <put-attribute name="title" value="" />
+    <definition name="rootlayout" template="/WEB-INF/root/rootlayout.jsp">
+        <put-attribute name="title" value="Administración" />
         <put-attribute name="body" value="" /> 
+        <put-attribute name="modal-delete" value="/WEB-INF/root/modal-delete.jsp" />
+        <put-list-attribute name="stylesheet" >
+            <add-attribute value="/../bower_components/bootstrap/dist/css/bootstrap.css" />
+            <add-attribute value="/../css/bootstrap-multiselect.min.css" />
+            <add-attribute value="/../bower_components/metisMenu/dist/metisMenu.min.css" />
+            <add-attribute value="/../css/sb-admin-2.css" />
+            <add-attribute value="/../bower_components/font-awesome/css/font-awesome.min.css" />
+            <add-attribute value="/../css/root.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascript" >
+            <add-attribute value="/../bower_components/jquery/dist/jquery.min.js" />
+            <add-attribute value="/../js/bootstrap-multiselect.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="/../bower_components/metisMenu/dist/metisMenu.min.js" />
+            <add-attribute value="/../js/sb-admin-2.js" />
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>
-    <!--    <definition name="layoutSitio" template="/LayoutSitio.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="body" value="" /> 
-    </definition>-->
     <!--FIN MASTER PAGE-->
     <!--INDEX ROOT-->
     <definition name="/root/index.tiles" extends="rootlayout">
         <put-attribute name="title" value="Home" />
-        <put-attribute name="body" value="/root/index.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/index.jsp" />
     </definition>
     <!--TIPO PAGO-->
     <definition name="/root/tipopago/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Tipo Pago" />
-        <put-attribute name="body" value="/root/tipopago/altamodificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/tipopago/altamodificacion.jsp" />
     </definition>
     <definition name="/root/tipopago/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Tipo Pagos" />
-        <put-attribute name="body" value="/root/tipopago/todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/tipopago/todos.jsp" />
     </definition>   
     <!--TIPO DOCUMENTO-->
     <definition name="/root/tipodocumento/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Tipo Documento" />
-        <put-attribute name="body" value="/root/tipodocumento/altamodificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/tipodocumento/altamodificacion.jsp" />
     </definition>
     <definition name="/root/tipodocumento/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Tipo Documentos" />
-        <put-attribute name="body" value="/root/tipodocumento/todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/tipodocumento/todos.jsp" />
     </definition>
     <!--SEXO-->
     <definition name="/root/sexo/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Sexo" />
-        <put-attribute name="body" value="/root/sexo/altamodificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/sexo/altamodificacion.jsp" />
     </definition>
     <definition name="/root/sexo/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Sexos" />
-        <put-attribute name="body" value="/root/sexo/todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/sexo/todos.jsp" />
     </definition>
     <!--MODULO-->
     <definition name="/root/modulo/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Modulo" />
-        <put-attribute name="body" value="/root/modulo/altamodificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/modulo/altamodificacion.jsp" />
     </definition>
     <definition name="/root/modulo/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Modulos" />
-        <put-attribute name="body" value="/root/modulo/todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/modulo/todos.jsp" />
     </definition>
     <!--PLAN-->
     <definition name="/root/plan/altamodificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Plan" />
-        <put-attribute name="body" value="/root/plan/altamodificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/plan/altamodificacion.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../bower_components/jquery/dist/jquery.min.js" />
+            <add-attribute value="/../js/bootstrap-multiselect.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="/../bower_components/metisMenu/dist/metisMenu.min.js" />
+            <add-attribute value="/../js/sb-admin-2.js" />
+            <add-attribute value="/../js/root/plan.js" />
+        </put-list-attribute>
     </definition>
     <definition name="/root/plan/todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Planes" />
-        <put-attribute name="body" value="/root/plan/todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/root/plan/todos.jsp" />
     </definition>
 </tiles-definitions>

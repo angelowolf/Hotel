@@ -15,10 +15,13 @@
             <div class="form-group ">
                 <label class="col-sm-3 control-label" for="modulos">Módulos</label>
                 <div class="col-sm-9 controls">
-                    <select name="modulos" multiple="multiple">
+                    <s:hidden name="modulosSeleccionados" value='-1' />
+                    <select name="modulosSeleccionados" multiple="multiple">    
                         <s:iterator var="cadaModulo" value="modulos">
-                            <option value="<s:property value="%{#cadaModulo.id}"/>"><s:property value="%{#cadaModulo.nombre}"/></option>
-                        </s:iterator>
+                            <option <s:if test="#cadaModulo.isSeleccionado()"> selected</s:if> value="<s:property value="%{#cadaModulo.id}"/>">
+                                <s:property value="%{#cadaModulo.nombre}" /> 
+                            </option>
+                        </s:iterator>                     
                     </select>
                 </div>
             </div>
@@ -31,17 +34,3 @@
         </div>
     </s:form>
 </div>
-<script src="/../bower_components/jquery/dist/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('select').multiselect({
-            nonSelectedText: 'Seleccionar',
-            nSelectedText: 'seleccionado',
-            allSelectedText: 'Todos seleccionados',
-            enableFiltering: true,
-            selectAllText: ' Elegir todo',
-            buttonClass: 'btn btn-primary',
-            includeSelectAllOption: true,
-        });
-    });
-</script>

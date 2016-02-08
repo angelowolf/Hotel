@@ -10,9 +10,11 @@ import Controlador.ControladorPlan;
 import Persistencia.Modelo.Modulo;
 import Persistencia.Modelo.Plan;
 import Soporte.Mensaje;
+import Soporte.ModuloMultiselect;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
@@ -28,7 +30,8 @@ public class PlanAction extends ActionSupport {
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private String nombre, caracteristica;
     private int id, precio;
-    private List<Modulo> modulos = new ArrayList<Modulo>();
+    private final List<ModuloMultiselect> modulos = new ArrayList<ModuloMultiselect>();
+    private List<Integer> modulosSeleccionados;
 
     private boolean validar() {
         boolean flag = true;
@@ -52,23 +55,21 @@ public class PlanAction extends ActionSupport {
 
     public String guardarOModificar() {
         if (!validar()) {
+            cargarListaModulosValidacion();
             return INPUT;
         }
         if (id != 0) {
-            controladorPlan.actualizar(id, nombre, precio, caracteristica);
+            controladorPlan.actualizar(id, nombre, precio, caracteristica,modulosSeleccionados);
             sesion.put("mensaje", Mensaje.getModificado(Mensaje.plan));
         } else {
-            controladorPlan.guardar(nombre, precio, caracteristica);
+            controladorPlan.guardar(nombre, precio, caracteristica, modulosSeleccionados);
             sesion.put("mensaje", Mensaje.getAgregado(Mensaje.plan));
         }
         return SUCCESS;
     }
 
     public String list() {
-        lista = controladorPlan.getTodos();
-        for (Plan plan : lista) {
-            System.out.println(plan.toString());
-        }
+        lista = controladorPlan.getTodos();      
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         String alerta = (String) sesion.get("alerta");
@@ -94,13 +95,61 @@ public class PlanAction extends ActionSupport {
         caracteristica = plan.getCaracteristica();
         precio = plan.getPrecio();
         id = plan.getId();
+        Map<Integer, Modulo> mapModuloQUePosee = new HashMap<Integer, Modulo>();
+        for (Modulo i : plan.getModulos()) {
+            mapModuloQUePosee.put(i.getId(), i);
+        }
+        cargarListaModulos(mapModuloQUePosee, true);
+
         return SUCCESS;
     }
-    
+
     public String nuevo() {
-        ControladorModulo cm = new ControladorModulo();
-        modulos = cm.getTodos();
+        cargarListaModulos(null, false);
         return SUCCESS;
+    }
+
+    private void cargarListaModulos(Map<Integer, Modulo> mapModuloQUePosee, Boolean flag) {
+        ControladorModulo cm = new ControladorModulo();
+        List<Modulo> modulosTodos = cm.getTodos();
+        for (Modulo cadaModuloQueExiste : modulosTodos) {
+            ModuloMultiselect ms = new ModuloMultiselect();
+            ms.setId(cadaModuloQueExiste.getId());
+            ms.setNombre(cadaModuloQueExiste.getNombre());
+            if (flag && mapModuloQUePosee.containsKey(cadaModuloQueExiste.getId())) {
+                ms.setSeleccionado(true);
+            } else {
+                ms.setSeleccionado(false);
+            }
+            this.modulos.add(ms);
+        }
+    }
+
+    private void cargarListaModulosValidacion() {
+        Map<Integer, Integer> mapModulosSeleccionados = new HashMap<Integer, Integer>();
+        modulosSeleccionados.remove(0);
+        for (Integer i : modulosSeleccionados) {
+            if(i > 0) {
+                mapModulosSeleccionados.put(i, i);
+            }
+        }
+        ControladorModulo cm = new ControladorModulo();
+        List<Modulo> modulosTodos = cm.getTodos();
+        for (Modulo cadaModuloQueExiste : modulosTodos) {
+            ModuloMultiselect ms = new ModuloMultiselect();
+            ms.setId(cadaModuloQueExiste.getId());
+            ms.setNombre(cadaModuloQueExiste.getNombre());
+            if (!mapModulosSeleccionados.isEmpty()) {
+                if (mapModulosSeleccionados.containsKey(cadaModuloQueExiste.getId())) {
+                    ms.setSeleccionado(true);
+                } else {
+                    ms.setSeleccionado(false);
+                }
+            } else {
+                ms.setSeleccionado(false);
+            }
+            this.modulos.add(ms);
+        }
     }
 
     public List<Plan> getLista() {
@@ -139,7 +188,12 @@ public class PlanAction extends ActionSupport {
         this.precio = precio;
     }
 
-    public List<Modulo> getModulos() {
+    public List<ModuloMultiselect> getModulos() {
         return modulos;
+    }
+
+    public void setModulosSeleccionados(List<Integer> modulosSeleccionados) {
+        this.modulosSeleccionados = modulosSeleccionados;
+        cargarListaModulosValidacion();
     }
 }
