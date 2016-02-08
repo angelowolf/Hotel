@@ -66,7 +66,7 @@ public class ModuloAction extends ActionSupport {
 
     public String eliminar() {
         System.out.println(id);
-        
+
         if (controladorModulo.enUso(id)) {
             System.out.println("1");
             sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.modulo, Mensaje.plan));
@@ -80,10 +80,15 @@ public class ModuloAction extends ActionSupport {
 
     public String editar() {
         Modulo modulo = controladorModulo.getUno(id);
-        nombre = modulo.getNombre();
-        caracteristica = modulo.getCaracteristica();
-        id = modulo.getId();
-        return SUCCESS;
+        if (modulo != null) {
+            nombre = modulo.getNombre();
+            caracteristica = modulo.getCaracteristica();
+            id = modulo.getId();
+            return SUCCESS;
+        } else {
+            sesion.put("alerta", Mensaje.idInvalido);
+            return ERROR;
+        }
     }
 
     public List<Modulo> getLista() {

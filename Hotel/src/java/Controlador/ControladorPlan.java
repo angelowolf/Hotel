@@ -79,9 +79,19 @@ public class ControladorPlan {
     }
 
     public Plan getUno(int id) {
-        return planDAO.buscar(id);
+        try {
+            return planDAO.buscar(id);
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 
+    /**
+     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
+     *
+     * @param id
+     * @return el objeto o nulo.
+     */
     public List<Integer> getModulosByID(Plan plan) {
         List<Integer> lista = new ArrayList();
         List<Modulo> listaModulos = plan.getModulos();

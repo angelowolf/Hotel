@@ -20,6 +20,7 @@
         </action>
         <action name="editar" method="editar" class="Acciones.PlanAction">
             <result name="success" type="tiles">/root/plan/altamodificacion.tiles</result>
+              <result name="error" type="redirect">listar</result>
         </action> 
         <action name="nuevo" method="nuevo" class="Acciones.PlanAction">
             <result name="success" type="tiles">/root/plan/altamodificacion.tiles</result>

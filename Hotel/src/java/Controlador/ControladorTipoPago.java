@@ -97,12 +97,16 @@ public class ControladorTipoPago {
     }
 
     /**
-     * recupera un tipo de pago de la bd.
+     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
      *
      * @param id
-     * @return
+     * @return el objeto o nulo.
      */
     public TipoPago getUno(int id) {
-        return tipoPagoDAO.buscar(id);
+        try {
+            return tipoPagoDAO.buscar(id);
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 }//end ControladorTipoPago

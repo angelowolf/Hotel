@@ -53,7 +53,7 @@ public class SexoAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String list() {      
+    public String list() {
         lista = controladorSexo.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
@@ -76,9 +76,14 @@ public class SexoAction extends ActionSupport {
 
     public String editar() {
         Sexo sexo = controladorSexo.getUno(id);
-        nombre = sexo.getNombre();
-        id = sexo.getId();
-        return SUCCESS;
+        if (sexo != null) {
+            nombre = sexo.getNombre();
+            id = sexo.getId();
+            return SUCCESS;
+        } else {
+            sesion.put("alerta", Mensaje.idInvalido);
+            return ERROR;
+        }
     }
 
     public List<Sexo> getLista() {

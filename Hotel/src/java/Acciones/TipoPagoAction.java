@@ -81,10 +81,15 @@ public class TipoPagoAction extends ActionSupport {
 
     public String editar() {
         TipoPago tp = controladorTipoPago.getUno(id);
-        nombre = tp.getNombre();
-        recargo = tp.getPorcentajeRecargo();
-        id = tp.getId();
-        return SUCCESS;
+        if (tp != null) {
+            nombre = tp.getNombre();
+            recargo = tp.getPorcentajeRecargo();
+            id = tp.getId();
+            return SUCCESS;
+        } else {
+            sesion.put("alerta", Mensaje.idInvalido);
+            return ERROR;
+        }
     }
 
     public List<TipoPago> getLista() {

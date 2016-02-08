@@ -59,7 +59,7 @@ public class PlanAction extends ActionSupport {
             return INPUT;
         }
         if (id != 0) {
-            controladorPlan.actualizar(id, nombre, precio, caracteristica,modulosSeleccionados);
+            controladorPlan.actualizar(id, nombre, precio, caracteristica, modulosSeleccionados);
             sesion.put("mensaje", Mensaje.getModificado(Mensaje.plan));
         } else {
             controladorPlan.guardar(nombre, precio, caracteristica, modulosSeleccionados);
@@ -69,7 +69,7 @@ public class PlanAction extends ActionSupport {
     }
 
     public String list() {
-        lista = controladorPlan.getTodos();      
+        lista = controladorPlan.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         String alerta = (String) sesion.get("alerta");
@@ -91,17 +91,22 @@ public class PlanAction extends ActionSupport {
 
     public String editar() {
         Plan plan = controladorPlan.getUno(id);
-        nombre = plan.getNombre();
-        caracteristica = plan.getCaracteristica();
-        precio = plan.getPrecio();
-        id = plan.getId();
-        Map<Integer, Modulo> mapModuloQUePosee = new HashMap<Integer, Modulo>();
-        for (Modulo i : plan.getModulos()) {
-            mapModuloQUePosee.put(i.getId(), i);
+        if (plan != null) {
+            nombre = plan.getNombre();
+            caracteristica = plan.getCaracteristica();
+            precio = plan.getPrecio();
+            id = plan.getId();
+            Map<Integer, Modulo> mapModuloQUePosee = new HashMap<Integer, Modulo>();
+            for (Modulo i : plan.getModulos()) {
+                mapModuloQUePosee.put(i.getId(), i);
+            }
+            cargarListaModulos(mapModuloQUePosee, true);
+            return SUCCESS;
+        } else {
+            sesion.put("alerta", Mensaje.idInvalido);
+            return ERROR;
         }
-        cargarListaModulos(mapModuloQUePosee, true);
 
-        return SUCCESS;
     }
 
     public String nuevo() {
@@ -129,7 +134,7 @@ public class PlanAction extends ActionSupport {
         Map<Integer, Integer> mapModulosSeleccionados = new HashMap<Integer, Integer>();
         modulosSeleccionados.remove(0);
         for (Integer i : modulosSeleccionados) {
-            if(i > 0) {
+            if (i > 0) {
                 mapModulosSeleccionados.put(i, i);
             }
         }

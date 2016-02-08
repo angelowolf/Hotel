@@ -57,7 +57,17 @@ public class ControladorTipoDocumento {
         tipoDocumentoDAO.eliminar(t);
     }
 
+    /**
+     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
+     *
+     * @param id
+     * @return el objeto o nulo.
+     */
     public TipoDocumento getUno(int id) {
-        return tipoDocumentoDAO.buscar(id);
+        try {
+            return tipoDocumentoDAO.buscar(id);
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 }//end ControladorTipoDocumento

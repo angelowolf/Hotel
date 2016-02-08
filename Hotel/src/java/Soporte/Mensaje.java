@@ -67,6 +67,7 @@ public class Mensaje {
     public static final String ingreseRecargo = "Ingrese un recargo positivo.";
     public static final String ingreseCaracteristica = "Ingrese una característica.";
     public static final String precioNoValido = "Ingrese un precio valido.";
+    public static final String idInvalido = "Id invalido.";
 
     public Mensaje() {
 

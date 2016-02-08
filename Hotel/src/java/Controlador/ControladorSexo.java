@@ -57,7 +57,17 @@ public class ControladorSexo {
         sexoDAO.eliminar(t);
     }
 
+    /**
+     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
+     *
+     * @param id
+     * @return el objeto o nulo.
+     */
     public Sexo getUno(int id) {
-        return sexoDAO.buscar(id);
+        try {
+            return sexoDAO.buscar(id);
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 }//end ControladorSexo

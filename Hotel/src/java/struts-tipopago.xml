@@ -20,6 +20,7 @@
         </action>
         <action name="editar" method="editar" class="Acciones.TipoPagoAction">
             <result name="success" type="tiles">/root/tipopago/altamodificacion.tiles</result>
+            <result name="error" type="redirect">listar</result>
         </action> 
         <action name="nuevo" method="nuevo" class="Acciones.LinkAction">
             <result name="nuevo" type="tiles">/root/tipopago/altamodificacion.tiles</result>

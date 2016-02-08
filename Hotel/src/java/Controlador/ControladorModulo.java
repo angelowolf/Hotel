@@ -59,8 +59,18 @@ public class ControladorModulo {
         moduloDAO.eliminar(t);
     }
 
+    /**
+     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
+     *
+     * @param id
+     * @return el objeto o nulo.
+     */
     public Modulo getUno(int id) {
-        return moduloDAO.buscar(id);
+        try {
+            return moduloDAO.buscar(id);
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 
 }//end ControladorModulo

@@ -76,9 +76,14 @@ public class TipoDocumentoAction extends ActionSupport {
 
     public String editar() {
         TipoDocumento tipoDocumento = controladorTipoDocumento.getUno(id);
-        nombre = tipoDocumento.getNombre();
-        id = tipoDocumento.getId();
-        return SUCCESS;
+        if (tipoDocumento != null) {
+            nombre = tipoDocumento.getNombre();
+            id = tipoDocumento.getId();
+            return SUCCESS;
+        } else {
+            sesion.put("alerta", Mensaje.idInvalido);
+            return ERROR;
+        }
     }
 
     public List<TipoDocumento> getLista() {
