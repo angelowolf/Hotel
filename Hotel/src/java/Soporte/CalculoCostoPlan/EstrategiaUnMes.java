@@ -1,6 +1,5 @@
 package Soporte.CalculoCostoPlan;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,18 +7,14 @@ package Soporte.CalculoCostoPlan;
  */
 public class EstrategiaUnMes extends EstrategiaCalculo {
 
-	public EstrategiaUnMes(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	/**
-	 * 
-	 * @param totalConRecargo
-	 */
-	protected int calculoPropio(int totalConRecargo){
-		return 0;
-	}
-}//end EstrategiaUnMes
+    /**
+     * No aplica ningun descuento.
+     *
+     * @param totalConRecargo
+     * @return el monto sin ningun descuento.
+     */
+    @Override
+    protected int calculoPropio(int totalConRecargo) {
+        return totalConRecargo;
+    }
+}

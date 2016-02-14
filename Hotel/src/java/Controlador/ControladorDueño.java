@@ -20,15 +20,16 @@ public class ControladorDueño {
 
     public void guardar(String apellido, String nombre, String email, String telefono, Date fechaNacimiento,
             String clave, String nick) {
-        Dueño d = new Dueño();
+        Usuario u = new Usuario();
+        u.setClave(clave);
+        u.setEmail(email);
+        u.hacerOwner();
+        Dueño d = new Dueño(u);
         d.setApellido(apellido);
         d.setNombre(nombre);
         d.setEmail(email);
         d.setTelefono(telefono);
         d.setFechaNacimiento(fechaNacimiento);
-        Usuario u = new Usuario();
-        u.setClave(clave);
-        u.setEmail(email);
-        u.hacerOwner();
+
     }
 }//end ControladorDueño

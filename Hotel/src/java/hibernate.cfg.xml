@@ -5,16 +5,14 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sistema_hotel</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"></property>
-    
+    <property name="hibernate.connection.password"/>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-    <property name="show_sql">false</property>
+    <property name="show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
-    
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.cache.use_second_level_cache">false</property>
     <!--Configuracion correspondiente al pool, para que no se caiga la conexion de mysql a las 8 hs sin uso.-->
-<!--    <property name="c3p0.min_size">5</property>
+    <!--    <property name="c3p0.min_size">5</property>
     <property name="c3p0.max_size">20</property>
     <property name="c3p0.timeout">1800</property>
     <property name="c3p0.max_statements">50</property>

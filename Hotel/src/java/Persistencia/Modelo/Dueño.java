@@ -14,13 +14,12 @@ public class Dueño extends Persona {
         this.usuario = usuario;
     }
 
-    public Dueño() {
-    }
-
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

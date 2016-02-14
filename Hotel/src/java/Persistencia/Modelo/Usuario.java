@@ -15,10 +15,7 @@ public class Usuario {
     private String nick;
     private TipoUsuario tipoUsuario;
 
-    public Usuario() {
-
-    }
-
+  
     /**
      * Verifica si el usuario es ROOT del sitio.
      *

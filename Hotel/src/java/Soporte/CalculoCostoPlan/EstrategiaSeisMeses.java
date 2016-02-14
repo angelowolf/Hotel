@@ -1,6 +1,5 @@
 package Soporte.CalculoCostoPlan;
 
-
 /**
  * @author Angelo
  * @version 1.0
@@ -8,18 +7,17 @@ package Soporte.CalculoCostoPlan;
  */
 public class EstrategiaSeisMeses extends EstrategiaCalculo {
 
-	public EstrategiaSeisMeses(){
+    private final int descuento = 10;
 
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	/**
-	 * 
-	 * @param totalConRecargo
-	 */
-	protected int calculoPropio(int totalConRecargo){
-		return 0;
-	}
-}//end EstrategiaSeisMeses
+    /**
+     * Aplica un descuento del 10%
+     *
+     * @param totalConRecargo
+     * @return el monto con el descuento.
+     */
+    @Override
+    protected int calculoPropio(int totalConRecargo) {
+        int aDescontar = descuento % totalConRecargo;
+        return totalConRecargo - aDescontar;
+    }
+}

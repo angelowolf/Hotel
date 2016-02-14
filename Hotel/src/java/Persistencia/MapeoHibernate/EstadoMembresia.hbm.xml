@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>    
-    <class name="Persistencia.Modelo.EstadoMembresia" table="EstadoMembresia" polymorphism="implicit">    
-        <cache usage="read-only"/>    
-        <id name="id" column="id">
-            <generator class="assigned" />
-        </id>
-        <discriminator insert="false" column="id" />
-        <property name="nombre" column="nombre" />
-        <subclass name="Persistencia.Modelo.EstadoMembresiaActiva" discriminator-value="1"/>
-        <subclass name="Persistencia.Modelo.EstadoMembresiaAviso" discriminator-value="2"/>
-        <subclass name="Persistencia.Modelo.EstadoMembresiaPrueba" discriminator-value="3"/>
-        <subclass name="Persistencia.Modelo.EstadoMembresiaVencida" discriminator-value="4"/>
-    </class>
+<hibernate-mapping>
+  <class name="Soporte.EstadoMembresia.EstadoMembresia" polymorphism="implicit" table="EstadoMembresia">
+    <cache usage="read-only"/>
+    <id column="id" name="id">
+      <generator class="assigned"/>
+    </id>
+    <discriminator column="id" insert="false"/>
+    <property column="nombre" name="nombre"/>
+    <subclass discriminator-value="1" name="Soporte.EstadoMembresia.EstadoMembresiaActiva"/>
+    <subclass discriminator-value="2" name="Soporte.EstadoMembresia.EstadoMembresiaAviso"/>
+    <subclass discriminator-value="3" name="Soporte.EstadoMembresia.EstadoMembresiaPrueba"/>
+    <subclass discriminator-value="4" name="Soporte.EstadoMembresia.EstadoMembresiaVencida"/>
+  </class>
 </hibernate-mapping>

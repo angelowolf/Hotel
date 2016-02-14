@@ -1,6 +1,6 @@
 package Persistencia.ORM.DAOInterface;
 
-import Persistencia.Modelo.EstadoMembresia;
+import Soporte.EstadoMembresia.EstadoMembresia;
 import Persistencia.ORM.Util.IGenericDAO;
 
 /**

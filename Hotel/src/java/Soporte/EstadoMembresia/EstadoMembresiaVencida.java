@@ -1,17 +1,17 @@
-package Persistencia.Modelo;
+package Soporte.EstadoMembresia;
+
+import Persistencia.ORM.DAOImplementacion.EstadoMembresiaDAO;
 
 /**
  * @author Angelo
  * @version 1.0
  * @created 28-ene-2016 08:44:24 p.m.
  */
-public class EstadoMembresiaAviso extends EstadoMembresia {
+public class EstadoMembresiaVencida extends EstadoMembresia {
 
-    private String nombre = "aviso";
+    private String nombre = "vencida";
 
-    public EstadoMembresiaAviso() {
-
-    }
+  
 
     @Override
     public void activar() {
@@ -54,11 +54,11 @@ public class EstadoMembresiaAviso extends EstadoMembresia {
 
     @Override
     public boolean isVencida() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAviso() {
-        return true;
+        return false;
     }
-}//end EstadoMembresiaAviso
+}//end EstadoMembresiaVencida

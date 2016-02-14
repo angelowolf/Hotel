@@ -1,8 +1,7 @@
 package Persistencia.Modelo;
 
-import java.util.Calendar;
+import Soporte.EstadoMembresia.EstadoMembresia;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * @author Angelo
@@ -17,15 +16,6 @@ public class Membresia {
     private Date fechaVencimiento;
     private Date fechaAviso;
 
-    public Membresia() {
-        estadoMembresia = new EstadoMembresiaPrueba();
-        Calendar c = new GregorianCalendar();
-        fechaActivacion = c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, 7);
-        fechaAviso = c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, 7);
-        fechaVencimiento = c.getTime();
-    }
 
     public EstadoMembresia getEstadoMembresia() {
         return estadoMembresia;
@@ -94,4 +84,10 @@ public class Membresia {
     public boolean isAviso() {
         return this.estadoMembresia.isAviso();
     }
+
+    @Override
+    public String toString() {
+        return "Membresia{" + "id=" + id + ", estadoMembresia=" + estadoMembresia + ", fechaActivacion=" + fechaActivacion + ", fechaVencimiento=" + fechaVencimiento + ", fechaAviso=" + fechaAviso + '}';
+    }
+
 }//end Membresia

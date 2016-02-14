@@ -17,11 +17,20 @@ public class Persona {
     private Sexo sexo;
     private String telefono;
     private TipoDocumento tipoDocumento;
+    private long numeroDocumento;
     private Date fechaNacimiento;
     private Pais pais;
 
     public Persona() {
 
+    }
+
+    public long getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(long numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public int getId() {

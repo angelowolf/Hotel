@@ -1,6 +1,9 @@
 package Persistencia.Modelo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -52,14 +55,6 @@ public class Hotel {
     private String web;
     private Pais pais;
 
-    public Hotel() {
-
-    }
-
-    public void finalize() throws Throwable {
-
-    }
-
     public Dueño getDueño() {
         return dueño;
     }
@@ -106,6 +101,11 @@ public class Hotel {
      */
     public void setPlan(Plan newVal) {
         plan = newVal;
+    }
+
+    public void setPlan(int idPlan) {
+        plan = new Plan();
+        plan.setId(idPlan);
     }
 
     public List<Reserva> getReservas() {
@@ -239,4 +239,43 @@ public class Hotel {
     public boolean isMembresiaAviso() {
         return this.membresia.isAviso();
     }
+
+    public void agregarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" + "id=" + id + ", due\u00f1o=" + dueño + ", membresia=" + membresia + ", pagos=" + pagos + ", plan=" + plan + ", nombre=" + nombre + ", reservas=" + reservas + ", tipoHabitaciones=" + tipoHabitaciones + ", empleados=" + empleados + ", clientes=" + clientes + ", lavados=" + lavados + ", domicilio=" + domicilio + ", telefonos=" + telefonos + ", usuarios=" + usuarios + ", email=" + email + ", web=" + web + ", pais=" + pais + '}';
+    }
+
+    public void crearMembresia() {
+        membresia = new Membresia();
+        Calendar calendario = new GregorianCalendar();
+        Date activacion = calendario.getTime();
+        calendario.add(Calendar.DAY_OF_MONTH, 7);
+        Date aviso = calendario.getTime();
+        calendario.add(Calendar.DAY_OF_MONTH, 7);
+        Date vencimiento = calendario.getTime();
+        membresia.setFechaActivacion(activacion);
+        membresia.setFechaAviso(aviso);
+        membresia.setFechaVencimiento(vencimiento);
+        membresia.setEstadoMembresia(Soporte.EstadoMembresia.SingletonEstadoMembresiaPrueba.getInstancia().getEstadoMembresiaPrueba());
+    }
+
+    public Usuario crearUsuario(String claveEnMD5, String email, String nick) {
+        Usuario usuario = new Usuario();
+        usuario.hacerOwner();
+        usuario.setClave(claveEnMD5);
+        usuario.setEmail(email);
+        usuario.setNick(nick);
+        return usuario;
+    }
+
+    public void crearDueño(String nombre, String apellido, Usuario usuario) {
+        dueño = new Dueño(usuario);
+        dueño.setNombre(nombre);
+        dueño.setApellido(apellido);
+    }
+
 }//end Hotel

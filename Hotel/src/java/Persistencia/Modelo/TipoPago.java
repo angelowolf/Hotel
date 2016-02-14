@@ -46,4 +46,8 @@ public class TipoPago {
     public void setPorcentajeRecargo(float newVal) {
         porcentajeRecargo = newVal;
     }
+
+    public boolean isContado() {
+        return this.nombre.equals("contado");
+    }
 }//end TipoPago

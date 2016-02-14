@@ -18,8 +18,8 @@ public class TipoUsuarioDAO extends GenericDAO<TipoUsuario, Integer> implements 
         Session session = getHibernateTemplate();
         List<TipoUsuario> objetos = new ArrayList<TipoUsuario>();
         try {
-            String sql = "from TipoUsuario where nombre = owner";
-            objetos = session.createQuery(sql).list();
+            String sql = "from TipoUsuario where nombre = :owner";
+            objetos = session.createQuery(sql).setParameter("owner", "owner").list();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

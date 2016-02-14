@@ -1,6 +1,6 @@
 package Controlador;
 
-import Persistencia.Modelo.EstadoMembresia;
+import Soporte.EstadoMembresia.EstadoMembresia;
 import java.util.List;
 
 /**

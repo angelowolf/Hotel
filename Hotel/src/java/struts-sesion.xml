@@ -10,10 +10,10 @@
         <action name="login" method="login" class="Acciones.UsuarioAction">
             <result name="root" type="tiles">/root/index.tiles</result>
             <result name="success">/admin/index.jsp</result>
-            <result name="input">/index.jsp</result>
+            <result name="input">/WEB-INF/index.jsp</result>
         </action>
         <action name="logout" method="logout" class="Acciones.UsuarioAction">
-            <result name="success">/index.jsp</result>
+            <result name="success">/WEB-INF/index.jsp</result>
         </action>
     </package>
 </struts>

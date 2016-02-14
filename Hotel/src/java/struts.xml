@@ -21,6 +21,7 @@
     <include file="struts-sexo.xml"></include>
     <include file="struts-modulo.xml"></include>
     <include file="struts-plan.xml"></include>
+    <include file="struts-hotel.xml"></include>
     
     
     

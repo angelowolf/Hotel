@@ -1,39 +1,34 @@
-package Persistencia.Modelo;
+package Soporte.EstadoMembresia;
+
+import Persistencia.ORM.DAOImplementacion.EstadoMembresiaDAO;
 
 /**
  * @author Angelo
  * @version 1.0
- * @created 28-ene-2016 08:44:23 p.m.
+ * @created 28-ene-2016 08:44:24 p.m.
  */
-public abstract class EstadoMembresia {
+public class EstadoMembresiaAviso extends EstadoMembresia {
 
-    private int id;
-    private String nombre;
+    private String nombre = "aviso";
 
-    public EstadoMembresia() {
+  
 
-    }
-
+    @Override
     public void activar() {
 
     }
 
+    @Override
     public void registrarAviso() {
 
     }
 
+    @Override
     public void registrarVencimiento() {
 
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -42,23 +37,28 @@ public abstract class EstadoMembresia {
      *
      * @param newVal
      */
+    @Override
     public void setNombre(String newVal) {
         nombre = newVal;
     }
 
+    @Override
     public boolean isActiva() {
         return false;
     }
 
+    @Override
     public boolean isPrueba() {
         return false;
     }
 
+    @Override
     public boolean isVencida() {
         return false;
     }
 
+    @Override
     public boolean isAviso() {
-        return false;
+        return true;
     }
-}//end EstadoMembresia
+}//end EstadoMembresiaAviso
