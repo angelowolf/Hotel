@@ -68,10 +68,10 @@ public class Mensaje {
     public static final String ingreseCaracteristica = "Ingrese una característica.";
     public static final String precioNoValido = "Ingrese un precio valido.";
     public static final String idInvalido = "Id invalido.";
-
-    public Mensaje() {
-
-    }
+    public static final String nickNoDisponible = "Este nombre de usuario no se encuentra disponible.";
+    public static final String emailNoDisponible = "Este email no se encuentra disponible.";
+    public static final String planNoExiste = "El plan seleccionado no existe.";
+    public static final String emailNoValido = "El formato del email no es correcto.";
 
     /**
      * Crea un mensaje con el tiempo pasado por parametro. "Ya se ha enviado un

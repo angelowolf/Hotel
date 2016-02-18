@@ -8,17 +8,17 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
-        <action name="guardarOModificar" method="guardarOModificar" class="Acciones.TipoPagoAction">
+        <action name="guardarOModificar" method="guardarOModificar" class="Acciones.Root.TipoPagoAction">
             <result name="success" type="redirect">listar</result>
             <result name="input" type="tiles">/root/tipopago/altamodificacion.tiles</result>
         </action>
-        <action name="eliminar" method="eliminar" class="Acciones.TipoPagoAction">
+        <action name="eliminar" method="eliminar" class="Acciones.Root.TipoPagoAction">
             <result name="success" type="redirect">listar</result>
         </action>
-        <action name="listar" method="list" class="Acciones.TipoPagoAction">
+        <action name="listar" method="list" class="Acciones.Root.TipoPagoAction">
             <result name="success" type="tiles">/root/tipopago/todos.tiles</result>
         </action>
-        <action name="editar" method="editar" class="Acciones.TipoPagoAction">
+        <action name="editar" method="editar" class="Acciones.Root.TipoPagoAction">
             <result name="success" type="tiles">/root/tipopago/altamodificacion.tiles</result>
             <result name="error" type="redirect">listar</result>
         </action> 

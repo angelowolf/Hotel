@@ -8,8 +8,6 @@ import Persistencia.ORM.DAOImplementacion.TipoUsuarioDAO;
 import Persistencia.ORM.DAOImplementacion.UsuarioDAO;
 import Soporte.Encriptar;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import org.apache.commons.lang.WordUtils;
 
 /**
  * @author Angelo
@@ -85,10 +83,31 @@ public class ControladorUsuario {
     }
 
     //***********************************************************************************************************
-    
+    /**
+     * Verifica si el nombre su usuario se encuentra disponible o no.
+     *
+     * @param nick
+     * @return True si es posible utilizarlo.
+     */
+    public boolean isNickDisponible(String nick) {
+        Usuario u = getUsuarioByNick(nick);
+        return u == null;
+    }
+
+    /**
+     * Verifica si el email ya se encuentra ocupado por algun usuario.
+     *
+     * @param email
+     * @return True si es posible utilizarlo.
+     */
+    public boolean isEmailDisponible(String email) {
+        Usuario u = getUsuarioByEmail(email);
+        return u == null;
+    }
+
     /**
      * Busca un usuario por email o por nick.
-     * 
+     *
      * @param emailONick
      * @return usuario
      */
@@ -99,7 +118,7 @@ public class ControladorUsuario {
         }
         return u;
     }
-    
+
     /**
      * Busca un usuario por su nick.
      *

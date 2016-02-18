@@ -100,4 +100,21 @@ public class ControladorPlan {
         }
         return lista;
     }
+
+    /**
+     * Verifica si el id pasado por parametro corresponde a un plan alamcenado
+     * en la base de datos.
+     *
+     * @param id_planSeleccionado
+     * @return True si el plan existe.
+     */
+    public boolean isPlanExistente(int id_planSeleccionado) {
+        Plan p = planDAO.buscar(id_planSeleccionado);
+        try {
+            p.getCaracteristica();
+            return true;
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return false;
+        }
+    }
 }//end ControladorPlan

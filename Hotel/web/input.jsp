@@ -1,7 +1,7 @@
 <%-- 
-    Document   : exito
-    Created on : 11/02/2016, 01:29:04
-    Author     : ang_2
+    Document   : input
+    Created on : 17/02/2016, 01:19:01
+    Author     : angelo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1> todo bien </h1>
+        <h1>INPUT</h1>
+
+        <div class="text-center">
+            <s:actionerror theme="bootstrap"/>
+            <s:actionmessage theme="bootstrap"/>
+            <s:fielderror theme="bootstrap"/>
+        </div>
     </body>
 </html>

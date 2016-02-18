@@ -8,8 +8,9 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
-        <action name="crearHotel" method="crearHotel" class="Acciones.HotelAction">
+        <action name="crearhotel" method="crearHotel" class="Acciones.Sistema.HotelAction">
             <result name="success">/exito.jsp</result>
+            <result name="input">/input.jsp</result>
         </action>
     </package>
 </struts>

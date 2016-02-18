@@ -23,6 +23,18 @@ public class ControladorHotel {
         dueñoDAO = new DueñoDAO();
     }
 
+    /**
+     * Registra un nuevo hotel, crea la cuenta de usuario del dueño, y se crea
+     * la membresia del hotel con el plan que selecciono.
+     *
+     * @param nombreHotel
+     * @param id_planSeleccionado
+     * @param nick
+     * @param email
+     * @param clave
+     * @param nombre
+     * @param apellido
+     */
     public void registrarHotel(String nombreHotel, int id_planSeleccionado, String nick, String email, String clave, String nombre, String apellido) {
         Hotel hotel = new Hotel();
         //creo la membresia y la guardo en la bd
