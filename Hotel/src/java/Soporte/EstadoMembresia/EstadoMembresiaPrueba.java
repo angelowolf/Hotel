@@ -1,6 +1,6 @@
 package Soporte.EstadoMembresia;
 
-import Persistencia.ORM.DAOImplementacion.EstadoMembresiaDAO;
+import Persistencia.Modelo.Membresia;
 
 /**
  * @author Angelo
@@ -11,22 +11,19 @@ public class EstadoMembresiaPrueba extends EstadoMembresia {
 
     private String nombre = "prueba";
 
-    
     @Override
-    public void activar() {
-        EstadoMembresiaDAO dao = new EstadoMembresiaDAO();
-        EstadoMembresia em = dao.buscar(this.nombre);
-        id = em.getId();
+    public void activar(Membresia membresia) {
+        membresia.setEstadoMembresia(SingletonEstadoMembresiaActiva.getInstancia().getEstadoMembresiaActiva());
     }
 
     @Override
-    public void registrarAviso() {
-
+    public void registrarAviso(Membresia membresia) {
+        membresia.setEstadoMembresia(SingletonEstadoMembresiaAviso.getInstancia().getEstadoMembresiaAviso());
     }
 
     @Override
-    public void registrarVencimiento() {
-
+    public void registrarVencimiento(Membresia membresia) {
+        membresia.setEstadoMembresia(SingletonEstadoMembresiaVencida.getInstancia().getEstadoMembresiaVencida());
     }
 
     @Override

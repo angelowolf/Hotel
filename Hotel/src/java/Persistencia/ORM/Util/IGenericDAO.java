@@ -12,28 +12,34 @@ import java.io.Serializable;
 public interface IGenericDAO<Entity, PK extends Serializable> {
 
     /**
+     * Guarda un objeto
      *
-     * @param t
-     * @return
+     * @param t El objeto a guardar.
+     * @return El ID generado al guardar el objeto
      */
     public Integer guardar(Entity t);
 
     /**
+     * Actualiza los datos de un objeto.
      *
-     * @param t
+     * @param t El objeto a actualizar.
      */
     public void actualizar(Entity t);
 
     /**
+     * Busca un objeto por su id. En el caso de que el objeto no exista, se
+     * devolvera un nuevo objeto al que se le mapeara el id pasado por
+     * parametro, si se le pide una propiedad saltara una exception.
      *
      * @param id
-     * @return
+     * @return El objeto encontrado.
      */
     public Entity buscar(PK id);
 
     /**
+     * Elimina un objeto.
      *
-     * @param t
+     * @param t El objeto a eliminar.
      */
     public void eliminar(Entity t);
 

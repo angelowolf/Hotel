@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class TipoPagoDAO extends GenericDAO<TipoPago, Integer> implements ITipoPago {
 
+    @Override
     public List<TipoPago> getTodos() {
         Session session = getHibernateTemplate();
         List<TipoPago> objetos = new ArrayList<TipoPago>();
@@ -25,7 +26,8 @@ public class TipoPagoDAO extends GenericDAO<TipoPago, Integer> implements ITipoP
         return objetos;
     }
 
-    public List<TipoPago> buscar(String nombre) {
+    @Override
+    public TipoPago buscar(String nombre) {
         Session session = getHibernateTemplate();
         List<TipoPago> objetos = new ArrayList<TipoPago>();
         try {
@@ -34,10 +36,15 @@ public class TipoPagoDAO extends GenericDAO<TipoPago, Integer> implements ITipoP
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
-    public List<TipoPago> pagoEnUso(int id) {
+    @Override
+    public TipoPago pagoEnUso(int id) {
         Session session = getHibernateTemplate();
         List<TipoPago> objetos = new ArrayList<TipoPago>();
         try {
@@ -46,7 +53,11 @@ public class TipoPagoDAO extends GenericDAO<TipoPago, Integer> implements ITipoP
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
 }//end TipoPagoDAO

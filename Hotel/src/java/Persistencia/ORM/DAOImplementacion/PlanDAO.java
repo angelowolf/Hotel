@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class PlanDAO extends GenericDAO<Plan, Integer> implements IPlan {
 
+    @Override
     public List<Plan> getTodos() {
         Session session = getHibernateTemplate();
         List<Plan> objetos = new ArrayList<Plan>();
@@ -25,7 +26,8 @@ public class PlanDAO extends GenericDAO<Plan, Integer> implements IPlan {
         return objetos;
     }
 
-    public List<Plan> enUso(int id) {
+    @Override
+    public Plan enUso(int id) {
         Session session = getHibernateTemplate();
         List<Plan> objetos = new ArrayList<Plan>();
         try {
@@ -34,10 +36,15 @@ public class PlanDAO extends GenericDAO<Plan, Integer> implements IPlan {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
-    public List<Plan> buscar(String nombre) {
+    @Override
+    public Plan buscar(String nombre) {
         Session session = getHibernateTemplate();
         List<Plan> objetos = new ArrayList<Plan>();
         try {
@@ -46,7 +53,11 @@ public class PlanDAO extends GenericDAO<Plan, Integer> implements IPlan {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
 }//end PlanDAO

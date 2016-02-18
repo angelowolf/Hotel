@@ -26,13 +26,9 @@ public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<E
     }
 
     protected Session getHibernateTemplate() {
-        return HibernateUtil.getSessionFactory().getCurrentSession();
+        return HibernateUtil.getSESSIONFACTORY().getCurrentSession();
     }
-
-    /**
-     *
-     * @param t
-     */
+   
     @Override
     public Integer guardar(Entity t) {
         try {
@@ -41,11 +37,7 @@ public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<E
             throw new HibernateException(e);
         }
     }
-
-    /**
-     *
-     * @param t
-     */
+  
     @Override
     public void actualizar(Entity t) {
         try {
@@ -54,11 +46,7 @@ public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<E
             throw new HibernateException(e);
         }
     }
-
-    /**
-     *
-     * @param id
-     */
+    
     @Override
     public Entity buscar(K id) {
         Entity returnValue;
@@ -69,11 +57,7 @@ public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<E
         }
         return returnValue;
     }
-
-    /**
-     *
-     * @param t
-     */
+   
     @Override
     public void eliminar(Entity t) {
         try {

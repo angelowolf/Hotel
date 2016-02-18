@@ -1,6 +1,6 @@
 package Soporte.EstadoMembresia;
 
-import Persistencia.ORM.DAOImplementacion.EstadoMembresiaDAO;
+import Persistencia.Modelo.Membresia;
 
 /**
  * @author Angelo
@@ -11,21 +11,19 @@ public class EstadoMembresiaActiva extends EstadoMembresia {
 
     private String nombre = "activa";
 
-   
-
     @Override
-    public void activar() {
-
+    public void activar(Membresia membresia) {
+       
     }
 
     @Override
-    public void registrarAviso() {
-
+    public void registrarAviso(Membresia membresia) {
+        membresia.setEstadoMembresia(SingletonEstadoMembresiaAviso.getInstancia().getEstadoMembresiaAviso());
     }
 
     @Override
-    public void registrarVencimiento() {
-
+    public void registrarVencimiento(Membresia membresia) {
+        throw new IllegalStateException("Se accedio a un metodo de un estado no valido.");
     }
 
     @Override

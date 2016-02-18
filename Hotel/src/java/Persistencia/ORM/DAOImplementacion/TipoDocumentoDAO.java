@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class TipoDocumentoDAO extends GenericDAO<TipoDocumento, Integer> implements ITipoDocumento {
 
+    @Override
     public List<TipoDocumento> getTodos() {
         Session session = getHibernateTemplate();
         List<TipoDocumento> objetos = new ArrayList<TipoDocumento>();
@@ -25,7 +26,8 @@ public class TipoDocumentoDAO extends GenericDAO<TipoDocumento, Integer> impleme
         return objetos;
     }
 
-    public List<TipoDocumento> enUso(int id) {
+    @Override
+    public TipoDocumento enUso(int id) {
         Session session = getHibernateTemplate();
         List<TipoDocumento> objetos = new ArrayList<TipoDocumento>();
         try {
@@ -34,10 +36,15 @@ public class TipoDocumentoDAO extends GenericDAO<TipoDocumento, Integer> impleme
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
-    public List<TipoDocumento> buscar(String nombre) {
+    @Override
+    public TipoDocumento buscar(String nombre) {
         Session session = getHibernateTemplate();
         List<TipoDocumento> objetos = new ArrayList<TipoDocumento>();
         try {
@@ -46,7 +53,11 @@ public class TipoDocumentoDAO extends GenericDAO<TipoDocumento, Integer> impleme
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
 }//end TipoDocumentoDAO

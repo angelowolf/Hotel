@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class ModuloDAO extends GenericDAO<Modulo, Integer> implements IModulo {
 
+    @Override
     public List<Modulo> getTodos() {
         Session session = getHibernateTemplate();
         List<Modulo> objetos = new ArrayList<Modulo>();
@@ -25,7 +26,8 @@ public class ModuloDAO extends GenericDAO<Modulo, Integer> implements IModulo {
         return objetos;
     }
 
-    public List<Modulo> enUso(int id) {
+    @Override
+    public Modulo enUso(int id) {
         Session session = getHibernateTemplate();
         List<Modulo> objetos = new ArrayList<Modulo>();
         try {
@@ -34,10 +36,15 @@ public class ModuloDAO extends GenericDAO<Modulo, Integer> implements IModulo {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
-    public List<Modulo> buscar(String nombre) {
+    @Override
+    public Modulo buscar(String nombre) {
         Session session = getHibernateTemplate();
         List<Modulo> objetos = new ArrayList<Modulo>();
         try {
@@ -46,7 +53,11 @@ public class ModuloDAO extends GenericDAO<Modulo, Integer> implements IModulo {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
 }//end ModuloDAO

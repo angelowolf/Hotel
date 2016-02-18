@@ -5,25 +5,23 @@
  */
 package Acciones.Root;
 
-import Controlador.ControladorModulo;
+import Acciones.Accion;
+import Controlador.Implementacion.ControladorModulo;
+import Controlador.Interface.IControladorModulo;
 import Persistencia.Modelo.Modulo;
 import Soporte.Mensaje;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
  *
  * @author ang_2
  */
-public class ModuloAction extends ActionSupport {
+public class ModuloAction extends Accion {
 
     private List<Modulo> lista = new ArrayList<Modulo>();
-    private final ControladorModulo controladorModulo = new ControladorModulo();
-    private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private final IControladorModulo controladorModulo = new ControladorModulo();
     private String nombre, caracteristica;
     private int id;
 

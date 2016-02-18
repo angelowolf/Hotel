@@ -1,6 +1,7 @@
 package Soporte.EstadoMembresia;
 
-import Persistencia.ORM.DAOImplementacion.EstadoMembresiaDAO;
+import Persistencia.Modelo.Membresia;
+
 
 /**
  * @author Angelo
@@ -20,15 +21,15 @@ public abstract class EstadoMembresia {
     public EstadoMembresia() {
     }
 
-    public void activar() {
+    public void activar(Membresia membresia) {
 
     }
 
-    public void registrarAviso() {
+    public void registrarAviso(Membresia membresia) {
 
     }
 
-    public void registrarVencimiento() {
+    public void registrarVencimiento(Membresia membresia) {
 
     }
 

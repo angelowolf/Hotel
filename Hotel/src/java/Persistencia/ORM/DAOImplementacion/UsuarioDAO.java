@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class UsuarioDAO extends GenericDAO<Usuario, Integer> implements IUsuario {
 
+    @Override
     public Usuario buscarNick(String username) {
         Session session = getHibernateTemplate();
         List<Usuario> objetos = new ArrayList<Usuario>();
@@ -30,6 +31,7 @@ public class UsuarioDAO extends GenericDAO<Usuario, Integer> implements IUsuario
         }
     }
 
+    @Override
     public Usuario buscarEmail(String email) {
         Session session = getHibernateTemplate();
         List<Usuario> objetos = new ArrayList<Usuario>();

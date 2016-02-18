@@ -16,7 +16,6 @@ public class Membresia {
     private Date fechaVencimiento;
     private Date fechaAviso;
 
-
     public EstadoMembresia getEstadoMembresia() {
         return estadoMembresia;
     }
@@ -88,6 +87,18 @@ public class Membresia {
     @Override
     public String toString() {
         return "Membresia{" + "id=" + id + ", estadoMembresia=" + estadoMembresia + ", fechaActivacion=" + fechaActivacion + ", fechaVencimiento=" + fechaVencimiento + ", fechaAviso=" + fechaAviso + '}';
+    }
+
+    public void registrarVencimiento() {
+        estadoMembresia.registrarVencimiento(this);
+    }
+
+    public void registrarAviso() {
+        estadoMembresia.registrarAviso(this);
+    }
+
+    public void regisrarActivacion() {
+        estadoMembresia.activar(this);
     }
 
 }//end Membresia

@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class SexoDAO extends GenericDAO<Sexo, Integer> implements ISexo {
 
+    @Override
     public List<Sexo> getTodos() {
         Session session = getHibernateTemplate();
         List<Sexo> objetos = new ArrayList<Sexo>();
@@ -25,7 +26,8 @@ public class SexoDAO extends GenericDAO<Sexo, Integer> implements ISexo {
         return objetos;
     }
 
-    public List<Sexo> enUso(int id) {
+    @Override
+    public Sexo enUso(int id) {
         Session session = getHibernateTemplate();
         List<Sexo> objetos = new ArrayList<Sexo>();
         try {
@@ -34,10 +36,15 @@ public class SexoDAO extends GenericDAO<Sexo, Integer> implements ISexo {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
-    public List<Sexo> buscar(String nombre) {
+    @Override
+    public Sexo buscar(String nombre) {
         Session session = getHibernateTemplate();
         List<Sexo> objetos = new ArrayList<Sexo>();
         try {
@@ -46,7 +53,11 @@ public class SexoDAO extends GenericDAO<Sexo, Integer> implements ISexo {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-        return objetos;
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
     }
 
 }//end SexoDAO

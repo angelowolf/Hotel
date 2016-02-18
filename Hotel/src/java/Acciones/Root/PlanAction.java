@@ -5,14 +5,14 @@
  */
 package Acciones.Root;
 
-import Controlador.ControladorModulo;
-import Controlador.ControladorPlan;
+import Acciones.Accion;
+import Controlador.Implementacion.ControladorModulo;
+import Controlador.Implementacion.ControladorPlan;
+import Controlador.Interface.IControladorPlan;
 import Persistencia.Modelo.Modulo;
 import Persistencia.Modelo.Plan;
 import Soporte.Mensaje;
 import Soporte.ModuloMultiselect;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +23,10 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class PlanAction extends ActionSupport {
+public class PlanAction extends Accion {
 
     private List<Plan> lista = new ArrayList<Plan>();
-    private final ControladorPlan controladorPlan = new ControladorPlan();
-    private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private final IControladorPlan controladorPlan = new ControladorPlan();
     private String nombre, caracteristica;
     private int id, precio;
     private final List<ModuloMultiselect> modulos = new ArrayList<ModuloMultiselect>();

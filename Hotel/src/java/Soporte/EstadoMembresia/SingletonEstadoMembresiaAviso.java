@@ -21,7 +21,7 @@ public class SingletonEstadoMembresiaAviso {
         estado = estadoMembresiaDAO.buscar("aviso");
     }
 
-    public EstadoMembresia getEstadoMembresiaActiva() {
+    public EstadoMembresia getEstadoMembresiaAviso() {
         return estado;
     }
 

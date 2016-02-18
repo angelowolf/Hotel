@@ -14,6 +14,7 @@ import org.hibernate.Session;
  */
 public class TipoUsuarioDAO extends GenericDAO<TipoUsuario, Integer> implements ITipoUsuario {
 
+    @Override
     public TipoUsuario getTipoOwner() {
         Session session = getHibernateTemplate();
         List<TipoUsuario> objetos = new ArrayList<TipoUsuario>();

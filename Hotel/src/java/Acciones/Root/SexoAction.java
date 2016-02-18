@@ -5,25 +5,23 @@
  */
 package Acciones.Root;
 
-import Controlador.ControladorSexo;
+import Acciones.Accion;
+import Controlador.Implementacion.ControladorSexo;
+import Controlador.Interface.IControladorSexo;
 import Persistencia.Modelo.Sexo;
 import Soporte.Mensaje;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
  *
  * @author ang_2
  */
-public class SexoAction extends ActionSupport {
+public class SexoAction extends Accion {
 
     private List<Sexo> lista = new ArrayList<Sexo>();
-    private final ControladorSexo controladorSexo = new ControladorSexo();
-    private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private final IControladorSexo controladorSexo = new ControladorSexo();
     private String nombre;
     private int id;
 

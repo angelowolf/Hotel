@@ -77,7 +77,7 @@ public class HibernateSessionRequestFilter implements Filter {
      */
     public void init(FilterConfig filterConfig)
             throws ServletException {
-        sf = HibernateUtil.getSessionFactory();
+        sf = HibernateUtil.getSESSIONFACTORY();
     }
 
     public void destroy() {

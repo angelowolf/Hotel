@@ -5,25 +5,23 @@
  */
 package Acciones.Root;
 
-import Controlador.ControladorTipoDocumento;
+import Acciones.Accion;
+import Controlador.Implementacion.ControladorTipoDocumento;
+import Controlador.Interface.IControladorTipoDocumento;
 import Persistencia.Modelo.TipoDocumento;
 import Soporte.Mensaje;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
  *
  * @author ang_2
  */
-public class TipoDocumentoAction extends ActionSupport {
+public class TipoDocumentoAction extends Accion {
 
     private List<TipoDocumento> lista = new ArrayList<TipoDocumento>();
-    private final ControladorTipoDocumento controladorTipoDocumento = new ControladorTipoDocumento();
-    private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private final IControladorTipoDocumento controladorTipoDocumento = new ControladorTipoDocumento();
     private String nombre;
     private int id;
 

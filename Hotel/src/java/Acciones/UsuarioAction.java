@@ -1,22 +1,19 @@
 package Acciones;
 
-import Controlador.ControladorUsuario;
+import Controlador.Implementacion.ControladorUsuario;
+import Controlador.Interface.IControladorUsuario;
 import Persistencia.Modelo.Usuario;
 import Soporte.Mensaje;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import java.util.Map;
 
 /**
  *
  * @author flore
  */
-public class UsuarioAction extends ActionSupport {
-    
+public class UsuarioAction extends Accion {
+
     private String email, clave;
-    private final ControladorUsuario controladorUsuario = new ControladorUsuario();
-    private final Map<String,Object> sesion = ActionContext.getContext().getSession();
-    
+    private final IControladorUsuario controladorUsuario = new ControladorUsuario();
+
     public String getEmail() {
         return email;
     }
@@ -32,17 +29,17 @@ public class UsuarioAction extends ActionSupport {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
+
     public String login() {
-        if(controladorUsuario.iniciarSesion(email, clave)) {
+        if (controladorUsuario.iniciarSesion(email, clave)) {
             Usuario u = controladorUsuario.getUsuario(email);
-            if(controladorUsuario.usuarioIsRoot(u)) {
+            if (controladorUsuario.usuarioIsRoot(u)) {
                 sesion.put("user", u);
                 return "root";
             }
-            
-            if(controladorUsuario.verificarCuentaActiva(u)) {
-                if(controladorUsuario.verificarCuentaAviso(u)) {
+
+            if (controladorUsuario.verificarCuentaActiva(u)) {
+                if (controladorUsuario.verificarCuentaAviso(u)) {
                     addActionMessage(controladorUsuario.getMensajeAviso(u));
                 }
                 sesion.put("user", u);
@@ -56,7 +53,7 @@ public class UsuarioAction extends ActionSupport {
             return INPUT;
         }
     }
-    
+
     public String logout() {
         sesion.remove("user");
         return SUCCESS;

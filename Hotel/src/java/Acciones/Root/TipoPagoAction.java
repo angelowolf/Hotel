@@ -5,25 +5,23 @@
  */
 package Acciones.Root;
 
-import Controlador.ControladorTipoPago;
+import Acciones.Accion;
+import Controlador.Implementacion.ControladorTipoPago;
+import Controlador.Interface.IControladorTipoPago;
 import Persistencia.Modelo.TipoPago;
 import Soporte.Mensaje;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
  *
  * @author angelo
  */
-public class TipoPagoAction extends ActionSupport {
+public class TipoPagoAction extends Accion {
 
     private List<TipoPago> lista = new ArrayList<TipoPago>();
-    private final ControladorTipoPago controladorTipoPago = new ControladorTipoPago();
-    private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private final IControladorTipoPago controladorTipoPago = new ControladorTipoPago();
     private String nombre;
     private int id;
     private float recargo;

@@ -5,9 +5,12 @@
  */
 package Acciones.Sistema;
 
-import Controlador.ControladorHotel;
-import Controlador.ControladorPlan;
-import Controlador.ControladorUsuario;
+import Controlador.Implementacion.ControladorHotel;
+import Controlador.Implementacion.ControladorPlan;
+import Controlador.Implementacion.ControladorUsuario;
+import Controlador.Interface.IControladorHotel;
+import Controlador.Interface.IControladorPlan;
+import Controlador.Interface.IControladorUsuario;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -19,9 +22,9 @@ public class HotelAction extends ActionSupport {
 
     private String nombreHotel, nick, email, clave, nombre, apellido;
     private int id_planSeleccionado;
-    private final ControladorHotel ch = new ControladorHotel();
-    private final ControladorUsuario cu = new ControladorUsuario();
-    private final ControladorPlan cp = new ControladorPlan();
+    private final IControladorHotel ch = new ControladorHotel();
+    private final IControladorUsuario cu = new ControladorUsuario();
+    private final IControladorPlan cp = new ControladorPlan();
 
     public boolean validarCrearHotel() {
         boolean flag = true;
@@ -55,9 +58,9 @@ public class HotelAction extends ActionSupport {
 
     public String crearHotel() {
         nombreHotel = "nombre hotel";
-        id_planSeleccionado = 2;
+        id_planSeleccionado = 1;
         nick = "nick2";
-        email = "email2";
+        email = "email2@email.com";
         clave = "clave";
         nombre = "nombre";
         apellido = "apellido";
