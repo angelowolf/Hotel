@@ -2,6 +2,7 @@ package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorHotel;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.Usuario;
 
 /**
  * @author Angelo
@@ -26,6 +27,11 @@ public class ControladorHotel implements IControladorHotel {
         hotel.setPlan(id_planSeleccionado);
         hotel.agregarUsuario(hotel.getDueño().getUsuario());
         HOTELDAO.guardar(hotel);
+    }
+
+    @Override
+    public Hotel getHotel(Usuario u) {
+        return HOTELDAO.getHotelByUsuario(u.getId());
     }
 
 }//end ControladorHotel

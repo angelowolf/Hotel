@@ -108,21 +108,21 @@ public class ControladorUsuario implements IControladorUsuario {
     @Override
     public boolean verificarCuentaActiva(Usuario u) {
         HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
         return !hotel.isMembresiaVencida();
     }
 
     @Override
     public boolean verificarCuentaAviso(Usuario u) {
         HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
         return hotel.isMembresiaAviso();
     }
 
     @Override
     public String getMensajeAviso(Usuario u) {
         HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u);
+        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
         String fecha = new SimpleDateFormat("dd-MM-yyyy").format(hotel.getMembresia().getFechaVencimiento());
         return Soporte.Mensaje.getAviso(fecha);
     }

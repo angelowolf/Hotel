@@ -5,6 +5,8 @@
  */
 package Controlador.Interface;
 
+import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.Usuario;
 import Persistencia.ORM.DAOImplementacion.DueñoDAO;
 import Persistencia.ORM.DAOImplementacion.HotelDAO;
 import Persistencia.ORM.DAOImplementacion.MembresiaDAO;
@@ -35,4 +37,12 @@ public interface IControladorHotel {
      * @param apellido
      */
     public void registrarHotel(String nombreHotel, int id_planSeleccionado, String nick, String email, String clave, String nombre, String apellido);
+
+    /**
+     * Devuelve el hotel al que pertenece este usuario.
+     *
+     * @param u
+     * @return Hotel
+     */
+    public Hotel getHotel(Usuario u);
 }

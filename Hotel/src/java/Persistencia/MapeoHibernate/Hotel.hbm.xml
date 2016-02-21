@@ -24,5 +24,12 @@
             <one-to-many class="Persistencia.Modelo.Usuario" />
         </list>
         
+        
+        <list name="tipoHabitaciones" cascade="all-delete-orphan"> 
+            <key column="id_hotel" /> 
+            <index column="orden" /> 
+            <one-to-many class="Persistencia.Modelo.TipoHabitacion" />
+        </list>
+        
     </class>
 </hibernate-mapping>

@@ -39,6 +39,10 @@
     <mapping package="Persistencia.MapeoHibernate.Sexo.hbm.xml" resource="Persistencia/MapeoHibernate/Sexo.hbm.xml"/>
     <mapping package="Persistencia.MapeoHibernate.Usuario.hbm.xml" resource="Persistencia/MapeoHibernate/Usuario.hbm.xml"/>
     <mapping package="Persistencia.MapeoHibernate.Persona.hbm.xml" resource="Persistencia/MapeoHibernate/Persona.hbm.xml"/>
+    <mapping package="Persistencia.MapeoHibernate.Bloqueo.hbm.xml" resource="Persistencia/MapeoHibernate/Bloqueo.hbm.xml"/>
+    <mapping package="Persistencia.MapeoHibernate.DetalleMantenimiento.hbm.xml" resource="Persistencia/MapeoHibernate/DetalleMantenimiento.hbm.xml"/>
+    <mapping package="Persistencia.MapeoHibernate.Habitacion.hbm.xml" resource="Persistencia/MapeoHibernate/Habitacion.hbm.xml"/>
+    <mapping package="Persistencia.MapeoHibernate.TipoHabitacion.hbm.xml" resource="Persistencia/MapeoHibernate/TipoHabitacion.hbm.xml"/>
     <mapping package="Persistencia.MapeoHibernate.Hotel.hbm.xml" resource="Persistencia/MapeoHibernate/Hotel.hbm.xml"/>
     <!--FIN MAPEO BD-->
   </session-factory>

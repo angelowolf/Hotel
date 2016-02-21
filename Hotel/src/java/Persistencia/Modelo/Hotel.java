@@ -20,7 +20,7 @@ public class Hotel {
     private Plan plan;
     private String nombre;
     private List<Reserva> reservas;
-    private List<TipoHabitacion> tipoHabitaciones;
+    private List<TipoHabitacion> tipoHabitaciones = new ArrayList<TipoHabitacion>();
 
     public int getId() {
         return id;
@@ -242,6 +242,10 @@ public class Hotel {
 
     public void agregarUsuario(Usuario usuario) {
         usuarios.add(usuario);
+    }
+
+    public void agregarTipoHabitacion(TipoHabitacion th) {
+        tipoHabitaciones.add(th);
     }
 
     @Override

@@ -15,5 +15,10 @@
     </head>
     <body>
         <h1> todo bien </h1>
+          <div class="text-center">
+            <s:actionerror theme="bootstrap"/>
+            <s:actionmessage theme="bootstrap"/>
+            <s:fielderror theme="bootstrap"/>
+        </div>
     </body>
 </html>

@@ -11,8 +11,7 @@ public class Habitacion {
 
     private int id;
     private String nombre;
-    private TipoHabitacion tipoHabitacion;
-    private List<DetalleMantenimiento> mantenimiento;
+    private List<DetalleMantenimiento> mantenimientos;
     private int capacidad;
     private List<Bloqueo> bloqueos;
 
@@ -40,28 +39,16 @@ public class Habitacion {
         bloqueos = newVal;
     }
 
-    public List<DetalleMantenimiento> getMantenimiento() {
-        return mantenimiento;
+    public List<DetalleMantenimiento> getMantenimientos() {
+        return mantenimientos;
     }
 
     /**
      *
      * @param newVal
      */
-    public void setMantenimiento(List<DetalleMantenimiento> newVal) {
-        mantenimiento = newVal;
-    }
-
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setTipoHabitacion(TipoHabitacion newVal) {
-        tipoHabitacion = newVal;
+    public void setMantenimientos(List<DetalleMantenimiento> newVal) {
+        mantenimientos = newVal;
     }
 
     public String getNombre() {

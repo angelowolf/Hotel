@@ -23,6 +23,8 @@
     <include file="struts-plan.xml"></include>
     <include file="struts-hotel.xml"></include>
     
+    <include file="struts-tipohabitacion.xml"></include>
+    
     
     
     

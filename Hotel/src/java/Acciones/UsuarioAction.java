@@ -1,7 +1,10 @@
 package Acciones;
 
+import Controlador.Implementacion.ControladorHotel;
 import Controlador.Implementacion.ControladorUsuario;
+import Controlador.Interface.IControladorHotel;
 import Controlador.Interface.IControladorUsuario;
+import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.Usuario;
 import Soporte.Mensaje;
 
@@ -42,6 +45,8 @@ public class UsuarioAction extends Accion {
                 if (controladorUsuario.verificarCuentaAviso(u)) {
                     addActionMessage(controladorUsuario.getMensajeAviso(u));
                 }
+                IControladorHotel ch = new ControladorHotel();
+                sesion.put("hotel", ch.getHotel(u));
                 sesion.put("user", u);
                 return SUCCESS;
             } else {

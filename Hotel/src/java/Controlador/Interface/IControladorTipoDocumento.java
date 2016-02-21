@@ -66,7 +66,7 @@ public interface IControladorTipoDocumento {
     public void eliminar(int id);
 
     /**
-     * recupera un tipo de pago de la bd. si no existe devuelve nulo.
+     * recupera un tipo de documento de la bd. si no existe devuelve nulo.
      *
      * @param id
      * @return el objeto o nulo.
