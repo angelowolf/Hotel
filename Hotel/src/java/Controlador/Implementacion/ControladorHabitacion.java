@@ -32,28 +32,35 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
-    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion) {
-        Habitacion h = HABITACIONDAO.buscar(id);
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
+    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) {
+        Habitacion h = getUno(id);
+        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+            try {
+                nombre = (WordUtils.capitalize(nombre));
+            } catch (Exception e) {
+            }
+            h.setNombre(nombre);
+            h.setCapacidad(capacidad);
+            TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
+            h.setTipoHabitacion(th);
+            HABITACIONDAO.actualizar(h);
+        } else {
+            throw new IllegalAccessError();
         }
-        h.setNombre(nombre);
-        h.setCapacidad(capacidad);
-        TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
-        h.setTipoHabitacion(th);
-        HABITACIONDAO.actualizar(h);
     }
 
     @Override
-    public void eliminar(int id) {
-        Habitacion h = new Habitacion();
-        h.setId(id);
-        IBloqueo bloqueoDAO = new BloqueoDAO();
-        bloqueoDAO.eliminarTodos(id);
-        IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
-        detalleMantenimientoDAO.eliminarTodos(id);
-        HABITACIONDAO.eliminar(h);
+    public void eliminar(int id, int id_hotel) {
+        Habitacion h = getUno(id);
+        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+            IBloqueo bloqueoDAO = new BloqueoDAO();
+            bloqueoDAO.eliminarTodos(id);
+            IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
+            detalleMantenimientoDAO.eliminarTodos(id);
+            HABITACIONDAO.eliminar(h);
+        } else {
+            throw new IllegalAccessError();
+        }
     }
 
     @Override

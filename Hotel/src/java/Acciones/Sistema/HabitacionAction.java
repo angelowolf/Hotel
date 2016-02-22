@@ -66,7 +66,14 @@ public class HabitacionAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        ch.actualizar(id, nombre, capacidad, id_tipohabitacion);
+        Hotel h = (Hotel) sesion.get("hotel");
+        try {
+            ch.actualizar(id, nombre, capacidad, id_tipohabitacion, h.getId());
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        }
         addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
         codigo = 400;
         return SUCCESS;
@@ -83,9 +90,17 @@ public class HabitacionAction extends Accion {
         if (ch.enUso(id)) {
             addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.HABITACION, Soporte.Mensaje.RESERVA));
             codigo = 200;
+            return INPUT;
         } else {
-            ch.eliminar(id);
-            addActionError(Soporte.Mensaje.getEliminada(Soporte.Mensaje.HABITACION));
+            Hotel h = (Hotel) sesion.get("hotel");
+            try {
+                ch.eliminar(id, h.getId());
+            } catch (IllegalAccessError e) {
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+                codigo = 200;
+                return INPUT;
+            }
+            addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.HABITACION));
             codigo = 400;
         }
         return SUCCESS;

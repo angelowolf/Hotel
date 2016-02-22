@@ -5,7 +5,6 @@
  */
 package Controlador.Interface;
 
-import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.DAOImplementacion.HotelDAO;
 import Persistencia.ORM.DAOImplementacion.TipoHabitacionDAO;
@@ -32,19 +31,25 @@ public interface IControladorTipoHabitacion {
     public void guardar(String nombre, int id_hotel);
 
     /**
-     * Actualiza los datos de un tipo de habitacion.
+     * Actualiza los datos de un tipo de habitacion. El id_hotel es utilizado
+     * para cuestiones de validaciones, que solo puedan ser modificadas objetos
+     * propios del hotel.
      *
      * @param id
      * @param nombre
+     * @param id_hotel
      */
-    public void actualizar(int id, String nombre);
+    public void actualizar(int id, String nombre, int id_hotel) throws IllegalAccessError;
 
     /**
-     * Elimina un tipo de habitacion.
+     * Elimina un tipo de habitacion. El id_hotel es utilizado para cuestiones
+     * de validaciones, que solo puedan ser eliminados objetos propios del
+     * hotel.
      *
      * @param id
+     * @param id_hotel
      */
-    public void eliminar(int id);
+    public void eliminar(int id, int id_hotel) throws IllegalAccessError;
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el

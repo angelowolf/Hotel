@@ -78,6 +78,7 @@ public class Mensaje {
     public static final String INGRESENOMBREHABITACION = "Ingrese el nombre de la habitacion.";
     public static final String INGRESENOMBRETIPOHABITACION = "Ingrese el nombre del tipo de habitacion.";
     public static final String ELTIPOHABITACIONNOESVALIDO = "El " + TIPOHABITACION + " no es valido.";
+    public static final String IDHOTELINVALIDO = "Usted no tiene acceso a este objeto.";
 
     /**
      * Crea un mensaje con el tiempo pasado por parametro. "Ya se ha enviado un

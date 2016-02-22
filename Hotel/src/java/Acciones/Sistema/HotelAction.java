@@ -59,8 +59,8 @@ public class HotelAction extends Accion {
     public String crearHotel() {
         nombreHotel = "nombre hotel";
         id_planSeleccionado = 1;
-        nick = "sistema2";
-        email = "sistema2@sistema.com";
+        nick = "sistema";
+        email = "sistema2@sistema2.com";
         clave = "clave";
         nombre = "nombre";
         apellido = "apellido";

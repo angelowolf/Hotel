@@ -55,7 +55,14 @@ public class TipoHabitacionAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        cth.actualizar(id, nombre);
+        Hotel h = (Hotel) sesion.get("hotel");
+        try {
+            cth.actualizar(id, nombre, h.getId());
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        }
         addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.TIPOHABITACION));
         codigo = 400;
         return SUCCESS;
@@ -72,12 +79,20 @@ public class TipoHabitacionAction extends Accion {
         if (cth.enUso(id)) {
             addActionError(Soporte.Mensaje.getUsadoPorUna(Soporte.Mensaje.TIPOHABITACION, Soporte.Mensaje.HABITACION));
             codigo = 200;
+            return INPUT;
         } else {
-            cth.eliminar(id);
-            addActionError(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
+            Hotel h = (Hotel) sesion.get("hotel");
+            try {
+                cth.eliminar(id, h.getId());
+            } catch (IllegalAccessError e) {
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+                codigo = 200;
+                return INPUT;
+            }
+            addActionMessage(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
             codigo = 400;
+            return SUCCESS;
         }
-        return SUCCESS;
     }
 
     public String editar() {

@@ -12,11 +12,11 @@
         <global-results>
             <result name="success" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\]</param>
+                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\],codigo</param>
             </result>              
             <result name="input" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\]</param>
+                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],codigo</param>
             </result>                 
         </global-results>     
         

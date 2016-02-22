@@ -25,21 +25,28 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public void actualizar(int id, String nombre) {
+    public void actualizar(int id, String nombre, int id_hotel) {
         try {
             nombre = (WordUtils.capitalize(nombre));
         } catch (Exception e) {
         }
-        TipoHabitacion th = TIPOHABITACIONDAO.buscar(id);
-        th.setNombre(nombre);
-        TIPOHABITACIONDAO.actualizar(th);
+        TipoHabitacion th = getUno(id);
+        if (th != null && th.getId_hotel() == id_hotel) {
+            th.setNombre(nombre);
+            TIPOHABITACIONDAO.actualizar(th);
+        } else {
+            throw new IllegalAccessError();
+        }
     }
 
     @Override
-    public void eliminar(int id) {
-        TipoHabitacion th = new TipoHabitacion();
-        th.setId(id);
-        TIPOHABITACIONDAO.eliminar(th);
+    public void eliminar(int id, int id_hotel) {
+        TipoHabitacion th = getUno(id);
+        if (th != null && th.getId_hotel() == id_hotel) {
+            TIPOHABITACIONDAO.eliminar(th);
+        } else {
+            throw new IllegalAccessError();
+        }
     }
 
     @Override

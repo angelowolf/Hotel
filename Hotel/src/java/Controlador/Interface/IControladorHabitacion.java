@@ -32,22 +32,27 @@ public interface IControladorHabitacion {
     public void guardar(String nombre, int capacidad, int id_tipohabitacion);
 
     /**
-     * Actualiza los datos de una habitacion.
+     * Actualiza los datos de una habitacion. El id_hotel es utilizado para
+     * cuestiones de validaciones, que solo puedan ser modificadas objetos
+     * propios del hotel.
      *
      * @param id
      * @param nombre
      * @param capacidad
      * @param id_tipohabitacion
+     * @param id_hotel
      *
      */
-    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion);
+    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) throws IllegalAccessError;
 
     /**
-     * Elimina una habitacion.
+     * Elimina una habitacion. El id_hotel es utilizado para cuestiones de
+     * validaciones, que solo puedan ser eliminados objetos propios del hotel.
      *
      * @param id
+     * @param id_hotel
      */
-    public void eliminar(int id);
+    public void eliminar(int id, int id_hotel) throws IllegalAccessError;
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el de
