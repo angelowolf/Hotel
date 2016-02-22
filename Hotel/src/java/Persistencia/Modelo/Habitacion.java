@@ -1,6 +1,7 @@
 package Persistencia.Modelo;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Angelo
@@ -11,12 +12,21 @@ public class Habitacion {
 
     private int id;
     private String nombre;
-    private List<DetalleMantenimiento> mantenimientos;
+    private Set<DetalleMantenimiento> mantenimientos = new HashSet<DetalleMantenimiento>();
     private int capacidad;
-    private List<Bloqueo> bloqueos;
+    private Set<Bloqueo> bloqueos = new HashSet<Bloqueo>();
+    private TipoHabitacion tipoHabitacion;
 
     public Habitacion() {
 
+    }
+
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
+    }
+
+    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+        this.tipoHabitacion = tipoHabitacion;
     }
 
     public int getId() {
@@ -27,28 +37,20 @@ public class Habitacion {
         this.id = id;
     }
 
-    public List<Bloqueo> getBloqueos() {
-        return bloqueos;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setBloqueos(List<Bloqueo> newVal) {
-        bloqueos = newVal;
-    }
-
-    public List<DetalleMantenimiento> getMantenimientos() {
+    public Set<DetalleMantenimiento> getMantenimientos() {
         return mantenimientos;
     }
 
-    /**
-     *
-     * @param newVal
-     */
-    public void setMantenimientos(List<DetalleMantenimiento> newVal) {
-        mantenimientos = newVal;
+    public void setMantenimientos(Set<DetalleMantenimiento> mantenimientos) {
+        this.mantenimientos = mantenimientos;
+    }
+
+    public Set<Bloqueo> getBloqueos() {
+        return bloqueos;
+    }
+
+    public void setBloqueos(Set<Bloqueo> bloqueos) {
+        this.bloqueos = bloqueos;
     }
 
     public String getNombre() {

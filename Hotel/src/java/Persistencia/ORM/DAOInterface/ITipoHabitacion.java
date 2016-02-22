@@ -1,6 +1,5 @@
 package Persistencia.ORM.DAOInterface;
 
-import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.Util.IGenericDAO;
 import java.util.List;

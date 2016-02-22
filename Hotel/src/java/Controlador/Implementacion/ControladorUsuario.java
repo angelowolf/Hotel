@@ -4,7 +4,6 @@ import Controlador.Interface.IControladorUsuario;
 import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoUsuario;
 import Persistencia.Modelo.Usuario;
-import Persistencia.ORM.DAOImplementacion.HotelDAO;
 import Soporte.Encriptar;
 import java.text.SimpleDateFormat;
 
@@ -91,13 +90,8 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public boolean iniciarSesion(String emailONick, String password) {
-        Usuario usuario = USUARIODAO.buscarEmail(emailONick);
-        if (usuario == null) {
-            usuario = USUARIODAO.buscarNick(emailONick);
-        }
-        String claveMD5 = Encriptar.encriptaEnMD5(password);
-        return usuario != null && (usuario.getEmail().equals(emailONick) || usuario.getNick().equals(emailONick)) && usuario.getClave().equals(claveMD5);
+    public boolean iniciarSesion(Usuario usuario, String password) {
+        return usuario != null && usuario.iniciarSesion(password);
     }
 
     @Override
@@ -105,25 +99,5 @@ public class ControladorUsuario implements IControladorUsuario {
         return u.isRoot();
     }
 
-    @Override
-    public boolean verificarCuentaActiva(Usuario u) {
-        HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
-        return !hotel.isMembresiaVencida();
-    }
-
-    @Override
-    public boolean verificarCuentaAviso(Usuario u) {
-        HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
-        return hotel.isMembresiaAviso();
-    }
-
-    @Override
-    public String getMensajeAviso(Usuario u) {
-        HotelDAO hotelDAO = new HotelDAO();
-        Hotel hotel = hotelDAO.getHotelByUsuario(u.getId());
-        String fecha = new SimpleDateFormat("dd-MM-yyyy").format(hotel.getMembresia().getFechaVencimiento());
-        return Soporte.Mensaje.getAviso(fecha);
-    }
+   
 }//end ControladorUsuario

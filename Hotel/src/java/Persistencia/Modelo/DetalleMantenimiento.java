@@ -9,13 +9,21 @@ import java.util.Date;
  */
 public class DetalleMantenimiento {
 
-    private int id;
+    private int id, id_habitacion;
     private String descripcion;
     private Date fecha;
     private boolean resuelto;
 
     public DetalleMantenimiento() {
 
+    }
+
+    public int getId_habitacion() {
+        return id_habitacion;
+    }
+
+    public void setId_habitacion(int id_habitacion) {
+        this.id_habitacion = id_habitacion;
     }
 
     public int getId() {

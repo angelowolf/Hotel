@@ -1,7 +1,6 @@
 package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorTipoHabitacion;
-import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoHabitacion;
 import java.util.List;
 import org.apache.commons.lang.WordUtils;
@@ -14,11 +13,15 @@ import org.apache.commons.lang.WordUtils;
 public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
 
     @Override
-    public void guardar(String nombre, Hotel hotel) {
+    public void guardar(String nombre, int id_hotel) {
         TipoHabitacion th = new TipoHabitacion();
+        try {
+            nombre = (WordUtils.capitalize(nombre));
+        } catch (Exception e) {
+        }
         th.setNombre(nombre);
-        hotel.agregarTipoHabitacion(th);
-        HOTELDAO.actualizar(hotel);
+        th.setId_hotel(id_hotel);
+        TIPOHABITACIONDAO.guardar(th);
     }
 
     @Override
@@ -40,12 +43,12 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public boolean existe(int id, String nombre, Hotel hotel) {
+    public boolean existe(int id, String nombre, int id_hotel) {
         try {
             nombre = (WordUtils.capitalize(nombre));
         } catch (Exception e) {
         }
-        TipoHabitacion th = TIPOHABITACIONDAO.buscar(nombre, hotel.getId());
+        TipoHabitacion th = TIPOHABITACIONDAO.buscar(nombre, id_hotel);
         if (th != null) {
             return th.getId() != id;
         }
@@ -58,13 +61,19 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public List<TipoHabitacion> getTodos(Hotel hotel) {
-        return TIPOHABITACIONDAO.getTodos(hotel.getId());
+    public List<TipoHabitacion> getTodos(int id_hotel) {
+        return TIPOHABITACIONDAO.getTodos(id_hotel);
     }
 
     @Override
     public TipoHabitacion getUno(int id) {
-        return TIPOHABITACIONDAO.buscar(id);
+        TipoHabitacion th = TIPOHABITACIONDAO.buscar(id);
+        try {
+            th.getNombre();
+            return th;
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return null;
+        }
     }
 
 }//end ControladorTipoHabitacion

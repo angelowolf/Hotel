@@ -1,6 +1,7 @@
 package Persistencia.Modelo;
 
 import Persistencia.ORM.DAOImplementacion.TipoUsuarioDAO;
+import Soporte.Encriptar;
 
 /**
  * @author Angelo
@@ -15,7 +16,6 @@ public class Usuario {
     private String nick;
     private TipoUsuario tipoUsuario;
 
-  
     /**
      * Verifica si el usuario es ROOT del sitio.
      *
@@ -33,8 +33,6 @@ public class Usuario {
     public boolean isOwner() {
         return tipoUsuario.isOwner();
     }
-
-   
 
     public int getId() {
         return id;
@@ -101,5 +99,17 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", clave=" + clave + ", email=" + email + ", nick=" + nick + ", tipoUsuario=" + tipoUsuario + '}';
+    }
+
+    /**
+     * Verifica que la calve para iniciar sesion coincida con la almacenada en
+     * la base de datos
+     *
+     * @param password
+     * @return True si coinciden los datos.
+     */
+    public boolean iniciarSesion(String password) {
+        String claveMD5 = Encriptar.encriptaEnMD5(password);
+        return this.getClave().equals(claveMD5);
     }
 }//end Usuario

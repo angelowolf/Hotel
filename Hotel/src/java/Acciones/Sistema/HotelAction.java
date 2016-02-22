@@ -5,20 +5,20 @@
  */
 package Acciones.Sistema;
 
+import Acciones.Accion;
 import Controlador.Implementacion.ControladorHotel;
 import Controlador.Implementacion.ControladorPlan;
 import Controlador.Implementacion.ControladorUsuario;
 import Controlador.Interface.IControladorHotel;
 import Controlador.Interface.IControladorPlan;
 import Controlador.Interface.IControladorUsuario;
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  *
  * @author ang_2
  */
-public class HotelAction extends ActionSupport {
+public class HotelAction extends Accion {
 
     private String nombreHotel, nick, email, clave, nombre, apellido;
     private int id_planSeleccionado;
@@ -30,20 +30,20 @@ public class HotelAction extends ActionSupport {
         boolean flag = true;
         if (!cu.isNickDisponible(nick)) {
             flag = false;
-            addActionError(Soporte.Mensaje.nickNoDisponible);
+            addActionError(Soporte.Mensaje.NICKNODISPONIBLE);
         }
         if (!EmailValidator.getInstance().isValid(email)) {
             flag = false;
-            addActionError(Soporte.Mensaje.emailNoValido);
+            addActionError(Soporte.Mensaje.EMAILNOVALIDO);
         } else {
             if (!cu.isEmailDisponible(email)) {
                 flag = false;
-                addActionError(Soporte.Mensaje.emailNoDisponible);
+                addActionError(Soporte.Mensaje.EMAILNODISPONIBLE);
             }
         }
         if (!cp.isPlanExistente(id_planSeleccionado)) {
             flag = false;
-            addActionError(Soporte.Mensaje.planNoExiste);
+            addActionError(Soporte.Mensaje.PLANNOEXISTE);
         }
         return flag;
     }
@@ -59,8 +59,8 @@ public class HotelAction extends ActionSupport {
     public String crearHotel() {
         nombreHotel = "nombre hotel";
         id_planSeleccionado = 1;
-        nick = "sistema";
-        email = "sistema@sistema.com";
+        nick = "sistema2";
+        email = "sistema2@sistema.com";
         clave = "clave";
         nombre = "nombre";
         apellido = "apellido";
@@ -121,6 +121,11 @@ public class HotelAction extends ActionSupport {
 
     public void setId_planSeleccionado(int id_planSeleccionado) {
         this.id_planSeleccionado = id_planSeleccionado;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 
 }

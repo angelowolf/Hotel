@@ -61,9 +61,12 @@ public class ControladorSexo implements IControladorSexo {
      * @param id
      * @return el objeto o nulo.
      */
+    @Override
     public Sexo getUno(int id) {
+        Sexo s = SEXODAO.buscar(id);
         try {
-            return SEXODAO.buscar(id);
+            s.getNombre();
+            return s;
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }

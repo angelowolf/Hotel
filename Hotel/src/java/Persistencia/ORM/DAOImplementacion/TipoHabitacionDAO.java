@@ -19,7 +19,7 @@ public class TipoHabitacionDAO extends GenericDAO<TipoHabitacion, Integer> imple
         Session session = getHibernateTemplate();
         List<TipoHabitacion> objetos = new ArrayList<TipoHabitacion>();
         try {
-            String sql = "from TipoHabitacion where nombre = :nombre AND :id";
+            String sql = "from TipoHabitacion where nombre = :nombre AND id_hotel= :id";
             objetos = session.createQuery(sql).setParameter("nombre", nombre).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();

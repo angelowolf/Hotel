@@ -60,8 +60,10 @@ public class ControladorTipoPago implements IControladorTipoPago {
 
     @Override
     public TipoPago getUno(int id) {
+        TipoPago tp = TIPOPAGODAO.buscar(id);
         try {
-            return TIPOPAGODAO.buscar(id);
+            tp.getNombre();
+            return tp;
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }

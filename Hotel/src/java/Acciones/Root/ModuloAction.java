@@ -28,10 +28,10 @@ public class ModuloAction extends Accion {
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addFieldError("nombre", Mensaje.ingreseNombre);
+            addFieldError("nombre", Mensaje.INGRESENOMBRE);
             flag = false;
         } else if (controladorModulo.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.modulo));
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.MODULO));
             flag = false;
         }
         return flag;
@@ -43,10 +43,10 @@ public class ModuloAction extends Accion {
         }
         if (id != 0) {
             controladorModulo.actualizar(id, nombre, caracteristica);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.modulo));
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.MODULO));
         } else {
             controladorModulo.guardar(nombre, caracteristica);
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.modulo));
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.MODULO));
         }
         return SUCCESS;
     }
@@ -63,15 +63,11 @@ public class ModuloAction extends Accion {
     }
 
     public String eliminar() {
-        System.out.println(id);
-
         if (controladorModulo.enUso(id)) {
-            System.out.println("1");
-            sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.modulo, Mensaje.plan));
+            sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.MODULO, Mensaje.PLAN));
         } else {
-            System.out.println("2");
             controladorModulo.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.modulo));
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.MODULO));
         }
         return SUCCESS;
     }
@@ -84,7 +80,7 @@ public class ModuloAction extends Accion {
             id = modulo.getId();
             return SUCCESS;
         } else {
-            sesion.put("alerta", Mensaje.idInvalido);
+            sesion.put("alerta", Mensaje.IDINVALIDO);
             return ERROR;
         }
     }
@@ -115,5 +111,10 @@ public class ModuloAction extends Accion {
 
     public void setCaracteristica(String caracteristica) {
         this.caracteristica = caracteristica;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 }

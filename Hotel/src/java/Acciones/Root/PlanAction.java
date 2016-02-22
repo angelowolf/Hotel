@@ -35,18 +35,18 @@ public class PlanAction extends Accion {
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addFieldError("nombre", Mensaje.ingreseNombre);
+            addFieldError("nombre", Mensaje.INGRESENOMBRE);
             flag = false;
         } else if (controladorPlan.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.plan));
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.PLAN));
             flag = false;
         }
         if (StringUtils.isBlank(caracteristica)) {
-            addFieldError("caracteristica", Mensaje.ingreseCaracteristica);
+            addFieldError("caracteristica", Mensaje.INGRESECARACTERISTICA);
             flag = false;
         }
         if (precio < 0) {
-            addFieldError("precio", Mensaje.precioNoValido);
+            addFieldError("precio", Mensaje.PRECIONOVALIDO);
             flag = false;
         }
         return flag;
@@ -59,10 +59,10 @@ public class PlanAction extends Accion {
         }
         if (id != 0) {
             controladorPlan.actualizar(id, nombre, precio, caracteristica, modulosSeleccionados);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.plan));
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.PLAN));
         } else {
             controladorPlan.guardar(nombre, precio, caracteristica, modulosSeleccionados);
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.plan));
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.PLAN));
         }
         return SUCCESS;
     }
@@ -80,10 +80,10 @@ public class PlanAction extends Accion {
 
     public String eliminar() {
         if (controladorPlan.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.plan, Mensaje.hotel));
+            sesion.put("alerta", Mensaje.getUsadoPorUn(Mensaje.PLAN, Mensaje.HOTEL));
         } else {
             controladorPlan.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.plan));
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.PLAN));
         }
         return SUCCESS;
     }
@@ -102,7 +102,7 @@ public class PlanAction extends Accion {
             cargarListaModulos(mapModuloQUePosee, true);
             return SUCCESS;
         } else {
-            sesion.put("alerta", Mensaje.idInvalido);
+            sesion.put("alerta", Mensaje.IDINVALIDO);
             return ERROR;
         }
 
@@ -199,5 +199,10 @@ public class PlanAction extends Accion {
     public void setModulosSeleccionados(List<Integer> modulosSeleccionados) {
         this.modulosSeleccionados = modulosSeleccionados;
         cargarListaModulosValidacion();
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 }

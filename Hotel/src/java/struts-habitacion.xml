@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <package name="tipohabitacion" extends="struts-default" namespace="/tipohabitacion">
+    <package name="habitacion" extends="struts-default" namespace="/habitacion">
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
@@ -18,29 +18,29 @@
                 <param name="ignoreHierarchy">false</param>
                 <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\]</param>
             </result>                 
-        </global-results>      
+        </global-results>     
         
         <!--PRUEBA ACCION TESTING-->
-        <action name="creartipohabitacion" method="creartipohabitacion" class="Acciones.Sistema.TipoHabitacionAction">
+        <action name="crearhabitacion" method="crearHabitacion" class="Acciones.Sistema.HabitacionAction">
             <result name="success">/exito.jsp</result>
             <result name="input">/input.jsp</result>
         </action>
-        <!--COMIENZO ACCIONES-->       
-        <action name="registrar" method="registrar" class="Acciones.Sistema.TipoHabitacionAction"/>
-        <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction"/>    
-        <action name="eliminar" method="eliminar" class="Acciones.Sistema.TipoHabitacionAction"/>     
-        <action name="list" method="list" class="Acciones.Sistema.TipoHabitacionAction">
+        <!--COMIENZO ACCIONES-->
+        <action name="registrar" method="registrar" class="Acciones.Sistema.HabitacionAction"/>      
+        <action name="modificar" method="modificar" class="Acciones.Sistema.HabitacionAction"/>
+        <action name="eliminar" method="eliminar" class="Acciones.Sistema.HabitacionAction"/>
+        <action name="list" method="list" class="Acciones.Sistema.HabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre</param>
+                <param name="excludeProperties">capacidad,id,id_tipohabitacion,nombre</param>
             </result>
         </action>        
-        <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
+        <action name="editar" method="editar" class="Acciones.Sistema.HabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
                 <param name="excludeProperties">lista</param>
-            </result>   
+            </result>            
         </action>
-        <!--FIN ACCIONES-->       
+        <!--FIN ACCIONES-->
     </package>
 </struts>

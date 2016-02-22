@@ -16,6 +16,7 @@ import Persistencia.ORM.DAOInterface.IUsuario;
  * @author flore
  */
 public interface IControladorUsuario {
+
     final IUsuario USUARIODAO = new UsuarioDAO();
     final ITipoUsuario TIPOUSUARIODAO = new TipoUsuarioDAO();
 
@@ -80,13 +81,15 @@ public interface IControladorUsuario {
     public Usuario getUsuario(String emailONick);
 
     /**
-     * Verifica si los datos ingresados pertenecen a un usuario registrado.
+     * Verifica si los datos ingresados pertenecen a un usuario registrado. Si
+     * el usuario es NULL, se devolvera false. Si el usuario existe, pero la
+     * contraseña no coincide devolvera false.
      *
-     * @param emailONick El email o el nick.
+     * @param u El usuario que esta intentando logearse.
      * @param password La clave.
-     * @return True si existe.
+     * @return True si existe y coincide la contraseña.
      */
-    public boolean iniciarSesion(String emailONick, String password);
+    public boolean iniciarSesion(Usuario u, String password);
 
     /**
      * Verifica que el usuario que esta por iniciar sesion es ROOT.
@@ -95,31 +98,5 @@ public interface IControladorUsuario {
      * @return true si lo es.
      */
     public boolean usuarioIsRoot(Usuario u);
-
-    /**
-     * Verifica que la membresia del hotel este todavia sin vencer, es decir que
-     * pueda seguir iniciando sesion.
-     *
-     * @param u EL usuario que esta iniciando sesion.
-     * @return true si puede logear.
-     */
-    public boolean verificarCuentaActiva(Usuario u);
-
-    /**
-     * Verifica si la membresia del hotel se encuentra en su ultima semana antes
-     * de que sea colocada como vencida.
-     *
-     * @param u El usuario que esta iniciando sesion.
-     * @return true si se encuentra en esta semana.
-     */
-    public boolean verificarCuentaAviso(Usuario u);
-
-    /**
-     * Crea un mensaje con la fecha de vencimiento de la cuenta para ser
-     * mostrado al usuario cuando inice sesion.
-     *
-     * @param u El usuario que esta iniciando sesion.
-     * @return El mensaje a msotrar.
-     */
-    public String getMensajeAviso(Usuario u);
+    
 }

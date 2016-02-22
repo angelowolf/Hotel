@@ -1,8 +1,8 @@
 package Controlador.Implementacion;
 
+import Controlador.Interface.IControladorDueño;
 import Persistencia.Modelo.Dueño;
 import Persistencia.Modelo.Usuario;
-import Persistencia.ORM.DAOImplementacion.DueñoDAO;
 import java.util.Date;
 
 /**
@@ -10,14 +10,9 @@ import java.util.Date;
  * @version 1.0
  * @created 28-ene-2016 08:44:21 p.m.
  */
-public class ControladorDueño {
+public class ControladorDueño implements IControladorDueño {
 
-    private final DueñoDAO dueñoDAO;
-
-    public ControladorDueño() {
-        dueñoDAO = new DueñoDAO();
-    }
-
+    @Override
     public void guardar(String apellido, String nombre, String email, String telefono, Date fechaNacimiento,
             String clave, String nick) {
         Usuario u = new Usuario();
@@ -30,6 +25,5 @@ public class ControladorDueño {
         d.setEmail(email);
         d.setTelefono(telefono);
         d.setFechaNacimiento(fechaNacimiento);
-
     }
 }//end ControladorDueño

@@ -9,18 +9,19 @@
         
         <property name="nombre" column="nombre" type="string"/>
         <property name="capacidad" column="capacidad"/>
-        
-        <list name="bloqueos" cascade="all-delete-orphan"> 
-            <key column="id_habitacion" /> 
-            <index column="orden" /> 
+        <set name="bloqueos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_habitacion" not-null="true" />
+            </key>
             <one-to-many class="Persistencia.Modelo.Bloqueo" />
-        </list>
-        
-        <list name="mantenimientos" cascade="all-delete-orphan"> 
-            <key column="id_habitacion" /> 
-            <index column="orden" /> 
+        </set>
+        <set name="mantenimientos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_habitacion" not-null="true" />
+            </key>
             <one-to-many class="Persistencia.Modelo.DetalleMantenimiento" />
-        </list>
+        </set>
+        <many-to-one name="tipoHabitacion" column="id_tipohabitacion" not-null="true"/>
         
     </class>
 </hibernate-mapping>

@@ -26,9 +26,10 @@ public interface IControladorTipoHabitacion {
      * Crea un nuevo tipo de habitacion para el hotel.
      *
      * @param nombre El nombre del tipo de habitacion.
-     * @param hotel El hotel al que se le guardara.
+     * @param id_hotel El hotel.
+     *
      */
-    public void guardar(String nombre, Hotel hotel);
+    public void guardar(String nombre, int id_hotel);
 
     /**
      * Actualiza los datos de un tipo de habitacion.
@@ -51,10 +52,10 @@ public interface IControladorTipoHabitacion {
      *
      * @param id
      * @param nombre
-     * @param hotel
+     * @param id_hotel
      * @return true si esta disponible.
      */
-    public boolean existe(int id, String nombre, Hotel hotel);
+    public boolean existe(int id, String nombre, int id_hotel);
 
     /**
      * verifica si el tipo de habitacion esta asociado a alguna habitacion.
@@ -67,10 +68,10 @@ public interface IControladorTipoHabitacion {
     /**
      * Busca todos los tipos de habitacion existentes del hotel.
      *
-     * @param hotel El hotel al que se le buscaran los tipos de habitacion,
+     * @param id_hotel El hotel al que se le buscaran los tipos de habitacion,
      * @return Los tipos de habitaciones.
      */
-    public List<TipoHabitacion> getTodos(Hotel hotel);
+    public List<TipoHabitacion> getTodos(int id_hotel);
 
     /**
      * recupera un tipo de habitacion de la bd. si no existe devuelve nulo.

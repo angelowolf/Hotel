@@ -78,8 +78,10 @@ public class ControladorPlan implements IControladorPlan {
 
     @Override
     public Plan getUno(int id) {
+        Plan p = PLANDAO.buscar(id);
         try {
-            return PLANDAO.buscar(id);
+            p.getCaracteristica();
+            return p;
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }

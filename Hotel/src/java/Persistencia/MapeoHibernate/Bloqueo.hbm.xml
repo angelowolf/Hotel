@@ -9,6 +9,7 @@
         
         <property name="fechaInicio" column="fechaInicio"/>
         <property name="fechaFIn" column="fechaFIn"/>
-                      
+        <property name="id_habitacion" column="id_habitacion"/> 
+                       
     </class>
 </hibernate-mapping>

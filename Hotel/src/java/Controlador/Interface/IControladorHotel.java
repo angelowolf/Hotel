@@ -45,4 +45,31 @@ public interface IControladorHotel {
      * @return Hotel
      */
     public Hotel getHotel(Usuario u);
+
+    /**
+     * Verifica que la membresia del hotel este todavia sin vencer, es decir que
+     * pueda seguir iniciando sesion.
+     *
+     * @param hotel El hotel al que peretence el usuario.
+     * @return true si puede logear.
+     */
+    public boolean verificarCuentaActiva(Hotel hotel);
+
+    /**
+     * Verifica si la membresia del hotel se encuentra en su ultima semana antes
+     * de que sea colocada como vencida.
+     *
+     * @param hotel El hotel al que peretence el usuario.
+     * @return true si se encuentra en esta semana.
+     */
+    public boolean verificarCuentaAviso(Hotel hotel);
+
+    /**
+     * Crea un mensaje con la fecha de vencimiento de la cuenta para ser
+     * mostrado al usuario cuando inice sesion.
+     *
+     * @param hotel El hotel al que peretence el usuario.
+     * @return El mensaje a msotrar.
+     */
+    public String getMensajeAviso(Hotel hotel);
 }

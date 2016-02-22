@@ -1,4 +1,3 @@
-
 USE sistema_hotel;
 
 INSERT INTO plan (nombre,precio,caracteristica) VALUES ('simple',500,'asd');
@@ -33,5 +32,3 @@ UPDATE hotel SET id_owner = 1 WHERE id = 1;
 
 -- UPDATE membresia SET id_estadoMembresia = 4 WHERE id = 1;
 update hotel set id_owner = 1 where id = 1;
-
-select * from Hotel h inner join usuario u ON h.id = u.id_hotel WHERE u.id = 1

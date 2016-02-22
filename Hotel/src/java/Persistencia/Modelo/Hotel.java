@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Angelo
@@ -20,7 +22,7 @@ public class Hotel {
     private Plan plan;
     private String nombre;
     private List<Reserva> reservas;
-    private List<TipoHabitacion> tipoHabitaciones = new ArrayList<TipoHabitacion>();
+    private Set<TipoHabitacion> tipoHabitaciones = new HashSet<TipoHabitacion>();
 
     public int getId() {
         return id;
@@ -30,11 +32,11 @@ public class Hotel {
         this.id = id;
     }
 
-    public List<TipoHabitacion> getTipoHabitaciones() {
+    public Set<TipoHabitacion> getTipoHabitaciones() {
         return tipoHabitaciones;
     }
 
-    public void setTipoHabitaciones(List<TipoHabitacion> tipoHabitaciones) {
+    public void setTipoHabitaciones(Set<TipoHabitacion> tipoHabitaciones) {
         this.tipoHabitaciones = tipoHabitaciones;
     }
 
@@ -244,10 +246,7 @@ public class Hotel {
         usuarios.add(usuario);
     }
 
-    public void agregarTipoHabitacion(TipoHabitacion th) {
-        tipoHabitaciones.add(th);
-    }
-
+ 
     @Override
     public String toString() {
         return "Hotel{" + "id=" + id + ", due\u00f1o=" + dueño + ", membresia=" + membresia + ", pagos=" + pagos + ", plan=" + plan + ", nombre=" + nombre + ", reservas=" + reservas + ", tipoHabitaciones=" + tipoHabitaciones + ", empleados=" + empleados + ", clientes=" + clientes + ", lavados=" + lavados + ", domicilio=" + domicilio + ", telefonos=" + telefonos + ", usuarios=" + usuarios + ", email=" + email + ", web=" + web + ", pais=" + pais + '}';

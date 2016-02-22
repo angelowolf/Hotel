@@ -29,14 +29,14 @@ public class TipoPagoAction extends Accion {
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addFieldError("nombre", Mensaje.ingreseNombre);
+            addFieldError("nombre", Mensaje.INGRESENOMBRE);
             flag = false;
         } else if (controladorTipoPago.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoPago));
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.TIPOPAGO));
             flag = false;
         }
         if (recargo < 0) {
-            addFieldError("recargo", Mensaje.ingreseRecargo);
+            addFieldError("recargo", Mensaje.INGRESERECARGO);
             flag = false;
         }
         return flag;
@@ -48,10 +48,10 @@ public class TipoPagoAction extends Accion {
         }
         if (id != 0) {
             controladorTipoPago.actualizar(id, nombre, recargo);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoPago));
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.TIPOPAGO));
         } else {
             controladorTipoPago.guardar(nombre, recargo);;
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoPago));
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.TIPOPAGO));
         }
         return SUCCESS;
     }
@@ -69,10 +69,10 @@ public class TipoPagoAction extends Accion {
 
     public String eliminar() {
         if (controladorTipoPago.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.tipoPago, Mensaje.pago));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.TIPOPAGO, Mensaje.PAGO));
         } else {
             controladorTipoPago.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPago));
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.TIPOPAGO));
         }
         return SUCCESS;
     }
@@ -85,7 +85,7 @@ public class TipoPagoAction extends Accion {
             id = tp.getId();
             return SUCCESS;
         } else {
-            sesion.put("alerta", Mensaje.idInvalido);
+            sesion.put("alerta", Mensaje.IDINVALIDO);
             return ERROR;
         }
     }
@@ -118,4 +118,8 @@ public class TipoPagoAction extends Accion {
         this.recargo = recargo;
     }
 
+    @Override
+    public int getCodigo() {
+        return codigo;
+    }
 }

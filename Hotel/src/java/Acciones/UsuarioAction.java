@@ -34,19 +34,19 @@ public class UsuarioAction extends Accion {
     }
 
     public String login() {
-        if (controladorUsuario.iniciarSesion(email, clave)) {
-            Usuario u = controladorUsuario.getUsuario(email);
+        Usuario u = controladorUsuario.getUsuario(email);
+        if (controladorUsuario.iniciarSesion(u, clave)) {
             if (controladorUsuario.usuarioIsRoot(u)) {
                 sesion.put("user", u);
                 return "root";
             }
-
-            if (controladorUsuario.verificarCuentaActiva(u)) {
-                if (controladorUsuario.verificarCuentaAviso(u)) {
-                    addActionMessage(controladorUsuario.getMensajeAviso(u));
+            IControladorHotel controladorHotel = new ControladorHotel();
+            Hotel hotel = controladorHotel.getHotel(u);
+            if (controladorHotel.verificarCuentaActiva(hotel)) {
+                if (controladorHotel.verificarCuentaAviso(hotel)) {
+                    addActionMessage(controladorHotel.getMensajeAviso(hotel));
                 }
-                IControladorHotel ch = new ControladorHotel();
-                sesion.put("hotel", ch.getHotel(u));
+                sesion.put("hotel", hotel);
                 sesion.put("user", u);
                 return SUCCESS;
             } else {
@@ -54,7 +54,7 @@ public class UsuarioAction extends Accion {
                 return INPUT;
             }
         } else {
-            addActionError(Mensaje.userClaveIncorrecto);
+            addActionError(Mensaje.USERCLAVEINCORRECTO);
             return INPUT;
         }
     }
@@ -62,5 +62,10 @@ public class UsuarioAction extends Accion {
     public String logout() {
         sesion.remove("user");
         return SUCCESS;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 }

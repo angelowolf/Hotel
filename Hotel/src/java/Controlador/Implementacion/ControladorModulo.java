@@ -56,11 +56,13 @@ public class ControladorModulo implements IControladorModulo {
         t.setId(id);
         MODULODAO.eliminar(t);
     }
-    
+
     @Override
     public Modulo getUno(int id) {
+        Modulo m = MODULODAO.buscar(id);
         try {
-            return MODULODAO.buscar(id);
+            m.getNombre();
+            return m;
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }

@@ -9,7 +9,8 @@
         
         <property name="descripcion" column="descripcion" type="string"/>
         <property name="fecha" column="fecha"/>
-        <property name="resuelto" column="resuelto"/>       
+        <property name="resuelto" column="resuelto"/>      
+        <property name="id_habitacion" column="id_habitacion"/>   
         
     </class>
 </hibernate-mapping>

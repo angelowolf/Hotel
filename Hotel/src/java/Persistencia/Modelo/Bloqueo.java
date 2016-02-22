@@ -9,17 +9,26 @@ import java.util.Date;
  */
 public class Bloqueo {
 
-    private int id;
+    private int id, id_habitacion;
     private Date fechaInicio;
     private Date fechaFIn;
 
     public Bloqueo() {
 
     }
-    
+
+    public int getId_habitacion() {
+        return id_habitacion;
+    }
+
+    public void setId_habitacion(int id_habitacion) {
+        this.id_habitacion = id_habitacion;
+    }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }

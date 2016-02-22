@@ -3,6 +3,7 @@ package Controlador.Implementacion;
 import Controlador.Interface.IControladorHotel;
 import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.Usuario;
+import java.text.SimpleDateFormat;
 
 /**
  * @author Angelo
@@ -32,6 +33,22 @@ public class ControladorHotel implements IControladorHotel {
     @Override
     public Hotel getHotel(Usuario u) {
         return HOTELDAO.getHotelByUsuario(u.getId());
+    }
+
+    @Override
+    public boolean verificarCuentaActiva(Hotel hotel) {
+        return !hotel.isMembresiaVencida();
+    }
+
+    @Override
+    public boolean verificarCuentaAviso(Hotel hotel) {
+        return hotel.isMembresiaAviso();
+    }
+
+    @Override
+    public String getMensajeAviso(Hotel hotel) {
+        String fecha = new SimpleDateFormat("dd-MM-yyyy").format(hotel.getMembresia().getFechaVencimiento());
+        return Soporte.Mensaje.getAviso(fecha);
     }
 
 }//end ControladorHotel

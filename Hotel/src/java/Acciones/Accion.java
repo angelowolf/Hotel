@@ -16,4 +16,8 @@ import java.util.Map;
 public abstract class Accion extends ActionSupport {
 
     protected final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    protected int codigo;
+
+    public abstract int getCodigo();
+
 }

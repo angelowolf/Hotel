@@ -28,10 +28,10 @@ public class SexoAction extends Accion {
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addFieldError("nombre", Mensaje.ingreseNombre);
+            addFieldError("nombre", Mensaje.INGRESENOMBRE);
             flag = false;
         } else if (controladorSexo.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.sexo));
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.SEXO));
             flag = false;
         }
         return flag;
@@ -43,10 +43,10 @@ public class SexoAction extends Accion {
         }
         if (id != 0) {
             controladorSexo.actualizar(id, nombre);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.sexo));
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.SEXO));
         } else {
             controladorSexo.guardar(nombre);
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.sexo));
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.SEXO));
         }
         return SUCCESS;
     }
@@ -64,10 +64,10 @@ public class SexoAction extends Accion {
 
     public String eliminar() {
         if (controladorSexo.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.sexo, Mensaje.persona));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.SEXO, Mensaje.PERSONA));
         } else {
             controladorSexo.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.sexo));
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.SEXO));
         }
         return SUCCESS;
     }
@@ -79,7 +79,7 @@ public class SexoAction extends Accion {
             id = sexo.getId();
             return SUCCESS;
         } else {
-            sesion.put("alerta", Mensaje.idInvalido);
+            sesion.put("alerta", Mensaje.IDINVALIDO);
             return ERROR;
         }
     }
@@ -102,5 +102,10 @@ public class SexoAction extends Accion {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 }

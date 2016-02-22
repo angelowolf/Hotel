@@ -1,6 +1,7 @@
 package Persistencia.Modelo;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Angelo
@@ -9,12 +10,19 @@ import java.util.List;
  */
 public class TipoHabitacion {
 
-    private int id;
-    private List<Habitacion> habitaciones;
+    private int id, id_hotel;
     private String nombre;
 
     public TipoHabitacion() {
 
+    }
+
+    public int getId_hotel() {
+        return id_hotel;
+    }
+
+    public void setId_hotel(int id_hotel) {
+        this.id_hotel = id_hotel;
     }
 
     public int getId() {
@@ -23,18 +31,6 @@ public class TipoHabitacion {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<Habitacion> getHabitaciones() {
-        return habitaciones;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setHabitaciones(List<Habitacion> newVal) {
-        habitaciones = newVal;
     }
 
     public String getNombre() {

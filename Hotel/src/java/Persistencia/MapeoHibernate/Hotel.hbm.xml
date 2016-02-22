@@ -25,11 +25,13 @@
         </list>
         
         
-        <list name="tipoHabitaciones" cascade="all-delete-orphan"> 
-            <key column="id_hotel" /> 
-            <index column="orden" /> 
+        <set name="tipoHabitaciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_hotel" not-null="true" />
+            </key>
             <one-to-many class="Persistencia.Modelo.TipoHabitacion" />
-        </list>
+        </set>
+        
         
     </class>
 </hibernate-mapping>

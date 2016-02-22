@@ -12,7 +12,7 @@
     <!--quitar action de url-->
     <constant name="struts.action.extension" value="," />
     <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/imagenes/.*" />
-    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.ui.theme" value="simple" /> 
     <!--ACCIONES INICIO-->
     <include file="struts-error.xml"></include>
     <include file="struts-sesion.xml"></include>
@@ -21,9 +21,12 @@
     <include file="struts-sexo.xml"></include>
     <include file="struts-modulo.xml"></include>
     <include file="struts-plan.xml"></include>
-    <include file="struts-hotel.xml"></include>
     
+    
+    <!--TIENEN RUTAS DE TESTING-->
+    <include file="struts-hotel.xml"></include>        
     <include file="struts-tipohabitacion.xml"></include>
+    <include file="struts-habitacion.xml"></include>
     
     
     

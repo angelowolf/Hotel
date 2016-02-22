@@ -8,12 +8,6 @@
         </id>
         
         <property name="nombre" column="nombre" type="string"/>
-        
-        <list name="habitaciones" cascade="all-delete-orphan"> 
-            <key column="id_tipohabitacion" /> 
-            <index column="orden" /> 
-            <one-to-many class="Persistencia.Modelo.Habitacion" />
-        </list>
-        
+        <property name="id_hotel" column="id_hotel"/>      
     </class>
 </hibernate-mapping>

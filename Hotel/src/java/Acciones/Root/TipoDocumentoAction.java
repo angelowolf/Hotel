@@ -28,10 +28,10 @@ public class TipoDocumentoAction extends Accion {
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addFieldError("nombre", Mensaje.ingreseNombre);
+            addFieldError("nombre", Mensaje.INGRESENOMBRE);
             flag = false;
         } else if (controladorTipoDocumento.existe(id, nombre)) {
-            addFieldError("nombre", Mensaje.getElExiste(Mensaje.tipoDocumento));
+            addFieldError("nombre", Mensaje.getElExiste(Mensaje.TIPODOCUMENTO));
             flag = false;
         }
         return flag;
@@ -43,10 +43,10 @@ public class TipoDocumentoAction extends Accion {
         }
         if (id != 0) {
             controladorTipoDocumento.actualizar(id, nombre);
-            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoDocumento));
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.TIPODOCUMENTO));
         } else {
             controladorTipoDocumento.guardar(nombre);
-            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoDocumento));
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.TIPODOCUMENTO));
         }
         return SUCCESS;
     }
@@ -64,10 +64,10 @@ public class TipoDocumentoAction extends Accion {
 
     public String eliminar() {
         if (controladorTipoDocumento.enUso(id)) {
-            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.tipoDocumento, Mensaje.persona));
+            sesion.put("alerta", Mensaje.getUsadoPorUna(Mensaje.TIPODOCUMENTO, Mensaje.PERSONA));
         } else {
             controladorTipoDocumento.eliminar(id);
-            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoDocumento));
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.TIPODOCUMENTO));
         }
         return SUCCESS;
     }
@@ -79,7 +79,7 @@ public class TipoDocumentoAction extends Accion {
             id = tipoDocumento.getId();
             return SUCCESS;
         } else {
-            sesion.put("alerta", Mensaje.idInvalido);
+            sesion.put("alerta", Mensaje.IDINVALIDO);
             return ERROR;
         }
     }
@@ -102,5 +102,10 @@ public class TipoDocumentoAction extends Accion {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int getCodigo() {
+        return codigo;
     }
 }

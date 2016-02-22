@@ -63,8 +63,10 @@ public class ControladorTipoDocumento implements IControladorTipoDocumento {
      */
     @Override
     public TipoDocumento getUno(int id) {
+        TipoDocumento td = TIPODOCUMENTODAO.buscar(id);
         try {
-            return TIPODOCUMENTODAO.buscar(id);
+            td.getNombre();
+            return td;
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }
