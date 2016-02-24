@@ -40,10 +40,15 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public void eliminar(int id, int id_hotel) {
+    public boolean eliminar(int id, int id_hotel) {
         TipoHabitacion th = getUno(id);
         if (th != null && th.getId_hotel() == id_hotel) {
-            TIPOHABITACIONDAO.eliminar(th);
+            if (enUso(id)) {
+                return false;
+            } else {
+                TIPOHABITACIONDAO.eliminar(th);
+                return true;
+            }
         } else {
             throw new IllegalAccessError();
         }

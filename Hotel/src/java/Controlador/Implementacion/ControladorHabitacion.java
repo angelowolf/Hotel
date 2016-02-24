@@ -50,14 +50,19 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
-    public void eliminar(int id, int id_hotel) {
+    public boolean eliminar(int id, int id_hotel) {
         Habitacion h = getUno(id);
         if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
-            IBloqueo bloqueoDAO = new BloqueoDAO();
-            bloqueoDAO.eliminarTodos(id);
-            IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
-            detalleMantenimientoDAO.eliminarTodos(id);
-            HABITACIONDAO.eliminar(h);
+            if (enUso(id)) {
+                return false;
+            } else {
+                IBloqueo bloqueoDAO = new BloqueoDAO();
+                bloqueoDAO.eliminarTodos(id);
+                IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
+                detalleMantenimientoDAO.eliminarTodos(id);
+                HABITACIONDAO.eliminar(h);
+                return true;
+            }
         } else {
             throw new IllegalAccessError();
         }

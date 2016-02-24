@@ -76,22 +76,21 @@ public class TipoHabitacionAction extends Accion {
     }
 
     public String eliminar() {
-        if (cth.enUso(id)) {
-            addActionError(Soporte.Mensaje.getUsadoPorUna(Soporte.Mensaje.TIPOHABITACION, Soporte.Mensaje.HABITACION));
-            codigo = 200;
-            return INPUT;
-        } else {
-            Hotel h = (Hotel) sesion.get("hotel");
-            try {
-                cth.eliminar(id, h.getId());
-            } catch (IllegalAccessError e) {
-                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+        Hotel h = (Hotel) sesion.get("hotel");
+        try {
+            if (cth.eliminar(id, h.getId())) {
+                addActionMessage(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
+                codigo = 400;
+                return SUCCESS;
+            } else {
+                addActionError(Soporte.Mensaje.getUsadoPorUna(Soporte.Mensaje.TIPOHABITACION, Soporte.Mensaje.HABITACION));
                 codigo = 200;
                 return INPUT;
             }
-            addActionMessage(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
-            codigo = 400;
-            return SUCCESS;
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
         }
     }
 

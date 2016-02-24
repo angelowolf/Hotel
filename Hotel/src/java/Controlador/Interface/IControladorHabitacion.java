@@ -51,8 +51,10 @@ public interface IControladorHabitacion {
      *
      * @param id
      * @param id_hotel
+     * @return True si se elimino. Falso si esta siendo utilizado por otra
+     * entidad.
      */
-    public void eliminar(int id, int id_hotel) throws IllegalAccessError;
+    public boolean eliminar(int id, int id_hotel) throws IllegalAccessError;
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el de
@@ -89,4 +91,5 @@ public interface IControladorHabitacion {
      * @return el objeto o nulo.
      */
     public Habitacion getUno(int id);
+
 }

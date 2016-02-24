@@ -12,6 +12,7 @@ import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
 import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.TipoHabitacion;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -44,6 +45,11 @@ public class HabitacionAction extends Accion {
             flag = false;
         }
         if (cth.getUno(id_tipohabitacion) == null) {
+            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
+            flag = false;
+        }
+        TipoHabitacion th = cth.getUno(id_tipohabitacion);
+        if (th != null && th.getId_hotel() != h.getId()) {
             addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
             flag = false;
         }
@@ -87,23 +93,22 @@ public class HabitacionAction extends Accion {
     }
 
     public String eliminar() {
-        if (ch.enUso(id)) {
-            addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.HABITACION, Soporte.Mensaje.RESERVA));
-            codigo = 200;
-            return INPUT;
-        } else {
-            Hotel h = (Hotel) sesion.get("hotel");
-            try {
-                ch.eliminar(id, h.getId());
-            } catch (IllegalAccessError e) {
-                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+        Hotel h = (Hotel) sesion.get("hotel");
+        try {
+            if (ch.eliminar(id, h.getId())) {
+                addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.HABITACION));
+                codigo = 400;
+                return SUCCESS;
+            } else {
+                addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.HABITACION, Soporte.Mensaje.RESERVA));
                 codigo = 200;
                 return INPUT;
             }
-            addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.HABITACION));
-            codigo = 400;
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
         }
-        return SUCCESS;
     }
 
     public String editar() {
