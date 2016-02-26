@@ -9,13 +9,21 @@ import java.util.Date;
  */
 public class Temporada {
 
-    private int id;
+    private int id, id_hotel;
     private Date fechaFin;
     private Date fechaInicio;
     private String nombre;
 
     public Temporada() {
 
+    }
+
+    public int getId_hotel() {
+        return id_hotel;
+    }
+
+    public void setId_hotel(int id_hotel) {
+        this.id_hotel = id_hotel;
     }
 
     public int getId() {

@@ -38,6 +38,8 @@ public interface IControladorTipoHabitacion {
      * @param id
      * @param nombre
      * @param id_hotel
+     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
+     * el hotel
      */
     public void actualizar(int id, String nombre, int id_hotel) throws IllegalAccessError;
 
@@ -48,6 +50,8 @@ public interface IControladorTipoHabitacion {
      *
      * @param id
      * @param id_hotel
+     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
+     * el hotel
      * @return True si se elimino. False si esta siendo utilizado por otra
      * entidad.
      */

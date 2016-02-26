@@ -68,7 +68,7 @@ public class TipoHabitacionAction extends Accion {
         return SUCCESS;
     }
 
-    public String list() {
+    public String listar() {
         Hotel hotel = (Hotel) sesion.get("hotel");
         lista = cth.getTodos(hotel.getId());
         codigo = 400;

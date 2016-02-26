@@ -44,4 +44,10 @@ public class TipoHabitacion {
     public void setNombre(String newVal) {
         nombre = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "TipoHabitacion{" + "id=" + id + ", id_hotel=" + id_hotel + ", nombre=" + nombre + '}';
+    }
+
 }//end TipoHabitacion

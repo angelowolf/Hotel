@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <package name="habitacion" extends="struts-default" namespace="/habitacion">
+    <package name="tarifa" extends="struts-default" namespace="/tarifa">
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
@@ -19,27 +19,28 @@
                 <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],codigo</param>
             </result>                 
         </global-results>     
-        
-        <!--PRUEBA ACCION TESTING-->
-        <action name="crearhabitacion" method="crearHabitacion" class="Acciones.Sistema.HabitacionAction">
-            <result name="success">/exito.jsp</result>
-            <result name="input">/input.jsp</result>
-        </action>
+             
         <!--COMIENZO ACCIONES-->
-        <action name="registrar" method="registrar" class="Acciones.Sistema.HabitacionAction"/>      
-        <action name="modificar" method="modificar" class="Acciones.Sistema.HabitacionAction"/>
-        <action name="eliminar" method="eliminar" class="Acciones.Sistema.HabitacionAction"/>
-        <action name="listar" method="listar" class="Acciones.Sistema.HabitacionAction">
+        <action name="registrar" method="registrar" class="Acciones.Sistema.TarifaAction"/>      
+        <action name="modificar" method="modificar" class="Acciones.Sistema.TarifaAction"/>
+        <action name="eliminar" method="eliminar" class="Acciones.Sistema.TarifaAction"/>
+        <action name="listar" method="listar" class="Acciones.Sistema.TarifaAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">capacidad,id,id_tipohabitacion,nombrem,tipohabitacion</param>
+                <param name="excludeProperties">fechaInicio,id,fechaFin,nombre,precio,temporada,temporadas,tipoHabitacionesSeleccionados,tipoHabitaciones</param>
             </result>
         </action>        
-        <action name="editar" method="editar" class="Acciones.Sistema.HabitacionAction">
+        <action name="editar" method="editar" class="Acciones.Sistema.TarifaAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
                 <param name="excludeProperties">lista</param>
             </result>            
+        </action>
+        <action name="nuevo" method="nuevo" class="Acciones.Sistema.TarifaAction">
+            <result type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="excludeProperties">lista,fechaInicio,id,fechaFin,nombre,precio,temporadas,tipoHabitacionesSeleccionados</param>
+            </result>   
         </action>
         <!--FIN ACCIONES-->
     </package>

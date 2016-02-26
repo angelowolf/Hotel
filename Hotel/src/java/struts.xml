@@ -29,7 +29,8 @@
     <include file="struts-habitacion.xml"></include>
     
     
-    
+    <include file="struts-temporada.xml"></include>
+    <include file="struts-tarifa.xml"></include>
     
     <include file="struts-ERRORIDE.xml"></include>
    

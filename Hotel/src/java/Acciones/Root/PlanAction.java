@@ -95,11 +95,11 @@ public class PlanAction extends Accion {
             caracteristica = plan.getCaracteristica();
             precio = plan.getPrecio();
             id = plan.getId();
-            Map<Integer, Modulo> mapModuloQUePosee = new HashMap<Integer, Modulo>();
+            Map<Integer, Modulo> mapModuloQuePosee = new HashMap<Integer, Modulo>();
             for (Modulo i : plan.getModulos()) {
-                mapModuloQUePosee.put(i.getId(), i);
+                mapModuloQuePosee.put(i.getId(), i);
             }
-            cargarListaModulos(mapModuloQUePosee, true);
+            cargarListaModulos(mapModuloQuePosee, true);
             return SUCCESS;
         } else {
             sesion.put("alerta", Mensaje.IDINVALIDO);

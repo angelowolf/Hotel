@@ -27,6 +27,7 @@ public class HabitacionAction extends Accion {
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
 
     private int id, capacidad, id_tipohabitacion;
+    private TipoHabitacion tipoHabitacion;
     private String nombre;
     private List<Habitacion> lista = new ArrayList<Habitacion>();
 
@@ -43,11 +44,7 @@ public class HabitacionAction extends Accion {
         } else if (ch.existe(id, nombre, h.getId())) {
             addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.HABITACION));
             flag = false;
-        }
-        if (cth.getUno(id_tipohabitacion) == null) {
-            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
-            flag = false;
-        }
+        }      
         TipoHabitacion th = cth.getUno(id_tipohabitacion);
         if (th != null && th.getId_hotel() != h.getId()) {
             addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
@@ -85,7 +82,7 @@ public class HabitacionAction extends Accion {
         return SUCCESS;
     }
 
-    public String list() {
+    public String listar() {
         Hotel hotel = (Hotel) sesion.get("hotel");
         lista = ch.getTodos(hotel.getId());
         codigo = 400;
@@ -118,6 +115,7 @@ public class HabitacionAction extends Accion {
             capacidad = habitacion.getCapacidad();
             id = habitacion.getId();
             id_tipohabitacion = habitacion.getTipoHabitacion().getId();
+            tipoHabitacion = habitacion.getTipoHabitacion();
             codigo = 400;
             return SUCCESS;
         } else {
@@ -168,6 +166,14 @@ public class HabitacionAction extends Accion {
 
     public List<Habitacion> getLista() {
         return lista;
+    }
+
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
+    }
+
+    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+        this.tipoHabitacion = tipoHabitacion;
     }
 
     @Override

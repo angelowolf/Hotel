@@ -1,7 +1,7 @@
 package Persistencia.Modelo;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Angelo
@@ -11,11 +11,11 @@ import java.util.List;
 public class Tarifa {
 
     private int id;
-    private Date fechaDesde;
-    private Date fechaHasta;
+    private Date fechaInicio;
+    private Date fechaFin;
     private float precio;
     private Temporada temporada;
-    private List<TipoHabitacion> tipoHabitaciones;
+    private Set<TipoHabitacion> tipoHabitaciones;
 
     public Tarifa() {
 
@@ -29,7 +29,7 @@ public class Tarifa {
         this.id = id;
     }
 
-    public List<TipoHabitacion> getTipoHabitaciones() {
+    public Set<TipoHabitacion> getTipoHabitaciones() {
         return tipoHabitaciones;
     }
 
@@ -37,7 +37,7 @@ public class Tarifa {
      *
      * @param newVal
      */
-    public void setTipoHabitaciones(List<TipoHabitacion> newVal) {
+    public void setTipoHabitaciones(Set<TipoHabitacion> newVal) {
         tipoHabitaciones = newVal;
     }
 
@@ -53,28 +53,28 @@ public class Tarifa {
         temporada = newVal;
     }
 
-    public Date getFechaDesde() {
-        return fechaDesde;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
     /**
      *
      * @param newVal
      */
-    public void setFechaDesde(Date newVal) {
-        fechaDesde = newVal;
+    public void setFechaInicio(Date newVal) {
+        fechaInicio = newVal;
     }
 
-    public Date getFechaHasta() {
-        return fechaHasta;
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
     /**
      *
      * @param newVal
      */
-    public void setFechaHasta(Date newVal) {
-        fechaHasta = newVal;
+    public void setFechaFin(Date newVal) {
+        fechaFin = newVal;
     }
 
     public float getPrecio() {
@@ -88,4 +88,10 @@ public class Tarifa {
     public void setPrecio(float newVal) {
         precio = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "Tarifa{" + "id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precio=" + precio + ", temporada=" + temporada + ", tipoHabitaciones=" + tipoHabitaciones + '}';
+    }
+    
 }//end Tarifa

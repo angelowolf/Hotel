@@ -21,10 +21,7 @@ public class ControladorHabitacion implements IControladorHabitacion {
     public void guardar(String nombre, int capacidad, int id_tipohabitacion) {
         Habitacion h = new Habitacion();
         h.setCapacidad(capacidad);
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
-        }
+        nombre = (WordUtils.capitalize(nombre));
         h.setNombre(nombre);
         TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
         h.setTipoHabitacion(th);
@@ -35,10 +32,7 @@ public class ControladorHabitacion implements IControladorHabitacion {
     public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) {
         Habitacion h = getUno(id);
         if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
-            try {
-                nombre = (WordUtils.capitalize(nombre));
-            } catch (Exception e) {
-            }
+            nombre = (WordUtils.capitalize(nombre));
             h.setNombre(nombre);
             h.setCapacidad(capacidad);
             TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
@@ -70,10 +64,7 @@ public class ControladorHabitacion implements IControladorHabitacion {
 
     @Override
     public boolean existe(int id, String nombre, int id_hotel) {
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
-        }
+        nombre = (WordUtils.capitalize(nombre));
         Habitacion h = HABITACIONDAO.buscar(nombre, id_hotel);
         if (h != null) {
             return h.getId() != id;

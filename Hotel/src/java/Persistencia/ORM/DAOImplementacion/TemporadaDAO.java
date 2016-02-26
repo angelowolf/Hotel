@@ -3,6 +3,9 @@ package Persistencia.ORM.DAOImplementacion;
 import Persistencia.Modelo.Temporada;
 import Persistencia.ORM.Util.GenericDAO;
 import Persistencia.ORM.DAOInterface.ITemporada;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Session;
 
 /**
  * @author Angelo
@@ -11,4 +14,50 @@ import Persistencia.ORM.DAOInterface.ITemporada;
  */
 public class TemporadaDAO extends GenericDAO<Temporada, Integer> implements ITemporada {
 
+    @Override
+    public Temporada buscar(String nombre, int id) {
+        Session session = getHibernateTemplate();
+        List<Temporada> objetos = new ArrayList<Temporada>();
+        try {
+            String sql = "select * from Temporada t WHERE t.id_hotel = :id AND t.nombre = :nombre";
+            objetos = session.createSQLQuery(sql).addEntity(Temporada.class).setParameter("id", id).setParameter("nombre", nombre).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
+    }
+
+    @Override
+    public Temporada enUso(int id) {
+        Session session = getHibernateTemplate();
+        List<Temporada> objetos = new ArrayList<Temporada>();
+        try {
+            String sql = "select * from Temporada t inner join tarifa_tipohabitacion tth ON t.id = tth.id_tarifa WHERE tth.id = :id ";
+            objetos = session.createSQLQuery(sql).addEntity(Temporada.class).setParameter("id", id).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        if (objetos.isEmpty()) {
+            return null;
+        } else {
+            return objetos.get(0);
+        }
+    }
+
+    @Override
+    public List<Temporada> getTodos(int id) {
+        Session session = getHibernateTemplate();
+        List<Temporada> objetos = new ArrayList<Temporada>();
+        try {
+            String sql = "select * from Temporada t WHERE t.id_hotel = :id ";
+            objetos = session.createSQLQuery(sql).addEntity(Temporada.class).setParameter("id", id).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
 }//end TemporadaDAO

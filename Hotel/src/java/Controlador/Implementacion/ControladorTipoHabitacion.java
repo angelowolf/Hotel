@@ -15,10 +15,7 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     @Override
     public void guardar(String nombre, int id_hotel) {
         TipoHabitacion th = new TipoHabitacion();
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
-        }
+        nombre = (WordUtils.capitalize(nombre));
         th.setNombre(nombre);
         th.setId_hotel(id_hotel);
         TIPOHABITACIONDAO.guardar(th);
@@ -26,10 +23,7 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
 
     @Override
     public void actualizar(int id, String nombre, int id_hotel) {
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
-        }
+        nombre = (WordUtils.capitalize(nombre));
         TipoHabitacion th = getUno(id);
         if (th != null && th.getId_hotel() == id_hotel) {
             th.setNombre(nombre);
@@ -56,10 +50,7 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
 
     @Override
     public boolean existe(int id, String nombre, int id_hotel) {
-        try {
-            nombre = (WordUtils.capitalize(nombre));
-        } catch (Exception e) {
-        }
+        nombre = (WordUtils.capitalize(nombre));
         TipoHabitacion th = TIPOHABITACIONDAO.buscar(nombre, id_hotel);
         if (th != null) {
             return th.getId() != id;

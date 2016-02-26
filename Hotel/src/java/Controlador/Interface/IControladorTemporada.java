@@ -5,49 +5,51 @@
  */
 package Controlador.Interface;
 
-import Persistencia.Modelo.Habitacion;
-import Persistencia.ORM.DAOImplementacion.HabitacionDAO;
-import Persistencia.ORM.DAOImplementacion.TipoHabitacionDAO;
-import Persistencia.ORM.DAOInterface.IHabitacion;
-import Persistencia.ORM.DAOInterface.ITipoHabitacion;
+import Persistencia.Modelo.Temporada;
+import Persistencia.ORM.DAOImplementacion.TemporadaDAO;
+import Persistencia.ORM.DAOInterface.ITemporada;
+import java.text.ParseException;
 import java.util.List;
 
 /**
  *
  * @author ang_2
  */
-public interface IControladorHabitacion {
+public interface IControladorTemporada {
 
-    final ITipoHabitacion TIPOHABITACIONDAO = new TipoHabitacionDAO();
-    final IHabitacion HABITACIONDAO = new HabitacionDAO();
+    final ITemporada TEMPORADADAO = new TemporadaDAO();
 
     /**
-     * Crea una nueva habitacion. El tipo de habitacion es unico por cada hotel.
+     * Crea una nueva temporada.
      *
-     * @param nombre El nombre del tipo de habitacion.
-     * @param capacidad la capacidad
-     * @param id_tipohabitacion
-     *
+     * @param nombre
+     * @param fechaInicio
+     * @param fechaFin
+     * @param id_hotel
+     * @throws java.text.ParseException Si la fecha no tiene el formato correcto
+     * dd-mm-yy
      */
-    public void guardar(String nombre, int capacidad, int id_tipohabitacion);
+    public void guardar(String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException;
 
     /**
-     * Actualiza los datos de una habitacion. El id_hotel es utilizado para
+     * Actualiza los datos de una temporada. El id_hotel es utilizado para
      * cuestiones de validaciones, que solo puedan ser modificadas objetos
      * propios del hotel.
      *
      * @param id
      * @param nombre
-     * @param capacidad
-     * @param id_tipohabitacion
+     * @param fechaInicio
+     * @param fechaFin
      * @param id_hotel
+     * @throws java.text.ParseException Si la fecha no tiene el formato correcto
+     * dd-mm-yy
      * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
      * el hotel
      */
-    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) throws IllegalAccessError;
+    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, IllegalAccessError;
 
     /**
-     * Elimina una habitacion. El id_hotel es utilizado para cuestiones de
+     * Elimina una temporada. El id_hotel es utilizado para cuestiones de
      * validaciones, que solo puedan ser eliminados objetos propios del hotel.
      *
      * @param id
@@ -61,7 +63,7 @@ public interface IControladorHabitacion {
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el de
-     * la propia habitacion devolvera true.
+     * la propia temporada devolvera true.
      *
      * @param id
      * @param nombre
@@ -72,7 +74,7 @@ public interface IControladorHabitacion {
     public boolean existe(int id, String nombre, int id_hotel);
 
     /**
-     * verifica si la habitacion esta asociado a alguna entidad.
+     * verifica si la temporada esta asociado a alguna entidad.
      *
      * @param id
      * @return true si lo esta.
@@ -80,19 +82,19 @@ public interface IControladorHabitacion {
     public boolean enUso(int id);
 
     /**
-     * Busca todos las habitaciones existentes del hotel.
+     * trae todos las temporadas de un hotel.
      *
-     * @param id_hotel El hotel al que se le buscaran las habitaciones,
-     * @return Las habitaciones
+     * @param id_hotel
+     * @return
      */
-    public List<Habitacion> getTodos(int id_hotel);
+    public List<Temporada> getTodos(int id_hotel);
 
     /**
-     * recupera una habitacion de la bd. si no existe devuelve nulo.
+     * recupera una temporada de la bd. si no existe devuelve nulo.
      *
      * @param id
      * @return el objeto o nulo.
      */
-    public Habitacion getUno(int id);
+    public Temporada getUno(int id);
 
 }
