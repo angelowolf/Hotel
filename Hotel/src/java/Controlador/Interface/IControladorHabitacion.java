@@ -47,6 +47,19 @@ public interface IControladorHabitacion {
     public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) throws IllegalAccessError;
 
     /**
+     * Actualiza el tipo de habitacion. El id_hotel es utilizado para cuestiones
+     * de validaciones, que solo puedan ser modificadas objetos propios del
+     * hotel
+     *
+     * @param id
+     * @param id_tipohabitacion
+     * @param id_hotel
+     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
+     * el hotel
+     */
+    public void actualizar(int id, int id_tipohabitacion, int id_hotel) throws IllegalAccessError;
+
+    /**
      * Elimina una habitacion. El id_hotel es utilizado para cuestiones de
      * validaciones, que solo puedan ser eliminados objetos propios del hotel.
      *
@@ -102,8 +115,7 @@ public interface IControladorHabitacion {
      *
      * @param id_tipoHabitacion
      * @param id_hotel
-     * @throws IllegalAccessError Si se accede a algun objeto que no
-     * pertenezca
+     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
      * @return
      */
     public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError;

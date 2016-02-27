@@ -45,6 +45,18 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
+    public void actualizar(int id, int id_tipohabitacion, int id_hotel) {
+        Habitacion h = getUno(id);
+        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+            TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
+            h.setTipoHabitacion(th);
+            HABITACIONDAO.actualizar(h);
+        } else {
+            throw new IllegalAccessError();
+        }
+    }
+
+    @Override
     public boolean eliminar(int id, int id_hotel) {
         Habitacion h = getUno(id);
         if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {

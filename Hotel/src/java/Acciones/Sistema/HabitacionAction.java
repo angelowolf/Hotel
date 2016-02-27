@@ -25,6 +25,7 @@ public class HabitacionAction extends Accion {
 
     private final IControladorHabitacion ch = new ControladorHabitacion();
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
+    private final Hotel h = (Hotel) sesion.get("hotel");
 
     private int id, capacidad, id_tipohabitacion;
     private TipoHabitacion tipoHabitacion;
@@ -33,7 +34,6 @@ public class HabitacionAction extends Accion {
 
     private boolean validarRegistrar() {
         boolean flag = true;
-        Hotel h = (Hotel) sesion.get("hotel");
         if (capacidad <= 0) {
             addActionError(Soporte.Mensaje.INGRESECAPACIDAD);
             flag = false;
@@ -44,13 +44,20 @@ public class HabitacionAction extends Accion {
         } else if (ch.existe(id, nombre, h.getId())) {
             addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.HABITACION));
             flag = false;
-        }      
-        TipoHabitacion th = cth.getUno(id_tipohabitacion);
-        if (th != null && th.getId_hotel() != h.getId()) {
-            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
+        }
+        if (!validarTipoHabitacion()) {
             flag = false;
         }
         return flag;
+    }
+
+    private boolean validarTipoHabitacion() {
+        TipoHabitacion th = cth.getUno(id_tipohabitacion);
+        if (th != null && th.getId_hotel() != h.getId()) {
+            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
+            return false;
+        }
+        return true;
     }
 
     public String registrar() {
@@ -69,7 +76,6 @@ public class HabitacionAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             ch.actualizar(id, nombre, capacidad, id_tipohabitacion, h.getId());
         } catch (IllegalAccessError e) {
@@ -82,15 +88,30 @@ public class HabitacionAction extends Accion {
         return SUCCESS;
     }
 
+    public String modificartipohabitacion() {
+        if (!validarTipoHabitacion()) {
+            codigo = 200;
+            return INPUT;
+        }
+        try {
+            ch.actualizar(id, id_tipohabitacion, h.getId());
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        }
+        addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
+        codigo = 400;
+        return SUCCESS;
+    }
+
     public String listar() {
-        Hotel hotel = (Hotel) sesion.get("hotel");
-        lista = ch.getTodos(hotel.getId());
+        lista = ch.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
     public String eliminar() {
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             if (ch.eliminar(id, h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.HABITACION));
@@ -123,13 +144,6 @@ public class HabitacionAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-    }
-
-    public String crearHabitacion() {
-        capacidad = 3;
-        nombre = "2";
-        id_tipohabitacion = 1;
-        return registrar();
     }
 
     public int getId() {
