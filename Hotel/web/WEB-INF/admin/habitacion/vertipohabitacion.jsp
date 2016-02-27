@@ -28,20 +28,22 @@
     <div class="col-xs-12 col-md-12">
         <div class="page-heading"><h4>Habitaciones</h4></div>
         <c:forEach var="habitacion" items="${accion.habitaciones}" >
-        <div class="col-xs-3 text-center bloque-habitacion">
-            ${habitacion.nombre}
-        </div>
-        <div style="display:none;">
-            <fieldset>
-                <legend>Habitación ${habitacion.nombre}</legend>
-                <div class="form-group">
-                    <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
-                    <div class="col-xs-12 col-md-10">
-                        <input type="text" class="form-control" name="nombre" value="${habitacion.nombre}"/>
+            <div class="col-xs-3">
+                <button class="btn btn-lg btn-default btn-block bloque-habitacion">
+                    ${habitacion.nombre}
+                </button>
+            </div>
+            <div style="display:none;">
+                <fieldset>
+                    <legend>Habitación ${habitacion.nombre}</legend>
+                    <div class="form-group">
+                        <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
+                        <div class="col-xs-12 col-md-10">
+                            <input type="text" class="form-control" name="nombre" value="${habitacion.nombre}"/>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
-        </div>
+                </fieldset>
+            </div>
         </c:forEach>
     </div>
 </div>

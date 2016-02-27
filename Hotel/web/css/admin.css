@@ -5,15 +5,17 @@ body {
 	border: none;
 	margin: 0 0 15px 0;
 }
-
+input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus {
+	outline: none;
+}
 
 /* HABITACIONES */
-.bloque-habitacion {
-	background: #DDD;
-	border: 1px solid #AAA;
-	min-width: 70px;
-	min-height: 70px;
-	vertical-align: middle;
-	line-height: 70px;
-	margin: 10px 5px;
+.col-xs-3 .bloque-habitacion {
+	min-width: 80px;
+}
+
+.bloque-habitacion:active {
+}
+
+.bloque-habitacion .label {
 }
