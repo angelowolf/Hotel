@@ -27,7 +27,7 @@
         <action name="listar" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre</param>
+                <param name="excludeProperties">id,nombre,habitaciones</param>
             </result>
         </action>           
         <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction">
@@ -36,7 +36,7 @@
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista</param>
+                <param name="excludeProperties">lista,habitaciones</param>
             </result>   
         </action>
         <action name="mishabitaciones" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
