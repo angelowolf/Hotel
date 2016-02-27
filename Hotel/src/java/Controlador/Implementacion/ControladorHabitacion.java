@@ -1,6 +1,7 @@
 package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorHabitacion;
+import Controlador.Interface.IControladorTipoHabitacion;
 import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.DAOImplementacion.BloqueoDAO;
@@ -91,6 +92,19 @@ public class ControladorHabitacion implements IControladorHabitacion {
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError {
+        List<Habitacion> lista;
+        IControladorTipoHabitacion controladorTipoHabitacion = new ControladorTipoHabitacion();
+        TipoHabitacion th = controladorTipoHabitacion.getUno(id_tipoHabitacion);
+        if (th != null && th.getId_hotel() == id_hotel) {
+            lista = HABITACIONDAO.getTodosByTipoHabitacion(id_tipoHabitacion);
+        } else {
+            throw new IllegalAccessError();
+        }
+        return lista;
     }
 
 }//end ControladorHabitacion

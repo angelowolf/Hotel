@@ -95,4 +95,17 @@ public interface IControladorHabitacion {
      */
     public Habitacion getUno(int id);
 
+    /**
+     * Busca todas las habitaciones segun el tipo de habitacion solicitado. El
+     * id_hotel es utilizado para cuestiones de validaciones, que solo puedan
+     * ser eliminados objetos propios del hotel.
+     *
+     * @param id_tipoHabitacion
+     * @param id_hotel
+     * @throws IllegalAccessError Si se accede a algun objeto que no
+     * pertenezca
+     * @return
+     */
+    public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError;
+
 }

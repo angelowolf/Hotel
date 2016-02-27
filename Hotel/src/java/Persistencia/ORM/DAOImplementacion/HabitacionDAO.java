@@ -68,4 +68,17 @@ public class HabitacionDAO extends GenericDAO<Habitacion, Integer> implements IH
         return objetos;
     }
 
+    @Override
+    public List<Habitacion> getTodosByTipoHabitacion(int id_tipoHabitacion) {
+        Session session = getHibernateTemplate();
+        List<Habitacion> objetos = new ArrayList<Habitacion>();
+        try {
+            String sql = "select * from Habitacion h inner join TipoHabitacion tp ON h.id_tipohabitacion = tp.id WHERE tp.id = :id ";
+            objetos = session.createSQLQuery(sql).addEntity(Habitacion.class).setParameter("id", id_tipoHabitacion).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
+
 }//end HabitacionDAO

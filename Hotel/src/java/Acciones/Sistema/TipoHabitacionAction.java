@@ -6,10 +6,14 @@
 package Acciones.Sistema;
 
 import Acciones.Accion;
+import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
+import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoHabitacion;
+import Soporte.VistaContenido;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +26,7 @@ public class TipoHabitacionAction extends Accion {
 
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
 
-    private String nombre;
+    private String nombre, contenido;
     private int id;
     private List<TipoHabitacion> lista = new ArrayList<TipoHabitacion>();
 
@@ -108,6 +112,21 @@ public class TipoHabitacionAction extends Accion {
         }
     }
 
+    public String getHabitaciones() {
+        IControladorHabitacion ch = new ControladorHabitacion();
+        Hotel h = (Hotel) sesion.get("hotel");
+        try {
+            List<Habitacion> habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
+            contenido = VistaContenido.crearTabla(habitaciones);
+            codigo = 400;
+            return SUCCESS;
+        } catch (IllegalAccessError e) {
+            codigo = 200;
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            return ERROR;
+        }
+    }
+
     public String creartipohabitacion() {
         nombre = "Superior2";
         return registrar();
@@ -131,6 +150,10 @@ public class TipoHabitacionAction extends Accion {
 
     public List<TipoHabitacion> getLista() {
         return lista;
+    }
+
+    public String getContenido() {
+        return contenido;
     }
 
     @Override

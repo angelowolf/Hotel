@@ -25,6 +25,40 @@
         </put-list-attribute>
     </definition>
     <!--FIN MASTER PAGE-->
+    <!--MASTER PAGE ADMIN-->
+    <definition name="adminlayout" template="/WEB-INF/admin/adminlayout.jsp">
+        <put-attribute name="title" value="Administración" />
+        <put-attribute name="body" value="" /> 
+        <put-list-attribute name="stylesheet" >
+            <add-attribute value="/../css/bootstrap.css" />
+            <add-attribute value="/../bower_components/font-awesome/css/font-awesome.min.css" />
+            <add-attribute value="/../css/admin.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascript" >
+            <add-attribute value="/../bower_components/jquery/dist/jquery.min.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="/../js/admin.js" />
+        </put-list-attribute>
+    </definition>
+    <!--FIN MASTER PAGE ADMIN-->
+    <!--INDEX ADMIN-->
+    <definition name="/admin/index.tiles" extends="adminlayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/WEB-INF/admin/index.jsp" />
+    </definition>
+    <!--HABITACIONES-->
+    <definition name="/admin/habitacion/habitaciones.tiles" extends="adminlayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/WEB-INF/admin/habitacion/habitaciones.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/admin/habitacion/mishabitaciones.js" />
+        </put-list-attribute>
+    </definition>
+    
+    
+    
+    
+    
     <!--INDEX ROOT-->
     <definition name="/root/index.tiles" extends="rootlayout">
         <put-attribute name="title" value="Home" />

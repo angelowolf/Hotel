@@ -34,6 +34,12 @@
                 <param name="excludeNullProperties">true</param>
                 <param name="excludeProperties">id,nombre</param>
             </result>
+        </action>   
+        <action name="contenido" method="getHabitaciones" class="Acciones.Sistema.TipoHabitacionAction">
+            <result type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="excludeProperties">id,nombre,lista,habitaciones</param>
+            </result>
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">

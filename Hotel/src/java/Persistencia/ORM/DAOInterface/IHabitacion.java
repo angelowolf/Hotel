@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @created 28-ene-2016 08:44:26 p.m.
  */
-public interface IHabitacion extends IGenericDAO<Habitacion,Integer> {
+public interface IHabitacion extends IGenericDAO<Habitacion, Integer> {
 
     /**
      * Busca una habitacion por nombre.
@@ -35,5 +35,13 @@ public interface IHabitacion extends IGenericDAO<Habitacion,Integer> {
      * @return Lista de TipoHabitacion
      */
     public List<Habitacion> getTodos(int id);
-    
+
+    /**
+     * Trae todas las habitaciones segun un tipo de habitacion.
+     *
+     * @param id_tipoHabitacion
+     * @return
+     */
+    public List<Habitacion> getTodosByTipoHabitacion(int id_tipoHabitacion);
+
 }
