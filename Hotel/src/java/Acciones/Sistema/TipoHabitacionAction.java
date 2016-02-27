@@ -13,7 +13,6 @@ import Controlador.Interface.IControladorTipoHabitacion;
 import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.TipoHabitacion;
-import Soporte.VistaContenido;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -29,6 +28,7 @@ public class TipoHabitacionAction extends Accion {
     private String nombre, contenido;
     private int id;
     private List<TipoHabitacion> lista = new ArrayList<TipoHabitacion>();
+    private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
 
     private boolean validarRegistrar() {
         boolean flag = true;
@@ -117,12 +117,6 @@ public class TipoHabitacionAction extends Accion {
         Hotel h = (Hotel) sesion.get("hotel");
         try {
             habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
-            //contenido = VistaContenido.crearTabla(habitaciones);
-
-            TipoHabitacion th = cth.getUno(id);
-            nombre = th.getNombre();
-            id = th.getId();
-            
             codigo = 400;
             return SUCCESS;
         } catch (IllegalAccessError e) {
@@ -131,15 +125,9 @@ public class TipoHabitacionAction extends Accion {
             return INPUT;
         }
     }
-    private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
 
     public List<Habitacion> getHabitaciones() {
         return habitaciones;
-    }
-
-    public String creartipohabitacion() {
-        nombre = "Superior2";
-        return registrar();
     }
 
     public String getNombre() {
