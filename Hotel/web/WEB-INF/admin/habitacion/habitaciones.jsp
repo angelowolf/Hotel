@@ -15,7 +15,7 @@
             <s:iterator var="tipo" value="lista" status="stat">
                 <s:if test="#stat.index == 0">
                     <div class="tab-pane fade active in" id="tipo-<s:property value="#tipo.id" />">
-                        <s:action name="contenido2" var="accion">
+                        <s:action name="contenido" var="accion">
                             <s:param name="id"><s:property value="#tipo.id" /></s:param>
                         </s:action>
                         <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion.jsp">

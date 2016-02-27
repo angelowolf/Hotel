@@ -20,11 +20,6 @@
             </result>                 
         </global-results>      
         
-        <!--PRUEBA ACCION TESTING-->
-        <action name="creartipohabitacion" method="creartipohabitacion" class="Acciones.Sistema.TipoHabitacionAction">
-            <result name="success">/exito.jsp</result>
-            <result name="input">/input.jsp</result>
-        </action>
         <!--COMIENZO ACCIONES-->       
         <action name="registrar" method="registrar" class="Acciones.Sistema.TipoHabitacionAction"/>
         <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction"/>    
@@ -34,16 +29,9 @@
                 <param name="excludeNullProperties">true</param>
                 <param name="excludeProperties">id,nombre</param>
             </result>
-        </action>   
-        
-        <action name="contenido2" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction">
-            <result name="success">/WEB-INF/admin/habitacion/vistacontenido.jsp</result>
-        </action>        
+        </action>           
         <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre,lista,habitaciones</param>
-            </result>
+            <result name="success">/WEB-INF/admin/habitacion/vistacontenido.jsp</result>
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
