@@ -1,58 +1,81 @@
 (function($){
-	//getHabitaciones();
+	setAgregarOnClick();
+	setHabitacionesOnClick();
 })(jQuery);
 
-function getHabitaciones() {
+function setAgregarOnClick() {
+	$('#agregar').click(function(e) {
+		e.preventDefault();
+		var $modal = $('#modal-agregar');
+		var idTipo = $('.nav-tabs .active').data('id');
+		$modal.find('input[name="id_tipohabitacion"]').val(idTipo);
+		var data = $modal.find('#form-agregar').serialize();
+		
+		$.ajax({
+			url: '/habitacion/registrar',
+			type: 'POST',
+			dataType: 'JSON',
+			data: data,
+			success: function(data) {
+				if (data.codigo == 400) {
+					alert('exito');
+				} else {
+					alert('error');
+				}
+				$modal.modal('hide');
+			}
+		})
+	});
+}
+
+function setHabitacionesOnClick() {
+	$('button.bloque-habitacion').click(function(e){
+		e.preventDefault();
+		var id = this.value;
+		var $bloque = $(this);
+		var $modal = $('#modal-editar');
+		$modal[0].reset;
+
+		$.ajax({
+			url: '/habitacion/editar',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {id: id },
+			success: function(data) {
+				if (data.codigo == 400) {
+					$modal.find('input[name="nombre"]').val(data.nombre);
+					$modal.find('input[name="id"]').val(id);
+					$modal.find('input[name="id_tipohabitacion"]').val(data.id_tipohabitacion);
+					$modal.find('input[name="capacidad"]').val(data.capacidad);
+					$('#editar').off('click').click(function(e) {
+						e.preventDefault();
+						editar($modal, $bloque);
+					});
+					$modal.modal('show');
+				} else {
+					
+				}
+			}
+		})
+
+	});
+}
+
+function editar($modal, $bloque, nombre) {
+	var data = $('#form-editar').serialize();
+
 	$.ajax({
-		url : '/tipohabitacion/listar',
+		url: '/habitacion/modificar',
+		type: 'POST',
 		dataType: 'JSON',
-		type: 'POST',
+		data: data,
 		success: function(data) {
-			data.codigo == 400 ? initTabsHabitaciones(data) : showError(data);
-		},
-		error:function(error) {
-			alert('Error al comunicarse con el servidor.');
+			if (data.codigo == 400) {
+				$bloque.html($modal.find('input[name="nombre"]').val());
+			} else {
+				alert('error');
+			}
+			$modal.modal('hide');
 		}
-	});
-}
-
-function initTabsHabitaciones(data) {
-	var stringNav = '<ul class="nav nav-tabs">';
-	var stringContenido = '<div id="tiposHabitaciones" class="tab-content">';
-	var flag = true;
-	for (var i = 0; i < data.lista.length; i++) {
-	 	stringNav += '<li'+( flag ? ' class="active"' : '' )+'"><a href="#tipo-'+data.lista[i].id+'" data-toggle="tab" aria-expanded="'+flag+'">'+data.lista[i].nombre+'</a></li>';
-	 	stringContenido += '<div class="tab-pane fade'+( flag ? ' active in': '' )+'" id="#tipo-'+data.lista[i].id+'"></div>';
-		flag = false;
-	}
-	stringNav += '</ul>';
-	stringContenido += '</div>';
-
-	getContenido(data.lista[0].id, function(contenido) {
-		$('.container').append(stringNav+stringContenido);
-		$(document.getElementById('#tipo-'+data.lista[0].id)).append(contenido);
-	});
-
-	setTabOnClickEvents();
-}
-
-function getContenido(id, callback) {
-	$.ajax({
-		url : '/tipohabitacion/contenido2',
-		dataType: 'html',
-		type: 'POST',
-		data: {id:id},
-		success: function(data) {
-			console.log(data);
-			$('.container').html(data);
-			//data.codigo == 400 ? callback(data.contenido) : showError(data);
-		},
-		error:function(error) {
-			alert('Error al comunicarse con el servidor.');
-		}
-	});
-}
-
-function showError(data) {
-
+	})
 }

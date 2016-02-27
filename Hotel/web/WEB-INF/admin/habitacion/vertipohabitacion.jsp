@@ -13,6 +13,11 @@
                             <input type="text" class="form-control" name="nombre" value="${tipo.nombre}"/>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 pull-left">
+                            <button class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
         </form>
@@ -26,24 +31,88 @@
         </div>
     </div>
     <div class="col-xs-12 col-md-12">
-        <div class="page-heading"><h4>Habitaciones</h4></div>
-        <c:forEach var="habitacion" items="${accion.habitaciones}" >
-            <div class="col-xs-3">
-                <button class="btn btn-lg btn-default btn-block bloque-habitacion">
-                    ${habitacion.nombre}
-                </button>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Habitaciones</h4>
+                <button data-toggle="modal" data-target="#modal-agregar" class="btn btn-sm btn-success">Agregar habitación <i class="fa fa-plus"></i></button>
             </div>
-            <div style="display:none;">
-                <fieldset>
-                    <legend>Habitación ${habitacion.nombre}</legend>
-                    <div class="form-group">
-                        <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
-                        <div class="col-xs-12 col-md-10">
-                            <input type="text" class="form-control" name="nombre" value="${habitacion.nombre}"/>
+        </div>
+        
+        <div class="row">
+            <c:forEach var="habitacion" items="${accion.habitaciones}" >
+                <div class="col-xs-4">
+                    <button value="${habitacion.id}" class="btn btn-lg btn-default btn-block bloque-habitacion">
+                        ${habitacion.nombre}
+                    </button>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="Editar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Editar habitación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="form-editar">
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="id_tipohabitacion" value="">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="nombre" class="label-control">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="capacidad" class="label-control">Capacidad</label>
+                                <input type="text" name="capacidad" class="form-control" value="">
+                            </div>
                         </div>
                     </div>
-                </fieldset>
+                </form>
             </div>
-        </c:forEach>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="editar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="Agregar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Agregar habitación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="form-agregar">
+                        <input type="hidden" name="id_tipohabitacion" value="">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="nombre" class="label-control">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="capacidad" class="label-control">Capacidad</label>
+                                <input type="text" name="capacidad" class="form-control" value="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="agregar">Guardar</button>
+            </div>
+        </div>
     </div>
 </div>
