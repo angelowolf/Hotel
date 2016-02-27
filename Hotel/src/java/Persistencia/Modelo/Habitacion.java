@@ -76,4 +76,11 @@ public class Habitacion {
     public void setCapacidad(int newVal) {
         capacidad = newVal;
     }
+
+    @Override
+    public String toString() {
+        return "Habitacion{" + "id=" + id + ", nombre=" + nombre + ", mantenimientos=" + mantenimientos + ", capacidad=" + capacidad + ", bloqueos=" + bloqueos + ", tipoHabitacion=" + tipoHabitacion + '}';
+    }
+    
+    
 }//end Habitacion

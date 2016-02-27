@@ -41,9 +41,6 @@
                 <param name="excludeProperties">lista</param>
             </result>            
         </action>
-        <action name="mishabitaciones" method="nuevo" class="Acciones.LinkAction">
-               <result name="nuevo" type="tiles">/admin/habitacion/habitaciones.tiles</result>
-        </action>
         <!--FIN ACCIONES-->
     </package>
 </struts>

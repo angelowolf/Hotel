@@ -108,23 +108,33 @@ public class TipoHabitacionAction extends Accion {
         } else {
             addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
-            return ERROR;
+            return INPUT;
         }
     }
 
-    public String getHabitaciones() {
+    public String getHabitacionesByTipo() {
         IControladorHabitacion ch = new ControladorHabitacion();
         Hotel h = (Hotel) sesion.get("hotel");
         try {
-            List<Habitacion> habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
-            contenido = VistaContenido.crearTabla(habitaciones);
+            habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
+            //contenido = VistaContenido.crearTabla(habitaciones);
+
+            TipoHabitacion th = cth.getUno(id);
+            nombre = th.getNombre();
+            id = th.getId();
+            
             codigo = 400;
             return SUCCESS;
         } catch (IllegalAccessError e) {
             codigo = 200;
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            return ERROR;
+            return INPUT;
         }
+    }
+    private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+
+    public List<Habitacion> getHabitaciones() {
+        return habitaciones;
     }
 
     public String creartipohabitacion() {

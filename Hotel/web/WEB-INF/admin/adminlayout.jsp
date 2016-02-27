@@ -39,7 +39,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Habitaciones <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<s:url action="mishabitaciones" namespace="/habitacion"/>">Habitaciones</a></li>
+            <li><a href="<s:url action="mishabitaciones" namespace="/tipohabitacion"/>">Habitaciones</a></li>
           </ul>
         </li>
       </ul>
