@@ -23,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DetalleMantenimientoAction extends Accion implements AccionABMC {
 
-    private IControladorDetalleMantenimiento cdm = new ControladorDetalleMantenimiento();
+    private final IControladorDetalleMantenimiento cdm = new ControladorDetalleMantenimiento();
 
     private int id, id_habitacion;
     private String descripcion;
@@ -145,6 +145,50 @@ public class DetalleMantenimientoAction extends Accion implements AccionABMC {
     @Override
     public int getCodigo() {
         return codigo;
+    }
+
+    public List<DetalleMantenimiento> getLista() {
+        return lista;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId_habitacion() {
+        return id_habitacion;
+    }
+
+    public void setId_habitacion(int id_habitacion) {
+        this.id_habitacion = id_habitacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public boolean isResuelto() {
+        return resuelto;
+    }
+
+    public void setResuelto(boolean resuelto) {
+        this.resuelto = resuelto;
     }
 
 }

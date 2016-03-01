@@ -27,12 +27,12 @@
     <include file="struts-hotel.xml"></include>        
     <include file="struts-tipohabitacion.xml"></include>
     <include file="struts-habitacion.xml"></include>
+    <include file="struts-detallemantenimiento.xml"></include>
     
     
     <include file="struts-temporada.xml"></include>
     <include file="struts-tarifa.xml"></include>
     
     <include file="struts-ERRORIDE.xml"></include>
-   
     <!--ACCIONES FIN-->
 </struts>
