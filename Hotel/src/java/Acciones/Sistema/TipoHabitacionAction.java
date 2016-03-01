@@ -6,6 +6,7 @@
 package Acciones.Sistema;
 
 import Acciones.Accion;
+import Acciones.AccionABMC;
 import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorHabitacion;
@@ -21,7 +22,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class TipoHabitacionAction extends Accion {
+public class TipoHabitacionAction extends Accion implements AccionABMC {
 
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
 
@@ -30,9 +31,15 @@ public class TipoHabitacionAction extends Accion {
     private List<TipoHabitacion> lista = new ArrayList<TipoHabitacion>();
     private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
 
+    public TipoHabitacionAction() {
+        h = (Hotel) sesion.get("hotel");
+        if (h == null) {
+            throw new NullPointerException();
+        }
+    }
+
     private boolean validarRegistrar() {
         boolean flag = true;
-        Hotel h = (Hotel) sesion.get("hotel");
         if (StringUtils.isBlank(nombre)) {
             addActionError(Soporte.Mensaje.INGRESENOMBRETIPOHABITACION);
             flag = false;
@@ -43,8 +50,8 @@ public class TipoHabitacionAction extends Accion {
         return flag;
     }
 
+    @Override
     public String registrar() {
-        Hotel h = (Hotel) sesion.get("hotel");
         if (!validarRegistrar()) {
             codigo = 200;
             return INPUT;
@@ -54,33 +61,33 @@ public class TipoHabitacionAction extends Accion {
         return SUCCESS;
     }
 
+    @Override
     public String modificar() {
         if (!validarRegistrar()) {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             cth.actualizar(id, nombre, h.getId());
+            addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.TIPOHABITACION));
+            codigo = 400;
         } catch (IllegalAccessError e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         }
-        addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.TIPOHABITACION));
-        codigo = 400;
         return SUCCESS;
     }
 
+    @Override
     public String listar() {
-        Hotel hotel = (Hotel) sesion.get("hotel");
-        lista = cth.getTodos(hotel.getId());
+        lista = cth.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
+    @Override
     public String eliminar() {
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             if (cth.eliminar(id, h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
@@ -98,15 +105,22 @@ public class TipoHabitacionAction extends Accion {
         }
     }
 
+    @Override
     public String editar() {
-        TipoHabitacion th = cth.getUno(id);
-        if (th != null) {
-            nombre = th.getNombre();
-            id = th.getId();
-            codigo = 400;
-            return SUCCESS;
-        } else {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
+        try {
+            TipoHabitacion th = cth.getUno(id,h.getId());
+            if (th != null) {
+                nombre = th.getNombre();
+                id = th.getId();
+                codigo = 400;
+                return SUCCESS;
+            } else {
+                addActionError(Soporte.Mensaje.IDINVALIDO);
+                codigo = 200;
+                return INPUT;
+            }
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -114,7 +128,6 @@ public class TipoHabitacionAction extends Accion {
 
     public String getHabitacionesByTipo() {
         IControladorHabitacion ch = new ControladorHabitacion();
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
             codigo = 400;

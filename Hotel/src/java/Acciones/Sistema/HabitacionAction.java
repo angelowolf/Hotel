@@ -6,6 +6,7 @@
 package Acciones.Sistema;
 
 import Acciones.Accion;
+import Acciones.AccionABMC;
 import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorHabitacion;
@@ -21,16 +22,22 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class HabitacionAction extends Accion {
+public class HabitacionAction extends Accion implements AccionABMC {
 
     private final IControladorHabitacion ch = new ControladorHabitacion();
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
-    private final Hotel h = (Hotel) sesion.get("hotel");
 
     private int id, capacidad, id_tipohabitacion;
     private TipoHabitacion tipoHabitacion;
     private String nombre;
     private List<Habitacion> lista = new ArrayList<Habitacion>();
+
+    public HabitacionAction() {
+        h = (Hotel) sesion.get("hotel");
+        if (h == null) {
+            throw new NullPointerException();
+        }
+    }
 
     private boolean validarRegistrar() {
         boolean flag = true;
@@ -52,14 +59,21 @@ public class HabitacionAction extends Accion {
     }
 
     private boolean validarTipoHabitacion() {
-        TipoHabitacion th = cth.getUno(id_tipohabitacion);
-        if (th != null && th.getId_hotel() != h.getId()) {
-            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
+        try {
+            TipoHabitacion th = cth.getUno(id_tipohabitacion, h.getId());
+            if (th == null) {
+                addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
+                return false;
+            } else {
+                return true;
+            }
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             return false;
         }
-        return true;
     }
 
+    @Override
     public String registrar() {
         if (!validarRegistrar()) {
             codigo = 200;
@@ -71,6 +85,7 @@ public class HabitacionAction extends Accion {
         return SUCCESS;
     }
 
+    @Override
     public String modificar() {
         if (!validarRegistrar()) {
             codigo = 200;
@@ -105,12 +120,14 @@ public class HabitacionAction extends Accion {
         return SUCCESS;
     }
 
+    @Override
     public String listar() {
         lista = ch.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
+    @Override
     public String eliminar() {
         try {
             if (ch.eliminar(id, h.getId())) {
@@ -129,18 +146,25 @@ public class HabitacionAction extends Accion {
         }
     }
 
+    @Override
     public String editar() {
-        Habitacion habitacion = ch.getUno(id);
-        if (habitacion != null) {
-            nombre = habitacion.getNombre();
-            capacidad = habitacion.getCapacidad();
-            id = habitacion.getId();
-            id_tipohabitacion = habitacion.getTipoHabitacion().getId();
-            tipoHabitacion = habitacion.getTipoHabitacion();
-            codigo = 400;
-            return SUCCESS;
-        } else {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
+        try {
+            Habitacion habitacion = ch.getUno(id,h.getId());
+            if (habitacion != null && habitacion.getTipoHabitacion().getId_hotel() == h.getId()) {
+                nombre = habitacion.getNombre();
+                capacidad = habitacion.getCapacidad();
+                id = habitacion.getId();
+                id_tipohabitacion = habitacion.getTipoHabitacion().getId();
+                tipoHabitacion = habitacion.getTipoHabitacion();
+                codigo = 400;
+                return SUCCESS;
+            } else {
+                addActionError(Soporte.Mensaje.IDINVALIDO);
+                codigo = 200;
+                return INPUT;
+            }
+        } catch (IllegalAccessError e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         }

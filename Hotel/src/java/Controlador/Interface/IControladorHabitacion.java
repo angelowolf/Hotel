@@ -104,9 +104,10 @@ public interface IControladorHabitacion {
      * recupera una habitacion de la bd. si no existe devuelve nulo.
      *
      * @param id
+     * @param id_hotel
      * @return el objeto o nulo.
      */
-    public Habitacion getUno(int id);
+    public Habitacion getUno(int id,int id_hotel)throws IllegalAccessError;
 
     /**
      * Busca todas las habitaciones segun el tipo de habitacion solicitado. El

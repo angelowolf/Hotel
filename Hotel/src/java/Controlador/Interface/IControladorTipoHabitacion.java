@@ -88,8 +88,9 @@ public interface IControladorTipoHabitacion {
      * recupera un tipo de habitacion de la bd. si no existe devuelve nulo.
      *
      * @param id
+     * @param id_hotel
      * @return el objeto o nulo.
      */
-    public TipoHabitacion getUno(int id);
+    public TipoHabitacion getUno(int id,int id_hotel)throws IllegalAccessError;
 
 }

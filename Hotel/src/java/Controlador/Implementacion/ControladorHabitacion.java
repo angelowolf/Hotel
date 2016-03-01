@@ -31,8 +31,8 @@ public class ControladorHabitacion implements IControladorHabitacion {
 
     @Override
     public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) {
-        Habitacion h = getUno(id);
-        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+        Habitacion h = getUno(id, id_hotel);
+        if (h != null) {
             nombre = (WordUtils.capitalize(nombre));
             h.setNombre(nombre);
             h.setCapacidad(capacidad);
@@ -46,8 +46,8 @@ public class ControladorHabitacion implements IControladorHabitacion {
 
     @Override
     public void actualizar(int id, int id_tipohabitacion, int id_hotel) {
-        Habitacion h = getUno(id);
-        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+        Habitacion h = getUno(id,id_hotel);
+        if (h != null) {
             TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
             h.setTipoHabitacion(th);
             HABITACIONDAO.actualizar(h);
@@ -58,8 +58,8 @@ public class ControladorHabitacion implements IControladorHabitacion {
 
     @Override
     public boolean eliminar(int id, int id_hotel) {
-        Habitacion h = getUno(id);
-        if (h != null && h.getTipoHabitacion().getId_hotel() == id_hotel) {
+        Habitacion h = getUno(id,id_hotel);
+        if (h != null) {
             if (enUso(id)) {
                 return false;
             } else {
@@ -96,11 +96,14 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
-    public Habitacion getUno(int id) {
+    public Habitacion getUno(int id, int id_hotel) {
         Habitacion h = HABITACIONDAO.buscar(id);
         try {
-            h.getNombre();
-            return h;
+            if (h.getTipoHabitacion().getId_hotel() == id_hotel) {
+                return h;
+            } else {
+                throw new IllegalAccessError();
+            }
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }
@@ -110,8 +113,8 @@ public class ControladorHabitacion implements IControladorHabitacion {
     public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError {
         List<Habitacion> lista;
         IControladorTipoHabitacion controladorTipoHabitacion = new ControladorTipoHabitacion();
-        TipoHabitacion th = controladorTipoHabitacion.getUno(id_tipoHabitacion);
-        if (th != null && th.getId_hotel() == id_hotel) {
+        TipoHabitacion th = controladorTipoHabitacion.getUno(id_tipoHabitacion,id_hotel);
+        if (th != null) {
             lista = HABITACIONDAO.getTodosByTipoHabitacion(id_tipoHabitacion);
         } else {
             throw new IllegalAccessError();

@@ -37,6 +37,8 @@ public class Mensaje {
     public static final String RESERVA = "Reserva";
     public static final String TEMPORADA = "Temporada";
     public static final String TARIFA = "Tarifa";
+    public static final String DETALLEMANTENIMIENTO = "Datella Mantenimiento";
+    public static final String BLOQUEO = "Bloqueo";
     //************************************************************************//
     //Mensajes de validacion//
     public static final String PAGO = "Pago";
@@ -87,8 +89,9 @@ public class Mensaje {
     public static final String FORMATOFECHANOCORRECTO = "El formato de la fecha ingresada no es correcto.";
     public static final String SELECCIONEUNTIPODEHABITACION = "Seleccione almenos un " + TIPOHABITACION + ".";
     public static final String LATEMPORADANOESVALIDO = "La " + TEMPORADA + " no es valida.";
-
-    ;
+    public static final String INGRESEDESCRIPCION = "Ingrese una descripcioón.";
+    public static final String INGRESEFECHA = "Ingrese la fecha en la que ocurrio el evento.";
+    
 
     /**
      * Crea un mensaje con el tiempo pasado por parametro. "Ya se ha enviado un

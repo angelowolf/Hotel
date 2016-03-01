@@ -26,7 +26,7 @@
                 </s:if>
                 <s:else>
                     <div class="tab-pane fade" id="tipo-<s:property value="#tipo.id" />">
-                        <s:action name="contenido2" var="accion">
+                        <s:action name="contenido" var="accion">
                             <s:param name="id"><s:property value="#tipo.id" /></s:param>
                         </s:action>
                         <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion.jsp">

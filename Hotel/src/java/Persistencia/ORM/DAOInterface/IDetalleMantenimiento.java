@@ -2,6 +2,7 @@ package Persistencia.ORM.DAOInterface;
 
 import Persistencia.Modelo.DetalleMantenimiento;
 import Persistencia.ORM.Util.IGenericDAO;
+import java.util.List;
 
 /**
  * @author Angelo
@@ -16,5 +17,7 @@ public interface IDetalleMantenimiento extends IGenericDAO<DetalleMantenimiento,
      * @param id La habitacion.
      */
     public void eliminarTodos(int id);
+
+    public List<DetalleMantenimiento> getTodos(int id_habitacion);
 
 }

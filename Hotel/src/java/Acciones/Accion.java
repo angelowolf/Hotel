@@ -5,6 +5,7 @@
  */
 package Acciones;
 
+import Persistencia.Modelo.Hotel;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
@@ -17,6 +18,7 @@ public abstract class Accion extends ActionSupport {
 
     protected final Map<String, Object> sesion = ActionContext.getContext().getSession();
     protected int codigo;
+    protected Hotel h;
 
     public abstract int getCodigo();
 

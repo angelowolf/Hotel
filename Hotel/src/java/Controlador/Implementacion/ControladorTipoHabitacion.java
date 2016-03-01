@@ -24,8 +24,8 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     @Override
     public void actualizar(int id, String nombre, int id_hotel) {
         nombre = (WordUtils.capitalize(nombre));
-        TipoHabitacion th = getUno(id);
-        if (th != null && th.getId_hotel() == id_hotel) {
+        TipoHabitacion th = getUno(id,id_hotel);
+        if (th != null) {
             th.setNombre(nombre);
             TIPOHABITACIONDAO.actualizar(th);
         } else {
@@ -35,8 +35,8 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
 
     @Override
     public boolean eliminar(int id, int id_hotel) {
-        TipoHabitacion th = getUno(id);
-        if (th != null && th.getId_hotel() == id_hotel) {
+        TipoHabitacion th = getUno(id,id_hotel);
+        if (th != null) {
             if (enUso(id)) {
                 return false;
             } else {
@@ -69,11 +69,14 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public TipoHabitacion getUno(int id) {
+    public TipoHabitacion getUno(int id, int id_hotel) {
         TipoHabitacion th = TIPOHABITACIONDAO.buscar(id);
         try {
-            th.getNombre();
-            return th;
+            if (th.getId_hotel() == id_hotel) {
+                return th;
+            } else {
+                throw new IllegalAccessError();
+            }
         } catch (org.hibernate.ObjectNotFoundException e) {
             return null;
         }

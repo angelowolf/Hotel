@@ -34,8 +34,8 @@ public class ControladorTarifa implements IControladorTarifa {
         IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
         Set<TipoHabitacion> set = new HashSet<TipoHabitacion>();
         for (Integer cadaUno : tiposHabitacionesSeleccionados) {
-            TipoHabitacion th = cth.getUno(cadaUno);
-            if (th != null && th.getId_hotel() == id_hotel) {
+            TipoHabitacion th = cth.getUno(cadaUno,id_hotel);
+            if (th != null ) {
                 set.add(th);
             } else {
                 throw new IllegalAccessError();
