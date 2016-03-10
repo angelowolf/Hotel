@@ -2,7 +2,9 @@ package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.Habitacion;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.DAOImplementacion.BloqueoDAO;
 import Persistencia.ORM.DAOImplementacion.DetalleMantenimientoDAO;
@@ -30,48 +32,36 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
-    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) {
+    public void actualizar(int id, String nombre, int capacidad, int id_tipohabitacion, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         Habitacion h = getUno(id, id_hotel);
-        if (h != null) {
-            nombre = (WordUtils.capitalize(nombre));
-            h.setNombre(nombre);
-            h.setCapacidad(capacidad);
-            TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
-            h.setTipoHabitacion(th);
-            HABITACIONDAO.actualizar(h);
-        } else {
-            throw new IllegalAccessError();
-        }
+        nombre = (WordUtils.capitalize(nombre));
+        h.setNombre(nombre);
+        h.setCapacidad(capacidad);
+        TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
+        h.setTipoHabitacion(th);
+        HABITACIONDAO.actualizar(h);
     }
 
     @Override
-    public void actualizar(int id, int id_tipohabitacion, int id_hotel) {
-        Habitacion h = getUno(id,id_hotel);
-        if (h != null) {
-            TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
-            h.setTipoHabitacion(th);
-            HABITACIONDAO.actualizar(h);
-        } else {
-            throw new IllegalAccessError();
-        }
+    public void actualizar(int id, int id_tipohabitacion, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
+        Habitacion h = getUno(id, id_hotel);
+        TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
+        h.setTipoHabitacion(th);
+        HABITACIONDAO.actualizar(h);
     }
 
     @Override
-    public boolean eliminar(int id, int id_hotel) {
-        Habitacion h = getUno(id,id_hotel);
-        if (h != null) {
-            if (enUso(id)) {
-                return false;
-            } else {
-                IBloqueo bloqueoDAO = new BloqueoDAO();
-                bloqueoDAO.eliminarTodos(id);
-                IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
-                detalleMantenimientoDAO.eliminarTodos(id);
-                HABITACIONDAO.eliminar(h);
-                return true;
-            }
+    public boolean eliminar(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
+        Habitacion h = getUno(id, id_hotel);
+        if (enUso(id)) {
+            return false;
         } else {
-            throw new IllegalAccessError();
+            IBloqueo bloqueoDAO = new BloqueoDAO();
+            bloqueoDAO.eliminarTodos(id);
+            IDetalleMantenimiento detalleMantenimientoDAO = new DetalleMantenimientoDAO();
+            detalleMantenimientoDAO.eliminarTodos(id);
+            HABITACIONDAO.eliminar(h);
+            return true;
         }
     }
 
@@ -96,29 +86,25 @@ public class ControladorHabitacion implements IControladorHabitacion {
     }
 
     @Override
-    public Habitacion getUno(int id, int id_hotel) {
+    public Habitacion getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         Habitacion h = HABITACIONDAO.buscar(id);
         try {
             if (h.getTipoHabitacion().getId_hotel() == id_hotel) {
                 return h;
             } else {
-                throw new IllegalAccessError();
+                throw new AccesoIlegal();
             }
         } catch (org.hibernate.ObjectNotFoundException e) {
-            return null;
+            throw new ObjetoNoEncontrado();
         }
     }
 
     @Override
-    public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError {
+    public List<Habitacion> getHabitacionesByTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws IllegalAccessError, ObjetoNoEncontrado, AccesoIlegal {
         List<Habitacion> lista;
         IControladorTipoHabitacion controladorTipoHabitacion = new ControladorTipoHabitacion();
-        TipoHabitacion th = controladorTipoHabitacion.getUno(id_tipoHabitacion,id_hotel);
-        if (th != null) {
-            lista = HABITACIONDAO.getTodosByTipoHabitacion(id_tipoHabitacion);
-        } else {
-            throw new IllegalAccessError();
-        }
+        TipoHabitacion th = controladorTipoHabitacion.getUno(id_tipoHabitacion, id_hotel);
+        lista = HABITACIONDAO.getTodosByTipoHabitacion(id_tipoHabitacion);
         return lista;
     }
 

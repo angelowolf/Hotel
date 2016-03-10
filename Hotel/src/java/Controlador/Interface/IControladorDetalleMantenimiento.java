@@ -5,7 +5,9 @@
  */
 package Controlador.Interface;
 
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.DetalleMantenimiento;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.ORM.DAOImplementacion.DetalleMantenimientoDAO;
 import Persistencia.ORM.DAOInterface.IDetalleMantenimiento;
 import java.text.ParseException;
@@ -39,11 +41,10 @@ public interface IControladorDetalleMantenimiento {
      * @param id_hotel
      * @param fecha
      * @param id_habitacion
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
      * @throws java.text.ParseException
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void actualizar(int id,String descripcion, String fecha, int id_habitacion, int id_hotel) throws IllegalAccessError,ParseException;
+    public void actualizar(int id,String descripcion, String fecha, int id_habitacion, int id_hotel) throws AccesoIlegal,ParseException,ObjetoNoEncontrado;
 
     /**
      * Elimina un detalle. El id_hotel es utilizado para cuestiones de
@@ -51,10 +52,10 @@ public interface IControladorDetalleMantenimiento {
      *
      * @param id
      * @param id_hotel
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void eliminar(int id, int id_hotel) throws IllegalAccessError;
+    public void eliminar(int id, int id_hotel) throws AccesoIlegal,ObjetoNoEncontrado;
 
     /**
      * Busca todos los detalles existentes de una habitacion.
@@ -62,8 +63,10 @@ public interface IControladorDetalleMantenimiento {
      * @param id_habitacion
      * @param id_hotel
      * @return
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public List<DetalleMantenimiento> getTodos(int id_habitacion, int id_hotel) throws IllegalAccessError;
+    public List<DetalleMantenimiento> getTodos(int id_habitacion, int id_hotel) throws AccesoIlegal,ObjetoNoEncontrado;
 
     /**
      * recupera un detalle de la bd. si no existe devuelve nulo.
@@ -71,7 +74,9 @@ public interface IControladorDetalleMantenimiento {
      * @param id
      * @param id_hotel
      * @return el objeto o nulo.
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public DetalleMantenimiento getUno(int id, int id_hotel)throws IllegalAccessError;
+    public DetalleMantenimiento getUno(int id, int id_hotel)throws AccesoIlegal,ObjetoNoEncontrado;
 
 }

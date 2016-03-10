@@ -1,6 +1,8 @@
 package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
 import java.util.List;
 import org.apache.commons.lang.WordUtils;
@@ -22,29 +24,21 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public void actualizar(int id, String nombre, int id_hotel) {
+    public void actualizar(int id, String nombre, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         nombre = (WordUtils.capitalize(nombre));
-        TipoHabitacion th = getUno(id,id_hotel);
-        if (th != null) {
-            th.setNombre(nombre);
-            TIPOHABITACIONDAO.actualizar(th);
-        } else {
-            throw new IllegalAccessError();
-        }
+        TipoHabitacion th = getUno(id, id_hotel);
+        th.setNombre(nombre);
+        TIPOHABITACIONDAO.actualizar(th);
     }
 
     @Override
-    public boolean eliminar(int id, int id_hotel) {
-        TipoHabitacion th = getUno(id,id_hotel);
-        if (th != null) {
-            if (enUso(id)) {
-                return false;
-            } else {
-                TIPOHABITACIONDAO.eliminar(th);
-                return true;
-            }
+    public boolean eliminar(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
+        TipoHabitacion th = getUno(id, id_hotel);
+        if (enUso(id)) {
+            return false;
         } else {
-            throw new IllegalAccessError();
+            TIPOHABITACIONDAO.eliminar(th);
+            return true;
         }
     }
 
@@ -69,16 +63,16 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
     }
 
     @Override
-    public TipoHabitacion getUno(int id, int id_hotel) {
+    public TipoHabitacion getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         TipoHabitacion th = TIPOHABITACIONDAO.buscar(id);
         try {
             if (th.getId_hotel() == id_hotel) {
                 return th;
             } else {
-                throw new IllegalAccessError();
+                throw new AccesoIlegal();
             }
         } catch (org.hibernate.ObjectNotFoundException e) {
-            return null;
+            throw new ObjetoNoEncontrado();
         }
     }
 

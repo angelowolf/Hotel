@@ -11,9 +11,12 @@ import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
+import static com.opensymphony.xwork2.Action.INPUT;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -61,14 +64,12 @@ public class HabitacionAction extends Accion implements AccionABMC {
     private boolean validarTipoHabitacion() {
         try {
             TipoHabitacion th = cth.getUno(id_tipohabitacion, h.getId());
-            if (th == null) {
-                addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
-                return false;
-            } else {
-                return true;
-            }
-        } catch (IllegalAccessError e) {
+            return true;
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            return false;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.ELTIPOHABITACIONNOESVALIDO);
             return false;
         }
     }
@@ -93,8 +94,12 @@ public class HabitacionAction extends Accion implements AccionABMC {
         }
         try {
             ch.actualizar(id, nombre, capacidad, id_tipohabitacion, h.getId());
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -110,8 +115,12 @@ public class HabitacionAction extends Accion implements AccionABMC {
         }
         try {
             ch.actualizar(id, id_tipohabitacion, h.getId());
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -139,8 +148,12 @@ public class HabitacionAction extends Accion implements AccionABMC {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -149,7 +162,7 @@ public class HabitacionAction extends Accion implements AccionABMC {
     @Override
     public String editar() {
         try {
-            Habitacion habitacion = ch.getUno(id,h.getId());
+            Habitacion habitacion = ch.getUno(id, h.getId());
             if (habitacion != null && habitacion.getTipoHabitacion().getId_hotel() == h.getId()) {
                 nombre = habitacion.getNombre();
                 capacidad = habitacion.getCapacidad();
@@ -163,8 +176,12 @@ public class HabitacionAction extends Accion implements AccionABMC {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }

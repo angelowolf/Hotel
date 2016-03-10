@@ -1,6 +1,8 @@
 package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorTemporada;
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Temporada;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,32 +29,24 @@ public class ControladorTemporada implements IControladorTemporada {
     }
 
     @Override
-    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException {
-        Temporada t = getUno(id);
-        if (t != null && t.getId_hotel() == id_hotel) {
-            nombre = (WordUtils.capitalize(nombre));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-            t.setNombre(nombre);
-            t.setFechaInicio(sdf.parse(fechaInicio));
-            t.setFechaFin(sdf.parse(fechaFin));
-            TEMPORADADAO.actualizar(t);
-        } else {
-            throw new IllegalAccessError();
-        }
+    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
+        Temporada t = getUno(id, id_hotel);
+        nombre = (WordUtils.capitalize(nombre));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+        t.setNombre(nombre);
+        t.setFechaInicio(sdf.parse(fechaInicio));
+        t.setFechaFin(sdf.parse(fechaFin));
+        TEMPORADADAO.actualizar(t);
     }
 
     @Override
-    public boolean eliminar(int id, int id_hotel) {
-        Temporada t = getUno(id);
-        if (t != null && t.getId_hotel() == id_hotel) {
-            if (enUso(id)) {
-                return false;
-            } else {
-                TEMPORADADAO.eliminar(t);
-                return true;
-            }
+    public boolean eliminar(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
+        Temporada t = getUno(id, id_hotel);
+        if (enUso(id)) {
+            return false;
         } else {
-            throw new IllegalAccessError();
+            TEMPORADADAO.eliminar(t);
+            return true;
         }
     }
 
@@ -73,17 +67,20 @@ public class ControladorTemporada implements IControladorTemporada {
 
     @Override
     public List<Temporada> getTodos(int id_hotel) {
-        return TEMPORADADAO.getTodos(id_hotel); 
+        return TEMPORADADAO.getTodos(id_hotel);
     }
 
     @Override
-    public Temporada getUno(int id) {
+    public Temporada getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         Temporada t = TEMPORADADAO.buscar(id);
         try {
-            t.getNombre();
-            return t;
+            if (t.getId_hotel() == id_hotel) {
+                return t;
+            } else {
+                throw new AccesoIlegal();
+            }
         } catch (org.hibernate.ObjectNotFoundException e) {
-            return null;
+            throw new ObjetoNoEncontrado();
         }
     }
 }//end ControladorTemporada

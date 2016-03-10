@@ -11,8 +11,10 @@ import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +73,12 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
             cth.actualizar(id, nombre, h.getId());
             addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.TIPOHABITACION));
             codigo = 400;
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -98,8 +104,12 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -108,7 +118,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     @Override
     public String editar() {
         try {
-            TipoHabitacion th = cth.getUno(id,h.getId());
+            TipoHabitacion th = cth.getUno(id, h.getId());
             if (th != null) {
                 nombre = th.getNombre();
                 id = th.getId();
@@ -119,8 +129,12 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -132,9 +146,13 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
             habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
             codigo = 400;
             return SUCCESS;
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             codigo = 200;
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
+            codigo = 200;
             return INPUT;
         }
     }
