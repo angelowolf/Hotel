@@ -51,6 +51,9 @@
         <put-attribute name="title" value="Home" />
         <put-attribute name="body" value="/WEB-INF/admin/habitacion/habitaciones.jsp" />
         <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../bower_components/jquery/dist/jquery.min.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="/../js/admin/admin.js" />
             <add-attribute value="/../js/admin/habitacion/mishabitaciones.js" />
         </put-list-attribute>
     </definition>

@@ -5,6 +5,9 @@ body {
 	border: none;
 	margin: 0 0 15px 0;
 }
+.error {
+    color: #e51c23;
+}
 input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus {
 	outline: none;
 }
@@ -20,4 +23,15 @@ input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habita
 
 .modal-dialog-center {
     margin-top: 38%;
+}
+
+/* SIN DATOS */
+.sin-datos {
+    color: #DDD;
+    font-size: 1.2em;
+    cursor: pointer;
+    min-height: 200px;
+    line-height: 200px;
+    text-align: center;
+    width: 100%;
 }

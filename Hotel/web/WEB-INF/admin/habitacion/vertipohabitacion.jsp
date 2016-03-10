@@ -1,7 +1,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="row">
-<hr class="divisor">
+    <hr class="divisor">
     <div class="col-md-6 col-xs-12">
         <form class="form-horizontal">
             <div class="well">
@@ -37,15 +37,13 @@
                 <button data-toggle="modal" data-target="#modal-agregar" class="btn btn-sm btn-success">Agregar habitación <i class="fa fa-plus"></i></button>
             </div>
         </div>
-        
+
         <div class="row">
-            <c:forEach var="habitacion" items="${accion.habitaciones}" >
-                <div class="col-xs-4">
-                    <button value="${habitacion.id}" class="btn btn-lg btn-default btn-block bloque-habitacion">
-                        ${habitacion.nombre}
-                    </button>
-                </div>
-            </c:forEach>
+            <s:iterator var="habitacion" value="#accion.habitaciones">
+                <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp">
+                    <s:param name="habitacion" value="#habitacion"/>
+                </s:include>
+            </s:iterator>
         </div>
     </div>
 </div>
@@ -62,19 +60,19 @@
                     <form id="form-editar">
                         <input type="hidden" name="id" value="">
                         <input type="hidden" name="id_tipohabitacion" value="">
-                        <div class="form-group">
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="form-group">
                                 <label for="nombre" class="label-control">Nombre</label>
                                 <input type="text" name="nombre" class="form-control" value="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="form-group">
                                 <label for="capacidad" class="label-control">Capacidad</label>
                                 <input type="text" name="capacidad" class="form-control" value="">
                             </div>
                         </div>
-                    </div>
+                </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -95,20 +93,20 @@
                 <div class="row">
                     <form id="form-agregar">
                         <input type="hidden" name="id_tipohabitacion" value="">
-                        <div class="form-group">
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="form-group">
                                 <label for="nombre" class="label-control">Nombre</label>
                                 <input type="text" name="nombre" class="form-control" value="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="form-group">
                                 <label for="capacidad" class="label-control">Capacidad</label>
                                 <input type="text" name="capacidad" class="form-control" value="">
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="agregar">Guardar</button>

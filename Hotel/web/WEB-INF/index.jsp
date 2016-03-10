@@ -376,12 +376,12 @@
             <!--<p class=error>Error, wrong username or password used. Please, try again.-->
             <s:form action="login" theme="simple" namespace="/" >
                 <div class="mat-in">
-                    <input type="text" name="email" value="sistema2" required />
+                    <input type="text" name="email" value="nick2" required />
                     <span class="bar"></span>
                     <label>Email</label>
                 </div>
                 <div class="mat-in">
-                    <input type="password" name="clave" value="123456" required />
+                    <input type="password" name="clave" value="clave" required />
                     <span class="bar"></span>
                     <label>Contraseña</label>
                 </div>
