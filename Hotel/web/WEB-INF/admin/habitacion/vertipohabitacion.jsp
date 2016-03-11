@@ -76,6 +76,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" data-toggle="modal" data-target="#modal-eliminar" class="btn btn-default pull-left" id="eliminar">Eliminar</button>
                 <button type="button" class="btn btn-success" id="editar">Guardar</button>
             </div>
         </div>
@@ -110,6 +111,23 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="agregar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+                        
+<div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Eliminar habitación</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que desea eliminar la habitación?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="eliminarh">Confirmar</button>
             </div>
         </div>
     </div>
