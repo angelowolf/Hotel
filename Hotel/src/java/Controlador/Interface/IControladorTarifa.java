@@ -5,6 +5,8 @@
  */
 package Controlador.Interface;
 
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Tarifa;
 import Persistencia.ORM.DAOImplementacion.TarifaDAO;
 import Persistencia.ORM.DAOInterface.ITarifa;
@@ -32,8 +34,9 @@ public interface IControladorTarifa {
      * @param id_hotel
      * @throws java.text.ParseException Si la fecha no tiene el formato correcto
      * dd-mm-yy
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException;
+    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal;
 
     /**
      * Actualiza los datos de una tarifa. El id_hotel es utilizado para
@@ -51,11 +54,11 @@ public interface IControladorTarifa {
      * @param id_hotel
      * @throws java.text.ParseException Si la fecha no tiene el formato correcto
      * dd-mm-yy
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
     public void actualizar(int id, String fechaInicio, String fechaFin, float precio, int id_temporada,
-            List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, IllegalAccessError;
+            List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * Elimina una tarifa. El id_hotel es utilizado para cuestiones de
@@ -65,10 +68,9 @@ public interface IControladorTarifa {
      * @param id_hotel
      * @return True si se elimino. Falso si esta siendo utilizado por otra
      * entidad.
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
      */
-    public boolean eliminar(int id, int id_hotel) throws IllegalAccessError;
+    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal;
 
     /**
      * verifica si la tarifa esta asociado a alguna entidad.

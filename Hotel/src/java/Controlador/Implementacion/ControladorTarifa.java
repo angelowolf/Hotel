@@ -3,15 +3,18 @@ package Controlador.Implementacion;
 import Controlador.Interface.IControladorTarifa;
 import Controlador.Interface.IControladorTemporada;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Tarifa;
 import Persistencia.Modelo.Temporada;
 import Persistencia.Modelo.TipoHabitacion;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Angelo
@@ -30,22 +33,18 @@ public class ControladorTarifa implements IControladorTarifa {
      * @return
      * @throws IllegalAccessError
      */
-    private Set<TipoHabitacion> crearLista(List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws IllegalAccessError {
+    private Set<TipoHabitacion> crearLista(List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
         Set<TipoHabitacion> set = new HashSet<TipoHabitacion>();
         for (Integer cadaUno : tiposHabitacionesSeleccionados) {
-            TipoHabitacion th = cth.getUno(cadaUno,id_hotel);
-            if (th != null ) {
-                set.add(th);
-            } else {
-                throw new IllegalAccessError();
-            }
+            TipoHabitacion th = cth.getUno(cadaUno, id_hotel);
+            set.add(th);
         }
         return set;
     }
 
     @Override
-    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, IllegalAccessError {
+    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
         Tarifa t = new Tarifa();
         if (id_temporada == 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
@@ -53,10 +52,15 @@ public class ControladorTarifa implements IControladorTarifa {
             t.setFechaFin(sdf.parse(fechaFin));
         } else {
             IControladorTemporada ct = new ControladorTemporada();
-            Temporada temp = ct.getUno(id_temporada);
-            t.setTemporada(temp);
-            t.setFechaInicio((temp.getFechaInicio()));
-            t.setFechaFin(temp.getFechaFin());
+            Temporada temp;
+            try {
+                temp = ct.getUno(id_temporada, id_hotel);
+                t.setTemporada(temp);
+                t.setFechaInicio((temp.getFechaInicio()));
+                t.setFechaFin(temp.getFechaFin());
+            } catch (AccesoIlegal ex) {
+                Logger.getLogger(ControladorTarifa.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         t.setPrecio(precio);
         t.setTipoHabitaciones(this.crearLista(tiposHabitacionesSeleccionados, id_hotel));
@@ -64,7 +68,7 @@ public class ControladorTarifa implements IControladorTarifa {
     }
 
     @Override
-    public void actualizar(int id, String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, IllegalAccessError {
+    public void actualizar(int id, String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
         boolean flag = true;
         Tarifa t = getUno(id);
         try {
@@ -83,7 +87,7 @@ public class ControladorTarifa implements IControladorTarifa {
                 t.setFechaFin(sdf.parse(fechaFin));
             } else {
                 IControladorTemporada ct = new ControladorTemporada();
-                Temporada temp = ct.getUno(id_temporada);
+                Temporada temp = ct.getUno(id_temporada, id_hotel);
                 t.setTemporada(temp);
                 t.setFechaInicio((temp.getFechaInicio()));
                 t.setFechaFin(temp.getFechaFin());

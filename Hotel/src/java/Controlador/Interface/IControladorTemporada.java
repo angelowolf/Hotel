@@ -5,6 +5,8 @@
  */
 package Controlador.Interface;
 
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Temporada;
 import Persistencia.ORM.DAOImplementacion.TemporadaDAO;
 import Persistencia.ORM.DAOInterface.ITemporada;
@@ -43,10 +45,10 @@ public interface IControladorTemporada {
      * @param id_hotel
      * @throws java.text.ParseException Si la fecha no tiene el formato correcto
      * dd-mm-yy
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, IllegalAccessError;
+    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * Elimina una temporada. El id_hotel es utilizado para cuestiones de
@@ -56,10 +58,10 @@ public interface IControladorTemporada {
      * @param id_hotel
      * @return True si se elimino. Falso si esta siendo utilizado por otra
      * entidad.
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public boolean eliminar(int id, int id_hotel) throws IllegalAccessError;
+    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el de
@@ -93,8 +95,11 @@ public interface IControladorTemporada {
      * recupera una temporada de la bd. si no existe devuelve nulo.
      *
      * @param id
+     * @param id_hotel
      * @return el objeto o nulo.
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
+     * @throws Persistencia.Modelo.AccesoIlegal
      */
-    public Temporada getUno(int id);
+    public Temporada getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
 
 }

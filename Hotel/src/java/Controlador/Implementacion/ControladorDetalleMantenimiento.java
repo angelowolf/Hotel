@@ -2,8 +2,10 @@ package Controlador.Implementacion;
 
 import Controlador.Interface.IControladorDetalleMantenimiento;
 import Controlador.Interface.IControladorHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.DetalleMantenimiento;
 import Persistencia.Modelo.Habitacion;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -27,54 +29,38 @@ public class ControladorDetalleMantenimiento implements IControladorDetalleMante
     }
 
     @Override
-    public void actualizar(int id, String descripcion, String fecha, int id_habitacion, int id_hotel) throws IllegalAccessError, ParseException {
+    public void actualizar(int id, String descripcion, String fecha, int id_habitacion, int id_hotel) throws AccesoIlegal, ParseException, ObjetoNoEncontrado {
         DetalleMantenimiento dm = getUno(id, id_hotel);
-        if (dm != null) {
-            dm.setDescripcion(descripcion);
-            dm.setId_habitacion(id_habitacion);
-            dm.setResuelto(false);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-            dm.setFecha(sdf.parse(fecha));
-            DETALLEMANTENIMIENTODAO.actualizar(dm);
-        } else {
-            throw new IllegalAccessError();
-        }
+        dm.setDescripcion(descripcion);
+        dm.setId_habitacion(id_habitacion);
+        dm.setResuelto(false);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+        dm.setFecha(sdf.parse(fecha));
+        DETALLEMANTENIMIENTODAO.actualizar(dm);
     }
 
     @Override
-    public void eliminar(int id, int id_hotel) throws IllegalAccessError {
+    public void eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
         DetalleMantenimiento dm = getUno(id, id_hotel);
-        if (dm != null) {
-            DETALLEMANTENIMIENTODAO.eliminar(dm);
-        } else {
-            throw new IllegalAccessError();
-        }
+        DETALLEMANTENIMIENTODAO.eliminar(dm);
     }
 
     @Override
-    public List<DetalleMantenimiento> getTodos(int id_habitacion, int id_hotel) throws IllegalAccessError {
+    public List<DetalleMantenimiento> getTodos(int id_habitacion, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
         IControladorHabitacion ch = new ControladorHabitacion();
         Habitacion h = ch.getUno(id_habitacion, id_hotel);
-        if (h != null) {
-            return DETALLEMANTENIMIENTODAO.getTodos(id_habitacion);
-        } else {
-            throw new IllegalAccessError();
-        }
+        return DETALLEMANTENIMIENTODAO.getTodos(id_habitacion);
     }
 
     @Override
-    public DetalleMantenimiento getUno(int id, int id_hotel) {
+    public DetalleMantenimiento getUno(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
         DetalleMantenimiento dm = DETALLEMANTENIMIENTODAO.buscar(id);
         try {
             IControladorHabitacion ch = new ControladorHabitacion();
             Habitacion h = ch.getUno(dm.getId_habitacion(), id_hotel);
-            if(h!=null){
-                return dm;
-            }else{
-                return null;
-            }
+            return dm;
         } catch (org.hibernate.ObjectNotFoundException e) {
-            return null;
+            throw new ObjetoNoEncontrado();
         }
     }
 

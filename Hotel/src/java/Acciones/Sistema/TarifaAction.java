@@ -12,7 +12,9 @@ import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorTarifa;
 import Controlador.Interface.IControladorTemporada;
 import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Tarifa;
 import Persistencia.Modelo.Temporada;
 import Persistencia.Modelo.TipoHabitacion;
@@ -44,9 +46,12 @@ public class TarifaAction extends Accion {
     private List<TipoHabitacionMultiselect> tipoHabitaciones = new ArrayList<TipoHabitacionMultiselect>();
     private List<Temporada> temporadas = new ArrayList<Temporada>();
 
+    public TarifaAction() {
+        h = (Hotel) sesion.get("hotel");
+    }
+
     private boolean validarRegistrar() {
         boolean flag = true;
-        Hotel h = (Hotel) sesion.get("hotel");
         if (tipoHabitacionesSeleccionados.isEmpty()) {
             flag = false;
             addActionError(Soporte.Mensaje.SELECCIONEUNTIPODEHABITACION);
@@ -61,15 +66,19 @@ public class TarifaAction extends Accion {
                 addActionError(Soporte.Mensaje.INGRESEFECHAFIN);
             }
         } else {
-            Temporada t = controladorTemporada.getUno(temporada.getId());
-            if (t != null && t.getId_hotel() != h.getId()) {
+            try {
+                Temporada t = controladorTemporada.getUno(temporada.getId(), h.getId());
+            } catch (AccesoIlegal e) {
+                flag = false;
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            } catch (ObjetoNoEncontrado ex) {
                 flag = false;
                 addActionError(Soporte.Mensaje.LATEMPORADANOESVALIDO);
             }
-        }
-        if (precio <= 0) {
-            flag = false;
-            addActionError(Soporte.Mensaje.PRECIONOVALIDO);
+            if (precio <= 0) {
+                flag = false;
+                addActionError(Soporte.Mensaje.PRECIONOVALIDO);
+            }
         }
         return flag;
     }
@@ -81,11 +90,18 @@ public class TarifaAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             ct.guardar(fechaInicio, fechaFin, precio, temporada.getId(), tipoHabitacionesSeleccionados, h.getId());
         } catch (ParseException ex) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (AccesoIlegal e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -101,15 +117,18 @@ public class TarifaAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             ct.actualizar(id, fechaInicio, fechaFin, precio, temporada.getId(), tipoHabitacionesSeleccionados, id);
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         } catch (ParseException e) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -119,14 +138,12 @@ public class TarifaAction extends Accion {
     }
 
     public String listar() {
-        Hotel hotel = (Hotel) sesion.get("hotel");
-        lista = ct.getTodos(hotel.getId());
+        lista = ct.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
     public String eliminar() {
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             if (ct.eliminar(id, h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.TARIFA));
@@ -137,7 +154,7 @@ public class TarifaAction extends Accion {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
@@ -176,7 +193,6 @@ public class TarifaAction extends Accion {
     }
 
     private void cargarListaTemporada() {
-        Hotel h = (Hotel) sesion.get("hotel");
         temporadas = controladorTemporada.getTodos(h.getId());
     }
 
@@ -187,7 +203,6 @@ public class TarifaAction extends Accion {
                 objetosSeleccionados.put(i, i);
             }
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
         List<TipoHabitacion> tipoHabitacionTodos = cth.getTodos(h.getId());
         for (TipoHabitacion cadaTipoHabitacionQueExiste : tipoHabitacionTodos) {
@@ -208,7 +223,6 @@ public class TarifaAction extends Accion {
     }
 
     private void cargarListaTipoHabitacion(Map<Integer, TipoHabitacion> mapTipoHabitacionQuePosee, boolean flag) {
-        Hotel h = (Hotel) sesion.get("hotel");
         IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
         List<TipoHabitacion> tipoHabitacionTodos = cth.getTodos(h.getId());
         for (TipoHabitacion cadaTipoHabitacionQueExiste : tipoHabitacionTodos) {

@@ -5,6 +5,8 @@
  */
 package Controlador.Interface;
 
+import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.DAOImplementacion.HotelDAO;
 import Persistencia.ORM.DAOImplementacion.TipoHabitacionDAO;
@@ -38,10 +40,10 @@ public interface IControladorTipoHabitacion {
      * @param id
      * @param nombre
      * @param id_hotel
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void actualizar(int id, String nombre, int id_hotel) throws IllegalAccessError;
+    public void actualizar(int id, String nombre, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * Elimina un tipo de habitacion. El id_hotel es utilizado para cuestiones
@@ -50,12 +52,12 @@ public interface IControladorTipoHabitacion {
      *
      * @param id
      * @param id_hotel
-     * @throws IllegalAccessError Si se accede a algun objeto que no pertenezca
-     * el hotel
      * @return True si se elimino. False si esta siendo utilizado por otra
      * entidad.
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public boolean eliminar(int id, int id_hotel) throws IllegalAccessError;
+    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * verifica si el nombre esta disponible, en caso de que el nombre sea el
@@ -90,7 +92,9 @@ public interface IControladorTipoHabitacion {
      * @param id
      * @param id_hotel
      * @return el objeto o nulo.
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public TipoHabitacion getUno(int id,int id_hotel)throws IllegalAccessError;
+    public TipoHabitacion getUno(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
 }

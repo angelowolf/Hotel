@@ -8,8 +8,11 @@ package Acciones.Sistema;
 import Acciones.Accion;
 import Controlador.Implementacion.ControladorTemporada;
 import Controlador.Interface.IControladorTemporada;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Temporada;
+import static com.opensymphony.xwork2.Action.INPUT;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,9 +31,12 @@ public class TemporadaAction extends Accion {
     private String nombre, fechaInicio, fechaFin;
     private List<Temporada> lista = new ArrayList<Temporada>();
 
+    public TemporadaAction() {
+        h = (Hotel) sesion.get("hotel");
+    }
+
     private boolean validarRegistrar() {
         boolean flag = true;
-        Hotel h = (Hotel) sesion.get("hotel");
         if (StringUtils.isBlank(nombre)) {
             addActionError(Soporte.Mensaje.INGRESENOMBRETEMPORADA);
             flag = false;
@@ -54,7 +60,6 @@ public class TemporadaAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             ct.guardar(nombre, fechaInicio, fechaFin, h.getId());
         } catch (ParseException ex) {
@@ -72,15 +77,18 @@ public class TemporadaAction extends Accion {
             codigo = 200;
             return INPUT;
         }
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             ct.actualizar(id, nombre, fechaInicio, fechaFin, h.getId());
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         } catch (ParseException e) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -90,14 +98,12 @@ public class TemporadaAction extends Accion {
     }
 
     public String listar() {
-        Hotel hotel = (Hotel) sesion.get("hotel");
-        lista = ct.getTodos(hotel.getId());
+        lista = ct.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
     public String eliminar() {
-        Hotel h = (Hotel) sesion.get("hotel");
         try {
             if (ct.eliminar(id, h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.TEMPORADA));
@@ -108,16 +114,20 @@ public class TemporadaAction extends Accion {
                 codigo = 200;
                 return INPUT;
             }
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
     }
 
     public String editar() {
-        Temporada temporada = ct.getUno(id);
-        if (temporada != null) {
+        try {
+            Temporada temporada = ct.getUno(id,h.getId());
             SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
             nombre = temporada.getNombre();
             fechaFin = sdf.format(temporada.getFechaFin());
@@ -125,7 +135,11 @@ public class TemporadaAction extends Accion {
             id = temporada.getId();
             codigo = 400;
             return SUCCESS;
-        } else {
+        } catch (AccesoIlegal e) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;

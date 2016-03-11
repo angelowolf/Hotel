@@ -9,8 +9,11 @@ import Acciones.Accion;
 import Acciones.AccionABMC;
 import Controlador.Implementacion.ControladorDetalleMantenimiento;
 import Controlador.Interface.IControladorDetalleMantenimiento;
+import Persistencia.Modelo.AccesoIlegal;
 import Persistencia.Modelo.DetalleMantenimiento;
 import Persistencia.Modelo.Hotel;
+import Persistencia.Modelo.ObjetoNoEncontrado;
+import static com.opensymphony.xwork2.Action.INPUT;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,12 +82,16 @@ public class DetalleMantenimientoAction extends Accion implements AccionABMC {
             cdm.actualizar(id, descripcion, fecha, id_habitacion, h.getId());
             codigo = 400;
             addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.DETALLEMANTENIMIENTO));
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
             return INPUT;
         } catch (ParseException e) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -95,22 +102,20 @@ public class DetalleMantenimientoAction extends Accion implements AccionABMC {
     public String editar() {
         try {
             DetalleMantenimiento dm = cdm.getUno(id, h.getId());
-            if (dm != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-                descripcion = dm.getDescripcion();
-                id = dm.getId();
-                id_habitacion = dm.getId_habitacion();
-                fecha = sdf.format(dm.getFecha());
-                resuelto = dm.isResuelto();
-                codigo = 400;
-                return SUCCESS;
-            } else {
-                addActionError(Soporte.Mensaje.IDINVALIDO);
-                codigo = 200;
-                return INPUT;
-            }
-        } catch (IllegalAccessError e) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+            descripcion = dm.getDescripcion();
+            id = dm.getId();
+            id_habitacion = dm.getId_habitacion();
+            fecha = sdf.format(dm.getFecha());
+            resuelto = dm.isResuelto();
+            codigo = 400;
+            return SUCCESS;
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -121,8 +126,12 @@ public class DetalleMantenimientoAction extends Accion implements AccionABMC {
         try {
             lista = cdm.getTodos(id_habitacion, h.getId());
             codigo = 400;
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
@@ -134,8 +143,12 @@ public class DetalleMantenimientoAction extends Accion implements AccionABMC {
         try {
             cdm.eliminar(id, h.getId());
             codigo = 400;
-        } catch (IllegalAccessError e) {
+        } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
             codigo = 200;
             return INPUT;
         }
