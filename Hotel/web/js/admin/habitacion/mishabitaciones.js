@@ -9,7 +9,7 @@ function setAgregarTipoHabitacionOnClick() {
         e.preventDefault();
         var $modal = $('#modal-agregar-th');
         var data = $modal.find('#form-agregar-th').serialize();
-
+        var nombre = $modal.find('#form-agregar-th input[name=nombre]').val();
         $.ajax({
             url: '/tipohabitacion/registrar',
             type: 'POST',
@@ -23,7 +23,8 @@ function setAgregarTipoHabitacionOnClick() {
                         data: {id: id},
                         type: 'POST',
                         success: function (data) {
-                            console.log(data);
+                            $("<li><a href='#tipo-"+id+"' data-toggle='tab'>"+nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $(data).appendTo('#contenidoTiposHabitaciones');
                         }
                     });
                 } else {
