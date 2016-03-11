@@ -15,12 +15,12 @@ import org.apache.commons.lang.WordUtils;
 public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
 
     @Override
-    public void guardar(String nombre, int id_hotel) {
+    public int guardar(String nombre, int id_hotel) {
         TipoHabitacion th = new TipoHabitacion();
         nombre = (WordUtils.capitalize(nombre));
         th.setNombre(nombre);
         th.setId_hotel(id_hotel);
-        TIPOHABITACIONDAO.guardar(th);
+        return TIPOHABITACIONDAO.guardar(th);
     }
 
     @Override

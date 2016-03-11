@@ -16,9 +16,16 @@ function setAgregarTipoHabitacionOnClick() {
             dataType: 'JSON',
             data: data,
             success: function (data) {
-                if (data.codigo == 400) {
-
-                    alert('exito');
+                if (data.codigo === 400) {
+                    var id = data.id;
+                    $.ajax({
+                        url: '/tipohabitacion/vistatipohabitacion',
+                        data: {id: id},
+                        type: 'POST',
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
                 } else {
                     alert('error');
                 }
@@ -113,7 +120,7 @@ function setHabitacionesOnClick() {
                     $modal.modal('hide');
                     $modalEditar[0].reset;
                     $modalEditar.modal('hide');
-                    $('.hab-'+id).fadeOut(function(){
+                    $('.hab-' + id).fadeOut(function () {
                         $(this).remove;
                     });
                 } else {

@@ -30,7 +30,7 @@ public interface IControladorTipoHabitacion {
      * @param id_hotel El hotel.
      *
      */
-    public void guardar(String nombre, int id_hotel);
+    public int guardar(String nombre, int id_hotel);
 
     /**
      * Actualiza los datos de un tipo de habitacion. El id_hotel es utilizado

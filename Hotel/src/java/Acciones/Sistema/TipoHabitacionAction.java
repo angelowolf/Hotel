@@ -58,7 +58,8 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
             codigo = 200;
             return INPUT;
         }
-        cth.guardar(nombre, h.getId());
+        codigo = 400;
+        id = cth.guardar(nombre, h.getId());
         addActionMessage(Soporte.Mensaje.getAgregado(Soporte.Mensaje.TIPOHABITACION));
         return SUCCESS;
     }
