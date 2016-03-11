@@ -36,6 +36,9 @@
                 <param name="excludeProperties">lista</param>
             </result>            
         </action>
+        <action name="vistahabitacion" method="getHabitacionById" class="Acciones.Sistema.HabitacionAction">
+            <result name="success">/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp</result>
+        </action>
         <!--FIN ACCIONES-->
     </package>
 </struts>

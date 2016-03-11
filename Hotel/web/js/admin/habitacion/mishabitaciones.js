@@ -2,7 +2,6 @@
     setAgregarHabitacionOnClick();
     setAgregarTipoHabitacionOnClick();
     setHabitacionesOnClick();
-    setTipoHabitacionesOnClick();
 })(jQuery);
 
 function setAgregarTipoHabitacionOnClick() {
@@ -18,6 +17,7 @@ function setAgregarTipoHabitacionOnClick() {
             data: data,
             success: function (data) {
                 if (data.codigo == 400) {
+
                     alert('exito');
                 } else {
                     alert('error');
@@ -43,12 +43,19 @@ function setAgregarHabitacionOnClick() {
             data: data,
             success: function (data) {
                 if (data.codigo == 400) {
-                    alert('exito');
+                    $modal.modal('hide');
+                    $.ajax({
+                        url: '/habitacion/vistahabitacion',
+                        type: 'POST',
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    })
                 } else {
                     mostrarErrores(data);
                     alert('error');
                 }
-                $modal.modal('hide');
+                
             }
         })
     });
@@ -101,7 +108,7 @@ function editar($modal, $bloque, nombre) {
                 $modal.modal('hide');
                 limpiarErrores('#form-editar');
             } else {
-                mostrarErrores('#form-editar',data);
+                mostrarErrores('#form-editar', data);
             }
         }
     })

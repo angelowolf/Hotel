@@ -186,6 +186,23 @@ public class HabitacionAction extends Accion implements AccionABMC {
             return INPUT;
         }
     }
+    
+    public String getHabitacionById() {
+        IControladorHabitacion ch = new ControladorHabitacion();
+        try {
+            Habitacion habitacion = ch.getUno(id, h.getId());
+            codigo = 400;
+            return SUCCESS;
+        } catch (AccesoIlegal e) {
+            codigo = 200;
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
+            codigo = 200;
+            return INPUT;
+        }
+    }
 
     public int getId() {
         return id;
