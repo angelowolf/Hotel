@@ -29,9 +29,10 @@ public interface IControladorHabitacion {
      * @param nombre El nombre del tipo de habitacion.
      * @param capacidad la capacidad
      * @param id_tipohabitacion
+     * @return el id con que se creo
      *
      */
-    public void guardar(String nombre, int capacidad, int id_tipohabitacion);
+    public int guardar(String nombre, int capacidad, int id_tipohabitacion);
 
     /**
      * Actualiza los datos de una habitacion. El id_hotel es utilizado para

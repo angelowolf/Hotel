@@ -80,7 +80,7 @@ public class HabitacionAction extends Accion implements AccionABMC {
             codigo = 200;
             return INPUT;
         }
-        ch.guardar(nombre, capacidad, id_tipohabitacion);
+        id = ch.guardar(nombre, capacidad, id_tipohabitacion);
         addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.HABITACION));
         codigo = 400;
         return SUCCESS;
@@ -179,23 +179,6 @@ public class HabitacionAction extends Accion implements AccionABMC {
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
-            return INPUT;
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
-        }
-    }
-    
-    public String getHabitacionById() {
-        IControladorHabitacion ch = new ControladorHabitacion();
-        try {
-            Habitacion habitacion = ch.getUno(id, h.getId());
-            codigo = 400;
-            return SUCCESS;
-        } catch (AccesoIlegal e) {
-            codigo = 200;
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);

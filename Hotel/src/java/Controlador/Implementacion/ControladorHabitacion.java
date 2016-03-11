@@ -21,14 +21,14 @@ import org.apache.commons.lang.WordUtils;
 public class ControladorHabitacion implements IControladorHabitacion {
 
     @Override
-    public void guardar(String nombre, int capacidad, int id_tipohabitacion) {
+    public int guardar(String nombre, int capacidad, int id_tipohabitacion) {
         Habitacion h = new Habitacion();
         h.setCapacidad(capacidad);
         nombre = (WordUtils.capitalize(nombre));
         h.setNombre(nombre);
         TipoHabitacion th = TIPOHABITACIONDAO.buscar(id_tipohabitacion);
         h.setTipoHabitacion(th);
-        HABITACIONDAO.guardar(h);
+       return HABITACIONDAO.guardar(h);
     }
 
     @Override
