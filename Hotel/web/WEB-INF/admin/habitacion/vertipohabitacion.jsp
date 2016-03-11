@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row habitaciones">
             <s:iterator var="habitacion" value="#accion.habitaciones">
                 <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp">
                     <s:param name="habitacion" value="#habitacion"/>

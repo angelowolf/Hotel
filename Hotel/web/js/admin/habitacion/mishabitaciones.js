@@ -43,12 +43,16 @@ function setAgregarHabitacionOnClick() {
             data: data,
             success: function (data) {
                 if (data.codigo == 400) {
+                    var id = data.id;
                     $modal.modal('hide');
                     $.ajax({
                         url: '/habitacion/vistahabitacion',
+                        data: { id: id },
                         type: 'POST',
                         success: function (data) {
-                            console.log(data);
+                            var $div = $(data).hide();
+                            $('.row.habitaciones').append($div);
+                            $div.fadeIn();
                         }
                     })
                 } else {
