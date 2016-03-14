@@ -1,8 +1,53 @@
 (function ($) {
     setAgregarHabitacionOnClick();
     setAgregarTipoHabitacionOnClick();
+    setEditarTipoHabitacionOnClick();
     setHabitacionesOnClick();
 })(jQuery);
+
+function setEditarTipoHabitacionOnClick() {
+    $('.editar-th').click(function (e) {
+        e.preventDefault();
+        var data = $(this).parents('form').serialize();
+        $.ajax({
+            url: '/tipohabitacion/editar',
+            type: 'POST',
+            dataType: 'JSON',
+            data: data,
+            success: function (datos) {
+                if (datos.codigo === 400) {
+                    alert('exito');
+                } else {
+                    erroresM.mostrarErrores();
+                }
+            }
+        });
+    });
+    
+    $('.eliminar-th').click(function (e) {
+        e.preventDefault();
+        var $boton = $(this);
+        var data = $boton.parents('form').serialize();
+        var id = $boton.parents('form').find('[name=id]').val();
+        $.ajax({
+            url: '/tipohabitacion/eliminar',
+            type: 'POST',
+            dataType: 'JSON',
+            data: data,
+            success: function (datos) {
+                console.log(datos);
+                if (datos.codigo === 400) {
+                    console.log($('.th-'+id));
+                    $('.th-'+id).remove();
+                } else {
+                    erroresM.mostrarErrores($boton.parents('form'), datos, true);
+                }
+            }, error: function (datos) {
+                console.log(datos);
+            }
+        });
+    });
+}
 
 function setAgregarTipoHabitacionOnClick() {
     $('#agregarth').click(function (e) {
@@ -15,21 +60,21 @@ function setAgregarTipoHabitacionOnClick() {
             type: 'POST',
             dataType: 'JSON',
             data: data,
-            success: function (data) {
-                if (data.codigo === 400) {
-                    var id = data.id;
+            success: function (datos) {
+                if (datos.codigo === 400) {
                     $.ajax({
                         url: '/tipohabitacion/vistatipohabitacion',
-                        data: {id: id},
+                        data: {id: datos.id},
                         type: 'POST',
-                        success: function (data) {
-                            $("<li><a href='#tipo-"+id+"' data-toggle='tab'>"+nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
-                            $(data).appendTo('#contenidoTiposHabitaciones');
+                        success: function (dataa) {
+                            $("<li><a href='#tipo-"+datos.id+"' data-toggle='tab'>"+nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $('#contenidoTiposHabitaciones').append(dataa);
                         }
                     });
                 } else {
                     alert('error');
                 }
+                $modal.find('#form-agregar-th')[0].reset;
                 $modal.modal('hide');
             }
         });

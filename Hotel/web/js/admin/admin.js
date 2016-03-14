@@ -15,8 +15,10 @@ var erroresM = (function () {
         return (parseInt(age) > 20);
     };
     
-    modulo.mostrarErrores = function (formId, data) {
-        modulo.limpiarErrores(formId);
+    modulo.mostrarErrores = function (formId, data, nolimpiar) {
+        if (!nolimpiar) {
+            modulo.limpiarErrores(formId);
+        }
     
         if (data.actionErrors) {
             var errores = data.actionErrors;
@@ -30,6 +32,13 @@ var erroresM = (function () {
             for (var input in errores) {
                 var error = errores[input];
                 $(formId+' [name='+input+']').after('<p class="error">'+error+'</p>').parents('.form-group').addClass('has-error');
+            }
+        }
+        if (data.actionMessages) {
+            var mensajes = data.actionMessages;
+            for (var dato in mensajes) {
+                var mensaje = mensajes[dato];
+                $(formId).append('<p class="info">'+mensaje+'</p>');
             }
         }
     };

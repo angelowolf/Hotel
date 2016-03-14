@@ -5,10 +5,10 @@
             <ul class="nav nav-tabs">
                 <s:iterator var="tipo" value="lista" status="stat">
                     <s:if test="#stat.index == 0">
-                        <li class="active" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
+                        <li class="active th-${tipo.id}" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:if>
                         <s:else>
-                        <li><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
+                        <li class="th-${tipo.id}"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:else>
                     </s:iterator>
                 <li><a href="#nuevo-tipo" data-toggle="modal" data-target="#modal-agregar-th" ><i class="fa fa-plus"></i></a></li>
