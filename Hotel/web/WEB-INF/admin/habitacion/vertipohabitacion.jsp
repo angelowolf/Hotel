@@ -1,12 +1,13 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="row">
+<div class="row th-${tipo.id}">
     <hr class="divisor">
     <div class="col-md-6 col-xs-12">
-        <form class="form-horizontal">
+        <form class="form-horizontal form-th-${tipo.id}">
             <div class="well">
                 <fieldset>
                     <legend>Tipo de Habitación</legend>
+                    <input type="hidden" name="id" value="${tipo.id}"/>
                     <div class="form-group">
                         <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
                         <div class="col-xs-12 col-md-10">
@@ -15,7 +16,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 pull-left">
-                            <button class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
+                            <button value="${tipo.id}" class="btn btn-sm btn-success editar-th"><i class="fa fa-save"></i></button>
+                            <button value="${tipo.id}" class="btn btn-sm btn-danger eliminar-th"><i class="fa fa-close"></i></button>
                         </div>
                     </div>
                 </fieldset>
