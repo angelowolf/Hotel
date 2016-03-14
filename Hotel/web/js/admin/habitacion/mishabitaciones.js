@@ -6,7 +6,7 @@
 })(jQuery);
 
 function setEditarTipoHabitacionOnClick() {
-    $('.editar-th').click(function (e) {
+    $('.editar-th').off('click').click(function (e) {
         e.preventDefault();
         var data = $(this).parents('form').serialize();
         $.ajax({
@@ -24,7 +24,7 @@ function setEditarTipoHabitacionOnClick() {
         });
     });
     
-    $('.eliminar-th').click(function (e) {
+    $('.eliminar-th').off('click').click(function (e) {
         e.preventDefault();
         var $boton = $(this);
         var data = $boton.parents('form').serialize();
@@ -50,7 +50,7 @@ function setEditarTipoHabitacionOnClick() {
 }
 
 function setAgregarTipoHabitacionOnClick() {
-    $('#agregarth').click(function (e) {
+    $('#agregarth').off('click').click(function (e) {
         e.preventDefault();
         var $modal = $('#modal-agregar-th');
         var data = $modal.find('#form-agregar-th').serialize();
@@ -68,7 +68,11 @@ function setAgregarTipoHabitacionOnClick() {
                         type: 'POST',
                         success: function (dataa) {
                             $("<li><a href='#tipo-"+datos.id+"' data-toggle='tab'>"+nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
-                            $('#contenidoTiposHabitaciones').append(dataa);
+                            $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-'+datos.id+'">'+dataa+'</div>');
+                            
+                            setAgregarHabitacionOnClick();
+                            setEditarTipoHabitacionOnClick();
+                            setHabitacionesOnClick();
                         }
                     });
                 } else {
@@ -82,7 +86,7 @@ function setAgregarTipoHabitacionOnClick() {
 }
 
 function setAgregarHabitacionOnClick() {
-    $('#agregar').click(function (e) {
+    $('#agregar').off('click').click(function (e) {
         e.preventDefault();
         var $modal = $('#modal-agregar');
         var idTipo = $('.nav-tabs .active').data('id');
@@ -119,7 +123,7 @@ function setAgregarHabitacionOnClick() {
 }
 
 function setHabitacionesOnClick() {
-    $('.bloque-habitacion button').click(function (e) {
+    $('.bloque-habitacion button').off('click').click(function (e) {
         e.preventDefault();
         var id = this.value;
         var $bloque = $(this);
@@ -150,7 +154,7 @@ function setHabitacionesOnClick() {
 
     });
 
-    $('#eliminarh').click(function (e) {
+    $('#eliminarh').off('click').click(function (e) {
         e.preventDefault();
         var $modalEditar = $('#modal-editar');
         var id = $modalEditar.find('form [name=id]').val();

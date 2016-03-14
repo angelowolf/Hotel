@@ -7,7 +7,12 @@
             <div class="well">
                 <fieldset>
                     <legend>Tipo de Habitación</legend>
-                    <input type="hidden" name="id" value="${tipo.id}"/>
+                    <s:if test="id != null && id.isEmpty()">
+                        <input type="hidden" name="id" value="${tipo.id}"/>
+                    </s:if>
+                    <s:else>
+                        <input type="hidden" name="id" value="<s:property value="id"/>"/>
+                    </s:else>
                     <div class="form-group">
                         <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
                         <div class="col-xs-12 col-md-10">              
