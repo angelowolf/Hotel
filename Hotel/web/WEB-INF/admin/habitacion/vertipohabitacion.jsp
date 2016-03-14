@@ -6,24 +6,14 @@
         <form class="form-horizontal form-th-${tipo.id}">
             <div class="well">
                 <fieldset>
-                    <legend>Tipo de Habitación</legend>
-                    <s:if test="id != null && id.isEmpty()">
-                        <input type="hidden" name="id" value="${tipo.id}"/>
-                    </s:if>
-                    <s:else>
-                        <input type="hidden" name="id" value="<s:property value="id"/>"/>
-                    </s:else>
+                    <legend>Tipo de Habitación</legend>                   
+                    <input type="hidden" name="id" value="<s:property value="id"/>"/>
                     <div class="form-group">
                         <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
                         <div class="col-xs-12 col-md-10">              
                             <!--//este sera llamado cuando se carga la pagina por primera vez....-->
-                            <s:if test="nombre != null && nombre.isEmpty()">
-                                <input type="text" class="form-control" name="nombre" value="${tipo.nombre}"/>
-                            </s:if>
                             <!--este otro se llama cuando se pide la vista parcial de un solo tipo de habitacion-->
-                            <s:else>
-                                <input type="text" class="form-control" name="nombre" value="<s:property value="nombre"/>"/>
-                            </s:else>
+                            <input type="text" class="form-control" name="nombre" value="<s:property value="nombre"/>"/>
                         </div>
                     </div>
                     <div class="row">

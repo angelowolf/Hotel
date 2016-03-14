@@ -21,25 +21,20 @@
         </global-results>      
         
         <!--COMIENZO ACCIONES-->       
-        <action name="registrar" method="registrar" class="Acciones.Sistema.TipoHabitacionAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista,habitaciones,habitacionesByTipo,nombre</param>
-            </result>
-        </action>
+        <action name="registrar" method="registrar" class="Acciones.Sistema.TipoHabitacionAction"/
         <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction"/>    
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TipoHabitacionAction"/>     
         <action name="listar" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre,habitaciones,habitacionesByTipo</param>
+                <param name="excludeProperties">id,nombre,habitaciones,habitacionesByTipo,modeloCompleto</param>
             </result>
         </action>           
         <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction"/>
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista,habitaciones,habitacionesByTipo</param>
+                <param name="excludeProperties">lista,habitaciones,habitacionesByTipo,modeloCompleto</param>
             </result>   
         </action>
         <action name="mishabitaciones" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
