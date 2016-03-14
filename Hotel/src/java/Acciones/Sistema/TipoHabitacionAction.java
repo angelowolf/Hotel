@@ -28,7 +28,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
 
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
 
-    private String nombre, contenido;
+    private String nombre;
     private int id;
     private List<TipoHabitacion> lista = new ArrayList<TipoHabitacion>();
     private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
@@ -43,10 +43,10 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     private boolean validarRegistrar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
-            addActionError(Soporte.Mensaje.INGRESENOMBRETIPOHABITACION);
+            addFieldError("nombre", Soporte.Mensaje.INGRESENOMBRETIPOHABITACION);
             flag = false;
         } else if (cth.existe(id, nombre, h.getId())) {
-            addActionError(Soporte.Mensaje.getElExiste(Soporte.Mensaje.TIPOHABITACION));
+            addFieldError("nombre", Soporte.Mensaje.getElExiste(Soporte.Mensaje.TIPOHABITACION));
             flag = false;
         }
         return flag;
@@ -120,16 +120,30 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     public String editar() {
         try {
             TipoHabitacion th = cth.getUno(id, h.getId());
-            if (th != null) {
-                nombre = th.getNombre();
-                id = th.getId();
-                codigo = 400;
-                return SUCCESS;
-            } else {
-                addActionError(Soporte.Mensaje.IDINVALIDO);
-                codigo = 200;
-                return INPUT;
-            }
+            nombre = th.getNombre();
+            id = th.getId();
+            codigo = 400;
+            return SUCCESS;
+        } catch (AccesoIlegal e) {
+            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            codigo = 200;
+            return INPUT;
+        } catch (ObjetoNoEncontrado ex) {
+            addActionError(Soporte.Mensaje.IDINVALIDO);
+            codigo = 200;
+            return INPUT;
+        }
+    }
+
+    public String getModeloCompleto() {
+        IControladorHabitacion ch = new ControladorHabitacion();
+        try {
+            TipoHabitacion th = cth.getUno(id, h.getId());
+            nombre = th.getNombre();
+            id = th.getId();
+            habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
+            codigo = 400;
+            return SUCCESS;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
@@ -180,10 +194,6 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
 
     public List<TipoHabitacion> getLista() {
         return lista;
-    }
-
-    public String getContenido() {
-        return contenido;
     }
 
     @Override
