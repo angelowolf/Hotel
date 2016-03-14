@@ -12,11 +12,11 @@
         <global-results>
             <result name="success" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\]</param>
+                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\],id,codigo,nombre</param>
             </result>              
             <result name="input" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\]</param>
+                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],id,codigo,nombre</param>
             </result>                 
         </global-results>      
         
@@ -32,22 +32,20 @@
         <action name="listar" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre,habitaciones</param>
+                <param name="excludeProperties">id,nombre,habitaciones,habitacionesByTipo</param>
             </result>
         </action>           
-        <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction">
-            <result name="success">/WEB-INF/admin/habitacion/vistacontenido.jsp</result>
-        </action>        
+        <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction"/>
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
             <result type="json">
                 <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista,habitaciones</param>
+                <param name="excludeProperties">lista,habitaciones,habitacionesByTipo</param>
             </result>   
         </action>
         <action name="mishabitaciones" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
             <result name="success" type="tiles">/admin/habitacion/habitaciones.tiles</result>
         </action>
-        <action name="vistatipohabitacion" method="editar" class="Acciones.Sistema.HabitacionAction">
+        <action name="vistatipohabitacion" method="getModeloCompleto" class="Acciones.Sistema.TipoHabitacionAction">
             <result name="success">/WEB-INF/admin/habitacion/vertipohabitacion.jsp</result>
         </action>
         <!--FIN ACCIONES-->       
