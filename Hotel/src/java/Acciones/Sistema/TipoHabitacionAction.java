@@ -16,6 +16,7 @@ import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
+import com.opensymphony.xwork2.ModelDriven;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -24,12 +25,11 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class TipoHabitacionAction extends Accion implements AccionABMC {
+public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDriven<TipoHabitacion> {
 
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
 
-    private String nombre;
-    private int id;
+    private TipoHabitacion tipohabitacion = new TipoHabitacion();
     private List<TipoHabitacion> lista = new ArrayList<TipoHabitacion>();
     private List<Habitacion> habitaciones = new ArrayList<Habitacion>();
 
@@ -42,10 +42,10 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
 
     private boolean validarRegistrar() {
         boolean flag = true;
-        if (StringUtils.isBlank(nombre)) {
+        if (StringUtils.isEmpty(tipohabitacion.getNombre())) {
             addFieldError("nombre", Soporte.Mensaje.INGRESENOMBRETIPOHABITACION);
             flag = false;
-        } else if (cth.existe(id, nombre, h.getId())) {
+        } else if (cth.existe(tipohabitacion.getId(), tipohabitacion.getNombre(), h.getId())) {
             addFieldError("nombre", Soporte.Mensaje.getElExiste(Soporte.Mensaje.TIPOHABITACION));
             flag = false;
         }
@@ -59,7 +59,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
             return INPUT;
         }
         codigo = 400;
-        id = cth.guardar(nombre, h.getId());
+        tipohabitacion.setId(cth.guardar(tipohabitacion.getNombre(), h.getId()));
         addActionMessage(Soporte.Mensaje.getAgregado(Soporte.Mensaje.TIPOHABITACION));
         return SUCCESS;
     }
@@ -71,7 +71,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
             return INPUT;
         }
         try {
-            cth.actualizar(id, nombre, h.getId());
+            cth.actualizar(tipohabitacion.getId(), tipohabitacion.getNombre(), h.getId());
             addActionMessage(Soporte.Mensaje.getModificado(Soporte.Mensaje.TIPOHABITACION));
             codigo = 400;
         } catch (AccesoIlegal e) {
@@ -96,7 +96,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     @Override
     public String eliminar() {
         try {
-            if (cth.eliminar(id, h.getId())) {
+            if (cth.eliminar(tipohabitacion.getId(), h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminado(Soporte.Mensaje.TIPOHABITACION));
                 codigo = 400;
                 return SUCCESS;
@@ -119,9 +119,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     @Override
     public String editar() {
         try {
-            TipoHabitacion th = cth.getUno(id, h.getId());
-            nombre = th.getNombre();
-            id = th.getId();
+            tipohabitacion = cth.getUno(tipohabitacion.getId(), h.getId());
             codigo = 400;
             return SUCCESS;
         } catch (AccesoIlegal e) {
@@ -138,10 +136,8 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     public String getModeloCompleto() {
         IControladorHabitacion ch = new ControladorHabitacion();
         try {
-            TipoHabitacion th = cth.getUno(id, h.getId());
-            nombre = th.getNombre();
-            id = th.getId();
-            habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
+            tipohabitacion = cth.getUno(tipohabitacion.getId(), h.getId());
+            habitaciones = ch.getHabitacionesByTipoHabitacion(tipohabitacion.getId(), h.getId());
             codigo = 400;
             return SUCCESS;
         } catch (AccesoIlegal e) {
@@ -158,7 +154,7 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
     public String getHabitacionesByTipo() {
         IControladorHabitacion ch = new ControladorHabitacion();
         try {
-            habitaciones = ch.getHabitacionesByTipoHabitacion(id, h.getId());
+            habitaciones = ch.getHabitacionesByTipoHabitacion(tipohabitacion.getId(), h.getId());
             codigo = 400;
             return SUCCESS;
         } catch (AccesoIlegal e) {
@@ -176,28 +172,21 @@ public class TipoHabitacionAction extends Accion implements AccionABMC {
         return habitaciones;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public List<TipoHabitacion> getLista() {
         return lista;
+    }
+
+    public void setTipohabitacion(TipoHabitacion tipohabitacion) {
+        this.tipohabitacion = tipohabitacion;
     }
 
     @Override
     public int getCodigo() {
         return codigo;
+    }
+
+    @Override
+    public TipoHabitacion getModel() {
+        return tipohabitacion;
     }
 }

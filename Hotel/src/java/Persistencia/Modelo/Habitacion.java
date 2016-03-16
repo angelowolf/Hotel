@@ -18,7 +18,7 @@ public class Habitacion {
     private TipoHabitacion tipoHabitacion;
 
     public Habitacion() {
-
+        tipoHabitacion = new TipoHabitacion();
     }
 
     public TipoHabitacion getTipoHabitacion() {
@@ -81,6 +81,5 @@ public class Habitacion {
     public String toString() {
         return "Habitacion{" + "id=" + id + ", nombre=" + nombre + ", mantenimientos=" + mantenimientos + ", capacidad=" + capacidad + ", bloqueos=" + bloqueos + ", tipoHabitacion=" + tipoHabitacion + '}';
     }
-    
-    
+
 }//end Habitacion

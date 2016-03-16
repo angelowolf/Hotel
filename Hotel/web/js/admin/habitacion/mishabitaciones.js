@@ -90,7 +90,7 @@ function setAgregarHabitacionOnClick() {
         e.preventDefault();
         var $modal = $('#modal-agregar');
         var idTipo = $('.nav-tabs .active').data('id');
-        $modal.find('input[name="id_tipohabitacion"]').val(idTipo);
+        $modal.find('input[name="tipoHabitacion.id"]').val(idTipo);
         var data = $modal.find('#form-agregar').serialize();
 
         $.ajax({
@@ -139,7 +139,7 @@ function setHabitacionesOnClick() {
                 if (data.codigo == 400) {
                     $modal.find('input[name="nombre"]').val(data.nombre);
                     $modal.find('input[name="id"]').val(id);
-                    $modal.find('input[name="id_tipohabitacion"]').val(data.id_tipohabitacion);
+                    $modal.find('input[name="tipoHabitacion.id"]').val(data.id_tipohabitacion);
                     $modal.find('input[name="capacidad"]').val(data.capacidad);
                     $('#editar').off('click').click(function (e) {
                         e.preventDefault();

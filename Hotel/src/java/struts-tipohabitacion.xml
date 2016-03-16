@@ -11,12 +11,27 @@
         </result-types>  
         <global-results>
             <result name="success" type="json">
+                <param name="root">action</param>   
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\],id,codigo,nombre</param>
+                <param name="excludeProperties">
+                    actionErrors.*,
+                    fieldErrors.*,
+                    habitaciones,
+                    habitacionesByTipo,
+                    modeloCompleto,
+                    lista,
+                    texts,
+                    error.*,
+                    errorMessages.*,
+                    locale
+                </param>                    
             </result>              
             <result name="input" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],id,codigo,nombre</param>
+                <param name="root">action</param>   
+                <param name="includeProperties">actionErrors.*,
+                    fieldErrors.*,
+                    codigo</param>
             </result>                 
         </global-results>      
         
@@ -25,16 +40,16 @@
         <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction"/>    
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TipoHabitacionAction"/>     
         <action name="listar" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">id,nombre,habitaciones,habitacionesByTipo,modeloCompleto</param>
+            <result name="success" type="json">
+                <param name="root">action</param>       
+                <param name="excludeProperties">habitaciones,habitacionesByTipo,modeloCompleto,model</param>
             </result>
         </action>           
         <action name="contenido" method="getHabitacionesByTipo" class="Acciones.Sistema.TipoHabitacionAction"/>
         <action name="editar" method="editar" class="Acciones.Sistema.TipoHabitacionAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista,habitaciones,habitacionesByTipo,modeloCompleto</param>
+            <result name="success" type="json">
+                <param name="root">action</param>   
+                <param name="excludeProperties">habitaciones,habitacionesByTipo,modeloCompleto,lista</param>
             </result>   
         </action>
         <action name="mishabitaciones" method="listar" class="Acciones.Sistema.TipoHabitacionAction">

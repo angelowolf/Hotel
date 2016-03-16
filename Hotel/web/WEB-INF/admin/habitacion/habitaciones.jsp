@@ -85,7 +85,7 @@
             <div class="modal-body">
                 <div class="row">
                     <form id="form-agregar">
-                        <input type="hidden" name="id_tipohabitacion" value="">
+                        <input type="hidden" name="tipoHabitacion.id" value="">
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="nombre" class="label-control">Nombre</label>
