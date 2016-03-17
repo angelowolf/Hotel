@@ -13,6 +13,7 @@ import Persistencia.Modelo.Hotel;
 import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Temporada;
 import static com.opensymphony.xwork2.Action.INPUT;
+import com.opensymphony.xwork2.ModelDriven;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,12 +24,11 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class TemporadaAction extends Accion {
+public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
 
     private final IControladorTemporada ct = new ControladorTemporada();
 
-    private int id;
-    private String nombre, fechaInicio, fechaFin;
+    private Temporada temporada = new Temporada();
     private List<Temporada> lista = new ArrayList<Temporada>();
 
     public TemporadaAction() {
@@ -37,18 +37,18 @@ public class TemporadaAction extends Accion {
 
     private boolean validarRegistrar() {
         boolean flag = true;
-        if (StringUtils.isBlank(nombre)) {
+        if (StringUtils.isBlank(temporada.getNombre())) {
             addActionError(Soporte.Mensaje.INGRESENOMBRETEMPORADA);
             flag = false;
-        } else if (ct.existe(id, nombre, h.getId())) {
+        } else if (ct.existe(temporada.getId(), temporada.getNombre(), h.getId())) {
             addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.TEMPORADA));
             flag = false;
         }
-        if (StringUtils.isBlank(fechaInicio)) {
+        if (StringUtils.isBlank(temporada.getFechaInicio().toString())) {
             addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
             flag = false;
         }
-        if (StringUtils.isBlank(fechaFin)) {
+        if (StringUtils.isBlank(temporada.getFechaFin().toString())) {
             addActionError(Soporte.Mensaje.INGRESEFECHAFIN);
             flag = false;
         }
@@ -61,7 +61,7 @@ public class TemporadaAction extends Accion {
             return INPUT;
         }
         try {
-            ct.guardar(nombre, fechaInicio, fechaFin, h.getId());
+            ct.guardar(temporada.getNombre(), temporada.getFechaInicio().toString(), temporada.getFechaFin().toString(), h.getId());
         } catch (ParseException ex) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
             codigo = 200;
@@ -78,7 +78,7 @@ public class TemporadaAction extends Accion {
             return INPUT;
         }
         try {
-            ct.actualizar(id, nombre, fechaInicio, fechaFin, h.getId());
+            ct.actualizar(temporada.getId(), temporada.getNombre(), temporada.getFechaInicio().toString(), temporada.getFechaFin().toString(), h.getId());
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
@@ -105,7 +105,7 @@ public class TemporadaAction extends Accion {
 
     public String eliminar() {
         try {
-            if (ct.eliminar(id, h.getId())) {
+            if (ct.eliminar(temporada.getId(), h.getId())) {
                 addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.TEMPORADA));
                 codigo = 400;
                 return SUCCESS;
@@ -127,12 +127,7 @@ public class TemporadaAction extends Accion {
 
     public String editar() {
         try {
-            Temporada temporada = ct.getUno(id,h.getId());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-            nombre = temporada.getNombre();
-            fechaFin = sdf.format(temporada.getFechaFin());
-            fechaInicio = sdf.format(temporada.getFechaInicio());
-            id = temporada.getId();
+            temporada = ct.getUno(temporada.getId(),h.getId());
             codigo = 400;
             return SUCCESS;
         } catch (AccesoIlegal e) {
@@ -146,38 +141,6 @@ public class TemporadaAction extends Accion {
         }
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public List<Temporada> getLista() {
         return lista;
     }
@@ -185,6 +148,11 @@ public class TemporadaAction extends Accion {
     @Override
     public int getCodigo() {
         return codigo;
+    }
+
+    @Override
+    public Temporada getModel() {
+      return temporada;
     }
 
 }

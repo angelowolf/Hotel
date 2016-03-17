@@ -11,13 +11,25 @@
         </result-types>  
         <global-results>
             <result name="success" type="json">
-                <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\],codigo</param>
-            </result>              
+                <param name="root">action</param>   
+                <param name="ignoreHierarchy">false</param>      
+                <param name="excludeProperties">
+                    actionErrors.*,
+                    fieldErrors.*,
+                    lista,
+                    texts,
+                    error.*,
+                    errorMessages.*,
+                    locale
+                </param>                            
+            </result>                     
             <result name="input" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],codigo</param>
-            </result>                 
+                <param name="root">action</param>   
+                <param name="includeProperties">actionErrors.*,
+                    fieldErrors.*,
+                    codigo</param>
+            </result>           
         </global-results>     
              
         <!--COMIENZO ACCIONES-->
@@ -25,16 +37,16 @@
         <action name="modificar" method="modificar" class="Acciones.Sistema.TemporadaAction"/>
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TemporadaAction"/>
         <action name="listar" method="listar" class="Acciones.Sistema.TemporadaAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">fechaInicio,id,fechaFin,nombre</param>
-            </result>
+            <result name="success" type="json">
+                <param name="root">action</param>       
+                <param name="excludeProperties">model</param>
+            </result>  
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TemporadaAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
+              <result name="success" type="json">
+                <param name="root">action</param>   
                 <param name="excludeProperties">lista</param>
-            </result>            
+            </result>              
         </action>
         <!--FIN ACCIONES-->
     </package>

@@ -14,25 +14,23 @@
     <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/imagenes/.*" />
     <constant name="struts.ui.theme" value="simple" /> 
     <!--ACCIONES INICIO-->
-    <include file="struts-error.xml"></include>
-    <include file="struts-sesion.xml"></include>
-    <include file="struts-tipopago.xml"></include>    
-    <include file="struts-tipodocumento.xml"></include>
-    <include file="struts-sexo.xml"></include>
-    <include file="struts-modulo.xml"></include>
-    <include file="struts-plan.xml"></include>
-    
-    
-    <!--TIENEN RUTAS DE TESTING-->
-    <include file="struts-hotel.xml"></include>        
-    <include file="struts-tipohabitacion.xml"></include>
-    <include file="struts-habitacion.xml"></include>
-    <include file="struts-detallemantenimiento.xml"></include>
-    
-    
-    <include file="struts-temporada.xml"></include>
-    <include file="struts-tarifa.xml"></include>
-    
+    <!--Acciones del sistema parte del administrador-->
+    <include file="/struts-error.xml"></include>
+    <include file="Acciones/XML/Root/struts-modulo.xml"></include>
+    <include file="Acciones/XML/Root/struts-plan.xml"></include>
+    <include file="Acciones/XML/Root/struts-sesion.xml"></include>
+    <include file="Acciones/XML/Root/struts-sexo.xml"></include>
+    <include file="Acciones/XML/Root/struts-tipodocumento.xml"></include>
+    <include file="Acciones/XML/Root/struts-tipopago.xml"></include>    
+   
+    <!--Acciones del sistema de la parte del cliente-->    
+    <include file="Acciones/XML/Sistema/struts-detallemantenimiento.xml"></include>
+    <include file="Acciones/XML/Sistema/struts-habitacion.xml"></include>
+    <include file="Acciones/XML/Sistema/struts-hotel.xml"></include>        
+    <include file="Acciones/XML/Sistema/struts-tarifa.xml"></include>
+    <include file="Acciones/XML/Sistema/struts-temporada.xml"></include>    
+    <include file="Acciones/XML/Sistema/struts-tipohabitacion.xml"></include>
+   
     <include file="struts-ERRORIDE.xml"></include>
     <!--ACCIONES FIN-->
 </struts>
