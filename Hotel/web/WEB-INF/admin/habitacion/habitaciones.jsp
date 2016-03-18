@@ -5,36 +5,28 @@
             <ul class="nav nav-tabs">
                 <s:iterator var="tipo" value="lista" status="stat">
                     <s:if test="#stat.index == 0">
-                        <li class="active th-${tipo.id}" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
+                        <li class="active th-<s:property value="#tipo.id" />" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:if>
                         <s:else>
-                        <li class="th-${tipo.id}"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
+                        <li class="th-<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:else>
                     </s:iterator>
                 <li><a href="#nuevo-tipo" data-toggle="modal" data-target="#modal-agregar-th" ><i class="fa fa-plus"></i></a></li>
             </ul>
             <div id="contenidoTiposHabitaciones" class="tab-content">
-                <s:iterator var="tipo" value="lista" status="stat">
+                <s:iterator var="cadatipohabitacion" value="lista" status="stat">
                     <s:if test="#stat.index == 0">
-                        <div class="tab-pane fade active in" id="tipo-<s:property value="#tipo.id" />">
-                            <s:action name="contenido" var="accion">
-                                <s:param name="id"><s:property value="#tipo.id" /></s:param>
+                        <div class="tab-pane fade active in" id="tipo-<s:property value="#cadatipohabitacion.id" />">
+                            <s:action name="vistatipohabitacion" executeResult="true">
+                                <s:param name="id"><s:property value="#cadatipohabitacion.id" /></s:param>
                             </s:action>
-                            <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion.jsp">
-                                <s:param name="tipo" value="#tipo"/>
-                                <s:param name="habitaciones" value="#accion.habitaciones"/>
-                            </s:include>
                         </div>
                     </s:if>
                     <s:else>
-                        <div class="tab-pane fade" id="tipo-<s:property value="#tipo.id" />">
-                            <s:action name="contenido" var="accion">
-                                <s:param name="id"><s:property value="#tipo.id" /></s:param>
+                        <div class="tab-pane fade" id="tipo-<s:property value="#cadatipohabitacion.id" />">
+                            <s:action name="vistatipohabitacion" executeResult="true">
+                                <s:param name="id"><s:property value="#cadatipohabitacion.id" /></s:param>
                             </s:action>
-                            <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion.jsp">
-                                <s:param name="tipo" value="#tipo"/>
-                                <s:param name="habitaciones" value="#accion.habitaciones"/>
-                            </s:include>
                         </div>
                     </s:else>
                 </s:iterator>

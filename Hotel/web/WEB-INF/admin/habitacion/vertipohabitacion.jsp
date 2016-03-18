@@ -1,23 +1,23 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="row th-<s:property value="id"/>">
+<div class="row th-<s:property value="tipohabitacion.id"/>">
     <hr class="divisor">
     <div class="col-md-6 col-xs-12">
-        <form class="form-horizontal form-th-<s:property value="id"/>">
+        <form class="form-horizontal form-th-<s:property value="tipohabitacion.id"/>">
             <div class="well">
                 <fieldset>
                     <legend>Tipo de Habitación</legend>                   
-                    <input type="hidden" name="id" value="<s:property value="id"/>"/>
+                    <input type="hidden" name="id" value="<s:property value="tipohabitacion.id"/>"/>                
                     <div class="form-group">
                         <label for="nombre" class="col-xs-12 col-md-2 control-label">Nombre</label>
                         <div class="col-xs-12 col-md-10">              
-                            <input type="text" class="form-control" name="nombre" value="<s:property value="nombre"/>"/>
+                            <input type="text" class="form-control" name="nombre" value="<s:property value="tipohabitacion.nombre"/>"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 pull-left">
-                            <button value="<s:property value="id"/>" class="btn btn-sm btn-success editar-th"><i class="fa fa-save"></i></button>
-                            <button value="<s:property value="id"/>" class="btn btn-sm btn-danger eliminar-th"><i class="fa fa-close"></i></button>
+                            <button value="<s:property value="tipohabitacion.id"/>" class="btn btn-sm btn-success editar-th"><i class="fa fa-save"></i></button>
+                            <button value="<s:property value="tipohabitacion.id"/>" class="btn btn-sm btn-danger eliminar-th"><i class="fa fa-close"></i></button>
                         </div>
                     </div>
                 </fieldset>
@@ -40,27 +40,12 @@
             </div>
         </div>
 
-        <div class="row habitaciones">
-            <!--//este sera llamado cuando se carga la pagina por primera vez....
-                verifica que la lista habitaciones que es llamada solo cuando se necesita la vistatipohabitacion
-            no este vacia... en el caso de que este vacia pues no se esta llamando a la vista parcial sino que se esta cargando
-            la pagina por primera vez.......
-            -->
-            <s:if test="%{habitaciones != null && habitaciones.isEmpty()}">
-                <s:iterator var="habitacion" value="#accion.habitaciones">
-                    <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp">
-                        <s:param name="habitacion" value="#habitacion"/>
-                    </s:include>
-                </s:iterator>
-            </s:if>
-            <!--este otro se llama cuando se pide la vista parcial de un solo tipo de habitacion-->
-            <s:else>
-                <s:iterator var="habitacion" value="habitaciones">
-                    <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp">
-                        <s:param name="habitacion" value="#habitacion"/>
-                    </s:include>
-                </s:iterator>
-            </s:else>          
+        <div class="row habitaciones">           
+            <s:iterator var="habitacion" value="habitaciones">
+                <s:include value="/WEB-INF/admin/habitacion/vertipohabitacion-habitacion.jsp">
+                    <s:param name="habitacion" value="#habitacion"/>
+                </s:include>
+            </s:iterator>       
         </div>
     </div>
 </div>
@@ -89,8 +74,8 @@
                                 <input type="text" name="capacidad" class="form-control" value="">
                             </div>
                         </div>
+                    </form>
                 </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" data-toggle="modal" data-target="#modal-eliminar" class="btn btn-default pull-left" id="eliminar">Eliminar</button>

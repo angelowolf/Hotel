@@ -151,23 +151,6 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
         }
     }
 
-    public String getHabitacionesByTipo() {
-        IControladorHabitacion ch = new ControladorHabitacion();
-        try {
-            habitaciones = ch.getHabitacionesByTipoHabitacion(tipohabitacion.getId(), h.getId());
-            codigo = 400;
-            return SUCCESS;
-        } catch (AccesoIlegal e) {
-            codigo = 200;
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            return INPUT;
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
-        }
-    }
-
     public List<Habitacion> getHabitaciones() {
         return habitaciones;
     }
@@ -178,6 +161,10 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
 
     public void setTipohabitacion(TipoHabitacion tipohabitacion) {
         this.tipohabitacion = tipohabitacion;
+    }
+
+    public TipoHabitacion getTipohabitacion() {
+        return tipohabitacion;
     }
 
     @Override
