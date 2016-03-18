@@ -37,8 +37,10 @@ function setEditarTipoHabitacionOnClick() {
             success: function (datos) {
                 console.log(datos);
                 if (datos.codigo === 400) {
-                    console.log($('.th-'+id));
-                    $('.th-'+id).remove();
+                    $('.th-'+id).fadeOut(function(){
+                        $('.nav-tabs li:first a').click();
+                        $(this).remove();
+                    });
                 } else {
                     erroresM.mostrarErrores($boton.parents('form'), datos, true);
                 }
@@ -54,7 +56,6 @@ function setAgregarTipoHabitacionOnClick() {
         e.preventDefault();
         var $modal = $('#modal-agregar-th');
         var data = $modal.find('#form-agregar-th').serialize();
-        var nombre = $modal.find('#form-agregar-th input[name=nombre]').val();
         $.ajax({
             url: '/tipohabitacion/registrar',
             type: 'POST',
@@ -64,11 +65,11 @@ function setAgregarTipoHabitacionOnClick() {
                 if (datos.codigo === 400) {
                     $.ajax({
                         url: '/tipohabitacion/vistatipohabitacion',
-                        data: {id: datos.id},
+                        data: {id: datos.model.id},
                         type: 'POST',
                         success: function (dataa) {
-                            $("<li><a href='#tipo-"+datos.id+"' data-toggle='tab'>"+nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
-                            $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-'+datos.id+'">'+dataa+'</div>');
+                            $("<li><a href='#tipo-"+datos.model.id+"' data-toggle='tab'>"+datos.model.nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-'+datos.model.id+'">'+dataa+'</div>');
                             
                             setAgregarHabitacionOnClick();
                             setEditarTipoHabitacionOnClick();
@@ -137,10 +138,10 @@ function setHabitacionesOnClick() {
             data: {id: id},
             success: function (data) {
                 if (data.codigo == 400) {
-                    $modal.find('input[name="nombre"]').val(data.nombre);
+                    $modal.find('input[name="nombre"]').val(data.model.nombre);
                     $modal.find('input[name="id"]').val(id);
-                    $modal.find('input[name="tipoHabitacion.id"]').val(data.id_tipohabitacion);
-                    $modal.find('input[name="capacidad"]').val(data.capacidad);
+                    $modal.find('input[name="tipoHabitacion.id"]').val(data.model.id_tipohabitacion);
+                    $modal.find('input[name="capacidad"]').val(data.model.capacidad);
                     $('#editar').off('click').click(function (e) {
                         e.preventDefault();
                         editar($modal, $bloque);
