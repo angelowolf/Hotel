@@ -131,7 +131,7 @@ function setHabitacionesOnClick() {
         var id = this.value;
         var $bloque = $(this);
         var $modal = $('#modal-editar');
-        $modal[0].reset;
+        $modal[0].reset();
 
         $.ajax({
             url: '/habitacion/editar',
@@ -171,7 +171,7 @@ function setHabitacionesOnClick() {
             success: function (data) {
                 if (data.codigo == 400) {
                     $modal.modal('hide');
-                    $modalEditar[0].reset;
+                    $modalEditar[0].reset();
                     $modalEditar.modal('hide');
                     $('.hab-' + id).fadeOut(function () {
                         $(this).remove;
