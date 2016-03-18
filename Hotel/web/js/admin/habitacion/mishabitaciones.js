@@ -68,18 +68,20 @@ function setAgregarTipoHabitacionOnClick() {
                         data: {id: datos.model.id},
                         type: 'POST',
                         success: function (dataa) {
-                            $("<li><a href='#tipo-"+datos.model.id+"' data-toggle='tab'>"+datos.model.nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $("<li><a class='capitalize' href='#tipo-"+datos.model.id+"' data-toggle='tab'>"+datos.model.nombre+"</a></li>").insertBefore('.nav.nav-tabs li:last');
                             $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-'+datos.model.id+'">'+dataa+'</div>');
                             
                             setAgregarHabitacionOnClick();
                             setEditarTipoHabitacionOnClick();
                             setHabitacionesOnClick();
+                            
+                            $('li a[href=#tipo-'+datos.model.id+']').click();
                         }
                     });
                 } else {
                     alert('error');
                 }
-                $modal.find('#form-agregar-th')[0].reset;
+                $modal.find('#form-agregar-th')[0].reset();
                 $modal.modal('hide');
             }
         });
