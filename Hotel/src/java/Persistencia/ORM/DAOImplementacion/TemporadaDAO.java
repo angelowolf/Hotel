@@ -36,7 +36,7 @@ public class TemporadaDAO extends GenericDAO<Temporada, Integer> implements ITem
         Session session = getHibernateTemplate();
         List<Temporada> objetos = new ArrayList<Temporada>();
         try {
-            String sql = "select * from Temporada t inner join tarifa_tipohabitacion tth ON t.id = tth.id_tarifa WHERE tth.id = :id ";
+            String sql = "select * from Temporada t inner join tarifa ta ON t.id = ta.id_temporada WHERE ta.id_temporada = :id ";
             objetos = session.createSQLQuery(sql).addEntity(Temporada.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();

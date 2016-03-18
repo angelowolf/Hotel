@@ -11,6 +11,7 @@ import Persistencia.Modelo.Temporada;
 import Persistencia.ORM.DAOImplementacion.TemporadaDAO;
 import Persistencia.ORM.DAOInterface.ITemporada;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public interface IControladorTemporada {
      * @throws java.text.ParseException Si la fecha no tiene el formato correcto
      * dd-mm-yy
      */
-    public void guardar(String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException;
+    public int guardar(String nombre, Date fechaInicio, Date fechaFin, int id_hotel) throws ParseException;
 
     /**
      * Actualiza los datos de una temporada. El id_hotel es utilizado para
@@ -48,7 +49,7 @@ public interface IControladorTemporada {
      * @throws Persistencia.Modelo.AccesoIlegal
      * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, AccesoIlegal, ObjetoNoEncontrado;
+    public void actualizar(int id, String nombre, Date fechaInicio, Date fechaFin, int id_hotel) throws ParseException, AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * Elimina una temporada. El id_hotel es utilizado para cuestiones de

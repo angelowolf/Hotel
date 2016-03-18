@@ -55,7 +55,6 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
     @Override
     public String registrar() {
         if (!validarRegistrar()) {
-            codigo = 200;
             return INPUT;
         }
         codigo = 400;
@@ -67,7 +66,6 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
     @Override
     public String modificar() {
         if (!validarRegistrar()) {
-            codigo = 200;
             return INPUT;
         }
         try {
@@ -76,11 +74,9 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
             codigo = 400;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
             return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
             return INPUT;
         }
         return SUCCESS;
@@ -102,16 +98,13 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
                 return SUCCESS;
             } else {
                 addActionError(Soporte.Mensaje.getUsadoPorUna(Soporte.Mensaje.TIPOHABITACION, Soporte.Mensaje.HABITACION));
-                codigo = 200;
                 return INPUT;
             }
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
             return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
             return INPUT;
         }
     }
@@ -124,11 +117,9 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
             return SUCCESS;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
             return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
             return INPUT;
         }
     }
@@ -142,11 +133,9 @@ public class TipoHabitacionAction extends Accion implements AccionABMC, ModelDri
             return SUCCESS;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
             return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
             return INPUT;
         }
     }

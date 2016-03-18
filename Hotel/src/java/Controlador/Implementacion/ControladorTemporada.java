@@ -6,6 +6,7 @@ import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.Temporada;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang.WordUtils;
 
@@ -17,25 +18,23 @@ import org.apache.commons.lang.WordUtils;
 public class ControladorTemporada implements IControladorTemporada {
 
     @Override
-    public void guardar(String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException {
+    public int guardar(String nombre, Date fechaInicio, Date fechaFin, int id_hotel) throws ParseException {
         Temporada t = new Temporada();
         nombre = (WordUtils.capitalize(nombre));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
         t.setId_hotel(id_hotel);
         t.setNombre(nombre);
-        t.setFechaInicio(sdf.parse(fechaInicio));
-        t.setFechaFin(sdf.parse(fechaFin));
-        TEMPORADADAO.guardar(t);
+        t.setFechaInicio(fechaInicio);
+        t.setFechaFin(fechaFin);
+        return TEMPORADADAO.guardar(t);
     }
 
     @Override
-    public void actualizar(int id, String nombre, String fechaInicio, String fechaFin, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
+    public void actualizar(int id, String nombre, Date fechaInicio, Date fechaFin, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
         Temporada t = getUno(id, id_hotel);
         nombre = (WordUtils.capitalize(nombre));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
         t.setNombre(nombre);
-        t.setFechaInicio(sdf.parse(fechaInicio));
-        t.setFechaFin(sdf.parse(fechaFin));
+        t.setFechaInicio(fechaInicio);
+        t.setFechaFin(fechaFin);
         TEMPORADADAO.actualizar(t);
     }
 

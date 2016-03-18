@@ -15,7 +15,6 @@ import Persistencia.Modelo.Temporada;
 import static com.opensymphony.xwork2.Action.INPUT;
 import com.opensymphony.xwork2.ModelDriven;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -24,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author ang_2
  */
-public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
+public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
 
     private final IControladorTemporada ct = new ControladorTemporada();
 
@@ -44,11 +43,11 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
             addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.TEMPORADA));
             flag = false;
         }
-        if (StringUtils.isBlank(temporada.getFechaInicio().toString())) {
-            addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
+        if (temporada.getFechaInicio() == null) {
+           addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
             flag = false;
         }
-        if (StringUtils.isBlank(temporada.getFechaFin().toString())) {
+        if (temporada.getFechaFin() == null) {
             addActionError(Soporte.Mensaje.INGRESEFECHAFIN);
             flag = false;
         }
@@ -57,11 +56,10 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
 
     public String registrar() {
         if (!validarRegistrar()) {
-            codigo = 200;
             return INPUT;
         }
         try {
-            ct.guardar(temporada.getNombre(), temporada.getFechaInicio().toString(), temporada.getFechaFin().toString(), h.getId());
+           temporada.setId(ct.guardar(temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId()));
         } catch (ParseException ex) {
             addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
             codigo = 200;
@@ -78,7 +76,7 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
             return INPUT;
         }
         try {
-            ct.actualizar(temporada.getId(), temporada.getNombre(), temporada.getFechaInicio().toString(), temporada.getFechaFin().toString(), h.getId());
+            ct.actualizar(temporada.getId(), temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId());
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             codigo = 200;
@@ -127,7 +125,7 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
 
     public String editar() {
         try {
-            temporada = ct.getUno(temporada.getId(),h.getId());
+            temporada = ct.getUno(temporada.getId(), h.getId());
             codigo = 400;
             return SUCCESS;
         } catch (AccesoIlegal e) {
@@ -152,7 +150,7 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada>{
 
     @Override
     public Temporada getModel() {
-      return temporada;
+        return temporada;
     }
 
 }
