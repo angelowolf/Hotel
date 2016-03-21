@@ -21,6 +21,8 @@ public class Mensaje {
     private static final String USADAPORUN = "La %s esta siendo utilizada por algun %s, debe eliminarlo o desvincularlos para poder eliminar esta %s!";
     private static final String CODIGOYAENVIADO = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %d minutos podra generar otro codigo.";
     private static final String CUENTAAVISO = "Le recordamos que su suscripción actual está próxima a vencer. Vencera el %s";
+    public static final String PREGUNTAELIMINAREL = "¿Está seguro de que quiere eliminar este %s?";
+    public static final String PREGUNTAELIMINARLA = "¿Está seguro de que quiere eliminar esta %s?";
     //************************************************************************//
     //Nombre de clases...//
     public static final String USUARIO = "Usuario";
@@ -29,24 +31,24 @@ public class Mensaje {
     public static final String PERSONAS = "Personas";
     public static final String PERSONA = "Persona";
     public static final String TIPODOCUMENTO = "Tipo Documento";
-    public static final String MODULO = "Modulo";
+    public static final String MODULO = "Módulo";
     public static final String PLAN = "Plan";
     public static final String HOTEL = "Hotel";
-    public static final String HABITACION = "Habitacion";
-    public static final String TIPOHABITACION = "Tipo Habitacion";
+    public static final String HABITACION = "Habitación";
+    public static final String TIPOHABITACION = "Tipo Habitación";
     public static final String RESERVA = "Reserva";
     public static final String TEMPORADA = "Temporada";
     public static final String TARIFA = "Tarifa";
-    public static final String DETALLEMANTENIMIENTO = "Datella Mantenimiento";
+    public static final String DETALLEMANTENIMIENTO = "Detalla Mantenimiento";
     public static final String BLOQUEO = "Bloqueo";
     //************************************************************************//
     //Mensajes de validacion//
     public static final String PAGO = "Pago";
     public static final String INGRESENOMBRE = "Ingrese un nombre.";
-    public static final String INGRESESIMBOLO = "Ingrese un simbolo.";
+    public static final String INGRESESIMBOLO = "Ingrese un símbolo.";
     public static final String INGRESEDIRECCION = "Ingrese una dirección.";
-    public static final String INGRESEUNCODIGO = "Ingrese un codigo.";
-    public static final String SELECCIONEUBIACION = "Seleccione una ubicacion en el mapa.";
+    public static final String INGRESEUNCODIGO = "Ingrese un código.";
+    public static final String SELECCIONEUBIACION = "Seleccione una ubicación en el mapa.";
     public static final String INGRESETITULO = "Ingrese un título.";
     public static final String INGRESEAPELLIDO = "Ingrese un apellido.";
     public static final String INGRESENICK = "Ingrese un nick.";
@@ -91,7 +93,6 @@ public class Mensaje {
     public static final String LATEMPORADANOESVALIDO = "La " + TEMPORADA + " no es valida.";
     public static final String INGRESEDESCRIPCION = "Ingrese una descripcioón.";
     public static final String INGRESEFECHA = "Ingrese la fecha en la que ocurrio el evento.";
-    
 
     /**
      * Crea un mensaje con el tiempo pasado por parametro. "Ya se ha enviado un
@@ -255,6 +256,28 @@ public class Mensaje {
      */
     public static String getUsadaPorUn(String arg, String arg2) {
         return String.format(USADAPORUN, arg, arg2, arg);
+    }
+
+    /**
+     * Crea un mensaje que pregunta si el objeto quiere ser eliminado. "¿Está
+     * seguro de que quiere eliminar este %s?"
+     *
+     * @param arg
+     * @return
+     */
+    public static String getPreguntaEliminarEl(String arg) {
+        return String.format(PREGUNTAELIMINAREL, arg);
+    }
+
+    /**
+     * Crea un mensaje que pregunta si el objeto quiere ser eliminado. "¿Está
+     * seguro de que quiere eliminar esta %s?"
+     *
+     * @param arg
+     * @return
+     */
+    public static String getPreguntaEliminarLa(String arg) {
+        return String.format(PREGUNTAELIMINARLA, arg);
     }
 
 }//end Mensaje

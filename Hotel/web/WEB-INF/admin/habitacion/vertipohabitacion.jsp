@@ -49,38 +49,3 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="Editar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Editar habitación</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <form id="form-editar">
-                        <input type="hidden" name="id" value="">
-                        <input type="hidden" name="tipoHabitacion.id" value="">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="nombre" class="label-control">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label for="capacidad" class="label-control">Capacidad</label>
-                                <input type="text" name="capacidad" class="form-control" value="">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-toggle="modal" data-target="#modal-eliminar" class="btn btn-default pull-left" id="eliminar">Eliminar</button>
-                <button type="button" class="btn btn-success" id="editar">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>

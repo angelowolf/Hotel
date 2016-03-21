@@ -1,9 +1,9 @@
 body {
-	background: #F5F5F5;
+    background: #F5F5F5;
 }
 .divisor {
-	border: none;
-	margin: 0 0 15px 0;
+    border: none;
+    margin: 0 0 15px 0;
 }
 .capitalize {
     text-transform: capitalize;
@@ -12,7 +12,7 @@ body {
     color: #e51c23;
 }
 input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus {
-	outline: none;
+    outline: none;
 }
 
 /* HABITACIONES */
@@ -37,4 +37,13 @@ input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habita
     line-height: 200px;
     text-align: center;
     width: 100%;
+}
+
+
+@media(max-width:767px) {
+    .alert {
+        margin: 0 !important;
+        width: 100%;
+        border-radius: 0;
+    }
 }

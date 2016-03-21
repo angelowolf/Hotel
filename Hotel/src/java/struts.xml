@@ -24,6 +24,7 @@
     <include file="Acciones/XML/Root/struts-tipopago.xml"></include>    
    
     <!--Acciones del sistema de la parte del cliente-->    
+    <include file="Acciones/XML/Sistema/struts-modal.xml"></include>            
     <include file="Acciones/XML/Sistema/struts-detallemantenimiento.xml"></include>
     <include file="Acciones/XML/Sistema/struts-habitacion.xml"></include>
     <include file="Acciones/XML/Sistema/struts-hotel.xml"></include>        

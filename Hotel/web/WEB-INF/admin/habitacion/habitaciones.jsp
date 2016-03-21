@@ -8,7 +8,7 @@
                         <li class="active th-<s:property value="#tipo.id" />" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:if>
                         <s:else>
-                        <li class="th-<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
+                        <li class="th-<s:property value="#tipo.id" />" data-id="<s:property value="#tipo.id" />"><a href="#tipo-<s:property value="#tipo.id" />" data-toggle="tab"><s:property value="#tipo.nombre" /></a></li>
                         </s:else>
                     </s:iterator>
                 <li><a href="#nuevo-tipo" data-toggle="modal" data-target="#modal-agregar-th" ><i class="fa fa-plus"></i></a></li>
@@ -100,19 +100,47 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
+<div class="modal fade" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="Editar" aria-hidden="true">
     <div class="modal-dialog modal-dialog-center">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Eliminar habitación</h4>
+                <h4 class="modal-title">Editar habitación</h4>
             </div>
             <div class="modal-body">
-                <p>¿Está seguro de que desea eliminar la habitación?</p>
+                <div class="row">
+                    <form id="form-editar">
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="tipoHabitacion.id" value="">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="nombre" class="label-control">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="capacidad" class="label-control">Capacidad</label>
+                                <input type="text" name="capacidad" class="form-control" value="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="eliminarh">Confirmar</button>
+                <button type="button" data-toggle="modal" data-target="#modal-eliminar-habitacion" class="btn btn-default pull-left" id="eliminar">Eliminar</button>
+                <button type="button" class="btn btn-success" id="editar">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+<s:action name="modaleliminar" namespace="/modal" executeResult="true">
+    <s:param name="titulo"><%out.println(Soporte.Mensaje.HABITACION);%></s:param>
+    <s:param name="mensaje"><%out.println(Soporte.Mensaje.getPreguntaEliminarLa(Soporte.Mensaje.HABITACION));%></s:param>
+    <s:param name="modelo">habitacion</s:param>
+</s:action>
+<s:action name="modaleliminar" namespace="/modal" executeResult="true">
+    <s:param name="titulo"><%out.println(Soporte.Mensaje.TIPOHABITACION);%></s:param>
+    <s:param name="mensaje"><%out.println(Soporte.Mensaje.getPreguntaEliminarLa(Soporte.Mensaje.TIPOHABITACION));%></s:param>
+    <s:param name="modelo">tipohabitacion</s:param>
+</s:action>
