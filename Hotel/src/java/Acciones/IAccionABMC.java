@@ -9,7 +9,7 @@ package Acciones;
  *
  * @author ang_2
  */
-public interface AccionABMC {
+public interface IAccionABMC {
 
     public String registrar();
 

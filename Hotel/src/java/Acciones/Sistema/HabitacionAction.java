@@ -6,7 +6,6 @@
 package Acciones.Sistema;
 
 import Acciones.Accion;
-import Acciones.AccionABMC;
 import Controlador.Implementacion.ControladorHabitacion;
 import Controlador.Implementacion.ControladorTipoHabitacion;
 import Controlador.Interface.IControladorHabitacion;
@@ -21,12 +20,13 @@ import com.opensymphony.xwork2.ModelDriven;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
+import Acciones.IAccionABMC;
 
 /**
  *
  * @author ang_2
  */
-public class HabitacionAction extends Accion implements AccionABMC, ModelDriven<Habitacion> {
+public class HabitacionAction extends Accion implements IAccionABMC, ModelDriven<Habitacion> {
 
     private final IControladorHabitacion ch = new ControladorHabitacion();
     private final IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
@@ -181,6 +181,10 @@ public class HabitacionAction extends Accion implements AccionABMC, ModelDriven<
 
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
+    }
+
+    public Habitacion getHabitacion() {
+        return habitacion;
     }
 
     @Override

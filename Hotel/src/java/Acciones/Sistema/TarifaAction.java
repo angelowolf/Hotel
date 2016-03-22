@@ -26,12 +26,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
+import Acciones.IAccionABMC;
 
 /**
  *
  * @author ang_2
  */
-public class TarifaAction extends Accion {
+public class TarifaAction extends Accion implements IAccionABMC{
 
     private final IControladorTarifa ct = new ControladorTarifa();
     private final IControladorTemporada controladorTemporada = new ControladorTemporada();
@@ -43,7 +44,7 @@ public class TarifaAction extends Accion {
     private Temporada temporada = new Temporada();
     private List<Integer> tipoHabitacionesSeleccionados;
 
-    private List<TipoHabitacionMultiselect> tipoHabitaciones = new ArrayList<TipoHabitacionMultiselect>();
+    private final List<TipoHabitacionMultiselect> tipoHabitaciones = new ArrayList<TipoHabitacionMultiselect>();
     private List<Temporada> temporadas = new ArrayList<Temporada>();
 
     public TarifaAction() {
@@ -83,6 +84,7 @@ public class TarifaAction extends Accion {
         return flag;
     }
 
+    @Override
     public String registrar() {
         if (!validarRegistrar()) {
             cargarListaTiposHabitacionValidacion();
@@ -110,6 +112,7 @@ public class TarifaAction extends Accion {
         return SUCCESS;
     }
 
+    @Override
     public String modificar() {
         if (!validarRegistrar()) {
             cargarListaTiposHabitacionValidacion();
@@ -137,12 +140,14 @@ public class TarifaAction extends Accion {
         return SUCCESS;
     }
 
+    @Override
     public String listar() {
         lista = ct.getTodos(h.getId());
         codigo = 400;
         return SUCCESS;
     }
 
+    @Override
     public String eliminar() {
         try {
             if (ct.eliminar(id, h.getId())) {
@@ -161,6 +166,7 @@ public class TarifaAction extends Accion {
         }
     }
 
+    @Override
     public String editar() {
         Tarifa tarifa = ct.getUno(id);
         if (tarifa != null) {

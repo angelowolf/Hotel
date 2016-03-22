@@ -6,7 +6,6 @@
 package Acciones.Sistema;
 
 import Acciones.Accion;
-import Acciones.AccionABMC;
 import Controlador.Implementacion.ControladorDetalleMantenimiento;
 import Controlador.Interface.IControladorDetalleMantenimiento;
 import Persistencia.Modelo.AccesoIlegal;
@@ -19,12 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
+import Acciones.IAccionABMC;
 
 /**
  *
  * @author ang_2
  */
-public class DetalleMantenimientoAction extends Accion implements AccionABMC {
+public class DetalleMantenimientoAction extends Accion implements IAccionABMC {
 
     private final IControladorDetalleMantenimiento cdm = new ControladorDetalleMantenimiento();
 

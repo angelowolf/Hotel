@@ -35,6 +35,7 @@ public interface IControladorTarifa {
      * @throws java.text.ParseException Si la fecha no tiene el formato correcto
      * dd-mm-yy
      * @throws Persistencia.Modelo.ObjetoNoEncontrado
+     * @throws Persistencia.Modelo.AccesoIlegal
      */
     public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal;
 
