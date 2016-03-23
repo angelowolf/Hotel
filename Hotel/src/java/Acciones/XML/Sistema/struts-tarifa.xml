@@ -11,35 +11,42 @@
         </result-types>  
         <global-results>
             <result name="success" type="json">
+                <param name="root">action</param>   
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">sampleComplexBean\[\d+\]\..+$, actionMessages\[\d+\],codigo</param>
+                <param name="excludeProperties">
+                    actionErrors.*,
+                    fieldErrors.*,
+                    lista,
+                    texts,
+                    error.*,
+                    errorMessages.*,
+                    locale,
+                    tarifa,
+                </param>                    
             </result>              
             <result name="input" type="json">
                 <param name="ignoreHierarchy">false</param>
-                <param name="includeProperties">actionErrors\[\d+\], fieldErrors\..+$, actionMessages\[\d+\],codigo</param>
+                <param name="root">action</param>   
+                <param name="includeProperties">actionErrors.*,
+                    fieldErrors.*,
+                    codigo</param>
             </result>                 
-        </global-results>     
+        </global-results>  
              
         <!--COMIENZO ACCIONES-->
         <action name="registrar" method="registrar" class="Acciones.Sistema.TarifaAction"/>      
         <action name="modificar" method="modificar" class="Acciones.Sistema.TarifaAction"/>
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TarifaAction"/>
         <action name="listar" method="listar" class="Acciones.Sistema.TarifaAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">fechaInicio,id,fechaFin,nombre,precio,temporada,temporadas,tipoHabitacionesSeleccionados,tipoHabitaciones</param>
+            <result name="success" type="json">
+                <param name="root">action</param>       
+                <param name="excludeProperties">model,tarifa</param>
             </result>
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TarifaAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista</param>
-            </result>            
-        </action>
-        <action name="nuevo" method="nuevo" class="Acciones.Sistema.TarifaAction">
-            <result type="json">
-                <param name="excludeNullProperties">true</param>
-                <param name="excludeProperties">lista,fechaInicio,id,fechaFin,nombre,precio,temporadas,tipoHabitacionesSeleccionados</param>
+            <result name="success" type="json">
+                <param name="root">action</param>   
+                <param name="excludeProperties">lista,tarifa</param>
             </result>   
         </action>
         <!--FIN ACCIONES-->

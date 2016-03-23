@@ -20,7 +20,8 @@
                     texts,
                     error.*,
                     errorMessages.*,
-                    locale
+                    locale,
+                    temporada
                 </param>                            
             </result>                     
             <result name="input" type="json">
@@ -39,13 +40,13 @@
         <action name="listar" method="listar" class="Acciones.Sistema.TemporadaAction">
             <result name="success" type="json">
                 <param name="root">action</param>       
-                <param name="excludeProperties">model</param>
+                <param name="excludeProperties">model,temporada</param>
             </result>  
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TemporadaAction">
               <result name="success" type="json">
                 <param name="root">action</param>   
-                <param name="excludeProperties">lista</param>
+                <param name="excludeProperties">lista,temporada</param>
             </result>              
         </action>
         <!--FIN ACCIONES-->

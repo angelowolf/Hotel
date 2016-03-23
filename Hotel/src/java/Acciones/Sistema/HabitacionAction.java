@@ -75,57 +75,46 @@ public class HabitacionAction extends Accion implements IAccionABMC, ModelDriven
 
     @Override
     public String registrar() {
-        if (!validarRegistrar()) {
-            codigo = 200;
-            return INPUT;
+        if (validarRegistrar()) {
+            habitacion.setId(ch.guardar(habitacion.getNombre(), habitacion.getCapacidad(), habitacion.getTipoHabitacion().getId()));
+            addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.HABITACION));
+            codigo = 400;
+            return SUCCESS;
         }
-        habitacion.setId(ch.guardar(habitacion.getNombre(), habitacion.getCapacidad(), habitacion.getTipoHabitacion().getId()));
-        addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.HABITACION));
-        codigo = 400;
-        return SUCCESS;
+        return INPUT;
     }
 
     @Override
     public String modificar() {
-        if (!validarRegistrar()) {
-            codigo = 200;
-            return INPUT;
+        if (validarRegistrar()) {
+            try {
+                ch.actualizar(habitacion.getId(), habitacion.getNombre(), habitacion.getCapacidad(), habitacion.getTipoHabitacion().getId(), h.getId());
+                addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
+                codigo = 400;
+                return SUCCESS;
+            } catch (AccesoIlegal e) {
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            } catch (ObjetoNoEncontrado ex) {
+                addActionError(Soporte.Mensaje.IDINVALIDO);
+            }
         }
-        try {
-            ch.actualizar(habitacion.getId(), habitacion.getNombre(), habitacion.getCapacidad(), habitacion.getTipoHabitacion().getId(), h.getId());
-        } catch (AccesoIlegal e) {
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
-        }
-        addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
-        codigo = 400;
-        return SUCCESS;
+        return INPUT;
     }
 
     public String modificartipohabitacion() {
-        if (!validarTipoHabitacion()) {
-            codigo = 200;
-            return INPUT;
+        if (validarTipoHabitacion()) {
+            try {
+                ch.actualizar(habitacion.getId(), habitacion.getTipoHabitacion().getId(), h.getId());
+                addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
+                codigo = 400;
+                return SUCCESS;
+            } catch (AccesoIlegal e) {
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            } catch (ObjetoNoEncontrado ex) {
+                addActionError(Soporte.Mensaje.IDINVALIDO);
+            }
         }
-        try {
-            ch.actualizar(habitacion.getId(), habitacion.getTipoHabitacion().getId(), h.getId());
-        } catch (AccesoIlegal e) {
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
-        }
-        addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.HABITACION));
-        codigo = 400;
-        return SUCCESS;
+        return INPUT;
     }
 
     @Override
@@ -144,18 +133,13 @@ public class HabitacionAction extends Accion implements IAccionABMC, ModelDriven
                 return SUCCESS;
             } else {
                 addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.HABITACION, Soporte.Mensaje.RESERVA));
-                codigo = 200;
-                return INPUT;
             }
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
         }
+        return INPUT;
     }
 
     @Override
@@ -166,13 +150,10 @@ public class HabitacionAction extends Accion implements IAccionABMC, ModelDriven
             return SUCCESS;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
         }
+        return INPUT;
     }
 
     public List<Habitacion> getLista() {

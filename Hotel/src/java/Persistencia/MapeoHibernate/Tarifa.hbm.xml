@@ -9,7 +9,7 @@
         <property column="precio" name="precio"/>
         <property column="fechaFin" name="fechaFin"/>
         <property column="fechaInicio" name="fechaInicio"/>
-        <many-to-one column="id_temporada" name="temporada"/>
+        <many-to-one column="id_temporada" name="temporada" not-null="false"/>
         <set name="tipoHabitaciones" table="tarifa_tipoHabitacion">
             <key>
                 <column name="id_tarifa" not-null="true"/>

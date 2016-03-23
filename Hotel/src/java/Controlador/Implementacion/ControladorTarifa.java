@@ -10,6 +10,7 @@ import Persistencia.Modelo.Temporada;
 import Persistencia.Modelo.TipoHabitacion;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,84 +45,52 @@ public class ControladorTarifa implements IControladorTarifa {
     }
 
     @Override
-    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
+    public int guardar(Date fechaInicio, Date fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
         Tarifa t = new Tarifa();
         if (id_temporada == 0) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-            t.setFechaInicio(sdf.parse(fechaInicio));
-            t.setFechaFin(sdf.parse(fechaFin));
+            t.setFechaInicio(fechaInicio);
+            t.setFechaFin(fechaFin);
+            t.setTemporada(null);
         } else {
             IControladorTemporada ct = new ControladorTemporada();
             Temporada temp;
-            try {
-                temp = ct.getUno(id_temporada, id_hotel);
-                t.setTemporada(temp);
-                t.setFechaInicio((temp.getFechaInicio()));
-                t.setFechaFin(temp.getFechaFin());
-            } catch (AccesoIlegal ex) {
-                Logger.getLogger(ControladorTarifa.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            temp = ct.getUno(id_temporada, id_hotel);
+            t.setTemporada(temp);
+            t.setFechaInicio((temp.getFechaInicio()));
+            t.setFechaFin(temp.getFechaFin());
         }
         t.setPrecio(precio);
         t.setTipoHabitaciones(this.crearLista(tiposHabitacionesSeleccionados, id_hotel));
-        TARIFADAO.guardar(t);
+        return TARIFADAO.guardar(t);
     }
 
     @Override
-    public void actualizar(int id, String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal {
-        boolean flag = true;
-        Tarifa t = getUno(id);
-        try {
-            Set<TipoHabitacion> set = t.getTipoHabitaciones();
-            for (TipoHabitacion tipoHabitacion : set) {
-                flag = tipoHabitacion.getId_hotel() == id_hotel;
-                break;
-            }
-        } catch (NullPointerException e) {
-            throw new IllegalAccessError();
-        }
-        if (flag) {
-            if (id_temporada == 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-                t.setFechaInicio(sdf.parse(fechaInicio));
-                t.setFechaFin(sdf.parse(fechaFin));
-            } else {
-                IControladorTemporada ct = new ControladorTemporada();
-                Temporada temp = ct.getUno(id_temporada, id_hotel);
-                t.setTemporada(temp);
-                t.setFechaInicio((temp.getFechaInicio()));
-                t.setFechaFin(temp.getFechaFin());
-            }
-            t.setPrecio(precio);
-            t.setTipoHabitaciones(this.crearLista(tiposHabitacionesSeleccionados, id_hotel));
-            TARIFADAO.actualizar(t);
+    public void actualizar(int id, Date fechaInicio, Date fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal {
+        Tarifa t = getUno(id, id_hotel);
+        if (id_temporada == 0) {
+            t.setFechaInicio(fechaInicio);
+            t.setFechaFin(fechaFin);
+            t.setTemporada(null);
         } else {
-            throw new IllegalAccessError();
+            IControladorTemporada ct = new ControladorTemporada();
+            Temporada temp = ct.getUno(id_temporada, id_hotel);
+            t.setTemporada(temp);
+            t.setFechaInicio((temp.getFechaInicio()));
+            t.setFechaFin(temp.getFechaFin());
         }
+        t.setPrecio(precio);
+        t.setTipoHabitaciones(this.crearLista(tiposHabitacionesSeleccionados, id_hotel));
+        TARIFADAO.actualizar(t);
     }
 
     @Override
-    public boolean eliminar(int id, int id_hotel) throws IllegalAccessError {
-        boolean flag = true;
-        Tarifa t = getUno(id);
-        try {
-            Set<TipoHabitacion> set = t.getTipoHabitaciones();
-            for (TipoHabitacion tipoHabitacion : set) {
-                flag = tipoHabitacion.getId_hotel() == id_hotel;
-                break;
-            }
-        } catch (NullPointerException e) {
-            throw new IllegalAccessError();
-        }
-        if (flag) {
-            if (enUso(id)) {
-                return false;
-            } else {
-                TARIFADAO.eliminar(t);
-                return true;
-            }
+    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
+        Tarifa t = getUno(id, id_hotel);
+        if (enUso(id)) {
+            return false;
         } else {
-            throw new IllegalAccessError();
+            TARIFADAO.eliminar(t);
+            return true;
         }
     }
 
@@ -136,13 +105,16 @@ public class ControladorTarifa implements IControladorTarifa {
     }
 
     @Override
-    public Tarifa getUno(int id) {
+    public Tarifa getUno(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
         Tarifa t = TARIFADAO.buscar(id);
         try {
-            t.getFechaFin();
-            return t;
+            if (t.getTipoHabitaciones().iterator().next().getId_hotel() == id_hotel) {
+                return t;
+            } else {
+                throw new AccesoIlegal();
+            }
         } catch (org.hibernate.ObjectNotFoundException e) {
-            return null;
+            throw new ObjetoNoEncontrado();
         }
     }
 }//end ControladorTarifa

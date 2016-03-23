@@ -11,6 +11,7 @@ import Persistencia.Modelo.Tarifa;
 import Persistencia.ORM.DAOImplementacion.TarifaDAO;
 import Persistencia.ORM.DAOInterface.ITarifa;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,12 +33,11 @@ public interface IControladorTarifa {
      * @param id_temporada
      * @param tiposHabitacionesSeleccionados
      * @param id_hotel
-     * @throws java.text.ParseException Si la fecha no tiene el formato correcto
-     * dd-mm-yy
+     * @return id
      * @throws Persistencia.Modelo.ObjetoNoEncontrado
      * @throws Persistencia.Modelo.AccesoIlegal
      */
-    public void guardar(String fechaInicio, String fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, ObjetoNoEncontrado, AccesoIlegal;
+    public int guardar(Date fechaInicio, Date fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
 
     /**
      * Actualiza los datos de una tarifa. El id_hotel es utilizado para
@@ -53,13 +53,11 @@ public interface IControladorTarifa {
      * @param id_temporada
      * @param tiposHabitacionesSeleccionados
      * @param id_hotel
-     * @throws java.text.ParseException Si la fecha no tiene el formato correcto
-     * dd-mm-yy
      * @throws Persistencia.Modelo.AccesoIlegal
      * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public void actualizar(int id, String fechaInicio, String fechaFin, float precio, int id_temporada,
-            List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ParseException, AccesoIlegal, ObjetoNoEncontrado;
+    public void actualizar(int id, Date fechaInicio, Date fechaFin, float precio, int id_temporada,
+            List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * Elimina una tarifa. El id_hotel es utilizado para cuestiones de
@@ -70,8 +68,9 @@ public interface IControladorTarifa {
      * @return True si se elimino. Falso si esta siendo utilizado por otra
      * entidad.
      * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
      */
-    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal;
+    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
     /**
      * verifica si la tarifa esta asociado a alguna entidad.
@@ -90,10 +89,13 @@ public interface IControladorTarifa {
     public List<Tarifa> getTodos(int id_hotel);
 
     /**
-     * recupera una tarifa de la bd. si no existe devuelve nulo.
+     * recupera una tarifa de la bd.
      *
      * @param id
+     * @param id_hotel
      * @return el objeto o nulo.
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
+     * @throws Persistencia.Modelo.AccesoIlegal
      */
-    public Tarifa getUno(int id);
+    public Tarifa getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
 }

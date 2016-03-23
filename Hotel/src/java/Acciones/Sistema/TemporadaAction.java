@@ -44,7 +44,7 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
             flag = false;
         }
         if (temporada.getFechaInicio() == null) {
-           addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
+            addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
             flag = false;
         }
         if (temporada.getFechaFin() == null) {
@@ -55,44 +55,35 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
     }
 
     public String registrar() {
-        if (!validarRegistrar()) {
-            return INPUT;
+        if (validarRegistrar()) {
+            try {
+                temporada.setId(ct.guardar(temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId()));
+                addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.TEMPORADA));
+                codigo = 400;
+                return SUCCESS;
+            } catch (ParseException ex) {
+                addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            }
         }
-        try {
-           temporada.setId(ct.guardar(temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId()));
-        } catch (ParseException ex) {
-            addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
-            codigo = 200;
-            return INPUT;
-        }
-        addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.TEMPORADA));
-        codigo = 400;
-        return SUCCESS;
+        return INPUT;
     }
 
     public String modificar() {
-        if (!validarRegistrar()) {
-            codigo = 200;
-            return INPUT;
+        if (validarRegistrar()) {
+            try {
+                ct.actualizar(temporada.getId(), temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId());
+                addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.TEMPORADA));
+                codigo = 400;
+                return SUCCESS;
+            } catch (AccesoIlegal e) {
+                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
+            } catch (ParseException e) {
+                addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
+            } catch (ObjetoNoEncontrado ex) {
+                addActionError(Soporte.Mensaje.IDINVALIDO);
+            }
         }
-        try {
-            ct.actualizar(temporada.getId(), temporada.getNombre(), temporada.getFechaInicio(), temporada.getFechaFin(), h.getId());
-        } catch (AccesoIlegal e) {
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
-        } catch (ParseException e) {
-            addActionError(Soporte.Mensaje.FORMATOFECHANOCORRECTO);
-            codigo = 200;
-            return INPUT;
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
-        }
-        addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.TEMPORADA));
-        codigo = 400;
-        return SUCCESS;
+        return INPUT;
     }
 
     public String listar() {
@@ -109,18 +100,13 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
                 return SUCCESS;
             } else {
                 addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.TEMPORADA, Soporte.Mensaje.TARIFA));
-                codigo = 200;
-                return INPUT;
             }
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            codigo = 200;
-            return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
         }
+        return INPUT;
     }
 
     public String editar() {
@@ -130,17 +116,22 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
             return SUCCESS;
         } catch (AccesoIlegal e) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
         } catch (ObjetoNoEncontrado ex) {
             addActionError(Soporte.Mensaje.IDINVALIDO);
-            codigo = 200;
-            return INPUT;
         }
+        return INPUT;
     }
 
     public List<Temporada> getLista() {
         return lista;
+    }
+
+    public Temporada getTemporada() {
+        return temporada;
+    }
+
+    public void setTemporada(Temporada temporada) {
+        this.temporada = temporada;
     }
 
     @Override

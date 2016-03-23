@@ -18,7 +18,7 @@ public class Tarifa {
     private Set<TipoHabitacion> tipoHabitaciones;
 
     public Tarifa() {
-
+        temporada = new Temporada();
     }
 
     public int getId() {
@@ -93,5 +93,5 @@ public class Tarifa {
     public String toString() {
         return "Tarifa{" + "id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precio=" + precio + ", temporada=" + temporada + ", tipoHabitaciones=" + tipoHabitaciones + '}';
     }
-    
+
 }//end Tarifa
