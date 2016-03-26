@@ -55,9 +55,15 @@
             <add-attribute value="/../js/admin/admin.js" />
             <add-attribute value="/../js/admin/habitacion/mishabitaciones.js" />
         </put-list-attribute>
-    </definition>
-    
-    
+    </definition>  
+    <!--TARIFA-->
+    <definition name="/admin/tarifa/tarifa.tiles" extends="adminlayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/WEB-INF/admin/tarifa/tarifa.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            
+        </put-list-attribute>
+    </definition>  
     
     
     

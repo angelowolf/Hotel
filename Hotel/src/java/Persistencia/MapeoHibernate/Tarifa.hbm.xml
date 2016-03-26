@@ -7,14 +7,8 @@
             <generator class="native"/>
         </id>
         <property column="precio" name="precio"/>
-        <property column="fechaFin" name="fechaFin"/>
-        <property column="fechaInicio" name="fechaInicio"/>
-        <many-to-one column="id_temporada" name="temporada" not-null="false"/>
-        <set name="tipoHabitaciones" table="tarifa_tipoHabitacion">
-            <key>
-                <column name="id_tarifa" not-null="true"/>
-            </key>
-            <many-to-many class="Persistencia.Modelo.TipoHabitacion" column="id_tipohabitacion"/>
-        </set>
+        <property column="fecha" name="fecha"/>
+        <property column="capacidad" name="capacidad"/>
+        <many-to-one column="id_tipoHabitacion" name="tipoHabitacion" not-null="true"/>
     </class>
 </hibernate-mapping>

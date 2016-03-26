@@ -1,7 +1,6 @@
 package Persistencia.Modelo;
 
 import java.util.Date;
-import java.util.Set;
 
 /**
  * @author Angelo
@@ -11,14 +10,29 @@ import java.util.Set;
 public class Tarifa {
 
     private int id;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private Date fecha;
     private float precio;
-    private Temporada temporada;
-    private Set<TipoHabitacion> tipoHabitaciones;
+    private TipoHabitacion tipoHabitacion;
+    private int capacidad;
 
     public Tarifa() {
-        temporada = new Temporada();
+        tipoHabitacion = new TipoHabitacion();
+    }
+
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
+    }
+
+    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+        this.tipoHabitacion = tipoHabitacion;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
 
     public int getId() {
@@ -29,69 +43,25 @@ public class Tarifa {
         this.id = id;
     }
 
-    public Set<TipoHabitacion> getTipoHabitaciones() {
-        return tipoHabitaciones;
+    public Date getFecha() {
+        return fecha;
     }
 
-    /**
-     *
-     * @param newVal
-     */
-    public void setTipoHabitaciones(Set<TipoHabitacion> newVal) {
-        tipoHabitaciones = newVal;
-    }
-
-    public Temporada getTemporada() {
-        return temporada;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setTemporada(Temporada newVal) {
-        temporada = newVal;
-    }
-
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setFechaInicio(Date newVal) {
-        fechaInicio = newVal;
-    }
-
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-
-    /**
-     *
-     * @param newVal
-     */
-    public void setFechaFin(Date newVal) {
-        fechaFin = newVal;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public float getPrecio() {
         return precio;
     }
 
-    /**
-     *
-     * @param newVal
-     */
-    public void setPrecio(float newVal) {
-        precio = newVal;
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return "Tarifa{" + "id=" + id + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", precio=" + precio + ", temporada=" + temporada + ", tipoHabitaciones=" + tipoHabitaciones + '}';
+        return "Tarifa{" + "id=" + id + ", fecha=" + fecha + ", precio=" + precio + ", tipoHabitacion=" + tipoHabitacion + ", capacidad=" + capacidad + '}';
     }
 
 }//end Tarifa

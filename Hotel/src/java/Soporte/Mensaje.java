@@ -93,6 +93,8 @@ public class Mensaje {
     public static final String LATEMPORADANOESVALIDO = "La " + TEMPORADA + " no es valida.";
     public static final String INGRESEDESCRIPCION = "Ingrese una descripcioón.";
     public static final String INGRESEFECHA = "Ingrese la fecha en la que ocurrio el evento.";
+    public static final String FORMATOCPACIDADNOCORRECTO = "El formato de la capacidad ingresada no es correcta.";
+    public static final String INGRESEPRECIOALGUNACAPACIDAD = "Ingrese algun precio.";
 
     /**
      * Crea un mensaje con el tiempo pasado por parametro. "Ya se ha enviado un

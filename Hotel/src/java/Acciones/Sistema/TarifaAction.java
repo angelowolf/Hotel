@@ -17,21 +17,32 @@ import Persistencia.Modelo.Tarifa;
 import Persistencia.Modelo.Temporada;
 import java.util.ArrayList;
 import java.util.List;
-import Acciones.IAccionABMC;
-import com.opensymphony.xwork2.ModelDriven;
+import Controlador.Implementacion.ControladorTipoHabitacion;
+import Controlador.Interface.IControladorTipoHabitacion;
+import Persistencia.Modelo.TipoHabitacion;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.struts2.interceptor.ParameterAware;
 
 /**
  *
  * @author ang_2
  */
-public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tarifa> {
+public class TarifaAction extends Accion implements ParameterAware {
 
     private final IControladorTarifa ct = new ControladorTarifa();
     private final IControladorTemporada controladorTemporada = new ControladorTemporada();
     private Tarifa tarifa = new Tarifa();
 
-    private List<Tarifa> lista = new ArrayList<Tarifa>();
-    private List<Integer> tipoHabitacionesSeleccionados;
+    private Date fechaInicio, fechaFin;
+    private int id_tipoHabitacion;
+    private int id_temporada;
+    private Map<String, String[]> parametros;
+
+    private final HashMap<Integer, Float> precioPorCapacidad = new HashMap<Integer, Float>();
+    private List<Integer> capacidadPorTipoHabitacion = new ArrayList<Integer>();
+    private List<TipoHabitacion> listaTipoHabitacion = new ArrayList<TipoHabitacion>();
 
     public TarifaAction() {
         h = (Hotel) sesion.get("hotel");
@@ -39,22 +50,24 @@ public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tar
 
     private boolean validarRegistrar() {
         boolean flag = true;
-        if (tipoHabitacionesSeleccionados.isEmpty()) {
+        if (id_tipoHabitacion <= 0) {
             flag = false;
             addFieldError("tipohabitacion", Soporte.Mensaje.SELECCIONEUNTIPODEHABITACION);
         }
-        if (tarifa.getTemporada().getId() == 0) {
-            if (tarifa.getFechaInicio() == null) {
+        if (id_temporada <= 0) {
+            if (fechaInicio == null) {
                 flag = false;
                 addFieldError("fechaInicio", Soporte.Mensaje.INGRESEFECHAINICIO);
             }
-            if (tarifa.getFechaFin() == null) {
+            if (fechaFin == null) {
                 flag = false;
                 addFieldError("fechaFin", Soporte.Mensaje.INGRESEFECHAFIN);
             }
         } else {
             try {
-                Temporada t = controladorTemporada.getUno(tarifa.getTemporada().getId(), h.getId());
+                Temporada t = controladorTemporada.getUno(id_temporada, h.getId());
+                fechaFin = t.getFechaFin();
+                fechaInicio = t.getFechaInicio();
             } catch (AccesoIlegal e) {
                 flag = false;
                 addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
@@ -62,39 +75,41 @@ public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tar
                 flag = false;
                 addActionError(Soporte.Mensaje.LATEMPORADANOESVALIDO);
             }
-            if (tarifa.getPrecio() <= 0) {
-                flag = false;
-                addActionError(Soporte.Mensaje.PRECIONOVALIDO);
+        }
+        boolean flagCapacidad = false;
+
+        for (Map.Entry<String, String[]> entrySet : parametros.entrySet()) {
+            String key = entrySet.getKey();
+            String[] value = entrySet.getValue();
+            if (key.contains("capacidad")) {
+                String scapacidad = key.substring(9);
+                int capacidad;
+                float precio;
+                try {
+                    capacidad = Integer.parseInt(scapacidad);
+                    precio = Float.parseFloat(value[0]);
+                    precioPorCapacidad.put(capacidad, precio);
+                    flagCapacidad = true;
+                } catch (NumberFormatException e) {
+                    addFieldError(key, Soporte.Mensaje.FORMATOCPACIDADNOCORRECTO);
+                    flag = false;
+                }
             }
+        }
+        if (!flagCapacidad) {
+            flag = false;
+            addActionError(Soporte.Mensaje.INGRESEPRECIOALGUNACAPACIDAD);
         }
         return flag;
     }
 
-    @Override
     public String registrar() {
         if (validarRegistrar()) {
             try {
-                tarifa.setId(ct.guardar(tarifa.getFechaInicio(), tarifa.getFechaFin(), tarifa.getPrecio(), tarifa.getTemporada().getId(), tipoHabitacionesSeleccionados, h.getId()));
+                ct.guardar(fechaInicio, fechaFin, id_tipoHabitacion, precioPorCapacidad, h.getId());
                 addActionMessage(Soporte.Mensaje.getAgregada(Soporte.Mensaje.TARIFA));
                 codigo = 400;
                 return SUCCESS;
-            } catch (ObjetoNoEncontrado ex) {
-                addActionError(Soporte.Mensaje.IDINVALIDO);
-            } catch (AccesoIlegal e) {
-                addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-            }
-        }
-        return INPUT;
-    }
-
-    @Override
-    public String modificar() {
-        if (validarRegistrar()) {
-            try {
-                ct.actualizar(tarifa.getId(), tarifa.getFechaInicio(), tarifa.getFechaFin(), tarifa.getPrecio(), tarifa.getTemporada().getId(), tipoHabitacionesSeleccionados, h.getId());
-                addActionMessage(Soporte.Mensaje.getModificada(Soporte.Mensaje.TARIFA));
-                codigo = 400;
-                return SUCCESS;
             } catch (AccesoIlegal e) {
                 addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
             } catch (ObjetoNoEncontrado ex) {
@@ -104,49 +119,29 @@ public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tar
         return INPUT;
     }
 
-    @Override
-    public String listar() {
-        lista = ct.getTodos(h.getId());
-        codigo = 400;
+    public String capacidadPorTipoHabitacion() {
+        try {
+            IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
+            capacidadPorTipoHabitacion = cth.getCapacidadesPorTipoHabitacion(id_tipoHabitacion, h.getId());
+            return SUCCESS;
+        } catch (AccesoIlegal ex) {
+        } catch (ObjetoNoEncontrado ex) {
+        }
+        return INPUT;
+    }
+
+    public String tarifa() {
+        IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
+        listaTipoHabitacion = cth.getTodos(h.getId());
         return SUCCESS;
     }
 
-    @Override
-    public String eliminar() {
-        try {
-            if (ct.eliminar(tarifa.getId(), h.getId())) {
-                addActionMessage(Soporte.Mensaje.getEliminada(Soporte.Mensaje.TARIFA));
-                codigo = 400;
-                return SUCCESS;
-            } else {
-                addActionError(Soporte.Mensaje.getUsadaPorUna(Soporte.Mensaje.TARIFA, Soporte.Mensaje.TARIFA));
-                codigo = 200;
-                return INPUT;
-            }
-        } catch (AccesoIlegal e) {
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-        }
-        return INPUT;
+    public List<Integer> getCapacidadPorTipoHabitacion() {
+        return capacidadPorTipoHabitacion;
     }
 
-    @Override
-    public String editar() {
-        try {
-            tarifa = ct.getUno(tarifa.getId(), h.getId());
-            codigo = 400;
-            return SUCCESS;
-        } catch (AccesoIlegal e) {
-            addActionError(Soporte.Mensaje.IDHOTELINVALIDO);
-        } catch (ObjetoNoEncontrado ex) {
-            addActionError(Soporte.Mensaje.IDINVALIDO);
-        }
-        return INPUT;
-    }
-
-    public List<Tarifa> getLista() {
-        return lista;
+    public List<TipoHabitacion> getListaTipoHabitacion() {
+        return listaTipoHabitacion;
     }
 
     public Tarifa getTarifa() {
@@ -157,8 +152,44 @@ public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tar
         this.tarifa = tarifa;
     }
 
-    public void setTipoHabitacionesSeleccionados(List<Integer> tipoHabitacionesSeleccionados) {
-        this.tipoHabitacionesSeleccionados = tipoHabitacionesSeleccionados;
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public int getId_tipoHabitacion() {
+        return id_tipoHabitacion;
+    }
+
+    public void setId_tipoHabitacion(int id_tipoHabitacion) {
+        this.id_tipoHabitacion = id_tipoHabitacion;
+    }
+
+    public int getId_temporada() {
+        return id_temporada;
+    }
+
+    public void setId_temporada(int id_temporada) {
+        this.id_temporada = id_temporada;
+    }
+
+    public Map<String, String[]> getParametros() {
+        return parametros;
+    }
+
+    public void setParametros(Map<String, String[]> parametros) {
+        this.parametros = parametros;
     }
 
     @Override
@@ -167,8 +198,8 @@ public class TarifaAction extends Accion implements IAccionABMC, ModelDriven<Tar
     }
 
     @Override
-    public Tarifa getModel() {
-        return tarifa;
+    public void setParameters(Map<String, String[]> parametros) {
+        this.parametros = parametros;
     }
 
 }

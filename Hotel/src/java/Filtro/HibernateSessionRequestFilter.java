@@ -44,7 +44,6 @@ public class HibernateSessionRequestFilter implements Filter {
             // Commit and cleanup  
 //            log.debug("Committing the database transaction");
             sf.getCurrentSession().getTransaction().commit();
-
         } catch (StaleObjectStateException staleEx) {
 //            log.error("This interceptor does not implement optimistic concurrency control!");
 //            log.error("Your application will not work until you add compensation actions!");

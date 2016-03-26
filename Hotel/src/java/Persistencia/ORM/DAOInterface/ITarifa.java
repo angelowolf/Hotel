@@ -1,7 +1,10 @@
 package Persistencia.ORM.DAOInterface;
 
+import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.Tarifa;
+import Persistencia.Modelo.TipoHabitacion;
 import Persistencia.ORM.Util.IGenericDAO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,11 +23,14 @@ public interface ITarifa extends IGenericDAO<Tarifa, Integer> {
     public List<Tarifa> getTodos(int id_hotel);
 
     /**
-     * Verifica si la Tarifa está siendo usado por alguna entidad.
+     * Busca una tarifa para esa habitacion en esa fecha,si la encuentra es
+     * devuelta sino null.
      *
-     * @param id
-     * @return La Tarifa si está en uso. NULL si no lo está.
+     * @param th
+     * @param capacidad
+     * @param fecha
+     * @return Tarifa o Null.
      */
-    public Object enUso(int id);
+    public Tarifa getUno(TipoHabitacion th, Date fecha, Integer capacidad);
 
 }

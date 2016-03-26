@@ -1,10 +1,15 @@
 package Controlador.Implementacion;
 
+import Controlador.Interface.IControladorHabitacion;
 import Controlador.Interface.IControladorTipoHabitacion;
 import Persistencia.Modelo.AccesoIlegal;
+import Persistencia.Modelo.Habitacion;
 import Persistencia.Modelo.ObjetoNoEncontrado;
 import Persistencia.Modelo.TipoHabitacion;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang.WordUtils;
 
 /**
@@ -74,6 +79,23 @@ public class ControladorTipoHabitacion implements IControladorTipoHabitacion {
         } catch (org.hibernate.ObjectNotFoundException e) {
             throw new ObjetoNoEncontrado();
         }
+    }
+
+    @Override
+    public List<Integer> getCapacidadesPorTipoHabitacion(int id_tipoHabitacion, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado {
+        IControladorHabitacion ch = new ControladorHabitacion();
+        HashMap<Integer, Integer> capacidades = new HashMap<Integer, Integer>();
+        List<Integer> lista = new ArrayList<Integer>();
+        List<Habitacion> habitaciones = ch.getHabitacionesByTipoHabitacion(id_tipoHabitacion, id_hotel);
+        for (Habitacion cadaHabitacion : habitaciones) {
+            if (!capacidades.containsKey(cadaHabitacion.getCapacidad())) {
+                capacidades.put(cadaHabitacion.getCapacidad(), cadaHabitacion.getCapacidad());
+            }
+        }
+        for (Map.Entry<Integer, Integer> entrySet : capacidades.entrySet()) {
+            lista.add(entrySet.getKey());
+        }
+        return lista;
     }
 
 }//end ControladorTipoHabitacion

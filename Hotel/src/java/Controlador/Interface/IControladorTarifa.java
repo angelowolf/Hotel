@@ -12,6 +12,7 @@ import Persistencia.ORM.DAOImplementacion.TarifaDAO;
 import Persistencia.ORM.DAOInterface.ITarifa;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,73 +30,12 @@ public interface IControladorTarifa {
      *
      * @param fechaInicio
      * @param fechaFin
-     * @param precio
-     * @param id_temporada
-     * @param tiposHabitacionesSeleccionados
+     * @param id_tipoHabitacion
+     * @param precioPorCapacidad
      * @param id_hotel
-     * @return id
      * @throws Persistencia.Modelo.ObjetoNoEncontrado
      * @throws Persistencia.Modelo.AccesoIlegal
      */
-    public int guardar(Date fechaInicio, Date fechaFin, float precio, int id_temporada, List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
+    public void guardar(Date fechaInicio, Date fechaFin, int id_tipoHabitacion, HashMap<Integer, Float> precioPorCapacidad, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
 
-    /**
-     * Actualiza los datos de una tarifa. El id_hotel es utilizado para
-     * cuestiones de validaciones, que solo puedan ser modificadas objetos
-     * propios del hotel. Si el id_temporada es igual a 0 se le asignara las
-     * fechas pasadas por parametro, si es distinto de 0 se le asiganara las
-     * fechas de la propia temporada.
-     *
-     * @param id
-     * @param fechaInicio
-     * @param fechaFin
-     * @param precio
-     * @param id_temporada
-     * @param tiposHabitacionesSeleccionados
-     * @param id_hotel
-     * @throws Persistencia.Modelo.AccesoIlegal
-     * @throws Persistencia.Modelo.ObjetoNoEncontrado
-     */
-    public void actualizar(int id, Date fechaInicio, Date fechaFin, float precio, int id_temporada,
-            List<Integer> tiposHabitacionesSeleccionados, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
-
-    /**
-     * Elimina una tarifa. El id_hotel es utilizado para cuestiones de
-     * validaciones, que solo puedan ser eliminados objetos propios del hotel.
-     *
-     * @param id
-     * @param id_hotel
-     * @return True si se elimino. Falso si esta siendo utilizado por otra
-     * entidad.
-     * @throws Persistencia.Modelo.AccesoIlegal
-     * @throws Persistencia.Modelo.ObjetoNoEncontrado
-     */
-    public boolean eliminar(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
-
-    /**
-     * verifica si la tarifa esta asociado a alguna entidad.
-     *
-     * @param id
-     * @return true si lo esta.
-     */
-    public boolean enUso(int id);
-
-    /**
-     * trae todos las tarifas de un hotel.
-     *
-     * @param id_hotel
-     * @return
-     */
-    public List<Tarifa> getTodos(int id_hotel);
-
-    /**
-     * recupera una tarifa de la bd.
-     *
-     * @param id
-     * @param id_hotel
-     * @return el objeto o nulo.
-     * @throws Persistencia.Modelo.ObjetoNoEncontrado
-     * @throws Persistencia.Modelo.AccesoIlegal
-     */
-    public Tarifa getUno(int id, int id_hotel) throws ObjetoNoEncontrado, AccesoIlegal;
 }

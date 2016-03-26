@@ -97,4 +97,16 @@ public interface IControladorTipoHabitacion {
      */
     public TipoHabitacion getUno(int id, int id_hotel) throws AccesoIlegal, ObjetoNoEncontrado;
 
+    /**
+     * busca todas las habitaciones que son del tipo solicitado, y obtiene las
+     * capacidades de estas.
+     *
+     * @param id_tipoHabitacion
+     * @param id_hotel
+     * @return las capacidades
+     * @throws Persistencia.Modelo.AccesoIlegal
+     * @throws Persistencia.Modelo.ObjetoNoEncontrado
+     */
+    public List<Integer> getCapacidadesPorTipoHabitacion(int id_tipoHabitacion,int id_hotel)throws AccesoIlegal,ObjetoNoEncontrado;
+
 }
