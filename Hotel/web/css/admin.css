@@ -14,6 +14,9 @@ body {
 input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus {
     outline: none;
 }
+.alert {
+    z-index: 9999 !important;
+}
 
 /* HABITACIONES */
 .col-xs-4 .bloque-habitacion button {

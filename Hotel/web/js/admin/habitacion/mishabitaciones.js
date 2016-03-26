@@ -78,7 +78,7 @@ function setAgregarTipoHabitacionOnClick() {
                         data: {id: datos.model.id},
                         type: 'POST',
                         success: function (dataa) {
-                            $("<li><a class='capitalize' href='#tipo-" + datos.model.id + "' data-toggle='tab'>" + datos.model.nombre + "</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $("<li data-id='"+datos.model.id+"'><a class='capitalize' href='#tipo-" + datos.model.id + "' data-toggle='tab'>" + datos.model.nombre + "</a></li>").insertBefore('.nav.nav-tabs li:last');
                             $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-' + datos.model.id + '">' + dataa + '</div>');
 
                             setEditarTipoHabitacionOnClick();
