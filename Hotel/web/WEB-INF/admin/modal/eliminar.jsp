@@ -1,5 +1,5 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
-<div class="modal fade" id="modal-eliminar-<s:property value="modelo"/>" tabindex="-1" role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
+<div class="modal fade eliminar" data-modelo="<s:property value="modelo"/>" tabindex="-1" role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
     <div class="modal-dialog modal-dialog-center">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
                 <p><s:property value="mensaje"/></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="eliminar-<s:property value="modelo"/>">Confirmar</button>
+                <button type="button" class="btn btn-warning" id="eliminar" value="<s:property value="modelo"/>">Confirmar</button>
             </div>
         </div>
     </div>

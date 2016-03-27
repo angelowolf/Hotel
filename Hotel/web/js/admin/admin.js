@@ -30,7 +30,7 @@ var erroresM = (function () {
         if (!nolimpiar) {
             modulo.limpiarErrores(formId);
         }
-
+        
         if (data.actionErrors) {
             modulo.mostrarAlertError(data.actionErrors, alert.DANGER);
         }
@@ -65,7 +65,7 @@ var erroresM = (function () {
                     enter: 'animated fadeInDown',
                     exit: 'animated fadeOutLeft'
                 },
-                delay: 0,
+                delay: 10000,
                 offset: {
                     y: 0
                 },

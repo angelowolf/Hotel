@@ -11,7 +11,7 @@ body {
 .error {
     color: #e51c23;
 }
-input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus {
+input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habitacion:focus, a:focus {
     outline: none;
 }
 .alert {

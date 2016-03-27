@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-toggle="modal" data-target="#modal-eliminar-habitacion" class="btn btn-default pull-left" id="eliminar">Eliminar</button>
+                <button type="button" data-toggle="modal" class="btn btn-default pull-left" id="eliminar-habitacion">Eliminar</button>
                 <button type="button" class="btn btn-success" id="editar">Guardar</button>
             </div>
         </div>

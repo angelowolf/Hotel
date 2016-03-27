@@ -2,66 +2,47 @@
     setAgregarTipoHabitacionOnClick();
     setEditarTipoHabitacionOnClick();
     setHabitacionesOnClick();
+
+    $('body').on('click','#eliminar', function (e) {
+        var $boton = $(this);
+        eliminar($boton);
+    });
+
 })(jQuery);
 
 function setEditarTipoHabitacionOnClick() {
-    $('.editar-th').off('click').click(function (e) {
+    $('body').on('click', '.editar-th', function (e) {
         e.preventDefault();
+
         var data = $(this).parents('form').serialize();
         $.ajax({
-            url: '/tipohabitacion/editar',
+            url: '/tipohabitacion/modificar',
             type: 'POST',
             dataType: 'JSON',
             data: data,
             success: function (datos) {
                 if (datos.codigo === 400) {
-                    alert('exito');
+                    erroresM.mostrarAlertError(datos.actionMessages, 'success');
                 } else {
-                    erroresM.mostrarErrores();
+                    erroresM.mostrarErrores('.form-th-'+datos.model.id, datos);
                 }
             }
         });
     });
 
-    $('.eliminar-th').off('click').click(function (e) {
+    $('body').on('click','.eliminar-th', function (e) {
         e.preventDefault();
 
-        var $modal = $('#modal-eliminar-tipohabitacion');
-
+        var $modal = $('.modal.eliminar[data-modelo=tipohabitacion]');
         $modal.find('#id').val($(this).val());
-        $modal.modal('show');
-    });
+        $modal.find('#model').val('tipohabitacion');
 
-    $('#eliminar-tipohabitacion').click(function (e) {
-        e.preventDefault();
-        var $boton = $(this);
-        var id = $boton.parents('.modal-content').find('#id').val();
-        erroresM.limpiarErrores();
-        $.ajax({
-            url: '/tipohabitacion/eliminar',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {id: id},
-            success: function (datos) {
-                if (datos.codigo === 400) {
-                    $('.th-' + id).fadeOut(function () {
-                        $('.nav-tabs li:first a').click();
-                        $(this).remove();
-                    });
-                } else {
-                    erroresM.mostrarErrores('', datos, true);
-                }
-                $('#modal-eliminar-tipohabitacion').modal('hide');
-            }, error: function (datos) {
-                $('#modal-eliminar-tipohabitacion').modal('hide');
-                erroresM.mostrarErrores('', datos);
-            }
-        });
+        $modal.modal('show');
     });
 }
 
 function setAgregarTipoHabitacionOnClick() {
-    $('#agregarth').off('click').click(function (e) {
+    $('body').on('click', '#agregarth', function (e) {
         e.preventDefault();
         var $modal = $('#modal-agregar-th');
         var data = $modal.find('#form-agregar-th').serialize();
@@ -78,11 +59,8 @@ function setAgregarTipoHabitacionOnClick() {
                         data: {id: datos.model.id},
                         type: 'POST',
                         success: function (dataa) {
-                            $("<li data-id='"+datos.model.id+"'><a class='capitalize' href='#tipo-" + datos.model.id + "' data-toggle='tab'>" + datos.model.nombre + "</a></li>").insertBefore('.nav.nav-tabs li:last');
+                            $("<li class='th-"+datos.model.id+"' data-id='"+datos.model.id+"'><a class='capitalize' href='#tipo-" + datos.model.id + "' data-toggle='tab'>" + datos.model.nombre + "</a></li>").insertBefore('.nav.nav-tabs li:last');
                             $('#contenidoTiposHabitaciones').append('<div class="tab-pane fade" id="tipo-' + datos.model.id + '">' + dataa + '</div>');
-
-                            setEditarTipoHabitacionOnClick();
-                            setHabitacionesOnClick();
                             $('li a[href=#tipo-' + datos.model.id + ']').click();
                         }
                     });
@@ -97,14 +75,13 @@ function setAgregarTipoHabitacionOnClick() {
 }
 
 function setHabitacionesOnClick() {
-    $('#agregar').off('click').click(function (e) {
+    $('body').on('click', '#agregar', function (e) {
         e.preventDefault();
         var $modal = $('#modal-agregar');
         var idTipo = $('.nav-tabs .active').data('id');
         $modal.find('input[name="tipoHabitacion.id"]').val(idTipo);
 
         var data = $modal.find('#form-agregar').serialize();
-        $modal.find('form')[0].reset();
 
         $.ajax({
             url: '/habitacion/registrar',
@@ -112,7 +89,7 @@ function setHabitacionesOnClick() {
             dataType: 'JSON',
             data: data,
             success: function (data) {
-                if (data.codigo == 400) {
+                if (data.codigo === 400) {
                     $modal.modal('hide');
                     $.ajax({
                         url: '/habitacion/vistahabitacion',
@@ -122,6 +99,7 @@ function setHabitacionesOnClick() {
                             var $div = $(datos).hide();
                             $('#tipo-' + idTipo + ' .row.habitaciones').append($div);
                             $div.fadeIn();
+                            erroresM.limpiarErrores('#form-agregar');
                         }
                     });
                 } else {
@@ -131,7 +109,7 @@ function setHabitacionesOnClick() {
         })
     });
 
-    $('.bloque-habitacion button').off('click').click(function (e) {
+    $('body').on('click', '.bloque-habitacion button', function (e) {
         e.preventDefault();
         var id = this.value;
         var $bloque = $(this);
@@ -144,7 +122,7 @@ function setHabitacionesOnClick() {
             dataType: 'JSON',
             data: {id: id},
             success: function (data) {
-                if (data.codigo == 400) {
+                if (data.codigo === 400) {
                     $('#modal-eliminar-habitacion #id').val(data.model.id);
                     $modal.find('input[name="nombre"]').val(data.model.nombre);
                     $modal.find('input[name="id"]').val(id);
@@ -162,31 +140,15 @@ function setHabitacionesOnClick() {
         });
     });
 
-    $('#eliminarh').off('click').click(function (e) {
+    $('body').on('click','#eliminar-habitacion', function (e) {
         e.preventDefault();
         var $modalEditar = $('#modal-editar');
         var id = $modalEditar.find('form [name=id]').val();
-        var $modal = $('#modal-eliminar');
+        var $modal = $('.modal.eliminar[data-modelo=habitacion]');
+        $modal.find('#id').val(id);
+        $modal.find('#model').val('habitacion');
 
-        $.ajax({
-            url: '/habitacion/eliminar',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {id: id},
-            success: function (data) {
-                if (data.codigo == 400) {
-                    $modal.modal('hide');
-                    $modalEditar.find('form')[0].reset();
-                    $modalEditar.modal('hide');
-                    $('.hab-' + id).fadeOut(function () {
-                        $(this).remove;
-                    });
-                } else {
-                    erroresM.mostrarErrores('', data);
-                }
-            }
-        })
-
+        $modal.modal('show');
     });
 }
 
@@ -207,5 +169,55 @@ function editar($modal, $bloque) {
                 erroresM.mostrarErrores('#form-editar', data);
             }
         }
-    })
+    });
+}
+
+function eliminar($boton) {
+    var $dialog = $boton.parents('.modal.eliminar');
+    
+    var url = '';
+    
+    switch ($boton.val()) {
+        case 'tipohabitacion': url = '/tipohabitacion/eliminar'; break;
+        case 'habitacion': url = '/habitacion/eliminar'; break;
+    }
+
+    var id = $dialog.find('#id').val();
+    
+    $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {id: id},
+        success: function (data) {
+            nolimpiar = false;
+            if (data.codigo === 400) {
+                $dialog.modal('hide');
+                var $modalEditar = $('#modal-editar');
+                
+                switch ($boton.val()) {
+                    case 'tipohabitacion': {
+                        $('.nav-tabs li:first a').click();
+                                
+                        $('.th-' + id).fadeOut(function () {
+                            $('.th-' + id).remove();
+                        });
+                        nolimpiar = true;
+                    }; break;
+                    case 'habitacion': {
+                        $modalEditar.find('form')[0].reset();
+                        $modalEditar.modal('hide');
+                        $('.hab-' + id).fadeOut(function () {
+                            $(this).remove;
+                        });
+                    }; break;
+                }
+
+                erroresM.mostrarAlertError(data.actionMessages, 'success');
+                
+            } else {
+                erroresM.mostrarAlertError(data.actionErrors, 'danger', nolimpiar);
+            }
+        }
+    });
 }

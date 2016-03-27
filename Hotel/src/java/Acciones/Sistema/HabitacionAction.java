@@ -44,14 +44,14 @@ public class HabitacionAction extends Accion implements IAccionABMC, ModelDriven
     private boolean validarRegistrar() {
         boolean flag = true;
         if (habitacion.getCapacidad() <= 0) {
-            addActionError(Soporte.Mensaje.INGRESECAPACIDAD);
+            addFieldError("capacidad", Soporte.Mensaje.INGRESECAPACIDAD);
             flag = false;
         }
         if (StringUtils.isBlank(habitacion.getNombre())) {
-            addActionError(Soporte.Mensaje.INGRESENOMBREHABITACION);
+            addFieldError("nombre", Soporte.Mensaje.INGRESENOMBREHABITACION);
             flag = false;
         } else if (ch.existe(habitacion.getId(), habitacion.getNombre(), h.getId())) {
-            addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.HABITACION));
+            addFieldError("nombre", Soporte.Mensaje.getLaExiste(Soporte.Mensaje.HABITACION));
             flag = false;
         }
         if (!validarTipoHabitacion()) {
