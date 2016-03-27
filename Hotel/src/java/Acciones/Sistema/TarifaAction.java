@@ -23,6 +23,7 @@ import Persistencia.Modelo.TipoHabitacion;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.ParameterAware;
 
 /**
@@ -87,10 +88,12 @@ public class TarifaAction extends Accion implements ParameterAware {
                 int capacidad;
                 float precio;
                 try {
-                    capacidad = Integer.parseInt(scapacidad);
-                    precio = Float.parseFloat(value[0]);
-                    precioPorCapacidad.put(capacidad, precio);
-                    flagCapacidad = true;
+                    if (StringUtils.isNotEmpty(value[0])) {
+                        capacidad = Integer.parseInt(scapacidad);
+                        precio = Float.parseFloat(value[0]);
+                        precioPorCapacidad.put(capacidad, precio);
+                        flagCapacidad = true;
+                    }
                 } catch (NumberFormatException e) {
                     addFieldError(key, Soporte.Mensaje.FORMATOCPACIDADNOCORRECTO);
                     flag = false;

@@ -3,25 +3,27 @@
     <hr class="divisor">
     <div class="col-md-6 col-xs-12">
         <form class="form-horizontal form-th-<s:property value="id_tipoHabitacion"/>">
+            <input type="hidden" name="id_tipoHabitacion" value="<s:property value="id_tipoHabitacion"/>"/>
             <div class="well">
                 <fieldset>
-                    <input type="hidden" name="id" value="<s:property value="id_tipoHabitacion"/>"/>  
+                    <input type="radio" name="tipofecha" value="especifico" checked>Fechas
+                    <input type="radio" name="tipofecha" value="temporada">Temporadas
                     <div class="form-group">
-                        <label for="desde" class="col-xs-12 col-md-3 control-label">Desde</label>
+                        <label for="desde" class="col-xs-12 col-md-3 control-label">Desde:</label>
                         <div class="col-xs-12 col-md-9">              
-                            <input type="text" class="form-control" placeholder="fecha desde" name=fechaDesde" value=""/>
+                            <input type="text" class="form-control" placeholder="fecha inicio" name="fechaInicio" value=""/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="hasta" class="col-xs-12 col-md-3 control-label">Hasta</label>
+                        <label for="hasta" class="col-xs-12 col-md-3 control-label">Hasta:</label>
                         <div class="col-xs-12 col-md-9">              
-                            <input type="text" class="form-control" placeholder="fecha hasta" name=fechaHasta" value=""/>
+                            <input type="text" class="form-control" placeholder="fecha fin" name="fechaFin" value=""/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-xs-12 col-md-3 control-label"> asd</label>
+                    <div class="form-group" style="display: none;">
+                        <label class="col-xs-12 col-md-3 control-label">Temporada:</label>
                         <div class="col-xs-12 col-md-9">
-                            <s:select cssClass="form-control" list="temporadas" listValue="nombre" listKey="id"/>                            
+                            <s:select name="id_temporada" disabled="true" cssClass="form-control" list="temporadas" listValue="nombre" listKey="id"/>                            
                         </div>
                     </div>
                     <s:iterator var="capacidad" value="capacidadPorTipoHabitacion" status="stat">
@@ -34,7 +36,7 @@
                     </s:iterator>
                     <div class="row">
                         <div class="col-xs-12 pull-left">
-                            <button value="<s:property value="id_tipoHabitacion"/>" class="btn btn-sm btn-success editar-th"><i class="fa fa-save"></i></button>
+                            <button value="<s:property value="id_tipoHabitacion"/>" class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
                         </div>
                     </div>
                 </fieldset>
