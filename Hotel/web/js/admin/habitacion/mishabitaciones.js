@@ -22,6 +22,7 @@ function setEditarTipoHabitacionOnClick() {
             data: data,
             success: function (datos) {
                 if (datos.codigo === 400) {
+                    $('li.th-'+datos.model.id+' a').html( datos.model.nombre);
                     erroresM.mostrarAlertError(datos.actionMessages, 'success');
                 } else {
                     erroresM.mostrarErrores('.form-th-'+datos.model.id, datos);
@@ -164,6 +165,7 @@ function editar($modal, $bloque) {
             if (data.codigo === 400) {
                 $bloque.html($modal.find('input[name="nombre"]').val());
                 $modal.modal('hide');
+
                 erroresM.limpiarErrores('#form-editar');
             } else {
                 erroresM.mostrarErrores('#form-editar', data);
