@@ -38,7 +38,24 @@
         
         <!--COMIENZO ACCIONES-->       
         <action name="registrar" method="registrar" class="Acciones.Sistema.TipoHabitacionAction"/>
-        <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction"/>    
+        <action name="modificar" method="modificar" class="Acciones.Sistema.TipoHabitacionAction">    
+            <result name="input" type="json">
+                <param name="root">action</param>   
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeProperties">
+                    actionMessages.*,
+                    habitaciones,
+                    habitacionesByTipo,
+                    modeloCompleto,
+                    lista,
+                    texts,
+                    error.*,
+                    errorMessages.*,
+                    locale,
+                    tipohabitacion
+                </param>                                    
+            </result>
+        </action>
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TipoHabitacionAction"/>     
         <action name="listar" method="listar" class="Acciones.Sistema.TipoHabitacionAction">
             <result name="success" type="json">
