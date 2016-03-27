@@ -28,7 +28,7 @@ input:focus, button:focus, select:focus, .btn:focus, .btn:active, .bloque-habita
 /* FIX MODAL DIALOG */
 
 .modal-dialog-center {
-    margin-top: 38%;
+    /*margin-top: 38%*/;
 }
 
 /* SIN DATOS */

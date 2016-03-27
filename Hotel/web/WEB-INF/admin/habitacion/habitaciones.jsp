@@ -141,6 +141,6 @@
 </s:action>
 <s:action name="modaleliminar" namespace="/modal" executeResult="true">
     <s:param name="titulo"><%out.println(Soporte.Mensaje.TIPOHABITACION);%></s:param>
-    <s:param name="mensaje"><%out.println(Soporte.Mensaje.getPreguntaEliminarLa(Soporte.Mensaje.TIPOHABITACION));%></s:param>
+    <s:param name="mensaje"><%out.println(Soporte.Mensaje.getPreguntaEliminarEl(Soporte.Mensaje.TIPOHABITACION));%></s:param>
     <s:param name="modelo">tipohabitacion</s:param>
 </s:action>

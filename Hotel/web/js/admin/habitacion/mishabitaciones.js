@@ -23,6 +23,7 @@ function setEditarTipoHabitacionOnClick() {
             success: function (datos) {
                 if (datos.codigo === 400) {
                     $('li.th-'+datos.model.id+' a').html( datos.model.nombre);
+                    erroresM.limpiarErrores('.form-th-'+datos.model.id);
                     erroresM.mostrarAlertError(datos.actionMessages, 'success');
                 } else {
                     erroresM.mostrarErrores('.form-th-'+datos.model.id, datos);
