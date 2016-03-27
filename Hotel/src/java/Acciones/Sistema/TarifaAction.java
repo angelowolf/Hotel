@@ -43,6 +43,7 @@ public class TarifaAction extends Accion implements ParameterAware {
     private final HashMap<Integer, Float> precioPorCapacidad = new HashMap<Integer, Float>();
     private List<Integer> capacidadPorTipoHabitacion = new ArrayList<Integer>();
     private List<TipoHabitacion> listaTipoHabitacion = new ArrayList<TipoHabitacion>();
+    private List<Temporada> temporadas = new ArrayList<Temporada>();
 
     public TarifaAction() {
         h = (Hotel) sesion.get("hotel");
@@ -123,6 +124,7 @@ public class TarifaAction extends Accion implements ParameterAware {
         try {
             IControladorTipoHabitacion cth = new ControladorTipoHabitacion();
             capacidadPorTipoHabitacion = cth.getCapacidadesPorTipoHabitacion(id_tipoHabitacion, h.getId());
+            temporadas = controladorTemporada.getTodos(h.getId());
             return SUCCESS;
         } catch (AccesoIlegal ex) {
         } catch (ObjetoNoEncontrado ex) {
@@ -190,6 +192,10 @@ public class TarifaAction extends Accion implements ParameterAware {
 
     public void setParametros(Map<String, String[]> parametros) {
         this.parametros = parametros;
+    }
+
+    public List<Temporada> getTemporadas() {
+        return temporadas;
     }
 
     @Override
