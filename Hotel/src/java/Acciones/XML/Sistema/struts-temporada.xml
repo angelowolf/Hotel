@@ -35,7 +35,21 @@
              
         <!--COMIENZO ACCIONES-->
         <action name="registrar" method="registrar" class="Acciones.Sistema.TemporadaAction"/>      
-        <action name="modificar" method="modificar" class="Acciones.Sistema.TemporadaAction"/>
+        <action name="modificar" method="modificar" class="Acciones.Sistema.TemporadaAction">
+            <result name="input" type="json">
+                <param name="root">action</param>   
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeProperties">
+                    actionMessages.*,
+                    lista,
+                    texts,
+                    error.*,
+                    errorMessages.*,
+                    locale,
+                    temporada
+                </param>                                    
+            </result>
+        </action>
         <action name="eliminar" method="eliminar" class="Acciones.Sistema.TemporadaAction"/>
         <action name="listar" method="listar" class="Acciones.Sistema.TemporadaAction">
             <result name="success" type="json">

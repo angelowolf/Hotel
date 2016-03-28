@@ -8,7 +8,7 @@
                         <li class="active temporada-<s:property value="#temporada.id" />" data-id="<s:property value="#temporada.id" />"><a href="#temporada-<s:property value="#temporada.id" />" data-toggle="tab"><s:property value="#temporada.nombre" /></a></li>
                         </s:if>
                         <s:else>
-                        <li class="th-<s:property value="#temporada.id" />" data-id="<s:property value="#temporada.id" />"><a href="#temporada-<s:property value="#temporada.id" />" data-toggle="tab"><s:property value="#temporada.nombre" /></a></li>
+                        <li class="temporada-<s:property value="#temporada.id" />" data-id="<s:property value="#temporada.id" />"><a href="#temporada-<s:property value="#temporada.id" />" data-toggle="tab"><s:property value="#temporada.nombre" /></a></li>
                         </s:else>
                     </s:iterator>                
                 <li><a href="#nuevo-temporada" data-toggle="modal" data-target="#modal-agregar-temporada" ><i class="fa fa-plus"></i></a></li>
@@ -74,3 +74,8 @@
         </div>
     </div>
 </div>
+<s:action name="modaleliminar" namespace="/modal" executeResult="true">
+    <s:param name="titulo"><%out.println(Soporte.Mensaje.TEMPORADA);%></s:param>
+    <s:param name="mensaje"><%out.println(Soporte.Mensaje.getPreguntaEliminarLa(Soporte.Mensaje.TEMPORADA));%></s:param>
+    <s:param name="modelo">temporada</s:param>
+</s:action>

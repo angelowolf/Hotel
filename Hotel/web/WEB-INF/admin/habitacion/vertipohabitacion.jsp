@@ -24,14 +24,6 @@
             </div>
         </form>
     </div>
-    <div class="col-md-2 hidden-xs">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Acciones</div>
-            <div class="panel-body">
-                <button class="btn btn-sm btn-success btn-block">Guardar <i class="fa fa-save"></i></button>
-            </div>
-        </div>
-    </div>
     <div class="col-xs-12 col-md-12">
         <div class="row">
             <div class="col-md-12">
