@@ -41,6 +41,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="<s:url action="mishabitaciones" namespace="/tipohabitacion"/>">Habitaciones</a></li>
                                     <li><a href="<s:url action="tarifa" namespace="/tarifa"/>">Tarifa</a></li>
+                                    <li><a href="<s:url action="mistemporadas" namespace="/temporada"/>">Temporada</a></li>
                                 </ul>
                             </li>
                         </ul>

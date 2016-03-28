@@ -64,6 +64,14 @@
             <add-attribute value="/../js/admin/tarifa/tarifa.js" />
         </put-list-attribute>
     </definition>  
+    <!--TEMPORADA-->
+    <definition name="/admin/temporada/temporada.tiles" extends="adminlayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="body" value="/WEB-INF/admin/temporada/temporada.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/admin/temporada/temporada.js" />
+        </put-list-attribute>
+    </definition>  
     
     
     

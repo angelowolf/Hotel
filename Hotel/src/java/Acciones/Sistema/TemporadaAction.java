@@ -37,18 +37,18 @@ public class TemporadaAction extends Accion implements ModelDriven<Temporada> {
     private boolean validarRegistrar() {
         boolean flag = true;
         if (StringUtils.isBlank(temporada.getNombre())) {
-            addActionError(Soporte.Mensaje.INGRESENOMBRETEMPORADA);
+            addFieldError("nombre",Soporte.Mensaje.INGRESENOMBRETEMPORADA);
             flag = false;
         } else if (ct.existe(temporada.getId(), temporada.getNombre(), h.getId())) {
-            addActionError(Soporte.Mensaje.getLaExiste(Soporte.Mensaje.TEMPORADA));
+            addFieldError("nombre",Soporte.Mensaje.getLaExiste(Soporte.Mensaje.TEMPORADA));
             flag = false;
         }
         if (temporada.getFechaInicio() == null) {
-            addActionError(Soporte.Mensaje.INGRESEFECHAINICIO);
+            addFieldError("fechaInicio",Soporte.Mensaje.INGRESEFECHAINICIO);
             flag = false;
         }
         if (temporada.getFechaFin() == null) {
-            addActionError(Soporte.Mensaje.INGRESEFECHAFIN);
+            addFieldError("fechaFin",Soporte.Mensaje.INGRESEFECHAFIN);
             flag = false;
         }
         return flag;

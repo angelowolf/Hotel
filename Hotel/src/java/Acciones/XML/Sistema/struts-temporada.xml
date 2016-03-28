@@ -44,10 +44,20 @@
             </result>  
         </action>        
         <action name="editar" method="editar" class="Acciones.Sistema.TemporadaAction">
-              <result name="success" type="json">
+            <result name="success" type="json">
                 <param name="root">action</param>   
                 <param name="excludeProperties">lista,temporada</param>
             </result>              
+        </action>
+        <action name="mistemporadas" method="listar" class="Acciones.Sistema.TemporadaAction">
+            <result name="success" type="tiles">
+                /admin/temporada/temporada.tiles
+            </result>
+        </action>
+        <action name="vistatemporada" method="editar" class="Acciones.Sistema.TemporadaAction">
+            <result name="success">
+                /WEB-INF/admin/temporada/vistatemporada.jsp
+            </result>
         </action>
         <!--FIN ACCIONES-->
     </package>
